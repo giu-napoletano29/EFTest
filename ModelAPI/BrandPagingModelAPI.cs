@@ -7,6 +7,6 @@ namespace TestJuniorDef.ModelAPI
         public string BrandName { get; set; }
         public string Description { get; set; }
 
-        public List<int> ProductIds { get; set; }
+        public List<int> ProductsId { get; set; }
     }
 }

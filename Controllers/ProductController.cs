@@ -27,6 +27,10 @@ namespace TestJuniorDef.Controllers
             _productRepo = productRepo;
         }
 
+        /// <summary>
+        /// Return a collection with all the products present in the database 
+        /// </summary>
+        /// <returns><see cref="IEnumerable{T}">List of brands</see></returns>
         [HttpGet]
         public IEnumerable<Product> GetProducts()
         {
@@ -49,6 +53,13 @@ namespace TestJuniorDef.Controllers
 
         //    return default;
         //}
+
+
+        /// <summary>
+        /// Return informations about a product by a specified id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns><see cref="IActionResult">ActionResult</see> <br/> Id <br/> Name <br/> BrandName <br/> Categories <br/> TotalInfoRequestGuest <br/> TotalInfoRequestLogged <br/> InfoRequest</returns>
 
         [HttpGet("{id}")]
         public IActionResult GetProductById(int id)
@@ -91,6 +102,12 @@ namespace TestJuniorDef.Controllers
             }
             return UnprocessableEntity();
         }
+
+        /// <summary>
+        /// Return informations about a product with pagination
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns><see cref="IActionResult">ActionResult</see> <br/> PageSize <br/> TotalElements <br/> NumPage <br/> Elements </returns>
 
         [HttpGet("page/{size}/{page}")]
         public IActionResult GetProductPerPage(int size, int page)

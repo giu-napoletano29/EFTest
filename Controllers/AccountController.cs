@@ -25,11 +25,22 @@ namespace TestJuniorDef.Controllers
             _accountRepo = accountRepo;
         }
 
+        /// <summary>
+        /// Return a collection with all the accounts present in the database 
+        /// </summary>
+        /// <returns><see cref="IEnumerable{T}">List of accounts</see></returns>
         [HttpGet]
         public IEnumerable<Account> GetAccounts()
         {
             return _accountRepo.GetAll();
         }
+
+
+        /// <summary>
+        /// Return informations about an account by a specified id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns><see cref="IActionResult">ActionResult</see></returns>
 
         [HttpGet("{id}")]
         public Account GetAccountsById(int id)
@@ -46,19 +57,19 @@ namespace TestJuniorDef.Controllers
             return default;
         }
 
-        [HttpGet("user/{id}")]
-        public Account GetAccountsByUser(int id)
-        {
-            try
-            {
-                return _accountRepo.GetById(id).FirstOrDefault();
-            }
-            catch (System.Exception e)
-            {
-                _logger.LogError(e, e.Message);
-            }
+        //[HttpGet("user/{id}")]
+        //public Account GetAccountsByUser(int id)
+        //{
+        //    try
+        //    {
+        //        return _accountRepo.GetById(id).FirstOrDefault();
+        //    }
+        //    catch (System.Exception e)
+        //    {
+        //        _logger.LogError(e, e.Message);
+        //    }
 
-            return default;
-        }
+        //    return default;
+        //}
     }
 }

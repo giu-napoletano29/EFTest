@@ -27,12 +27,21 @@ namespace TestJuniorDef.Controllers
             _inforeqrepo = inforeqrepo;
         }
 
+        /// <summary>
+        /// Return a collection with all the InfoRequests present in the database 
+        /// </summary>
+        /// <returns><see cref="IEnumerable{T}">List of brands</see></returns>
         [HttpGet]
         public IEnumerable<InfoRequest> GetInfoRequests()
         {
             return _inforeqrepo.GetAll();
         }
 
+        /// <summary>
+        /// Return informations about an InfoRequest by a specified id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns><see cref="IActionResult">ActionResult</see> <br/> Id <br/> Product <br/> Name <br/> LastName <br/> Email <br/> Address <br/> Replies</returns>
         [HttpGet("{id}")]
         public IActionResult GetInfoRequestById(int id)
         {

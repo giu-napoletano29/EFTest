@@ -28,15 +28,20 @@ namespace TestJuniorDef.Controllers
         }
 
         /// <summary>
-        /// Return a collection with all the brands present in the database
+        /// Return a collection with all the brands present in the database 
         /// </summary>
-        /// <returns></returns>
+        /// <returns><see cref="IEnumerable{T}">List of brands</see></returns>
         [HttpGet]
         public IEnumerable<Brand> GetBrands()
         {
             return _brandRepo.GetAll();
         }
 
+        /// <summary>
+        /// Return informations about a brand by a specified id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns><see cref="IActionResult">ActionResult</see> <br/> BrandId <br/> BrandName <br/> TotalProducts <br/> TotalInfoRequest <br/> Categories <br/> Products</returns>
         [HttpGet("{id}")]
         public IActionResult GetBrandById(int id)
         {
@@ -133,7 +138,14 @@ namespace TestJuniorDef.Controllers
                 _logger.LogError(e, e.Message);
             }
             return UnprocessableEntity();
-}
+        }
+
+
+        /// <summary>
+        /// Return informations about a brand with pagination
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns><see cref="IActionResult">ActionResult</see> <br/> PageSize <br/> TotalElements <br/> NumPage <br/> BrandName <br/> Description <br/> ProductsId </returns>
 
         [HttpGet("page/{size}/{page}")]
         public IActionResult GetbrandPerPage(int size, int page)
@@ -148,7 +160,7 @@ namespace TestJuniorDef.Controllers
                 {
                     BrandName = x.BrandName,
                     Description = x.Description,
-                    ProductIds = x.Products.Select(y => y.Id).ToList()
+                    ProductsId = x.Products.Select(y => y.Id).ToList()
                 }).ToList();
 
                 PagingModelAPI<BrandPagingModelAPI> view = new PagingModelAPI<BrandPagingModelAPI>();
