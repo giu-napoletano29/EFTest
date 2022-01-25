@@ -20,7 +20,7 @@ namespace TestJuniorDef.Repositories
                         //.Include(x => x.ProductCategory)
                         //    .ThenInclude(x => x.Category)
                         //.Include(x => x.Brand)
-                        .Where(x => x.Id == id).AsNoTracking();
+                        .Where(x => x.Id == id).AsNoTracking(); //TODO: handle tracking
         }
 
         public IQueryable<Product> GetAll()

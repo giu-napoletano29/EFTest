@@ -89,21 +89,32 @@ namespace TestJuniorDef.Controllers
         [HttpGet("page/{size}/{page}")]
         public IActionResult GetProductPerPage(int size, int page)
         {
-          
-            var products = _productRepo.GetAll().Skip((size*page)-size).Take(size).Select(x => new ProductPagingModelAPI
+            if (size <= 0 || page < 1)
             {
-                Id = x.Id,
-                ProductName = x.Name,
-                Description = x.ShortDescription
-            }).ToList();
+                return ValidationProblem();
+            }
+            try
+            {
+                var products = _productRepo.GetAll().Skip((size * page) - size).Take(size).Select(x => new ProductPagingModelAPI
+                {
+                    Id = x.Id,
+                    ProductName = x.Name,
+                    Description = x.ShortDescription
+                }).ToList();
 
-            PagingModelAPI<ProductPagingModelAPI> view = new PagingModelAPI<ProductPagingModelAPI>();
-            view.PageSize = size;
-            view.TotalElements = _productRepo.GetAll().Count();
-            view.NumPage = page;
-            view.Elements = products;
-            
-            return Ok(view);
+                PagingModelAPI<ProductPagingModelAPI> view = new PagingModelAPI<ProductPagingModelAPI>();
+                view.PageSize = size;
+                view.TotalElements = _productRepo.GetAll().Count();
+                view.NumPage = page;
+                view.Elements = products;
+
+                return Ok(view);
+            }
+            catch (System.Exception e)
+            {
+                _logger.LogError(e, e.Message);
+            }
+            return UnprocessableEntity();
         }
 
     }

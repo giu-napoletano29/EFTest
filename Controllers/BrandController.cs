@@ -150,7 +150,7 @@ namespace TestJuniorDef.Controllers
         [HttpGet("page/{size}/{page}")]
         public IActionResult GetbrandPerPage(int size, int page)
         {
-            if (size <= 0)
+            if (size <= 0 || page < 1)
             {
                 return ValidationProblem();
             }
@@ -163,13 +163,13 @@ namespace TestJuniorDef.Controllers
                     ProductsId = x.Products.Select(y => y.Id).ToList()
                 }).ToList();
 
-                PagingModelAPI<BrandPagingModelAPI> view = new PagingModelAPI<BrandPagingModelAPI>();
-                view.PageSize = size;
-                view.TotalElements = _brandRepo.GetAll().Count();
-                view.NumPage = page;
-                view.Elements = brands;
+                PagingModelAPI<BrandPagingModelAPI> model = new PagingModelAPI<BrandPagingModelAPI>();
+                model.PageSize = size;
+                model.TotalElements = _brandRepo.GetAll().Count();
+                model.NumPage = page;
+                model.Elements = brands;
 
-                return Ok(view);
+                return Ok(model);
             }
             catch (System.Exception e)
             {
