@@ -165,7 +165,7 @@ namespace TestJuniorDef.Controllers
 
                 PagingModelAPI<BrandPagingModelAPI> view = new PagingModelAPI<BrandPagingModelAPI>();
                 view.PageSize = size;
-                view.TotalElements = _context.Brands.Count();
+                view.TotalElements = _brandRepo.GetAll().Count();
                 view.NumPage = page;
                 view.Elements = brands;
 

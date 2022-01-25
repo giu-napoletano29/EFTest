@@ -66,11 +66,7 @@ namespace TestJuniorDef.Controllers
         {
             try
             {
-                var p = _context.Products
-                        //.Include(x => x.ProductCategory)
-                        //    .ThenInclude(x => x.Category)
-                        //.Include(x => x.Brand)
-                        .Where(x => x.Id == id)
+                var p = _productRepo.GetById(id)
                         .Select(x => new
                         {
                             Id = x.Id,

@@ -64,10 +64,5 @@ namespace TestJuniorDef.Repositories
         //                    }),
         //                });
         //}
-
-        IQueryable<Product> IGeneric<Product>.GetById(int id)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
