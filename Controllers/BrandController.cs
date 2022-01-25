@@ -147,8 +147,8 @@ namespace TestJuniorDef.Controllers
         /// <param name="id"></param>
         /// <returns><see cref="IActionResult">ActionResult</see> <br/> PageSize <br/> TotalElements <br/> NumPage <br/> BrandName <br/> Description <br/> ProductsId </returns>
 
-        [HttpGet("page/{size}/{page}")]
-        public IActionResult GetbrandPerPage(int size, int page)
+        [HttpGet("page/{size?}/{page?}")]
+        public IActionResult GetbrandPerPage(int size = 5, int page = 1)
         {
             if (size <= 0 || page < 1)
             {
