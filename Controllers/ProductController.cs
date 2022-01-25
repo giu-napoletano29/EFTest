@@ -30,7 +30,7 @@ namespace TestJuniorDef.Controllers
         [HttpGet]
         public IEnumerable<Product> GetProducts()
         {
-            return _context.Products;
+            return _productRepo.GetAll();
         }
 
         //[HttpGet("{id}")]
@@ -100,7 +100,7 @@ namespace TestJuniorDef.Controllers
 
             //var procedure = _context.Products.FromSqlRaw("exec paginationProd @PageSize, @PageNum, @Category = 5, @orderby = 1", PageSize, PageNum).ToList();
             
-            var products = _context.Products.Skip((size*page)-size).Take(size).Select(x => new ProductPagingModelAPI
+            var products = _productRepo.GetAll().Skip((size*page)-size).Take(size).Select(x => new ProductPagingModelAPI
             {
                 Id = x.Id,
                 ProductName = x.Name,
@@ -109,7 +109,7 @@ namespace TestJuniorDef.Controllers
 
             PagingModelAPI<ProductPagingModelAPI> view = new PagingModelAPI<ProductPagingModelAPI>();
             view.PageSize = size;
-            view.TotalElements = _context.Products.Count();
+            view.TotalElements = _productRepo.GetAll().Count();
             view.NumPage = page;
             view.Elements = products;
             

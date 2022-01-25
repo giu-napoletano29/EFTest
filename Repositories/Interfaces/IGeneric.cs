@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace TestJuniorDef.Repositories.Interfaces
 {
     public interface IGeneric<T>
     {
-        T GetById(int id);
-        IEnumerable<T> GetAll();
+        IQueryable<T> GetById(int id);
+        IQueryable<T> GetAll();
         void Save(T obj);
     }
 }

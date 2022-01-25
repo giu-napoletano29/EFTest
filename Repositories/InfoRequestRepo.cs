@@ -14,19 +14,19 @@ namespace TestJuniorDef.Repositories
         {
             _context = context;
         }
-        public InfoRequest GetById(int id)
+        public IQueryable<InfoRequest> GetById(int id)
         {
             return _context.InfoRequests
-                    .Include(x => x.Product)
-                        .ThenInclude(x => x.Brand)
-                    .Include(x => x.InfoRequestReply)
-                    .Include(x => x.User)
-                    .Where(x => x.Id == id).FirstOrDefault();
+                    //.Include(x => x.Product)
+                    //    .ThenInclude(x => x.Brand)
+                    //.Include(x => x.InfoRequestReply)
+                    //.Include(x => x.User)
+                    .Where(x => x.Id == id).AsNoTracking();
         }
 
-        public IEnumerable<InfoRequest> GetAll()
+        public IQueryable<InfoRequest> GetAll()
         {
-            return _context.InfoRequests.ToList();
+            return _context.InfoRequests.AsNoTracking();
         }
 
         public void Save(InfoRequest obj)

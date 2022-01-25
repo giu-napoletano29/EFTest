@@ -6,6 +6,6 @@ namespace TestJuniorDef.Repositories.Interfaces
 {
     public interface IProductRepo : IGeneric<Product>
     {
-        IQueryable GetProductByIdAPIFormatting(int id);
+        //IQueryable GetProductByIdAPIFormatting(int id);
     }
 }

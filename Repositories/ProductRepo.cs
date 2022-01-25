@@ -14,18 +14,18 @@ namespace TestJuniorDef.Repositories
         {
             _context = context;
         }
-        public Product GetById(int id)
+        public IQueryable<Product> GetById(int id)
         {
             return _context.Products
-                        .Include(x => x.ProductCategory)
-                            .ThenInclude(x => x.Category)
-                        .Include(x => x.Brand)
-                        .Where(x => x.Id == id).FirstOrDefault();
+                        //.Include(x => x.ProductCategory)
+                        //    .ThenInclude(x => x.Category)
+                        //.Include(x => x.Brand)
+                        .Where(x => x.Id == id).AsNoTracking();
         }
 
-        public IEnumerable<Product> GetAll()
+        public IQueryable<Product> GetAll()
         {
-            return _context.Products.ToList();
+            return _context.Products.AsNoTracking();
         }
 
         public void Save(Product obj)
@@ -33,36 +33,41 @@ namespace TestJuniorDef.Repositories
             throw new System.NotImplementedException();
         }
 
-        public IQueryable GetProductByIdAPIFormatting(int id)
+        //public IQueryable GetProductByIdAPIFormatting(int id)
+        //{
+        //    return _context.Products
+        //                //.Include(x => x.ProductCategory)
+        //                //    .ThenInclude(x => x.Category)
+        //                //.Include(x => x.Brand)
+        //                .Where(x => x.Id == id)
+        //                .Select(x => new
+        //                {
+        //                    Id = x.Id,
+        //                    Name = x.Name,
+        //                    BrandName = x.Brand.BrandName,
+        //                    Categories = x.ProductCategory.Select(z => new
+        //                    {
+        //                        Id = z.Category.Id,
+        //                        CategoryName = z.Category.Name
+        //                    }),
+        //                    TotalInfoRequestGuest = x.InfoRequests.Where(x => x.UserId == null).Count(),
+        //                    TotalInfoRequestLogged = x.InfoRequests.Where(x => x.UserId != null).Count(),
+        //                    InfoRequest = x.InfoRequests.OrderByDescending(y => y.InfoRequestReply.Max(y => y.InsertDate))  //Repeating Max()
+        //                    .Select(x => new
+        //                    {
+        //                        Id = x.Id,
+        //                        Name = x.UserId == null ? x.Name : x.User.Name,
+        //                        Lastname = x.UserId == null ? x.LastName : x.User.LastName,
+        //                        TotalReply = x.InfoRequestReply.Count(),
+        //                        //DateLastReply = x.InfoRequestReply.Select(x => x.InsertDate).OrderByDescending(x => x).FirstOrDefault(),
+        //                        DateLastReply = x.InfoRequestReply.Max(x => x.InsertDate),
+        //                    }),
+        //                });
+        //}
+
+        IQueryable<Product> IGeneric<Product>.GetById(int id)
         {
-            return _context.Products
-                        //.Include(x => x.ProductCategory)
-                        //    .ThenInclude(x => x.Category)
-                        //.Include(x => x.Brand)
-                        .Where(x => x.Id == id)
-                        .Select(x => new
-                        {
-                            Id = x.Id,
-                            Name = x.Name,
-                            BrandName = x.Brand.BrandName,
-                            Categories = x.ProductCategory.Select(z => new
-                            {
-                                Id = z.Category.Id,
-                                CategoryName = z.Category.Name
-                            }),
-                            TotalInfoRequestGuest = x.InfoRequests.Where(x => x.UserId == null).Count(),
-                            TotalInfoRequestLogged = x.InfoRequests.Where(x => x.UserId != null).Count(),
-                            InfoRequest = x.InfoRequests.OrderByDescending(y => y.InfoRequestReply.Max(y => y.InsertDate))  //Repeating Max()
-                            .Select(x => new
-                            {
-                                Id = x.Id,
-                                Name = x.UserId == null ? x.Name : x.User.Name,
-                                Lastname = x.UserId == null ? x.LastName : x.User.LastName,
-                                TotalReply = x.InfoRequestReply.Count(),
-                                //DateLastReply = x.InfoRequestReply.Select(x => x.InsertDate).OrderByDescending(x => x).FirstOrDefault(),
-                                DateLastReply = x.InfoRequestReply.Max(x => x.InsertDate),
-                            }),
-                        });
+            throw new System.NotImplementedException();
         }
     }
 }

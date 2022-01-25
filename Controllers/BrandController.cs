@@ -27,6 +27,10 @@ namespace TestJuniorDef.Controllers
             _brandRepo = brandRepo;
         }
 
+        /// <summary>
+        /// Return a collection with all the brands present in the database
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IEnumerable<Brand> GetBrands()
         {
@@ -38,8 +42,7 @@ namespace TestJuniorDef.Controllers
         {
             try
             {
-                var brand = _context.Brands
-                    .Where(x => x.Id == id);
+                var brand = _brandRepo.GetById(id);
 
                 var cat = brand
                     .SelectMany(x => x.Products
@@ -69,7 +72,7 @@ namespace TestJuniorDef.Controllers
                                 ProductName = x.Name,
                                 TotalInfoRequest = x.InfoRequests.Count
                             })
-                        }).ToList();
+                        }).FirstOrDefault();
                 return Ok(brands);
             }
             catch (System.Exception e)
@@ -85,11 +88,11 @@ namespace TestJuniorDef.Controllers
             try
             {
                 var brandQuery =
-                        from brand in _context.Brands
+                        from brand in _brandRepo.GetAll()
                         let p = brand.Products
                         let pc = p.SelectMany(x => x.ProductCategory)
-                    //let cat = pc.Select(x => x.)
-                    where brand.Id == id
+                        //let cat = pc.Select(x => x.)
+                        where brand.Id == id
                         select new
                         {
                             BrandId = brand.Id,

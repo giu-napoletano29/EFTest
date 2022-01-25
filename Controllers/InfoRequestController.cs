@@ -18,28 +18,25 @@ namespace TestJuniorDef.Controllers
     {
         private readonly Context _context;
         private readonly ILogger<InfoRequestController> _logger;
+        private readonly IInfoRequestRepo _inforeqrepo;
 
-        public InfoRequestController(Context context, ILogger<InfoRequestController> logger)
+        public InfoRequestController(Context context, ILogger<InfoRequestController> logger, IInfoRequestRepo inforeqrepo)
         {
             _context = context;
             _logger = logger;
+            _inforeqrepo = inforeqrepo;
         }
 
         [HttpGet]
         public IEnumerable<InfoRequest> GetInfoRequests()
         {
-            return _context.InfoRequests;
+            return _inforeqrepo.GetAll();
         }
 
         [HttpGet("{id}")]
         public IActionResult GetInfoRequestById(int id)
         {
-            var infoRequest = _context.InfoRequests
-                    //.Include(x => x.Product)
-                    //    .ThenInclude(x => x.Brand)
-                    //.Include(x => x.InfoRequestReply)
-                    //.Include(x => x.User)
-                    .Where(x => x.Id == id)
+            var infoRequest = _inforeqrepo.GetById(id)
                     .Select(x => new
                     {
                         Id = x.Id,

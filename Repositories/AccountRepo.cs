@@ -15,17 +15,20 @@ namespace TestJuniorDef.Repositories
             _context = context;
         }
 
-        public Account GetById(int id)
+        public IQueryable<Account> GetById(int id)
         {
-            Account account = _context.Accounts.Include(x => x.Brand).ThenInclude(x => x.Products)
-                                            .Include(x => x.User).Where(x => x.Id == id).FirstOrDefault();
+            var account = _context.Accounts
+                    //.Include(x => x.Brand)
+                    //    .ThenInclude(x => x.Products)
+                    //.Include(x => x.User)
+                    .Where(x => x.Id == id).AsNoTracking();//.FirstOrDefault();
 
             return account;
         }
 
-        public IEnumerable<Account> GetAll()
+        public IQueryable<Account> GetAll()
         {
-            return _context.Accounts.ToList();
+            return _context.Accounts.AsNoTracking();
         }
 
         public void Save(Account obj)

@@ -14,19 +14,21 @@ namespace TestJuniorDef.Repositories
         {
             _context = context;
         }
-        public Brand GetById(int id)
+        public IQueryable<Brand> GetById(int id)
         {
             return _context.Brands
-                    .Include(x => x.Products)
-                        .ThenInclude(x => x.InfoRequests)
-                    .Include(x => x.Products)
-                        .ThenInclude(x => x.ProductCategory)
-                            .ThenInclude(x => x.Category).Where(x => x.Id == id).FirstOrDefault();
+                    //.Include(x => x.Products)
+                    //    .ThenInclude(x => x.InfoRequests)
+                    //.Include(x => x.Products)
+                    //    .ThenInclude(x => x.ProductCategory)
+                    //        .ThenInclude(x => x.Category)
+                                .Where(x => x.Id == id).AsNoTracking();
         }
 
-        public IEnumerable<Brand> GetAll()
+
+        public IQueryable<Brand> GetAll()
         {
-            return _context.Brands.ToList();
+            return _context.Brands.AsNoTracking();
         }
 
         public void Save(Brand obj)

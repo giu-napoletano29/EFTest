@@ -36,7 +36,7 @@ namespace TestJuniorDef.Controllers
         {
             try
             {
-                return _accountRepo.GetById(id);
+                return _accountRepo.GetById(id).FirstOrDefault();
             }
             catch (System.Exception e)
             {
@@ -50,8 +50,8 @@ namespace TestJuniorDef.Controllers
         public Account GetAccountsByUser(int id)
         {
             try
-            {                
-                return _accountRepo.GetById(id);
+            {
+                return _accountRepo.GetById(id).FirstOrDefault();
             }
             catch (System.Exception e)
             {
