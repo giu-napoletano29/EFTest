@@ -16,13 +16,11 @@ namespace TestJuniorDef.Controllers
     [Route("[controller]")]
     public class InfoRequestController : ControllerBase
     {
-        private readonly Context _context;
         private readonly ILogger<InfoRequestController> _logger;
         private readonly IInfoRequestRepo _inforeqrepo;
 
-        public InfoRequestController(Context context, ILogger<InfoRequestController> logger, IInfoRequestRepo inforeqrepo)
+        public InfoRequestController(ILogger<InfoRequestController> logger, IInfoRequestRepo inforeqrepo)
         {
-            _context = context;
             _logger = logger;
             _inforeqrepo = inforeqrepo;
         }

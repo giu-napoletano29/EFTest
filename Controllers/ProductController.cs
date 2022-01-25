@@ -16,13 +16,11 @@ namespace TestJuniorDef.Controllers
     [Route("[controller]")]
     public class ProductController : ControllerBase
     {
-        private readonly Context _context;
         private readonly ILogger<ProductController> _logger;
         private readonly IProductRepo _productRepo;
 
-        public ProductController(Context context, ILogger<ProductController> logger, IProductRepo productRepo)
+        public ProductController(ILogger<ProductController> logger, IProductRepo productRepo)
         {
-            _context = context;
             _logger = logger;
             _productRepo = productRepo;
         }
@@ -36,23 +34,6 @@ namespace TestJuniorDef.Controllers
         {
             return _productRepo.GetAll();
         }
-
-        //[HttpGet("{id}")]
-        //public Product GetProductById(int id)
-        //{
-        //    try
-        //    {              
-        //        Product p = _context.Products.Include(x => x.ProductCategory).ThenInclude(x => x.Category).Where(x => x.Id == id).FirstOrDefault();
-
-        //        return p;
-        //    }
-        //    catch (System.Exception e)
-        //    {
-        //        _logger.LogError(e, e.Message);
-        //    }
-
-        //    return default;
-        //}
 
 
         /// <summary>
@@ -108,11 +89,7 @@ namespace TestJuniorDef.Controllers
         [HttpGet("page/{size}/{page}")]
         public IActionResult GetProductPerPage(int size, int page)
         {
-            //var PageSize = new SqlParameter("@PageSize", size);
-            //var PageNum = new SqlParameter("@PageNum", page);
-
-            //var procedure = _context.Products.FromSqlRaw("exec paginationProd @PageSize, @PageNum, @Category = 5, @orderby = 1", PageSize, PageNum).ToList();
-            
+          
             var products = _productRepo.GetAll().Skip((size*page)-size).Take(size).Select(x => new ProductPagingModelAPI
             {
                 Id = x.Id,

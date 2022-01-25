@@ -41,6 +41,7 @@ namespace TestJuniorDef
             services.AddScoped<IBrandRepo, BrandRepo>();
             services.AddScoped<IInfoRequestRepo, InfoRequestRepo>();
             services.AddScoped<IProductRepo, ProductRepo>();
+            services.AddScoped<ICategoryRepo, CategoryRepo>();
 
             services.AddControllers().AddNewtonsoftJson(options =>
             {

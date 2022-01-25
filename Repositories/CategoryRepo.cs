@@ -6,26 +6,26 @@ using TestJuniorDef.Repositories.Interfaces;
 
 namespace TestJuniorDef.Repositories
 {
-    public class InfoRequestRepo : IInfoRequestRepo
+    public class CategoryRepo : ICategoryRepo
     {
         private readonly Context _context;
 
-        public InfoRequestRepo(Context context)
+        public CategoryRepo(Context context)
         {
             _context = context;
         }
-        public IQueryable<InfoRequest> GetById(int id)
+        public IQueryable<Category> GetById(int id)
         {
-            return _context.InfoRequests
-                    .Where(x => x.Id == id).AsNoTracking();
+            return _context.Categories
+                        .Where(x => x.Id == id).AsNoTracking();
         }
 
-        public IQueryable<InfoRequest> GetAll()
+        public IQueryable<Category> GetAll()
         {
-            return _context.InfoRequests.AsNoTracking();
+            return _context.Categories.AsNoTracking();
         }
 
-        public void Save(InfoRequest obj)
+        public void Save(Category obj)
         {
             throw new System.NotImplementedException();
         }

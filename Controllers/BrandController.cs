@@ -16,15 +16,15 @@ namespace TestJuniorDef.Controllers
     [Route("[controller]")]
     public class BrandController : ControllerBase
     {
-        private readonly Context _context;
         private readonly ILogger<BrandController> _logger;
         private readonly IBrandRepo _brandRepo;
+        private readonly ICategoryRepo _categoryRepo;
 
-        public BrandController(Context context, ILogger<BrandController> logger, IBrandRepo brandRepo)
+        public BrandController(ILogger<BrandController> logger, IBrandRepo brandRepo, ICategoryRepo categoryRepo)
         {
-            _context = context;
             _logger = logger;
             _brandRepo = brandRepo;
+            _categoryRepo = categoryRepo;
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace TestJuniorDef.Controllers
                             Brandname = brand.BrandName,
                             TotalProducts = brand.Products.Count,
                             TotalReq = brand.Products.SelectMany(x => x.InfoRequests.Select(x => x.Id)).Count(),
-                            Categories = (from c in _context.Categories
+                            Categories = (from c in _categoryRepo.GetAll()
                                           where pc.Select(x => x.CategoryId).Contains(c.Id)
                                           select new
                                           {
@@ -156,7 +156,7 @@ namespace TestJuniorDef.Controllers
             }
             try
             {
-                var brands = _context.Brands.Skip((size * page) - size).Take(size).Select(x => new BrandPagingModelAPI
+                var brands = _brandRepo.GetAll().Skip((size * page) - size).Take(size).Select(x => new BrandPagingModelAPI
                 {
                     BrandName = x.BrandName,
                     Description = x.Description,

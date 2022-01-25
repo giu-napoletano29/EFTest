@@ -14,13 +14,11 @@ namespace TestJuniorDef.Controllers
     [Route("[controller]")]
     public class AccountController : ControllerBase
     {
-        private readonly Context _context;
         private readonly ILogger<AccountController> _logger;
         private readonly IAccountRepo _accountRepo;
 
-        public AccountController(Context context, ILogger<AccountController> logger, IAccountRepo accountRepo)
+        public AccountController(ILogger<AccountController> logger, IAccountRepo accountRepo)
         {
-            _context = context;
             _logger = logger;
             _accountRepo = accountRepo;
         }
