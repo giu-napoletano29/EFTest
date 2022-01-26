@@ -25,6 +25,17 @@ namespace TestJuniorDef.Repositories
             return _context.Categories.AsNoTracking();
         }
 
+        public IQueryable<Category> GetAll(bool includeAll)
+        {
+            if (!includeAll)
+            {
+                return GetAll();
+            }
+
+            return _context.Categories.Include(x => x.ProductCategory)
+                                        .ThenInclude(x => x.Product);
+        }
+
         public void Save(Category obj)
         {
             throw new System.NotImplementedException();

@@ -61,18 +61,17 @@ namespace TestJuniorDef.Services
 
         public PagingModelAPI<BrandPagingModelAPI> GetbrandPerPage(int size = 5, int page = 1)
         {
-            var brands = _brandRepo.GetAll().Skip((size * page) - size).Take(size).Select(x => new BrandPagingModelAPI
+            var pagination = Service.PaginateEntity<Brand>(_brandRepo, size, page);
+            PagingModelAPI<BrandPagingModelAPI> model = new PagingModelAPI<BrandPagingModelAPI>();
+            model.PageSize = pagination.PageSize;
+            model.TotalElements = pagination.TotalElements;
+            model.NumPage = pagination.NumPage;
+            model.Elements = pagination.Elements.Select(x => new BrandPagingModelAPI
             {
                 BrandName = x.BrandName,
                 Description = x.Description,
                 ProductsId = x.Products.Select(y => y.Id).ToList()
             }).ToList();
-
-            PagingModelAPI<BrandPagingModelAPI> model = new PagingModelAPI<BrandPagingModelAPI>();
-            model.PageSize = size;
-            model.TotalElements = _brandRepo.GetAll().Count();
-            model.NumPage = page;
-            model.Elements = brands;
 
             return model;
         }

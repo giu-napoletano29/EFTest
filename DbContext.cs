@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace apitest.Models
 {
-    public class Context : DbContext    //TODO: move outside Dbcontext
+    public class Context : DbContext
     {
         public Context(DbContextOptions<Context> options)
             : base(options)

@@ -29,6 +29,19 @@ namespace TestJuniorDef.Repositories
         public IQueryable<Brand> GetAll()
         {
             return _context.Brands.AsNoTracking();
+        }        
+        
+        public IQueryable<Brand> GetAll(bool includeAll)
+        {
+            if (!includeAll)
+            {
+                return GetAll();
+            }
+            return _context.Brands.Include(x => x.Products)
+                                        .ThenInclude(x => x.InfoRequests)
+                                    .Include(x => x.Products)
+                                        .ThenInclude(x => x.ProductCategory)
+                                            .ThenInclude(x => x.Category); //TODO: try to generalize include
         }
 
         public void Save(Brand obj)

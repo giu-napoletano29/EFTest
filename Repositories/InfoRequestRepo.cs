@@ -25,6 +25,20 @@ namespace TestJuniorDef.Repositories
             return _context.InfoRequests.AsNoTracking();
         }
 
+        public IQueryable<InfoRequest> GetAll(bool includeAll)
+        {
+            if (!includeAll)
+            {
+                return GetAll();
+            }
+
+            return _context.InfoRequests.Include(x => x.User)
+                                            .ThenInclude(x => x.Account)
+                                        .Include(x => x.Product)
+                                        .Include(x => x.InfoRequestReply)
+                                        .Include(x => x.Nation);
+        }
+
         public void Save(InfoRequest obj)
         {
             throw new System.NotImplementedException();

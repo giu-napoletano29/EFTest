@@ -28,6 +28,18 @@ namespace TestJuniorDef.Repositories
             return _context.Products.AsNoTracking();
         }
 
+        public IQueryable<Product> GetAll(bool includeAll)
+        {
+            if (!includeAll)
+            {
+                return GetAll();
+            }
+
+            return _context.Products.Include(x => x.ProductCategory)
+                                        .ThenInclude(x => x.Category)
+                                    .Include(x => x.Brand);
+        }
+
         public void Save(Product obj)
         {
             throw new System.NotImplementedException();

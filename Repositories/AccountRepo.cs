@@ -31,6 +31,18 @@ namespace TestJuniorDef.Repositories
             return _context.Accounts.AsNoTracking();
         }
 
+        public IQueryable<Account> GetAll(bool includeAll)
+        {
+            if (!includeAll)
+            {
+                return GetAll();
+            }
+
+            return _context.Accounts.Include(x => x.Brand)
+                                        .ThenInclude(x => x.Products)
+                                    .Include(x => x.User);
+        }
+
         public void Save(Account obj)
         {
             throw new System.NotImplementedException();
