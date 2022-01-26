@@ -17,11 +17,7 @@ namespace TestJuniorDef.Repositories
 
         public IQueryable<Account> GetById(int id)
         {
-            var account = _context.Accounts
-                    //.Include(x => x.Brand)
-                    //    .ThenInclude(x => x.Products)
-                    //.Include(x => x.User)
-                    .Where(x => x.Id == id).AsNoTracking();//.FirstOrDefault();
+            var account = _context.Accounts.Where(x => x.Id == id).AsNoTracking();
 
             return account;
         }

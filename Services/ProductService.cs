@@ -18,10 +18,20 @@ namespace TestJuniorDef.Services
             _productRepo = productRepo;
         }
 
+        /// <summary>
+        /// Return a collection with all the products present in the database 
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Product> GetProducts()
         {
             return _productRepo.GetAll();
         }
+
+        /// <summary>
+        /// Return informations about a product by a given id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
 
         public ProductByIdModelAPI GetProductById(int id)
         {
@@ -45,7 +55,6 @@ namespace TestJuniorDef.Services
                             Name = x.UserId == null ? x.Name : x.User.Name,
                             Lastname = x.UserId == null ? x.LastName : x.User.LastName,
                             TotalReply = x.InfoRequestReply.Count(),
-                            //DateLastReply = x.InfoRequestReply.Select(x => x.InsertDate).OrderByDescending(x => x).FirstOrDefault(),
                             DateLastReply = x.InfoRequestReply.Max(x => x.InsertDate),
                         }),
                     }).FirstOrDefault();
@@ -53,7 +62,12 @@ namespace TestJuniorDef.Services
             return p;
         }
 
-        public PagingModelAPI<ProductPagingModelAPI> GetProductPerPage(int size = 5, int page = 1)  //TODO: generalize
+        /// <summary>
+        /// Return informations about a product with pagination
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public PagingModelAPI<ProductPagingModelAPI> GetProductPerPage(int size = 5, int page = 1)
         {
             var pagination = Service.PaginateEntity<Product>(_productRepo, size, page);
             PagingModelAPI<ProductPagingModelAPI> model = new PagingModelAPI<ProductPagingModelAPI>();

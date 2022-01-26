@@ -16,13 +16,7 @@ namespace TestJuniorDef.Repositories
         }
         public IQueryable<Brand> GetById(int id)
         {
-            return _context.Brands
-                    //.Include(x => x.Products)
-                    //    .ThenInclude(x => x.InfoRequests)
-                    //.Include(x => x.Products)
-                    //    .ThenInclude(x => x.ProductCategory)
-                    //        .ThenInclude(x => x.Category)
-                                .Where(x => x.Id == id).AsNoTracking();
+            return _context.Brands.Where(x => x.Id == id).AsNoTracking();
         }
 
 

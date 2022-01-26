@@ -11,6 +11,14 @@ namespace TestJuniorDef.Services
 {
     internal static class Service
     {
+        /// <summary>
+        /// Return a given entity paginated with the specified page size and page number
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entityRepo"></param>
+        /// <param name="size"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
         internal static PagingModelAPI<T> PaginateEntity<T>(IGeneric<T> entityRepo, int size = 5, int page = 1)
         {
             var entityList = entityRepo.GetAll(true).Skip((size * page) - size).Take(size);

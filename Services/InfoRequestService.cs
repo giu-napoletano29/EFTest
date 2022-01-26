@@ -17,10 +17,20 @@ namespace TestJuniorDef.Services
             _inforeqrepo = inforeqrepo;
         }
 
+        /// <summary>
+        /// Return a collection with all the InfoRequests present in the database 
+        /// </summary>
+        /// <returns><see cref="IEnumerable{T}">List of brands</see></returns>
         public IEnumerable<InfoRequest> GetInfoRequests()
         {
             return _inforeqrepo.GetAll();
         }
+
+        /// <summary>
+        /// Return informations about an InfoRequest by a given id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
 
         public GetInfoRequestByIdModelAPI GetInfoRequestById(int id)
         {

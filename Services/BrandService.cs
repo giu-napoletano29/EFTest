@@ -12,18 +12,25 @@ namespace TestJuniorDef.Services
     public class BrandService : IBrandService
     {
         private readonly IBrandRepo _brandRepo;
-        private readonly ICategoryRepo _categoryRepo;
         public BrandService(IBrandRepo brandRepo, ICategoryRepo categoryRepo)
         {
             _brandRepo = brandRepo;
-            _categoryRepo = categoryRepo;
         }
 
+        /// <summary>
+        /// Return a collection with all the brands present in the database 
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Brand> GetBrands()
         {
             return _brandRepo.GetAll();
         }
 
+        /// <summary>
+        /// Return informations about a brand by a specified id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public BrandModelAPI GetBrandById(int id)
         {
             var brand = _brandRepo.GetById(id);
@@ -59,7 +66,12 @@ namespace TestJuniorDef.Services
             return brands;
         }
 
-        public PagingModelAPI<BrandPagingModelAPI> GetbrandPerPage(int size = 5, int page = 1)
+        /// <summary>
+        /// Return informations about a brand with pagination
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public PagingModelAPI<BrandPagingModelAPI> GetBrandPerPage(int size = 5, int page = 1)
         {
             var pagination = Service.PaginateEntity<Brand>(_brandRepo, size, page);
             PagingModelAPI<BrandPagingModelAPI> model = new PagingModelAPI<BrandPagingModelAPI>();

@@ -8,6 +8,6 @@ namespace TestJuniorDef.Services.Interfaces
     {
         IEnumerable<Brand> GetBrands();
         BrandModelAPI GetBrandById(int id);
-        PagingModelAPI<BrandPagingModelAPI> GetbrandPerPage(int size = 5, int page = 1);
+        PagingModelAPI<BrandPagingModelAPI> GetBrandPerPage(int size = 5, int page = 1);
     }
 }
