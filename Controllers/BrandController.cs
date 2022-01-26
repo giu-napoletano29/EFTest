@@ -9,6 +9,9 @@ using TestJuniorDef.Repositories.Interfaces;
 using TestJuniorDef.Repositories;
 using Microsoft.Data.SqlClient;
 using TestJuniorDef.ModelAPI;
+using TestJuniorDef.ModelAPI.CategoryModels;
+using TestJuniorDef.ModelAPI.ProductModels;
+using TestJuniorDef.Services.Interfaces;
 
 namespace TestJuniorDef.Controllers
 {
@@ -17,14 +20,12 @@ namespace TestJuniorDef.Controllers
     public class BrandController : ControllerBase
     {
         private readonly ILogger<BrandController> _logger;
-        private readonly IBrandRepo _brandRepo;
-        private readonly ICategoryRepo _categoryRepo;
+        private readonly IBrandService _brandService;
 
-        public BrandController(ILogger<BrandController> logger, IBrandRepo brandRepo, ICategoryRepo categoryRepo)
+        public BrandController(ILogger<BrandController> logger, IBrandService brandService)
         {
             _logger = logger;
-            _brandRepo = brandRepo;
-            _categoryRepo = categoryRepo;
+            _brandService = brandService;
         }
 
         /// <summary>
@@ -34,7 +35,7 @@ namespace TestJuniorDef.Controllers
         [HttpGet]
         public IEnumerable<Brand> GetBrands()
         {
-            return _brandRepo.GetAll();
+            return _brandService.GetBrands();
         }
 
         /// <summary>
@@ -47,37 +48,8 @@ namespace TestJuniorDef.Controllers
         {
             try
             {
-                var brand = _brandRepo.GetById(id);
+                var brands = _brandService.GetBrandById(id);
 
-                var cat = brand
-                    .SelectMany(x => x.Products
-                        .SelectMany(y => y.ProductCategory
-                            .Select(z => new CategoryModelAPI
-                            {
-                                Id = z.Category.Id,
-                                CategoryName = z.Category.Name,
-                            //TotalProducts = _context.ProductCategories.Where(x => x.CategoryId == z.CategoryId).Count()
-                            //TotalProducts = z.Category.ProductCategory.Select(c => c.Product).Where(v => v.BrandId == id).Count(),
-                            TotalProducts = x.Products.SelectMany(x => x.ProductCategory.Select(x => x.CategoryId)).Where(x => x == z.CategoryId).Count(),
-                            })))
-                    .Distinct()
-                    .ToList();
-
-                var brands = brand
-                        .Select(x => new
-                        {
-                            Id = x.Id,
-                            BrandName = x.BrandName,
-                            TotalProducts = x.Products.Count,
-                            TotalInfoRequest = x.Products.SelectMany(x => x.InfoRequests.Select(x => x.Id)).Count(),
-                            Categories = cat,
-                            Products = x.Products.Select(x => new ProductModelAPI
-                            {
-                                Id = x.Id,
-                                ProductName = x.Name,
-                                TotalInfoRequest = x.InfoRequests.Count
-                            })
-                        }).FirstOrDefault();
                 return Ok(brands);
             }
             catch (System.Exception e)
@@ -87,58 +59,58 @@ namespace TestJuniorDef.Controllers
             return UnprocessableEntity();
         }
 
-        [HttpGet("test/{id}")]
-        public IActionResult GetBrandByIdTest(int id)
-        {
-            try
-            {
-                var brandQuery =
-                        from brand in _brandRepo.GetAll()
-                        let p = brand.Products
-                        let pc = p.SelectMany(x => x.ProductCategory)
-                        //let cat = pc.Select(x => x.)
-                        where brand.Id == id
-                        select new
-                        {
-                            BrandId = brand.Id,
-                            Brandname = brand.BrandName,
-                            TotalProducts = brand.Products.Count,
-                            TotalReq = brand.Products.SelectMany(x => x.InfoRequests.Select(x => x.Id)).Count(),
-                            Categories = (from c in _categoryRepo.GetAll()
-                                          where pc.Select(x => x.CategoryId).Contains(c.Id)
-                                          select new
-                                          {
-                                              Id = c.Id,
-                                              CatName = c.Name,
-                                              Totalprod = p.SelectMany(x => x.ProductCategory.Select(x => x.CategoryId)).Where(x => x == c.Id).Count()
-                                          }).ToList(),
+        //[HttpGet("test/{id}")]
+        //public IActionResult GetBrandByIdTest(int id)
+        //{
+        //    try
+        //    {
+        //        var brandQuery =
+        //                from brand in _brandRepo.GetAll()
+        //                let p = brand.Products
+        //                let pc = p.SelectMany(x => x.ProductCategory)
+        //                //let cat = pc.Select(x => x.)
+        //                where brand.Id == id
+        //                select new
+        //                {
+        //                    BrandId = brand.Id,
+        //                    Brandname = brand.BrandName,
+        //                    TotalProducts = brand.Products.Count,
+        //                    TotalReq = brand.Products.SelectMany(x => x.InfoRequests.Select(x => x.Id)).Count(),
+        //                    Categories = (from c in _categoryRepo.GetAll()
+        //                                  where pc.Select(x => x.CategoryId).Contains(c.Id)
+        //                                  select new
+        //                                  {
+        //                                      Id = c.Id,
+        //                                      CatName = c.Name,
+        //                                      Totalprod = p.SelectMany(x => x.ProductCategory.Select(x => x.CategoryId)).Where(x => x == c.Id).Count()
+        //                                  }).ToList(),
 
-                        //Categories = pc.Select(z => new
-                        //{
-                        //    id = z.CategoryId,
-                        //    CatName = z.Category.Name,
-                        //    Totalprod = p.SelectMany(x => x.ProductCategory.Select(x => x.CategoryId)).Where(x => x == z.CategoryId).Count(), //duplicate to fix
+        //                //Categories = pc.Select(z => new
+        //                //{
+        //                //    id = z.CategoryId,
+        //                //    CatName = z.Category.Name,
+        //                //    Totalprod = p.SelectMany(x => x.ProductCategory.Select(x => x.CategoryId)).Where(x => x == z.CategoryId).Count(), //duplicate to fix
 
-                        //}).ToList(),
-                        Products = p.Select(x => new ProductModelAPI
-                            {
-                                Id = x.Id,
-                                ProductName = x.Name,
-                                TotalInfoRequest = x.InfoRequests.Count
+        //                //}).ToList(),
+        //                Products = p.Select(x => new ProductModelAPI
+        //                    {
+        //                        Id = x.Id,
+        //                        ProductName = x.Name,
+        //                        TotalInfoRequest = x.InfoRequests.Count
 
-                            }).ToList(),
+        //                    }).ToList(),
 
 
-                        };
-                return Ok(brandQuery);
+        //                };
+        //        return Ok(brandQuery);
 
-            }
-            catch (System.Exception e)
-            {
-                _logger.LogError(e, e.Message);
-            }
-            return UnprocessableEntity();
-        }
+        //    }
+        //    catch (System.Exception e)
+        //    {
+        //        _logger.LogError(e, e.Message);
+        //    }
+        //    return UnprocessableEntity();
+        //}
 
 
         /// <summary>
@@ -156,18 +128,7 @@ namespace TestJuniorDef.Controllers
             }
             try
             {
-                var brands = _brandRepo.GetAll().Skip((size * page) - size).Take(size).Select(x => new BrandPagingModelAPI
-                {
-                    BrandName = x.BrandName,
-                    Description = x.Description,
-                    ProductsId = x.Products.Select(y => y.Id).ToList()
-                }).ToList();
-
-                PagingModelAPI<BrandPagingModelAPI> model = new PagingModelAPI<BrandPagingModelAPI>();
-                model.PageSize = size;
-                model.TotalElements = _brandRepo.GetAll().Count();
-                model.NumPage = page;
-                model.Elements = brands;
+                var model = _brandService.GetbrandPerPage(size, page);
 
                 return Ok(model);
             }

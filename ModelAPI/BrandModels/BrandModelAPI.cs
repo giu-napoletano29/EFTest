@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using TestJuniorDef.ModelAPI.CategoryModels;
+using TestJuniorDef.ModelAPI.ProductModels;
 
 namespace TestJuniorDef.ModelAPI
 {

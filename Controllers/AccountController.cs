@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text.Json;
 using TestJuniorDef.Repositories.Interfaces;
 using TestJuniorDef.Repositories;
+using TestJuniorDef.Services.Interfaces;
 
 namespace TestJuniorDef.Controllers
 {
@@ -15,12 +16,12 @@ namespace TestJuniorDef.Controllers
     public class AccountController : ControllerBase
     {
         private readonly ILogger<AccountController> _logger;
-        private readonly IAccountRepo _accountRepo;
+        private readonly IAccountService _accountService;
 
-        public AccountController(ILogger<AccountController> logger, IAccountRepo accountRepo)
+        public AccountController(ILogger<AccountController> logger, IAccountService accountService)
         {
             _logger = logger;
-            _accountRepo = accountRepo;
+            _accountService = accountService;
         }
 
         /// <summary>
@@ -30,7 +31,7 @@ namespace TestJuniorDef.Controllers
         [HttpGet]
         public IEnumerable<Account> GetAccounts()
         {
-            return _accountRepo.GetAll();
+            return _accountService.GetAccounts();
         }
 
 
@@ -45,7 +46,7 @@ namespace TestJuniorDef.Controllers
         {
             try
             {
-                return _accountRepo.GetById(id).FirstOrDefault();
+                return _accountService.GetAccountsById(id);
             }
             catch (System.Exception e)
             {
@@ -55,19 +56,24 @@ namespace TestJuniorDef.Controllers
             return default;
         }
 
-        //[HttpGet("user/{id}")]
-        //public Account GetAccountsByUser(int id)
-        //{
-        //    try
-        //    {
-        //        return _accountRepo.GetById(id).FirstOrDefault();
-        //    }
-        //    catch (System.Exception e)
-        //    {
-        //        _logger.LogError(e, e.Message);
-        //    }
+        /// <summary>
+        /// Return informations about an account by its linked user id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns><see cref="IActionResult">ActionResult</see></returns>
+        [HttpGet("user/{id}")]
+        public Account GetAccountsByUser(int id)
+        {
+            try
+            {
+                return _accountService.GetAccountsByUser(id);
+            }
+            catch (System.Exception e)
+            {
+                _logger.LogError(e, e.Message);
+            }
 
-        //    return default;
-        //}
+            return default;
+        }
     }
 }

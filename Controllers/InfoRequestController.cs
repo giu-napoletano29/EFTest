@@ -9,6 +9,9 @@ using TestJuniorDef.Repositories.Interfaces;
 using TestJuniorDef.Repositories;
 using Microsoft.Data.SqlClient;
 using TestJuniorDef.ModelAPI;
+using TestJuniorDef.Services.Interfaces;
+using TestJuniorDef.ModelAPI.ProductModels;
+using TestJuniorDef.ModelAPI.InfoRequestModels;
 
 namespace TestJuniorDef.Controllers
 {
@@ -17,12 +20,12 @@ namespace TestJuniorDef.Controllers
     public class InfoRequestController : ControllerBase
     {
         private readonly ILogger<InfoRequestController> _logger;
-        private readonly IInfoRequestRepo _inforeqrepo;
+        private readonly IInfoRequestService _infoRequestService;
 
-        public InfoRequestController(ILogger<InfoRequestController> logger, IInfoRequestRepo inforeqrepo)
+        public InfoRequestController(ILogger<InfoRequestController> logger, IInfoRequestService infoRequestService)
         {
             _logger = logger;
-            _inforeqrepo = inforeqrepo;
+            _infoRequestService = infoRequestService;
         }
 
         /// <summary>
@@ -32,7 +35,7 @@ namespace TestJuniorDef.Controllers
         [HttpGet]
         public IEnumerable<InfoRequest> GetInfoRequests()
         {
-            return _inforeqrepo.GetAll();
+            return _infoRequestService.GetInfoRequests();
         }
 
         /// <summary>
@@ -43,28 +46,7 @@ namespace TestJuniorDef.Controllers
         [HttpGet("{id}")]
         public IActionResult GetInfoRequestById(int id)
         {
-            var infoRequest = _inforeqrepo.GetById(id)
-                    .Select(x => new
-                    {
-                        Id = x.Id,
-                        Product = new
-                        {
-                            Id = x.Product.Id,
-                            Name = x.Product.Name,
-                            Brandname = x.Product.Brand.BrandName
-                        },
-                        Name = x.UserId == null ? x.Name : x.User.Name,
-                        Lastname = x.UserId == null ? x.LastName : x.User.LastName,
-                        Email = x.UserId == null ? x.Email : x.User.Account.Email,
-                        Address = x.City + " (" + x.PostalCode + "), " + x.Nation.Name,
-                        Replies = x.InfoRequestReply.OrderByDescending(x => x.InsertDate).Select(x => new
-                        {
-                            Id = x.Id,
-                            User = x.Account.AccountType == 1 ? x.Account.Brand.BrandName : x.Account.AccountType == 2 ? x.Account.User.Name + " " + x.Account.User.LastName : "Invalid User",
-                            Text = x.ReplyText,
-                            Date = x.InsertDate
-                        })
-                    }).ToList();
+            var infoRequest = _infoRequestService.GetInfoRequestById(id);
 
             return Ok(infoRequest);
         }

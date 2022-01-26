@@ -9,6 +9,8 @@ using TestJuniorDef.Repositories.Interfaces;
 using TestJuniorDef.Repositories;
 using Microsoft.Data.SqlClient;
 using TestJuniorDef.ModelAPI;
+using TestJuniorDef.Services.Interfaces;
+using TestJuniorDef.ModelAPI.ProductModels;
 
 namespace TestJuniorDef.Controllers
 {
@@ -17,12 +19,12 @@ namespace TestJuniorDef.Controllers
     public class ProductController : ControllerBase
     {
         private readonly ILogger<ProductController> _logger;
-        private readonly IProductRepo _productRepo;
+        private readonly IProductService _productService;
 
-        public ProductController(ILogger<ProductController> logger, IProductRepo productRepo)
+        public ProductController(ILogger<ProductController> logger, IProductService productService)
         {
             _logger = logger;
-            _productRepo = productRepo;
+            _productService = productService;
         }
 
         /// <summary>
@@ -32,7 +34,7 @@ namespace TestJuniorDef.Controllers
         [HttpGet]
         public IEnumerable<Product> GetProducts()
         {
-            return _productRepo.GetAll();
+            return _productService.GetProducts();
         }
 
 
@@ -47,30 +49,7 @@ namespace TestJuniorDef.Controllers
         {
             try
             {
-                var p = _productRepo.GetById(id)
-                        .Select(x => new
-                        {
-                            Id = x.Id,
-                            Name = x.Name,
-                            BrandName = x.Brand.BrandName,
-                            Categories = x.ProductCategory.Select(z => new
-                            {
-                                Id = z.Category.Id,
-                                CategoryName = z.Category.Name
-                            }),
-                            TotalInfoRequestGuest = x.InfoRequests.Where(x => x.UserId == null).Count(),
-                            TotalInfoRequestLogged = x.InfoRequests.Where(x => x.UserId != null).Count(),
-                            InfoRequest = x.InfoRequests.OrderByDescending(y => y.InfoRequestReply.Max(y => y.InsertDate))  //Repeating Max()
-                            .Select(x => new
-                            {
-                                Id = x.Id,
-                                Name = x.UserId == null ? x.Name : x.User.Name,
-                                Lastname = x.UserId == null ? x.LastName : x.User.LastName,
-                                TotalReply = x.InfoRequestReply.Count(),
-                                //DateLastReply = x.InfoRequestReply.Select(x => x.InsertDate).OrderByDescending(x => x).FirstOrDefault(),
-                                DateLastReply = x.InfoRequestReply.Max(x => x.InsertDate),
-                            }),
-                        }).ToList();
+                var p = _productService.GetProductById(id);
                 return Ok(p);
             }
             catch (System.Exception e)
@@ -86,8 +65,8 @@ namespace TestJuniorDef.Controllers
         /// <param name="id"></param>
         /// <returns><see cref="IActionResult">ActionResult</see> <br/> PageSize <br/> TotalElements <br/> NumPage <br/> Elements </returns>
 
-        [HttpGet("page/{size}/{page}")]
-        public IActionResult GetProductPerPage(int size, int page)
+        [HttpGet("page/{size?}/{page?}")]
+        public IActionResult GetProductPerPage(int size = 5, int page = 1)
         {
             if (size <= 0 || page < 1)
             {
@@ -95,20 +74,9 @@ namespace TestJuniorDef.Controllers
             }
             try
             {
-                var products = _productRepo.GetAll().Skip((size * page) - size).Take(size).Select(x => new ProductPagingModelAPI
-                {
-                    Id = x.Id,
-                    ProductName = x.Name,
-                    Description = x.ShortDescription
-                }).ToList();
+                var retvalue = _productService.GetProductPerPage(size, page);
 
-                PagingModelAPI<ProductPagingModelAPI> view = new PagingModelAPI<ProductPagingModelAPI>();
-                view.PageSize = size;
-                view.TotalElements = _productRepo.GetAll().Count();
-                view.NumPage = page;
-                view.Elements = products;
-
-                return Ok(view);
+                return Ok(retvalue);
             }
             catch (System.Exception e)
             {

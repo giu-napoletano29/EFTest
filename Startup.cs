@@ -17,6 +17,8 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using TestJuniorDef.Repositories;
 using TestJuniorDef.Repositories.Interfaces;
+using TestJuniorDef.Services.Interfaces;
+using TestJuniorDef.Services;
 
 namespace TestJuniorDef
 {
@@ -42,6 +44,10 @@ namespace TestJuniorDef
             services.AddScoped<IInfoRequestRepo, InfoRequestRepo>();
             services.AddScoped<IProductRepo, ProductRepo>();
             services.AddScoped<ICategoryRepo, CategoryRepo>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IBrandService, BrandService>();
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IInfoRequestService, InfoRequestService>();
 
             services.AddControllers().AddNewtonsoftJson(options =>
             {
