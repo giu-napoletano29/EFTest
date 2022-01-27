@@ -6,6 +6,8 @@
             <Home :test="prova"
                   :inc="numInc"
                   :dec="numDec"
+                  :bset="bset"
+                  @val="bset"
                   />
         </b-container>
     </div>
@@ -34,6 +36,9 @@ export default {
       },
       numDec() {
           this.prova--
+      },
+      bset(val) {
+          this.prova = val
       }
   }
 }
