@@ -41,6 +41,3 @@ jobs:
     - name: Build
       working-directory: ./TestJuniorDef.FrontEndVue
       run: npm run build --if-present
-    - name: test
-      working-directory: ./TestJuniorDef.FrontEndVue
-      run: npm test
