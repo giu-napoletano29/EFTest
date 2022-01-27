@@ -9,6 +9,10 @@ on:
   pull_request:
     branches: [ main ]
 
+defaults:
+  run:
+    working-directory: ./TestJuniorDef.FrontEndVue
+
 jobs:
   build:
 
@@ -21,7 +25,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - working-directory: ./TestJuniorDef.FrontEndVue
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
