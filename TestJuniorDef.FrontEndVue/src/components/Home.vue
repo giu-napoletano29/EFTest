@@ -6,5 +6,23 @@
             <b-avatar variant="info" src="https://placekitten.com/300/300"></b-avatar>
             <b-avatar variant="success" icon="people-fill"></b-avatar>
         </div>
+        <div>
+            <b-button>Button</b-button>
+            <b-button @click="dec" variant="danger">Dec</b-button>
+            <b-button @click="inc" variant="success">inc</b-button>
+            <b-button variant="outline-primary">Button</b-button>
+        </div>
+        <h2>Numero di prova: {{ test }}</h2>
     </div>
 </template>
+
+<script>
+    export default {
+        props: {
+            test: Number,
+            inc: Function,
+            dec: Function
+        }
+    }
+</script>
+
