@@ -22,10 +22,6 @@ jobs:
         working-directory: ./TestJuniorDef.FrontEndVue
   
     steps:
-    - name: Download Key
-      run: |
-          echo "https://github.com/giu-napoletano29/EFTest/blob/main/Debug%20Key/testjuniordef.frontendvue.key" >> 'C:\Users\runneradmin\AppData\Roaming\ASP.NET\https\TestJuniorDef.FrontEndVue.key'
-          echo "https://github.com/giu-napoletano29/EFTest/blob/main/Debug%20Key/testjuniordef.frontendvue.pem" >> 'C:\Users\runneradmin\AppData\Roaming\ASP.NET\https\TestJuniorDef.FrontEndVue.pem'
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       run: |
@@ -35,6 +31,12 @@ jobs:
     - name: CI
       working-directory: ./TestJuniorDef.FrontEndVue
       run: npm ci
+      
+    - name: Download Key
+      run: |
+          echo "https://github.com/giu-napoletano29/EFTest/blob/main/Debug%20Key/testjuniordef.frontendvue.key" >> 'C:\Users\runneradmin\AppData\Roaming\ASP.NET\https\TestJuniorDef.FrontEndVue.key'
+          echo "https://github.com/giu-napoletano29/EFTest/blob/main/Debug%20Key/testjuniordef.frontendvue.pem" >> 'C:\Users\runneradmin\AppData\Roaming\ASP.NET\https\TestJuniorDef.FrontEndVue.pem'
+
     - name: Build
       working-directory: ./TestJuniorDef.FrontEndVue
       run: npm run build --if-present
