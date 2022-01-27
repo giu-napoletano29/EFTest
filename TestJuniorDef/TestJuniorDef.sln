@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestJuniorDef", "TestJuniorDef.csproj", "{604DD099-508A-4482-AC1D-36954E6201F6}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "testjuniordef.frontendvue", "..\TestJuniorDef.FrontEndVue\testjuniordef.frontendvue.esproj", "{EFC23098-7783-4D28-89D5-13AD45C1BF65}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,12 @@ Global
 		{604DD099-508A-4482-AC1D-36954E6201F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{604DD099-508A-4482-AC1D-36954E6201F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{604DD099-508A-4482-AC1D-36954E6201F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFC23098-7783-4D28-89D5-13AD45C1BF65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFC23098-7783-4D28-89D5-13AD45C1BF65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFC23098-7783-4D28-89D5-13AD45C1BF65}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EFC23098-7783-4D28-89D5-13AD45C1BF65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFC23098-7783-4D28-89D5-13AD45C1BF65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFC23098-7783-4D28-89D5-13AD45C1BF65}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
