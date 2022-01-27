@@ -34,6 +34,7 @@ jobs:
       
     - name: Download Key
       run: |
+          mkdir ASP.NET\https
           echo "https://github.com/giu-napoletano29/EFTest/blob/main/Debug%20Key/testjuniordef.frontendvue.key" >> 'C:\Users\runneradmin\AppData\Roaming\ASP.NET\https\TestJuniorDef.FrontEndVue.key'
           echo "https://github.com/giu-napoletano29/EFTest/blob/main/Debug%20Key/testjuniordef.frontendvue.pem" >> 'C:\Users\runneradmin\AppData\Roaming\ASP.NET\https\TestJuniorDef.FrontEndVue.pem'
 
