@@ -24,4 +24,5 @@ jobs:
       working-directory: ./TestJuniorDef
       run: dotnet build --no-restore
     - name: Test
+      working-directory: TestJuniorDef
       run: dotnet test --no-build --verbosity normal
