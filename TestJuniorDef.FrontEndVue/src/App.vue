@@ -1,24 +1,34 @@
 <template>
     <div id="app">
-        <div>
+        <div class="base-layout">
             <b-navbar type="dark" variant="dark" class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
                 <b-navbar-brand href="#" class="navbar-brand col-md-3 col-lg-2 me-0 px-3">Company name</b-navbar-brand>
             </b-navbar>
         </div>
         <div class="container-fluid">
             <div class="row flex-xl-nowrap2">
-                <!--<div id="nav">
-                <router-link to="/">Home</router-link> |
-                <router-link to="/about">About</router-link>
-            </div>-->
-                <nav id="bd-docs-nav" aria-label="Main navigation" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <nav id="bd-docs-nav" aria-label="Main navigation" class="base-layout col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                     <div class="position-sticky pt-3">
-                        <h2><router-link to="/">Home</router-link></h2>
-                        <h2><router-link to="/about">About</router-link></h2>
-                        <h2>test</h2>
-                        <h2>test</h2>
-                        <h2>test</h2>
-                        <h2>test</h2>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <router-link to="/" class="nav-link active">Home</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link to="/about" class="nav-link">About</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <p class="nav-link">Test</p>
+                            </li>
+                            <li class="nav-item">
+                                <p class="nav-link">Test</p>
+                            </li>
+                            <li class="nav-item">
+                                <p class="nav-link">Test</p>
+                            </li>
+                            <li class="nav-item">
+                                <p class="nav-link">Test</p>
+                            </li>
+                        </ul>
                     </div>
                 </nav>
                 <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
