@@ -20,7 +20,9 @@
         <div class="overflow-auto">
             <!--<b-pagination-nav :link-gen="linkGen" :number-of-pages="3" use-router align="center"></b-pagination-nav>-->
         </div>
-        <p> Test API: {{ axi.brandName }}</p>
+        <b-overlay :show="!loaded" rounded="sm">
+            <p> Test API: {{ axi.brandName }}</p>
+        </b-overlay>
     </div>
 </template>
 
@@ -31,7 +33,8 @@
             test: Number,
             inc: Function,
             dec: Function,
-            axi: null
+            axi: null,
+            loaded: Boolean
         },
 
         data() {

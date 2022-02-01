@@ -8,6 +8,7 @@
                   :inc="numInc"
                   :dec="numDec"
                   :bset="bset"
+                  :loaded="loaded"
                   @val="bset" />
         </b-container>
     </div>
@@ -28,13 +29,15 @@
         data() {
             return {
                 prova: 34,
-                brand: ''
+                brand: '',
+                loaded: false
             }
         },
 
-        created() {
+        async created() {
             try {
-                axios.get('https://localhost:5001/Brand/6').then(response => (this.brand = response.data))
+               await axios.get('https://localhost:5001/Brand/6').then(response => (this.brand = response.data))
+               this.loaded = true
             } catch (e) {
                 console.error(e)
             }

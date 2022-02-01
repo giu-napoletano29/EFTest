@@ -16,18 +16,6 @@
                             <li class="nav-item">
                                 <router-link to="/about" class="nav-link">About</router-link>
                             </li>
-                            <li class="nav-item">
-                                <p class="nav-link">Test</p>
-                            </li>
-                            <li class="nav-item">
-                                <p class="nav-link">Test</p>
-                            </li>
-                            <li class="nav-item">
-                                <p class="nav-link">Test</p>
-                            </li>
-                            <li class="nav-item">
-                                <p class="nav-link">Test</p>
-                            </li>
                         </ul>
                     </div>
                 </nav>
