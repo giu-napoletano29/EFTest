@@ -31,7 +31,7 @@
             test: Number,
             inc: Function,
             dec: Function,
-            axi: String
+            axi: null
         },
 
         data() {
