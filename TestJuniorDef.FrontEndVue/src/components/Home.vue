@@ -17,22 +17,37 @@
             <b-form-input v-model="text" placeholder="Enter your name"></b-form-input>
             <div class="mt-2">Value: {{ text }}</div>
         </div>
+        <div class="overflow-auto">
+            <!--<b-pagination-nav :link-gen="linkGen" :number-of-pages="3" use-router align="center"></b-pagination-nav>-->
+        </div>
+        <p> Test API: {{ axi.brandName }}</p>
     </div>
 </template>
 
 <script>
+/*    import axios from 'axios';*/
     export default {
         props: {
             test: Number,
             inc: Function,
             dec: Function,
+            axi: String
         },
 
         data() {
             return {
-                text: ''
+                text: '',
+                brands: [],
             }
         },
+
+        //created() {
+        //    try {
+        //        axios.get('https://localhost:5001/Brand/6').then(response => (this.brand = response.data))
+        //    } catch (e) {
+        //        /*Console.log(e)*/
+        //    }
+        //},
 
         methods: {
             set() {

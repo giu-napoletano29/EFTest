@@ -36,6 +36,8 @@ namespace TestJuniorDef
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             services.AddDbContext<Context>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging(Env.IsDevelopment()));
 
@@ -74,6 +76,11 @@ namespace TestJuniorDef
             {
                 return n();
             });
+
+            app.UseCors(
+                options => options.WithOrigins("https://localhost:5002").AllowAnyMethod()
+            );
+
 
             app.UseEndpoints(endpoints =>
             {

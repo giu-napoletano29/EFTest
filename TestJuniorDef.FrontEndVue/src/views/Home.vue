@@ -4,6 +4,7 @@
         <b-container>
             <Header />
             <Home :test="prova"
+                  :axi="brand"
                   :inc="numInc"
                   :dec="numDec"
                   :bset="bset"
@@ -15,6 +16,7 @@
 <script>
     import Home from '@/components/Home.vue'
     import Header from '@/components/Header.vue'
+    import axios from 'axios';
 
     export default {
         name: 'App',
@@ -25,7 +27,16 @@
 
         data() {
             return {
-                prova: 34
+                prova: 34,
+                brand: ''
+            }
+        },
+
+        created() {
+            try {
+                axios.get('https://localhost:5001/Brand/6').then(response => (this.brand = response.data))
+            } catch (e) {
+                console.error(e)
             }
         },
 
