@@ -17,6 +17,7 @@
 </template>
 
 <script>
+    //import BrandsAPI from '../wrappers/BrandWrapper.js';
     import axios from 'axios';
 
     export default {
@@ -34,6 +35,13 @@
             .catch((error) => { console.warn('Not good man :( ' + error); this.error = true })
             this.loaded = true
 
+            // BrandsAPI.getall({
+            //         "artist": "Red Hot Chili Peppers",
+            //         "order_by": "release_date",
+            //         "order_direction": "DESC"
+            //     }).then(function( response ){
+            //         this.songs = response.data;
+            //     }.bind(this));
         }
     }
 
