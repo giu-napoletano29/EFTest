@@ -1,1 +1,0 @@
-//Qui chiamata ad API e poi passare contenuto ai componenti

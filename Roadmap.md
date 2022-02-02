@@ -13,13 +13,13 @@
 |--|--|--|--|--|
 | GetAllBrands()|GET |/brands  |Restituisce tutti i brand	 | Id - Nome brand|
 | InsertBrand()|POST |  |Inserisce un brand	 | |
-| UpdateBrand()|UPDATE|  |Modifica un brand	 | |
+| UpdateBrand()|PUT|  |Modifica un brand	 | |
 | RemoveBrand()|DELETE|  |Rimuove un brand	 | |
 | GetBrandByName()|GET|  |Restituisce i brand con quel nome	 | Lista di brand |
 | GetBrandById()|GET|  |Restituisce il brand con quel Id| Brand |
 | GetAllProducts()|GET |/products  |Restituisce tutti i prodotti| Lista di prodotti|
 | InsertProduct()|POST |  |Inserisce un prodotto| |
-| UpdateProduct()|UPDATE|  |Modifica un prodotto| |
+| UpdateProduct()|PUT|  |Modifica un prodotto| |
 | RemoveProduct()|DELETE|  |Rimuove un prodotto| |
 | GetAllLeeds()|GET |/leeds  |Restituisce tutte le richieste info| Lista di richieste info|
 
