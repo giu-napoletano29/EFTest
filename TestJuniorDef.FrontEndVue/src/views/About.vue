@@ -6,6 +6,7 @@
         <div v-if="loaded">
             <p>{{ list }}</p>
             <p v-for="el in list.elements" :key="el.brandName"> {{ el.brandName}}</p>
+            <b-table striped hover :items="list.elements" :fields="fields"></b-table>
         </div>
     </div>
     </b-overlay>
@@ -24,6 +25,7 @@
                 list: null,
                 loaded: false,
                 error: false,
+                fields: ['brandName', 'description']
             }
         },
 
