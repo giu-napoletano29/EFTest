@@ -2,8 +2,9 @@
 
  1. Studio
  2. Creazione API
- 3. Creazione layout principale
- 4. Creazione logica applicazione
+ 3. Creazione struttura pagine
+ 4. Creazione layout principale
+ 5. Creazione logica applicazione
  
  ## Studio
  **API da creare**
