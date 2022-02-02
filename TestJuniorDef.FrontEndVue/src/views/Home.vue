@@ -1,8 +1,7 @@
 <template>
     <div>
-        <!--<img alt="Vue logo" src="../assets/logo.png">-->
         <b-container>
-            <Header />
+            <Header :name="name"/>
             <Home :test="prova"
                   :axi="brand"
                   :inc="numInc"
@@ -20,7 +19,7 @@
     import axios from 'axios';
 
     export default {
-        name: 'App',
+        
         components: {
             Home,
             Header
@@ -28,6 +27,7 @@
 
         data() {
             return {
+                name: 'Home',
                 prova: 34,
                 brand: '',
                 loaded: false

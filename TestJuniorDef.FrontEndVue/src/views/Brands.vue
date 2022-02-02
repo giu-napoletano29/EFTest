@@ -1,7 +1,7 @@
 <template>
     <div>
         <b-container>
-            <Header />
+            <Header :name="name"/>
             <Brands/>
         </b-container>
     </div>
@@ -11,9 +11,16 @@
     import Header from '@/components/Header.vue'
     import Brands from '@/components/Brands.vue'
     export default {
+        
         components: {
             Brands,
             Header
         },
+
+        data(){
+            return{
+                name: 'Brand',
+            }
+        }
     }
 </script>
