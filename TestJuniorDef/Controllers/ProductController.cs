@@ -66,6 +66,7 @@ namespace TestJuniorDef.Controllers
         /// <param name="id"></param>
         /// <returns><see cref="IActionResult">ActionResult</see> <br/> PageSize <br/> TotalElements <br/> NumPage <br/> Elements </returns>
 
+        [HttpGet("page/{page}")]
         [HttpGet("page/{size?}/{page?}")]
         public IActionResult GetProductPerPage(int size = 5, int page = 1)
         {
