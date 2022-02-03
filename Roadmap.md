@@ -12,15 +12,15 @@
 |Nome|Tipo|Route|Descrizione |Valori di ritorno|
 |--|--|--|--|--|
 | GetAllBrands()|GET |/brands  |Restituisce tutti i brand	 | Id - Nome brand|
-| InsertBrand()|POST |  |Inserisce un brand	 | |
-| UpdateBrand()|PUT|  |Modifica un brand	 | |
-| RemoveBrand()|DELETE|  |Rimuove un brand	 | |
+| InsertBrand()|POST |/brands/new |Inserisce un brand	 | |
+| UpdateBrand()|PUT|/brands/:id/edit  |Modifica un brand	 | |
+| RemoveBrand()|DELETE|/brands/:id |Rimuove un brand	 | |
 | GetBrandByName()|GET|  |Restituisce i brand con quel nome	 | Lista di brand |
-| GetBrandById()|GET|  |Restituisce il brand con quel Id| Brand |
+| GetBrandById()|GET|/brands/:id  |Restituisce il brand con quel Id| Brand |
 | GetAllProducts()|GET |/products  |Restituisce tutti i prodotti| Lista di prodotti|
-| InsertProduct()|POST |  |Inserisce un prodotto| |
-| UpdateProduct()|PUT|  |Modifica un prodotto| |
-| RemoveProduct()|DELETE|  |Rimuove un prodotto| |
+| InsertProduct()|POST |/products/new  |Inserisce un prodotto| |
+| UpdateProduct()|PUT|/products/:id/edit  |Modifica un prodotto| |
+| RemoveProduct()|DELETE|/products/:id  |Rimuove un prodotto| |
 | GetAllLeeds()|GET |/leeds  |Restituisce tutte le richieste info| Lista di richieste info|
 
  **Pagine**
