@@ -21,8 +21,10 @@
     import axios from 'axios';
 
     export default {
+        
         data() {
             return {
+                name: 'About',
                 list: null,
                 loaded: false,
                 error: false,

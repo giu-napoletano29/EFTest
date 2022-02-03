@@ -39,7 +39,22 @@ namespace TestJuniorDef.Repositories
                                         .Include(x => x.Nation);
         }
 
-        public void Save(InfoRequest obj)
+        public void Insert(InfoRequest obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Update(InfoRequest obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Delete(InfoRequest obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IQueryable<InfoRequest> GetByIdTracked(int id)
         {
             throw new System.NotImplementedException();
         }

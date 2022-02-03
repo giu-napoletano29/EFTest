@@ -1,4 +1,6 @@
 ﻿using apitest.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using TestJuniorDef.ModelAPI;
@@ -86,6 +88,80 @@ namespace TestJuniorDef.Services
             }).ToList();
 
             return model;
+        }
+        /// <summary>
+        /// Insert a new brand into the DataBase
+        /// </summary>
+        /// <param name="brand"></param>
+        public int InsertBrand(Brand brand)
+        {
+            try
+            {
+                _brandRepo.Insert(brand);
+            }
+            catch (System.Exception e)
+            {
+                return StatusCodes.Status500InternalServerError;
+            }
+
+            return StatusCodes.Status201Created;
+            
+        }
+
+        /// <summary>
+        /// Update a brand with the given infos
+        /// </summary>
+        /// <param name="brand"></param>
+        /// <returns></returns>
+        public int UpdateBrand(Brand brand)
+        {
+            var b = _brandRepo.GetByIdTracked(brand.Id).FirstOrDefault();
+            if (b != null)
+            {
+                try
+                {
+                    b.Account.Email = brand.Account.Email;
+                    b.Account.Password = brand.Account.Password;
+                    b.BrandName = brand.BrandName;
+                    b.Description = brand.Description;
+
+                    _brandRepo.Update(b);
+                }
+                catch (System.Exception e)
+                {
+                    return StatusCodes.Status500InternalServerError;
+                }
+            }
+            else
+            {
+                return StatusCodes.Status404NotFound;
+            }
+            return StatusCodes.Status200OK;
+        }
+
+        /// <summary>
+        /// Delete a brand by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int DeleteBrand(int id)
+        {
+            var brand = _brandRepo.GetById(id).FirstOrDefault();
+            if (brand != null)
+            {
+                try
+                {
+                    _brandRepo.Delete(brand);
+                }catch (System.Exception e)
+                {
+                    return StatusCodes.Status500InternalServerError;
+                }
+            }
+            else
+            {
+                return StatusCodes.Status404NotFound;
+            }
+            return StatusCodes.Status200OK;
         }
     }
 }

@@ -36,7 +36,22 @@ namespace TestJuniorDef.Repositories
                                         .ThenInclude(x => x.Product);
         }
 
-        public void Save(Category obj)
+        public void Insert(Category obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Update(Category obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Delete(Category obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IQueryable<Category> GetByIdTracked(int id)
         {
             throw new System.NotImplementedException();
         }

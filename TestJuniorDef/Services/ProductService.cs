@@ -1,4 +1,5 @@
 ﻿using apitest.Models;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Linq;
 using TestJuniorDef.ModelAPI;
@@ -82,6 +83,68 @@ namespace TestJuniorDef.Services
             }).ToList();
 
             return model;
+        }
+
+        public int InsertProduct(Product product)
+        {
+            try
+            {
+                _productRepo.Insert(product);
+            }
+            catch (System.Exception e)
+            {
+                return StatusCodes.Status500InternalServerError;
+            }
+
+            return StatusCodes.Status201Created;
+        }
+
+        public int UpdateProduct(Product product)
+        {
+            var prod = _productRepo.GetByIdTracked(product.Id).FirstOrDefault();
+            if (prod != null)
+            {
+                try
+                {
+                    prod.Price = product.Price;
+                    prod.Description = product.Description;
+                    prod.BrandId = product.BrandId;
+                    prod.Name = product.Name;
+                    prod.ShortDescription = product.ShortDescription;
+
+                    _productRepo.Update(prod);
+                }
+                catch (System.Exception e)
+                {
+                    return StatusCodes.Status500InternalServerError;
+                }
+            }
+            else
+            {
+                return StatusCodes.Status404NotFound;
+            }
+            return StatusCodes.Status200OK;
+        }
+
+        public int DeleteProduct(int id)
+        {
+            var prod = _productRepo.GetById(id).FirstOrDefault();
+            if (prod != null)
+            {
+                try
+                {
+                    _productRepo.Delete(prod);
+                }
+                catch (System.Exception e)
+                {
+                    return StatusCodes.Status500InternalServerError;
+                }
+            }
+            else
+            {
+                return StatusCodes.Status404NotFound;
+            }
+            return StatusCodes.Status200OK;
         }
     }
 }

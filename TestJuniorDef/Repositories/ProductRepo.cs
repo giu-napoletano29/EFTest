@@ -36,9 +36,27 @@ namespace TestJuniorDef.Repositories
                                     .Include(x => x.Brand);
         }
 
-        public void Save(Product obj)
+        public void Insert(Product obj)
         {
-            throw new System.NotImplementedException();
+            _context.Products.Add(obj);
+            _context.SaveChanges();
+        }
+
+        public void Update(Product obj)
+        {
+            _context.Products.Update(obj);
+            _context.SaveChanges();
+        }
+
+        public void Delete(Product obj)
+        {
+            _context.Products.Remove(obj);
+            _context.SaveChanges();
+        }
+
+        public IQueryable<Product> GetByIdTracked(int id)
+        {
+            return _context.Products.Where(x => x.Id == id);
         }
     }
 }

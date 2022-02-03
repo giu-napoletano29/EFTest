@@ -1,7 +1,7 @@
 <template>
     <div>
         <b-container>
-            <Header />
+            <Header :name="name"/>
             <Leeds/>
         </b-container>
     </div>
@@ -11,9 +11,16 @@
     import Header from '@/components/Header.vue'
     import Leeds from '@/components/Leeds.vue'
     export default {
+        
         components: {
             Leeds,
             Header
         },
+
+        data(){
+            return{
+                name: 'Richieste info',
+            }
+        }
     }
 </script>
