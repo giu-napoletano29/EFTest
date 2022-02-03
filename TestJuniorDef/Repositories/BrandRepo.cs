@@ -17,6 +17,11 @@ namespace TestJuniorDef.Repositories
         public IQueryable<Brand> GetById(int id)
         {
             return _context.Brands.Where(x => x.Id == id).AsNoTracking();
+        }        
+        
+        public IQueryable<Brand> GetByIdTracked(int id)
+        {
+            return _context.Brands.Where(x => x.Id == id).Include(x => x.Account);  //TODO: was AsNoTracking()
         }
 
 
@@ -46,7 +51,8 @@ namespace TestJuniorDef.Repositories
 
         public void Update(Brand obj)
         {
-            throw new System.NotImplementedException();
+            _context.Brands.Update(obj);
+            _context.SaveChanges();
         }
 
         public void Delete(Brand obj)

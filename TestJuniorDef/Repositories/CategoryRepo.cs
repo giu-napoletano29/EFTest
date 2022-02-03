@@ -50,5 +50,10 @@ namespace TestJuniorDef.Repositories
         {
             throw new System.NotImplementedException();
         }
+
+        public IQueryable<Category> GetByIdTracked(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

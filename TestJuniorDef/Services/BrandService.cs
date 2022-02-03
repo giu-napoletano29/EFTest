@@ -108,11 +108,42 @@ namespace TestJuniorDef.Services
             
         }
 
+        /// <summary>
+        /// Update a brand with the given infos
+        /// </summary>
+        /// <param name="brand"></param>
+        /// <returns></returns>
         public int UpdateBrand(Brand brand)
         {
-            throw new System.NotImplementedException();
+            var b = _brandRepo.GetByIdTracked(brand.Id).FirstOrDefault();
+            if (b != null)
+            {
+                try
+                {
+                    b.Account.Email = brand.Account.Email;
+                    b.Account.Password = brand.Account.Password;
+                    b.BrandName = brand.BrandName;
+                    b.Description = brand.Description;
+
+                    _brandRepo.Update(b);
+                }
+                catch (System.Exception e)
+                {
+                    return StatusCodes.Status500InternalServerError;
+                }
+            }
+            else
+            {
+                return StatusCodes.Status404NotFound;
+            }
+            return StatusCodes.Status200OK;
         }
 
+        /// <summary>
+        /// Delete a brand by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public int DeleteBrand(int id)
         {
             var brand = _brandRepo.GetById(id).FirstOrDefault();

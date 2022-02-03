@@ -111,6 +111,34 @@ namespace TestJuniorDef.Controllers
         }
 
         /// <summary>
+        /// Update a brand if id exist with the given infos
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <param name="brandname"></param>
+        /// <param name="description"></param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        public IActionResult UpdateBrand(int id, string email, string password, string brandname, string description)
+        {
+            Brand brand = new Brand()
+            {
+                Id = id,
+                BrandName = brandname,
+                Description = description,
+                Account = new Account()
+                {
+                    Email = email,
+                    Password = Encoding.ASCII.GetBytes(password),
+                    AccountType = 1
+                }
+            };
+
+            return StatusCode(_brandService.UpdateBrand(brand));
+        }
+
+        /// <summary>
         /// Delete the brand with the given id
         /// </summary>
         /// <param name="id"></param>
