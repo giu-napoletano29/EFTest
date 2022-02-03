@@ -38,22 +38,25 @@ namespace TestJuniorDef.Repositories
 
         public void Insert(Product obj)
         {
-            throw new System.NotImplementedException();
+            _context.Products.Add(obj);
+            _context.SaveChanges();
         }
 
         public void Update(Product obj)
         {
-            throw new System.NotImplementedException();
+            _context.Products.Update(obj);
+            _context.SaveChanges();
         }
 
         public void Delete(Product obj)
         {
-            throw new System.NotImplementedException();
+            _context.Products.Remove(obj);
+            _context.SaveChanges();
         }
 
         public IQueryable<Product> GetByIdTracked(int id)
         {
-            throw new System.NotImplementedException();
+            return _context.Products.Where(x => x.Id == id);
         }
     }
 }

@@ -85,5 +85,48 @@ namespace TestJuniorDef.Controllers
             return UnprocessableEntity();
         }
 
+        [HttpPost]
+        public IActionResult InsertProduct(int brandid, string name, string shortdescription, decimal price, string description)
+        {
+            Product product = new Product()
+            {
+                BrandId = brandid,
+                Name = name,
+                ShortDescription = shortdescription,
+                Price = price,
+                Description = description
+            };
+            _productService.InsertProduct(product);
+
+            return StatusCode(200);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateProduct(int id, int brandid, string name, string shortdescription, decimal price, string description)
+        {
+            Product product = new Product()
+            {
+                Id = id,
+                BrandId = brandid,
+                Name = name,
+                ShortDescription = shortdescription,
+                Price = price,
+                Description = description
+            };
+
+            return StatusCode(_productService.UpdateProduct(product));
+        }
+
+        /// <summary>
+        /// Delete the product with the given id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        public IActionResult DeleteProduct(int id)
+        {
+
+            return StatusCode(_productService.DeleteProduct(id));
+        }
     }
 }

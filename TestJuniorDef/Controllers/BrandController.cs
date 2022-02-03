@@ -150,5 +150,11 @@ namespace TestJuniorDef.Controllers
             return StatusCode(_brandService.DeleteBrand(id));
         }
 
-}
+        [HttpGet("name/{name}")]
+        public IActionResult GetBrandByName(string name)
+        {
+            return Ok(_brandService.GetBrands().Where(x => x.BrandName == name).ToList());
+        }
+
     }
+}
