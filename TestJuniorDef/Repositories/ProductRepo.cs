@@ -44,12 +44,14 @@ namespace TestJuniorDef.Repositories
 
         public void Update(Product obj)
         {
+            _context.ProductCategories.RemoveRange(_context.ProductCategories.Where(x => x.ProductId == obj.Id));
             _context.Products.Update(obj);
             _context.SaveChanges();
         }
 
         public void Delete(Product obj)
         {
+            _context.ProductCategories.RemoveRange(_context.ProductCategories.Where(x => x.ProductId == obj.Id));
             _context.Products.Remove(obj);
             _context.SaveChanges();
         }

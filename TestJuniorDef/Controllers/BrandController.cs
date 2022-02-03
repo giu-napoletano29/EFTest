@@ -17,7 +17,7 @@ using System.Text;
 namespace TestJuniorDef.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("brands")]
     public class BrandController : ControllerBase
     {
         private readonly ILogger<BrandController> _logger;
@@ -66,6 +66,7 @@ namespace TestJuniorDef.Controllers
         /// <param name="id"></param>
         /// <returns><see cref="IActionResult">ActionResult</see> <br/> PageSize <br/> TotalElements <br/> NumPage <br/> BrandName <br/> Description <br/> ProductsId </returns>
 
+        [HttpGet("page/{page}")]
         [HttpGet("page/{size?}/{page?}")]
         public IActionResult GetbrandPerPage(int size = 5, int page = 1)
         {
@@ -93,20 +94,9 @@ namespace TestJuniorDef.Controllers
         /// <param name="BrandName"></param>
         /// <param name="Description"></param>
         /// <returns></returns>
-        [HttpPost]
-        public IActionResult InsertBrand(string email, string password, string BrandName, string Description)
+        [HttpPost("new")]      
+        public IActionResult InsertBrand([FromBody] Brand brand)
         {
-            Brand brand = new Brand()
-            {
-                BrandName = BrandName,
-                Description = Description,
-                Account = new Account()
-                {
-                    Email = email,
-                    Password = Encoding.ASCII.GetBytes(password),
-                    AccountType = 1
-                }
-            };
             return StatusCode(_brandService.InsertBrand(brand));
         }
 
@@ -119,21 +109,10 @@ namespace TestJuniorDef.Controllers
         /// <param name="brandname"></param>
         /// <param name="description"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
-        public IActionResult UpdateBrand(int id, string email, string password, string brandname, string description)
+        [HttpPut("{id}/edit")]
+        public IActionResult UpdateBrand(int id, [FromBody] Brand brand)
         {
-            Brand brand = new Brand()
-            {
-                Id = id,
-                BrandName = brandname,
-                Description = description,
-                Account = new Account()
-                {
-                    Email = email,
-                    Password = Encoding.ASCII.GetBytes(password),
-                    AccountType = 1
-                }
-            };
+            brand.Id = id;
 
             return StatusCode(_brandService.UpdateBrand(brand));
         }

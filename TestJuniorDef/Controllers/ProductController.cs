@@ -15,7 +15,7 @@ using TestJuniorDef.ModelAPI.ProductModels;
 namespace TestJuniorDef.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("products")]
     public class ProductController : ControllerBase
     {
         private readonly ILogger<ProductController> _logger;
@@ -65,6 +65,7 @@ namespace TestJuniorDef.Controllers
         /// <param name="id"></param>
         /// <returns><see cref="IActionResult">ActionResult</see> <br/> PageSize <br/> TotalElements <br/> NumPage <br/> Elements </returns>
 
+        [HttpGet("page/{page}")]
         [HttpGet("page/{size?}/{page?}")]
         public IActionResult GetProductPerPage(int size = 5, int page = 1)
         {
@@ -85,34 +86,18 @@ namespace TestJuniorDef.Controllers
             return UnprocessableEntity();
         }
 
-        [HttpPost]
-        public IActionResult InsertProduct(int brandid, string name, string shortdescription, decimal price, string description)
+        [HttpPost("new")]      
+        public IActionResult InsertProduct([FromBody] Product product)
         {
-            Product product = new Product()
-            {
-                BrandId = brandid,
-                Name = name,
-                ShortDescription = shortdescription,
-                Price = price,
-                Description = description
-            };
             _productService.InsertProduct(product);
 
             return StatusCode(200);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult UpdateProduct(int id, int brandid, string name, string shortdescription, decimal price, string description)
+        [HttpPut("{id}/edit")]       
+        public IActionResult UpdateProduct(int id, [FromBody] Product product)
         {
-            Product product = new Product()
-            {
-                Id = id,
-                BrandId = brandid,
-                Name = name,
-                ShortDescription = shortdescription,
-                Price = price,
-                Description = description
-            };
+            product.Id = id;
 
             return StatusCode(_productService.UpdateProduct(product));
         }
