@@ -1,4 +1,5 @@
 ﻿using apitest.Models;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Linq;
 using TestJuniorDef.Repositories.Interfaces;
@@ -12,6 +13,11 @@ namespace TestJuniorDef.Services
         public AccountService(IAccountRepo accountRepo)
         {
             _accountRepo = accountRepo;
+        }
+
+        public int DeleteAccount(int id)
+        {
+            throw new System.NotImplementedException();
         }
 
         /// <summary>
@@ -41,6 +47,24 @@ namespace TestJuniorDef.Services
         public Account GetAccountsByUser(int id)
         {
             return _accountRepo.GetAll().Where(x => x.User.Id == id).FirstOrDefault();
+        }
+
+        public int InsertAccount(Account account)
+        {
+            try
+            {
+                _accountRepo.Insert(account);
+            }
+            catch (System.Exception e)
+            {
+                return StatusCodes.Status500InternalServerError;
+            }
+            return StatusCodes.Status200OK;
+        }
+
+        public int UpdateAccount(Account account)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

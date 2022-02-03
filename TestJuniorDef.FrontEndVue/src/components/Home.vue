@@ -41,6 +41,7 @@
             return {
                 text: '',
                 brands: [],
+                value: ['apple', 'orange']
             }
         },
 

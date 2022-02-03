@@ -1,4 +1,6 @@
 ﻿using apitest.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using TestJuniorDef.ModelAPI;
@@ -86,6 +88,49 @@ namespace TestJuniorDef.Services
             }).ToList();
 
             return model;
+        }
+        /// <summary>
+        /// Insert a new brand into the DataBase
+        /// </summary>
+        /// <param name="brand"></param>
+        public int InsertBrand(Brand brand)
+        {
+            try
+            {
+                _brandRepo.Insert(brand);
+            }
+            catch (System.Exception e)
+            {
+                return StatusCodes.Status500InternalServerError;
+            }
+
+            return StatusCodes.Status201Created;
+            
+        }
+
+        public int UpdateBrand(Brand brand)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int DeleteBrand(int id)
+        {
+            var brand = _brandRepo.GetById(id).FirstOrDefault();
+            if (brand != null)
+            {
+                try
+                {
+                    _brandRepo.Delete(brand);
+                }catch (System.Exception e)
+                {
+                    return StatusCodes.Status500InternalServerError;
+                }
+            }
+            else
+            {
+                return StatusCodes.Status404NotFound;
+            }
+            return StatusCodes.Status200OK;
         }
     }
 }

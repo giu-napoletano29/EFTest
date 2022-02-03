@@ -12,6 +12,7 @@ using TestJuniorDef.ModelAPI;
 using TestJuniorDef.ModelAPI.CategoryModels;
 using TestJuniorDef.ModelAPI.ProductModels;
 using TestJuniorDef.Services.Interfaces;
+using System.Text;
 
 namespace TestJuniorDef.Controllers
 {
@@ -85,5 +86,41 @@ namespace TestJuniorDef.Controllers
             return UnprocessableEntity();
         }
 
-    }
+        /// <summary>
+        /// Insert a new Brand and Account into the database with the specified infos
+        /// </summary>
+        /// <param name="AccountId"></param>
+        /// <param name="BrandName"></param>
+        /// <param name="Description"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult InsertBrand(string email, string password, string BrandName, string Description)
+        {
+            Brand brand = new Brand()
+            {
+                BrandName = BrandName,
+                Description = Description,
+                Account = new Account()
+                {
+                    Email = email,
+                    Password = Encoding.ASCII.GetBytes(password),
+                    AccountType = 1
+                }
+            };
+            return StatusCode(_brandService.InsertBrand(brand));
+        }
+
+        /// <summary>
+        /// Delete the brand with the given id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        public IActionResult DeleteBrand(int id)
+        {
+
+            return StatusCode(_brandService.DeleteBrand(id));
+        }
+
 }
+    }

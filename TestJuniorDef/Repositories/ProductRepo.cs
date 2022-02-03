@@ -36,7 +36,17 @@ namespace TestJuniorDef.Repositories
                                     .Include(x => x.Brand);
         }
 
-        public void Save(Product obj)
+        public void Insert(Product obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Update(Product obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Delete(Product obj)
         {
             throw new System.NotImplementedException();
         }

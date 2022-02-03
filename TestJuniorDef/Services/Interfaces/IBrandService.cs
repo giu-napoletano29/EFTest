@@ -1,4 +1,5 @@
 ﻿using apitest.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using TestJuniorDef.ModelAPI;
 
@@ -9,5 +10,8 @@ namespace TestJuniorDef.Services.Interfaces
         IEnumerable<Brand> GetBrands();
         BrandModelAPI GetBrandById(int id);
         PagingModelAPI<BrandPagingModelAPI> GetBrandPerPage(int size = 5, int page = 1);
+        int InsertBrand(Brand brand);
+        int UpdateBrand(Brand brand);
+        int DeleteBrand(int id);
     }
 }

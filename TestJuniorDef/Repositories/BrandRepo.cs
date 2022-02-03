@@ -38,9 +38,21 @@ namespace TestJuniorDef.Repositories
                                             .ThenInclude(x => x.Category); //TODO: try to generalize include
         }
 
-        public void Save(Brand obj)
+        public void Insert(Brand obj)
+        {
+            _context.Brands.Add(obj);
+            _context.SaveChanges();
+        }
+
+        public void Update(Brand obj)
         {
             throw new System.NotImplementedException();
+        }
+
+        public void Delete(Brand obj)
+        {
+            var result = _context.Remove(obj);
+            _context.SaveChanges();
         }
     }
 }

@@ -1,5 +1,15 @@
 <template>
     <div>
-        <h1>Products</h1>
+        <Table/>
     </div>
 </template>
+
+<script>
+/*    import axios from 'axios';*/
+import Table from '@/components/Table.vue'
+    export default {
+        components:{
+            Table
+        },
+    }
+</script>

@@ -8,6 +8,8 @@ namespace TestJuniorDef.Repositories.Interfaces
         IQueryable<T> GetById(int id);
         IQueryable<T> GetAll();
         IQueryable<T> GetAll(bool includeAll);
-        void Save(T obj);
+        void Insert(T obj);
+        void Update(T obj);
+        void Delete(T obj);
     }
 }

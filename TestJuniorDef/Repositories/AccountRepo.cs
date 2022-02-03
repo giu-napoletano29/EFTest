@@ -39,7 +39,17 @@ namespace TestJuniorDef.Repositories
                                     .Include(x => x.User);
         }
 
-        public void Save(Account obj)
+        public void Insert(Account obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Update(Account obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Delete(Account obj)
         {
             throw new System.NotImplementedException();
         }

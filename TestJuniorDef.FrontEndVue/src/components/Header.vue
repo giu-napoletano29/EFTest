@@ -4,6 +4,7 @@
             <h1 class="h2">{{ name }}</h1>
             <slot></slot>
         </div>
+        <span class="badge bg-primary">Primary</span>
     </div>
 </template>
 
