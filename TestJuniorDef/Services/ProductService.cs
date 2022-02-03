@@ -111,6 +111,7 @@ namespace TestJuniorDef.Services
                     prod.BrandId = product.BrandId;
                     prod.Name = product.Name;
                     prod.ShortDescription = product.ShortDescription;
+                    prod.ProductCategory = product.ProductCategory;
 
                     _productRepo.Update(prod);
                 }
