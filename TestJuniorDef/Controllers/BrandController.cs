@@ -17,7 +17,8 @@ using System.Text;
 namespace TestJuniorDef.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    //[Route("[controller]")]
+    [Route("brands")]
     public class BrandController : ControllerBase
     {
         private readonly ILogger<BrandController> _logger;
@@ -93,7 +94,7 @@ namespace TestJuniorDef.Controllers
         /// <param name="BrandName"></param>
         /// <param name="Description"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("new")]
         public IActionResult InsertBrand(string email, string password, string BrandName, string Description)
         {
             Brand brand = new Brand()
@@ -119,7 +120,7 @@ namespace TestJuniorDef.Controllers
         /// <param name="brandname"></param>
         /// <param name="description"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
+        [HttpPut("{id}/edit")]
         public IActionResult UpdateBrand(int id, string email, string password, string brandname, string description)
         {
             Brand brand = new Brand()

@@ -16,7 +16,7 @@ using TestJuniorDef.ModelAPI.InfoRequestModels;
 namespace TestJuniorDef.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("leeds")]
     public class InfoRequestController : ControllerBase
     {
         private readonly ILogger<InfoRequestController> _logger;

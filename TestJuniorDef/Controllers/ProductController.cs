@@ -15,7 +15,8 @@ using TestJuniorDef.ModelAPI.ProductModels;
 namespace TestJuniorDef.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    //[Route("[controller]")]
+    [Route("products")]
     public class ProductController : ControllerBase
     {
         private readonly ILogger<ProductController> _logger;
@@ -85,7 +86,7 @@ namespace TestJuniorDef.Controllers
             return UnprocessableEntity();
         }
 
-        [HttpPost]
+        [HttpPost("new")]
         public IActionResult InsertProduct(int brandid, string name, string shortdescription, decimal price, string description)
         {
             Product product = new Product()
@@ -101,7 +102,7 @@ namespace TestJuniorDef.Controllers
             return StatusCode(200);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}/edit")]
         public IActionResult UpdateProduct(int id, int brandid, string name, string shortdescription, decimal price, string description)
         {
             Product product = new Product()
