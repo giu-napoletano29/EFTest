@@ -17,7 +17,6 @@ using System.Text;
 namespace TestJuniorDef.Controllers
 {
     [ApiController]
-    //[Route("[controller]")]
     [Route("brands")]
     public class BrandController : ControllerBase
     {
@@ -95,20 +94,9 @@ namespace TestJuniorDef.Controllers
         /// <param name="BrandName"></param>
         /// <param name="Description"></param>
         /// <returns></returns>
-        [HttpPost("new")]
-        public IActionResult InsertBrand(string email, string password, string BrandName, string Description)
+        [HttpPost("new")]      
+        public IActionResult InsertBrand([FromBody] Brand brand)
         {
-            Brand brand = new Brand()
-            {
-                BrandName = BrandName,
-                Description = Description,
-                Account = new Account()
-                {
-                    Email = email,
-                    Password = Encoding.ASCII.GetBytes(password),
-                    AccountType = 1
-                }
-            };
             return StatusCode(_brandService.InsertBrand(brand));
         }
 
@@ -122,20 +110,9 @@ namespace TestJuniorDef.Controllers
         /// <param name="description"></param>
         /// <returns></returns>
         [HttpPut("{id}/edit")]
-        public IActionResult UpdateBrand(int id, string email, string password, string brandname, string description)
+        public IActionResult UpdateBrand(int id, [FromBody] Brand brand)
         {
-            Brand brand = new Brand()
-            {
-                Id = id,
-                BrandName = brandname,
-                Description = description,
-                Account = new Account()
-                {
-                    Email = email,
-                    Password = Encoding.ASCII.GetBytes(password),
-                    AccountType = 1
-                }
-            };
+            brand.Id = id;
 
             return StatusCode(_brandService.UpdateBrand(brand));
         }
