@@ -16,7 +16,7 @@
                                 <div class="container">
                                     <button type="button" class="btn btn-primary">Modifica</button>
                                     <!-- <DeleteModal/> -->
-                                    <button type="button" class="btn btn-danger" @click="modal.show()">Elimina</button>
+                                    <button type="button" class="btn btn-danger" @click="OpenModal()">Elimina</button>
                                 </div>
                             </td> 
                         </tr>
@@ -25,7 +25,12 @@
             </div>
         </div>
 
-        <div class="modal fade" ref="exampleModal" tabindex="-1" aria-hidden="true">
+        <DeleteModal
+            :open="open"
+            @closemodal="CloseModal"
+        />
+
+        <!-- <div class="modal fade" ref="exampleModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -41,7 +46,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         </b-overlay>
         <div v-if="error">
@@ -51,9 +56,13 @@
 </template>
 
 <script>
-import { Modal } from 'bootstrap'
+//import { Modal } from 'bootstrap'
+import DeleteModal from '@/components/DeleteModal.vue'
 
 export default {
+    components: {
+        DeleteModal,
+    },
 
     props: {
         page: Number,
@@ -65,12 +74,22 @@ export default {
 
     data(){
         return{
-            modal: null
+            modal: null,
+            open: false,
+        }
+    },
+
+    methods:{
+        OpenModal(){
+            this.open = true
+        },
+        CloseModal(){
+            this.open = false
         }
     },
 
     mounted() {
-        this.modal = new Modal(this.$refs.exampleModal)
+        //this.modal = new Modal(this.$refs.exampleModal)
     },
 }
 </script>
