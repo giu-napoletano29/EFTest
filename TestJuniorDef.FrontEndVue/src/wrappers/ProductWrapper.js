@@ -1,18 +1,14 @@
 import Repository from "./Repository";
 
-const resource = "/brands";
+const resource = "/products";
 
 export default {
     get(){
         return Repository.get(`${resource}`);
     },
 
-    getallpagedsized(size, page){
+    getallpaged(size, page){
         return Repository.get(`${resource}/page/${size}/${page}`);
-    },
-
-    getallpaged(page){
-        return Repository.get(`${resource}/page/${page}`);
     },
 
     getById( id ){

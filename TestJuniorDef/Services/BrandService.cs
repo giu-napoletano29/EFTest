@@ -82,6 +82,7 @@ namespace TestJuniorDef.Services
             model.NumPage = pagination.NumPage;
             model.Elements = pagination.Elements.Select(x => new BrandPagingModelAPI
             {
+                Id=x.Id,
                 BrandName = x.BrandName,
                 Description = x.Description,
                 ProductsId = x.Products.Select(y => y.Id).ToList()
