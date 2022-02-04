@@ -18,8 +18,8 @@
 
 <script>
     //import BrandsAPI from '../wrappers/BrandWrapper.js';
-    import axios from 'axios';
-
+    import {Factory} from './../wrappers/Factory'
+    const BrandsRepo = Factory.get('brands')
     export default {
         
         data() {
@@ -33,17 +33,9 @@
         },
 
         async created() {
-            await axios.get('https://localhost:5001/Brand/page/5/2').then(response => (this.list = response.data))
-            .catch((error) => { console.warn('Not good man :( ' + error); this.error = true })
+            const {data} = await BrandsRepo.getallpaged(5, 2)
             this.loaded = true
-
-            // BrandsAPI.getall({
-            //         "artist": "Red Hot Chili Peppers",
-            //         "order_by": "release_date",
-            //         "order_direction": "DESC"
-            //     }).then(function( response ){
-            //         this.songs = response.data;
-            //     }.bind(this));
+            this.list = data;
         }
     }
 

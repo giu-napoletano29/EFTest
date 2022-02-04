@@ -16,7 +16,8 @@
 <script>
     import Home from '@/components/Home.vue'
     import Header from '@/components/Header.vue'
-    import axios from 'axios';
+    import {Factory} from './../wrappers/Factory'
+    const BrandsRepo = Factory.get('brands')
 
     export default {
         
@@ -35,12 +36,9 @@
         },
 
         async created() {
-            try {
-               await axios.get('https://localhost:5001/Brand/6').then(response => (this.brand = response.data))
-               this.loaded = true
-            } catch (e) {
-                console.error(e)
-            }
+            const {data} = await BrandsRepo.getById(6)
+            this.loaded = true
+            this.brand = data;
         },
 
         methods: {
