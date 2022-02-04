@@ -15,12 +15,19 @@
                 :page="page"
                 :maxVisibleButtons="maxVisibleButtons"
                 @page="pageChange"
+                @openmodal="OpenModal"
+                @closemodal="CloseModal"
             />
+            
             <Pagination
                 :totalPages="totalpages"
                 :maxVisibleButtons="maxVisibleButtons"
                 :page="page"
                 @pageChanged="pageChange"
+            />
+            <DeleteModal
+                :open="open"
+                @closemodal="CloseModal"
             />
         </b-container>
     </div>
@@ -31,6 +38,7 @@
     import Brands from '@/components/Brands.vue'
     import Pagination from '@/components/Pagination.vue'
     import {Factory} from './../wrappers/Factory'
+    import DeleteModal from '@/components/DeleteModal.vue'
     const BrandsRepo = Factory.get('brands')
 
     export default {
@@ -38,7 +46,8 @@
         components: {
             Brands,
             Header,
-            Pagination
+            Pagination,
+            DeleteModal,
         },
 
         data(){
@@ -49,6 +58,7 @@
                 list: {},
                 loaded: false,
                 error: false,
+                open: false,
             }
         },
 
@@ -68,6 +78,12 @@
                 this.loaded = true
                 this.list = data;
             },
+            OpenModal(){
+                this.open = true
+            },
+            CloseModal(){
+                this.open = false
+            }
         },
 
         created() {

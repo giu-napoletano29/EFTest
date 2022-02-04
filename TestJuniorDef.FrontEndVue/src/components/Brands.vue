@@ -15,7 +15,6 @@
                             <td>
                                 <div class="container">
                                     <button type="button" class="btn btn-primary">Modifica</button>
-                                    <!-- <DeleteModal/> -->
                                     <button type="button" class="btn btn-danger" @click="OpenModal()">Elimina</button>
                                 </div>
                             </td> 
@@ -24,30 +23,6 @@
                 </table>
             </div>
         </div>
-
-        <DeleteModal
-            :open="open"
-            @closemodal="CloseModal"
-        />
-
-        <!-- <div class="modal fade" ref="exampleModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Sei sicuro?</h5>
-                        <button type="button" class="btn-close" @click="modal.hide()" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        L'azione è irreversibile.
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" @click="modal.hide()">Chiudi</button>
-                        <button type="button" class="btn btn-danger">Elimina</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
         </b-overlay>
         <div v-if="error">
             <h2>An error has occourred!</h2>
@@ -56,13 +31,8 @@
 </template>
 
 <script>
-//import { Modal } from 'bootstrap'
-import DeleteModal from '@/components/DeleteModal.vue'
 
 export default {
-    components: {
-        DeleteModal,
-    },
 
     props: {
         page: Number,
@@ -72,24 +42,13 @@ export default {
         error: Boolean,
     },
 
-    data(){
-        return{
-            modal: null,
-            open: false,
-        }
-    },
-
     methods:{
         OpenModal(){
-            this.open = true
+            this.$emit('openmodal')
         },
         CloseModal(){
-            this.open = false
+            this.$emit('closemodal')
         }
-    },
-
-    mounted() {
-        //this.modal = new Modal(this.$refs.exampleModal)
     },
 }
 </script>
