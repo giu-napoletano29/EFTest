@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Brands from '../views/Brands.vue'
+import BrandDetail from '../views/BrandDetail.vue'
 import Products from '../views/Products.vue'
 import Leeds from '../views/Leeds.vue'
 
@@ -25,6 +26,11 @@ const routes = [
     path: '/brands',
     name: 'Brands',
     component: Brands
+  },
+  {
+    path: '/brands/:id',
+    name: 'BrandDetail',
+    component: BrandDetail
   },
   {
     path: '/products',

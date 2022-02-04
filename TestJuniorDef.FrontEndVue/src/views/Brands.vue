@@ -37,8 +37,8 @@
     import Header from '@/components/Header.vue'
     import Brands from '@/components/Brands.vue'
     import Pagination from '@/components/Pagination.vue'
-    import {Factory} from './../wrappers/Factory'
     import DeleteModal from '@/components/DeleteModal.vue'
+    import {Factory} from './../wrappers/Factory'
     const BrandsRepo = Factory.get('brands')
 
     export default {

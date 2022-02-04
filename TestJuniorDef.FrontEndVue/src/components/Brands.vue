@@ -21,6 +21,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <router-link to="/brands/2" class="nav-link">Test</router-link>
             </div>
         </div>
         </b-overlay>
