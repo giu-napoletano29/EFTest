@@ -7,8 +7,12 @@ export default {
         return Repository.get(`${resource}`);
     },
 
-    getallpaged(size, page){
+    getallpagedsized(size, page){
         return Repository.get(`${resource}/page/${size}/${page}`);
+    },
+
+    getallpaged(page){
+        return Repository.get(`${resource}/page/${page}`);
     },
 
     getById( id ){

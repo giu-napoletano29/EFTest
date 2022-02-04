@@ -1,7 +1,7 @@
 <template>
     <div>
         <b-overlay :show="!loaded && !error" rounded="sm">
-        <div class="brand">
+        <div class="brands">
             <div v-if="loaded">
                 <table class="table table-striped table-hover">
                     <thead>
@@ -35,8 +35,6 @@
 export default {
 
     props: {
-        page: Number,
-        maxVisibleButtons: Number,
         list: Object,
         loaded: Boolean,
         error: Boolean,

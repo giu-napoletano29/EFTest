@@ -78,8 +78,15 @@ namespace TestJuniorDef.Services
             model.Elements = pagination.Elements.Select(x => new ProductPagingModelAPI
             {
                 Id = x.Id,
+                BrandName = x.Brand.BrandName,
                 ProductName = x.Name,
-                Description = x.ShortDescription
+                Description = x.ShortDescription,
+                Price = x.Price,
+                Categories = x.ProductCategory.Select(z => new CategoryBaseModelAPI
+                {
+                    Id = z.Category.Id,
+                    CategoryName = z.Category.Name
+                }),
             }).ToList();
 
             return model;
