@@ -13,9 +13,9 @@
                             <td>{{ l.id }}</td> 
                             <td>{{ l.brandName }}</td>
                             <td>
-                                <div class="container">
-                                    <button type="button" class="btn btn-primary">Modifica</button>
-                                    <button type="button" class="btn btn-danger" @click="OpenModal()">Elimina</button>
+                                <div class="btn-group me-2">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil-square"></i></button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" @click="OpenModal()"><i class="bi bi-trash" style="color: red;"></i></button>
                                 </div>
                             </td> 
                         </tr>

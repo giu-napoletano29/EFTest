@@ -3,13 +3,13 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <li class="page-item" :class="{ disabled: IsFirstPage }">
-                    <a class="page-link" @click="changePage(prevPage)">Previous</a>
+                    <a class="page-link" @click="changePage(prevPage)">Indietro</a>
                 </li>
                 <li v-for="i in pages" :key="i.num" class="page-item" :class="{ active: IsCurrentPage(i), disabled: i.isDisabled }"> 
                     <a class="page-link" href="#" @click="changePage(i.num)">{{i.num}}</a>
                 </li>
                 <li class="page-item" :class="{ disabled: IsLastPage }">
-                <a class="page-link" href="#" @click="changePage(nextPage)" >Next</a>
+                <a class="page-link" href="#" @click="changePage(nextPage)" >Avanti</a>
                 </li>
             </ul>
         </nav>
