@@ -46,6 +46,7 @@ namespace TestJuniorDef.Services
                     },
                     Name = x.UserId == null ? x.Name : x.User.Name,
                     Lastname = x.UserId == null ? x.LastName : x.User.LastName,
+                    Text = x.RequestText,
                     Email = x.UserId == null ? x.Email : x.User.Account.Email,
                     Address = x.City + " (" + x.PostalCode + "), " + x.Nation.Name,
                     Replies = x.InfoRequestReply.OrderByDescending(x => x.InsertDate).Select(x => new ReplyModelAPI
@@ -72,6 +73,7 @@ namespace TestJuniorDef.Services
                 Id=x.Id,
                 Name = x.Name,
                 Lastname = x.LastName,
+                Text = x.RequestText,
                 productId = x.ProductId,
                 productName = x.Product.Name,
                 brandId = x.Product.BrandId,

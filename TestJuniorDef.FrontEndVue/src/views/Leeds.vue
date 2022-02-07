@@ -62,7 +62,7 @@
             },
 
             async loadElements(){
-                const {data} = await LeedsRepo.getallpaged(this.page)
+                const {data} = await LeedsRepo.getallpagedsized(this.pageSize, this.page)
                 this.loaded = true
                 this.list = data
                 //this.pageChange(1);

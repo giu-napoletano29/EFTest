@@ -5,6 +5,7 @@ import Brands from '../views/Brands.vue'
 import BrandDetail from '../views/BrandDetail.vue'
 import Products from '../views/Products.vue'
 import Leeds from '../views/Leeds.vue'
+import LeedDetail from '../views/LeedDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -31,6 +32,11 @@ const routes = [
     path: '/brands/:id',
     name: 'BrandDetail',
     component: BrandDetail
+  },
+  {
+    path: '/leeds/:id',
+    name: 'LeedDetail',
+    component: LeedDetail
   },
   {
     path: '/products',
