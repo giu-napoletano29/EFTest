@@ -6,10 +6,11 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th scope="col"> Brand </th>
+                                <th scope="col"> Id </th>
+                                <th scope="col"> Nome </th>
+                                <th scope="col"> Cognome </th>
                                 <th scope="col"> Prodotto </th>
-                                <th scope="col"> Categorie </th>
-                                <th scope="col"> Prezzo </th>
+                                <th scope="col"> Brand </th>
                                 <th/>
                             </tr>
                             <tr class="table-light">
@@ -25,13 +26,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(l,i) in list.elements" :key="i"> 
-                                <td>{{ l.brandName }}</td> 
-                                <td>{{ l.productName }}</td>
-                                <td>
-                                    <span v-for="(cat,y) in l.categories" :key="y" class="badge bg-primary">{{ cat.categoryName }}</span>
-                                </td>
-                                <td><i class="bi bi-currency-euro"> </i> {{ l.price }}</td>
+                            <tr v-for="(l,i) in list" :key="i"> 
+                                <td>{{ l.id }}</td> 
+                                <td>{{ l.name }}</td>
+                                <td>{{ l.lastName }}</td>
+                                <td>{{ l.product.name }}</td>
+                                <td>{{ l.product.brandId }}</td>
                                 <td>
                                     <div class="btn-group me-2">
                                         <button type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil-square"></i></button>

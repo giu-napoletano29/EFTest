@@ -14,6 +14,9 @@
 <script>
     import Header from '@/components/Header.vue'
     import Leeds from '@/components/Leeds.vue'
+    import {Factory} from './../wrappers/Factory'
+    const LeedsRepo = Factory.get('leeds')
+
     export default {
         
         components: {
@@ -31,11 +34,11 @@
         },
 
         methods: {
-            // async loadElements(){
-            //     const {data} = await ProductsRepo.getallpaged(this.page)
-            //     this.loaded = true
-            //     this.list = data;
-            // },
+            async loadElements(){
+                const {data} = await LeedsRepo.get()
+                this.loaded = true
+                this.list = data;
+            },
             OpenModal(){
                 this.open = true
             },
@@ -45,7 +48,7 @@
         },
 
         created() {
-            //this.loadElements();
+            this.loadElements();
         },
     }
 </script>
