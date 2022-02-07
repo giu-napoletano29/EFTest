@@ -22,6 +22,11 @@
                                         <option value="3">Three</option>
                                     </select>   
                                 </th>
+                                <th> 
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Nome prodotto" aria-label="Nome prodotto" aria-describedby="basic-addon2">
+                                    </div>
+                                </th>
                                 <th/><th/><th/><th/>
                             </tr>
                         </thead>
@@ -54,7 +59,7 @@
     export default {
 
         props: {
-            list: Object,
+            list: Array,
             loaded: Boolean,
             error: Boolean,
         },
