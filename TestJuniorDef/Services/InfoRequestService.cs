@@ -59,5 +59,26 @@ namespace TestJuniorDef.Services
 
             return infoRequest;
         }
+
+        public PagingModelAPI<InfoRequestPagingModelAPI> GetInfoRequestsPerPage(int size = 5, int page = 1)
+        {
+            var pagination = Service.PaginateEntity<InfoRequest>(_inforeqrepo, size, page);
+            PagingModelAPI<InfoRequestPagingModelAPI> model = new PagingModelAPI<InfoRequestPagingModelAPI>();
+            model.PageSize = pagination.PageSize;
+            model.TotalElements = pagination.TotalElements;
+            model.NumPage = pagination.NumPage;
+            model.Elements = pagination.Elements.Select(x => new InfoRequestPagingModelAPI
+            {
+                Id=x.Id,
+                Name = x.Name,
+                Lastname = x.LastName,
+                productId = x.ProductId,
+                productName = x.Product.Name,
+                brandId = x.Product.BrandId,
+                brandName = x.Product.Brand.BrandName
+            }).ToList();
+
+            return model;
+        }
     }
 }

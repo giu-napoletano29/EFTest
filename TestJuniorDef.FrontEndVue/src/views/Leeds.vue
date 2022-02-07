@@ -3,7 +3,7 @@
         <b-container>
             <Header :name="name"/>
             <Leeds
-                :list="listpaginated"
+                :list="list"
                 :loaded="loaded"
                 :error="error"
             />
@@ -35,8 +35,8 @@
         data(){
             return{
                 name: 'Richieste info',
-                list: [],
-                listpaginated: [],
+                list: {},
+                //listpaginated: [],
                 maxVisibleButtons: 7,
                 page: 1,
                 pageSize: 10,
@@ -47,25 +47,25 @@
 
         computed:{
             totalpages(){
-                return Math.ceil(this.list.length/this.pageSize)
+                //return Math.ceil(this.list.length/this.pageSize)
+                return Math.ceil(this.list.totalElements/this.list.pageSize)
             }
         },
 
         methods: {
             pageChange(page) {
                 this.page = page
-                var skip = (this.page - 1 ) * this.pageSize
-                var take = skip + this.pageSize
-                //this.listpaginated = this.list.Skip(skip).Take(this.pageSize)
-                this.listpaginated = this.list.slice(skip, take)
-                // this.loadElements();
+                this.loadElements();
+                //var skip = (this.page - 1 ) * this.pageSize
+                //var take = skip + this.pageSize
+                //this.listpaginated = this.list.slice(skip, take)
             },
 
             async loadElements(){
-                const {data} = await LeedsRepo.get()
+                const {data} = await LeedsRepo.getallpaged(this.page)
                 this.loaded = true
                 this.list = data
-                this.pageChange(1);
+                //this.pageChange(1);
             },
             OpenModal(){
                 this.open = true

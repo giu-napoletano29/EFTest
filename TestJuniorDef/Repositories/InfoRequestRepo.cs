@@ -36,6 +36,7 @@ namespace TestJuniorDef.Repositories
             return _context.InfoRequests.Include(x => x.User)
                                             .ThenInclude(x => x.Account)
                                         .Include(x => x.Product)
+                                            .ThenInclude(x => x.Brand)
                                         .Include(x => x.InfoRequestReply)
                                         .Include(x => x.Nation);
         }
