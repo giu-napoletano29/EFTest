@@ -17,6 +17,7 @@
                 @page="pageChange"
                 @openmodal="OpenModal"
                 @closemodal="CloseModal"
+                @openDetail="OpenDetail"
             />
             
             <Pagination
@@ -83,6 +84,9 @@
             },
             CloseModal(){
                 this.open = false
+            },
+            OpenDetail(val){
+                this.$router.push('/brands/'+val)
             }
         },
 

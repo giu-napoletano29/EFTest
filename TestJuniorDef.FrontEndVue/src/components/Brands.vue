@@ -9,7 +9,7 @@
                         <th> Nome brand </th>
                     </thead>
                     <tbody>
-                        <tr v-for="(l,i) in list.elements" :key="i"> 
+                        <tr v-for="(l,i) in list.elements" :key="i" v-on:click="openDetail(list.elements[i])"> 
                             <td>{{ l.id }}</td> 
                             <td>{{ l.brandName }}</td>
                             <td>
@@ -21,7 +21,6 @@
                         </tr>
                     </tbody>
                 </table>
-                <router-link to="/brands/2" class="nav-link">Test</router-link>
             </div>
         </div>
         </b-overlay>
@@ -47,6 +46,9 @@ export default {
         },
         CloseModal(){
             this.$emit('closemodal')
+        },
+        openDetail: function (element) {
+            this.$emit('openDetail', element.id)
         }
     },
 }
