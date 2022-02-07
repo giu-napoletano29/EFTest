@@ -31,7 +31,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(l,i) in list.elements" :key="i"> 
+                            <tr v-for="(l,i) in list.elements" :key="i" v-on:click="openDetail(list.elements[i])"> 
                                 <td>{{ l.id }}</td> 
                                 <td>{{ l.name }}</td>
                                 <td>{{ l.lastName }}</td>
@@ -46,7 +46,6 @@
                             </tr>
                         </tbody>
                     </table>
-                    <router-link to="/leeds/3" class="nav-link">Test</router-link>
                 </div>
             </div>
         </b-overlay>
@@ -64,5 +63,12 @@
             loaded: Boolean,
             error: Boolean,
         },
+
+        methods:{
+            openDetail: function (element) {
+                this.$emit('openDetail', element.id)
+            }
+        }
+
     }
 </script>

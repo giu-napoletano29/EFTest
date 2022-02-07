@@ -6,6 +6,7 @@
                 :list="list"
                 :loaded="loaded"
                 :error="error"
+                @openDetail="OpenDetail"
             />
             <Pagination
                 :totalPages="totalpages"
@@ -36,7 +37,6 @@
             return{
                 name: 'Richieste info',
                 list: {},
-                //listpaginated: [],
                 maxVisibleButtons: 7,
                 page: 1,
                 pageSize: 10,
@@ -47,7 +47,6 @@
 
         computed:{
             totalpages(){
-                //return Math.ceil(this.list.length/this.pageSize)
                 return Math.ceil(this.list.totalElements/this.list.pageSize)
             }
         },
@@ -56,22 +55,21 @@
             pageChange(page) {
                 this.page = page
                 this.loadElements();
-                //var skip = (this.page - 1 ) * this.pageSize
-                //var take = skip + this.pageSize
-                //this.listpaginated = this.list.slice(skip, take)
             },
 
             async loadElements(){
                 const {data} = await LeedsRepo.getallpagedsized(this.pageSize, this.page)
                 this.loaded = true
                 this.list = data
-                //this.pageChange(1);
             },
             OpenModal(){
                 this.open = true
             },
             CloseModal(){
                 this.open = false
+            },
+            OpenDetail(val){
+                this.$router.push('/leeds/'+val)
             }
         },
 
