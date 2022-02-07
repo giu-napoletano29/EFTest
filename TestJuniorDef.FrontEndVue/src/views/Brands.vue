@@ -4,7 +4,7 @@
             <Header :name="name">
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group me-2">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Crea nuovo brand</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" @click="OpenNewBrand()">Crea nuovo brand</button>
                     </div>
                 </div>
             </Header>
@@ -87,6 +87,9 @@
             },
             OpenDetail(val){
                 this.$router.push('/brands/'+val)
+            },
+            OpenNewBrand(){
+                this.$router.push('/brands/new')
             }
         },
 

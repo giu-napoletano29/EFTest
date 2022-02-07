@@ -49,7 +49,7 @@ export default {
         },
         openDetail: function (element) {
             this.$emit('openDetail', element.id)
-        }
+        },
     },
 }
 </script>
