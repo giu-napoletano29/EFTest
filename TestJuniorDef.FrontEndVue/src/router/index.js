@@ -7,6 +7,7 @@ import Products from '../views/Products.vue'
 import Leeds from '../views/Leeds.vue'
 import LeedDetail from '../views/LeedDetail.vue'
 import InsertNewbrand from '../views/InsertNewbrand.vue'
+import InsertNewProduct from '../views/InsertNewProduct.vue'
 
 Vue.use(VueRouter)
 
@@ -48,6 +49,11 @@ const routes = [
     path: '/products',
     name: 'Products',
     component: Products
+  },
+  {
+    path: '/products/new',
+    name: 'InsertNewProduct',
+    component: InsertNewProduct
   },
   {
     path: '/leeds',

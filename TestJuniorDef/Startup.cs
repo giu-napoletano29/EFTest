@@ -50,6 +50,7 @@ namespace TestJuniorDef
             services.AddScoped<IBrandService, BrandService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IInfoRequestService, InfoRequestService>();
+            services.AddScoped<ICategoryService, CategoryService>();
 
             services.AddControllers().AddNewtonsoftJson(options =>
             {
