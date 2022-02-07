@@ -2,7 +2,11 @@
     <div>
         <b-container>
             <Header :name="name"/>
-            <Leeds/>
+            <Leeds
+                :list="list"
+                :loaded="loaded"
+                :error="error"
+            />
         </b-container>
     </div>
 </template>
@@ -20,7 +24,28 @@
         data(){
             return{
                 name: 'Richieste info',
+                list: {},
+                loaded: false,
+                error: false,
             }
-        }
+        },
+
+        methods: {
+            // async loadElements(){
+            //     const {data} = await ProductsRepo.getallpaged(this.page)
+            //     this.loaded = true
+            //     this.list = data;
+            // },
+            OpenModal(){
+                this.open = true
+            },
+            CloseModal(){
+                this.open = false
+            }
+        },
+
+        created() {
+            //this.loadElements();
+        },
     }
 </script>

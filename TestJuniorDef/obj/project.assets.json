@@ -8861,19 +8861,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\napoletano\\.nuget\\packages\\": {}
+    "C:\\Users\\Giuseppe\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\napoletano\\source\\repos\\TestJuniorDef\\TestJuniorDef\\TestJuniorDef.csproj",
+      "projectUniqueName": "C:\\Users\\Giuseppe\\Documents\\GitHub\\repo\\EFTest\\TestJuniorDef\\TestJuniorDef.csproj",
       "projectName": "TestJuniorDef",
-      "projectPath": "C:\\Users\\napoletano\\source\\repos\\TestJuniorDef\\TestJuniorDef\\TestJuniorDef.csproj",
-      "packagesPath": "C:\\Users\\napoletano\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\napoletano\\source\\repos\\TestJuniorDef\\TestJuniorDef\\obj\\",
+      "projectPath": "C:\\Users\\Giuseppe\\Documents\\GitHub\\repo\\EFTest\\TestJuniorDef\\TestJuniorDef.csproj",
+      "packagesPath": "C:\\Users\\Giuseppe\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Giuseppe\\Documents\\GitHub\\repo\\EFTest\\TestJuniorDef\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\napoletano\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Giuseppe\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

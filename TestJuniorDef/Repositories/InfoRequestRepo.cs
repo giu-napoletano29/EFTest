@@ -29,7 +29,8 @@ namespace TestJuniorDef.Repositories
         {
             if (!includeAll)
             {
-                return GetAll();
+                return _context.InfoRequests
+                                        .Include(x => x.Product);
             }
 
             return _context.InfoRequests.Include(x => x.User)

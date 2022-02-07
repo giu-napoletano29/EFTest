@@ -23,7 +23,7 @@ namespace TestJuniorDef.Services
         /// <returns><see cref="IEnumerable{T}">List of brands</see></returns>
         public IEnumerable<InfoRequest> GetInfoRequests()
         {
-            return _inforeqrepo.GetAll();
+            return _inforeqrepo.GetAll(false);
         }
 
         /// <summary>

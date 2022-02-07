@@ -80,7 +80,7 @@ namespace apitest.Models
                 builder.Property(x => x.ProductId).IsRequired();
                 builder.Property(x => x.RequestText).IsRequired();
                 //builder.Property(x => x.City).IsRequired();
-                builder.Property(x => x.Email).IsRequired();
+                //builder.Property(x => x.Email).IsRequired();
                 builder.Property(x => x.InsertDate).IsRequired();
                 builder.Property(x => x.Name).IsRequired();
                 builder.Property(x => x.LastName).IsRequired();
