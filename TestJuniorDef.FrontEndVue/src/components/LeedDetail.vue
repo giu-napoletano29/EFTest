@@ -10,7 +10,7 @@
         <p>{{ list.text }}</p>
         <b>Rispsote/Commenti alla richiesta</b>
         <b-overlay :show="!loaded && !error" rounded="sm">
-            <div v-for="(l,i) in list.replies" :key="i" class="card" style="width: 18rem;">
+            <div v-for="(l,i) in replies" :key="i" class="card" style="width: 18rem;">
                 <div class="card-header">
                     {{l.date}} - {{list.product.brandName}}
                 </div>
@@ -30,6 +30,7 @@ export default {
 
     props: {
         list: Object,
+        replies: Array,
         loaded: Boolean,
         error: Boolean,
     },
