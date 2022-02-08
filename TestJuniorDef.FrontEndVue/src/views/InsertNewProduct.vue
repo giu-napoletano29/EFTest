@@ -55,7 +55,7 @@
             InsertProduct(product){
                 const resp = ProductRepo.create(product)
                 this.response = resp
-                console.log("Test: " + resp.response)
+                
             }
         },
 

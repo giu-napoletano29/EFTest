@@ -55,27 +55,13 @@ export default {
                 ShortDescription: "",
                 Price: 0,
                 Description: "",
-                ProductCategory: [
-                    // {
-                    //     CategoryId: 0,
-                    // }
-                ],
+                ProductCategory: [],
             }
         }
-        // product:{
-        //     BrandId: this.brandId
-        //     Name: this.productName
-        //     ShortDescription: this.shortDesc
-        //     Price: 20
-        //     Description: this.longDesc
-        //     ProductCategory: this.productCats
-        // }
     },
 
     methods:{
         submitForm(){
-            // var jsonString = JSON.stringify(this.product);
-            //console.log("JSON: " + jsonString)
             this.$emit('submitForm', this.product)
         },
 
