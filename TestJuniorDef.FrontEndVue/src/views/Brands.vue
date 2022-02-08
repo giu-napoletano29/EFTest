@@ -29,6 +29,7 @@
             <DeleteModal
                 :open="open"
                 @closemodal="CloseModal"
+                @delete="Delete"
             />
         </b-container>
     </div>
@@ -60,6 +61,7 @@
                 loaded: false,
                 error: false,
                 open: false,
+                idEl: 0,
             }
         },
 
@@ -79,7 +81,8 @@
                 this.loaded = true
                 this.list = data;
             },
-            OpenModal(){
+            OpenModal(id){
+                this.idEl = id
                 this.open = true
             },
             CloseModal(){
@@ -90,6 +93,10 @@
             },
             OpenNewBrand(){
                 this.$router.push('/brands/new')
+            },
+            Delete(){
+                this.open = false
+                console.log("Id da eliminare: " + this.idEl)
             }
         },
 

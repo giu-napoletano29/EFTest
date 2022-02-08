@@ -67,7 +67,7 @@ namespace TestJuniorDef.Controllers
 
         [HttpGet("page/{page}")]
         [HttpGet("page/{size?}/{page?}")]
-        public IActionResult GetProductPerPage(int size = 5, int page = 1)
+        public IActionResult GetProductPerPage(int size = 5, int page = 1, int brand = 0)
         {
             if (size <= 0 || page < 1)
             {

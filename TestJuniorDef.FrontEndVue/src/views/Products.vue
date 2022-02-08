@@ -10,6 +10,7 @@
             </Header>
             <Products
                 :list="list"
+                :listbrands="listbrands"
                 :loaded="loaded"
                 :error="error"
                 @openDetail="OpenDetail"
@@ -30,6 +31,7 @@
     import Pagination from '@/components/Pagination.vue'
     import {Factory} from './../wrappers/Factory'
     const ProductsRepo = Factory.get('products')
+    const BrandsRepo = Factory.get('brands')
 
     export default {
         
@@ -43,6 +45,7 @@
             return{
                 name: 'Prodotti',
                 list: {},
+                listbrands: [],
                 maxVisibleButtons: 7,
                 page: 1,
                 loaded: false,
@@ -66,6 +69,10 @@
                 this.loaded = true
                 this.list = data;
             },
+            async loadBrands(){
+                const {data} = await BrandsRepo.get()
+                this.listbrands = data;
+            },
             OpenModal(){
                 this.open = true
             },
@@ -82,6 +89,7 @@
 
         created() {
             this.loadElements();
+            this.loadBrands();
         },
     }
 </script>

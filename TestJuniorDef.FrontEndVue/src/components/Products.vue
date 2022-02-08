@@ -14,11 +14,9 @@
                             </tr>
                             <tr class="table-light">
                                 <th> 
-                                    <select class="form-select" aria-label="Default select example">
+                                    <select class="form-select" aria-label="Default select example" v-model="key" @change="onChange()">
                                         <option selected>Tutti i brand</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <option v-for="(l,i) in listbrands" :key="i" :value="l.id">{{l.brandName}}</option>
                                     </select>   
                                 </th>
                                 <th/><th/><th/><th/>
@@ -35,7 +33,7 @@
                                 <td>
                                     <div class="btn-group me-2">
                                         <button type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil-square"></i></button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-trash" style="color: red;"></i></button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" @click.stop="OpenModal()"><i class="bi bi-trash" style="color: red;"></i></button>
                                     </div>
                                 </td> 
                             </tr>
@@ -55,8 +53,15 @@
 
         props: {
             list: Object,
+            listbrands: Array,
             loaded: Boolean,
             error: Boolean,
+        },
+        
+        data() {
+            return{
+                key: "Tutti i brand"
+            }  
         },
 
         methods:{
@@ -69,6 +74,9 @@
             openDetail: function (element) {
                 this.$emit('openDetail', element.id)
             },
+            onChange(){
+                console.log("Key: " + this.key)
+            }
         },
     }
 </script>

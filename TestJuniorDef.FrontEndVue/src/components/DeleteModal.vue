@@ -11,7 +11,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" @click="CloseModal()">Chiudi</button>
-                    <button type="button" class="btn btn-danger">Elimina</button>
+                    <button type="button" class="btn btn-danger" @click="Delete()">Elimina</button>
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@ import { Modal } from 'bootstrap'
 
 export default {
     props: {
-        open: Boolean
+        open: Boolean,
     },
 
     data(){
@@ -39,6 +39,10 @@ export default {
         CloseModal(){
             this.modal.hide()
             this.$emit('closemodal')
+        },
+        Delete(){
+            this.modal.hide()
+            this.$emit('delete')
         },
     },
 
