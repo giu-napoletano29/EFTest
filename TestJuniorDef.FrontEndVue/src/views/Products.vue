@@ -4,7 +4,7 @@
             <Header :name="name">
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group me-2">
-                        <button type="button" class="btn btn-sm btn-outline-secondary" @click="OpenNewBrand()">Aggiungi prodotto</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" @click="OpenNewProduct()">Aggiungi prodotto</button>
                     </div>
                 </div>
             </Header>
@@ -12,6 +12,7 @@
                 :list="list"
                 :loaded="loaded"
                 :error="error"
+                @openDetail="OpenDetail"
             />
             <Pagination
                 :totalPages="totalpages"
@@ -71,9 +72,12 @@
             CloseModal(){
                 this.open = false
             },
-            OpenNewBrand(){
+            OpenNewProduct(){
                 this.$router.push('/products/new')
-            }
+            },
+            OpenDetail(val){
+                this.$router.push('/products/'+val)
+            },
         },
 
         created() {

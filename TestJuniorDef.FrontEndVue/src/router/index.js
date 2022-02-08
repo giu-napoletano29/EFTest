@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Brands from '../views/Brands.vue'
 import BrandDetail from '../views/BrandDetail.vue'
 import Products from '../views/Products.vue'
+import ProductDetail from '../views/ProductDetail.vue'
 import Leeds from '../views/Leeds.vue'
 import LeedDetail from '../views/LeedDetail.vue'
 import InsertNewbrand from '../views/InsertNewbrand.vue'
@@ -49,6 +50,11 @@ const routes = [
     path: '/products',
     name: 'Products',
     component: Products
+  },
+  {
+    path: '/products/:id(\\d+)',
+    name: 'ProductDetail',
+    component: ProductDetail
   },
   {
     path: '/products/new',

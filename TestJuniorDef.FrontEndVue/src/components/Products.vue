@@ -25,7 +25,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(l,i) in list.elements" :key="i"> 
+                            <tr v-for="(l,i) in list.elements" :key="i" v-on:click="openDetail(list.elements[i])"> 
                                 <td>{{ l.brandName }}</td> 
                                 <td>{{ l.productName }}</td>
                                 <td>
@@ -51,15 +51,24 @@
 </template>
 
 <script>
-// import Table from '@/components/Table.vue'
     export default {
-        // components:{
-        //     Table
-        // },
+
         props: {
             list: Object,
             loaded: Boolean,
             error: Boolean,
+        },
+
+        methods:{
+            OpenModal(){
+                this.$emit('openmodal')
+            },
+            CloseModal(){
+                this.$emit('closemodal')
+            },
+            openDetail: function (element) {
+                this.$emit('openDetail', element.id)
+            },
         },
     }
 </script>

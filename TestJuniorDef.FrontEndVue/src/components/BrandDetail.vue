@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="row mb-3">
+        <div class="row mb-5">
             <h5 class="mb-3">Categorie associate ai Prodotti di {{ list.brandName }}</h5>
             <div class="row">
                 <div v-for="(l,i) in list.categories" :key="i"  class="col-sm-4">
