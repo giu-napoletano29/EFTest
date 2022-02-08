@@ -39,7 +39,7 @@
     const CategoriesRepo = Factory.get('categories')
     const BrandsRepo = Factory.get('brands')
     const Comp = InsertNewProduct
-//:product="product[prodIndex-1]" 
+
     export default {
         
         components: {
@@ -104,12 +104,6 @@
                 this.newcomponents.push(Comp)
                 this.product.push(prod);
                       
-            }
-        },
-
-        computed: {
-            temp(){
-                return this.prod
             }
         },
 

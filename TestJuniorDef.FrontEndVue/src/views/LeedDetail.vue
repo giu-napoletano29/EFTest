@@ -66,7 +66,7 @@
             },
 
             totalpages(){
-                return Math.ceil(this.list.replies.length/this.pageSize)
+                return Math.ceil(this.list.replies?.length/this.pageSize)
             }
         },
 
