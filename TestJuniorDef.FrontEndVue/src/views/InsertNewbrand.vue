@@ -38,7 +38,6 @@
     import {Factory} from './../wrappers/Factory'
     const CategoriesRepo = Factory.get('categories')
     const BrandsRepo = Factory.get('brands')
-    const ProductRepo = Factory.get('products')
     const Comp = InsertNewProduct
 //:product="product[prodIndex-1]" 
     export default {
@@ -57,7 +56,6 @@
                 loaded: false,
                 error: false,
                 response: '',
-                prodIndex: 0,
 
                 brand:{ 
                     BrandName: "",
@@ -70,14 +68,6 @@
                     Products:[]
                 },
 
-                // product:{ 
-                //     BrandId: "Seleziona brand",
-                //     Name: "",
-                //     ShortDescription: "",
-                //     Price: 0,
-                //     Description: "",
-                //     ProductCategory: [],
-                // },
                 product: [],
             }
         },
@@ -96,7 +86,8 @@
             },
 
             InsertProduct(){
-                const resp = ProductRepo.create(this.product)
+                this.brand.Products = this.product
+                const resp = BrandsRepo.create(this.brand)
                 this.response = resp
                 
             },
@@ -111,7 +102,7 @@
                     ProductCategory: [],
                 } 
                 this.newcomponents.push(Comp)
-                this.prodIndex = this.product.push(prod);
+                this.product.push(prod);
                       
             }
         },

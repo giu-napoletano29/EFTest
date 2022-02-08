@@ -23,16 +23,18 @@
 
 export default {
 
-    props: {
-        brand:{ 
-            BrandName: String,
-            Description: String,
-            Account:{
-                Email: String,
-                Password: String,
+    data(){
+        return{
+            brand:{ 
+                BrandName: "",
+                Description: "",
+                Account:{
+                    Email: "",
+                    Password: "",
+                    AccountType: 1,
+                }
             }
         }
-
     },
 
     watch: {
