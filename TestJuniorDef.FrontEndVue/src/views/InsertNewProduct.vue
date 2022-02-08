@@ -2,13 +2,19 @@
     <div>
         <b-container>
             <Header :name="name"/>
-            <InsertNewProduct
-                :list="list"
-                :brands="brands"
-                :loaded="loaded"
-                :error="error"
-                @submitForm="InsertProduct"
-            />
+            <form v-on:submit.prevent="InsertProduct">
+                <InsertNewProduct
+                    :list="list"
+                    :brands="brands"
+                    :loaded="loaded"
+                    :error="error"
+                    :product="product"
+                    @input="(newprod) => {product = newprod}"
+                />
+                <div class="mb-3">      
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>       
+            </form>
         </b-container>
     </div>
 </template>
@@ -36,6 +42,15 @@
                 loaded: false,
                 error: false,
                 response: '',
+
+                product:{ 
+                    BrandId: "Seleziona brand",
+                    Name: "",
+                    ShortDescription: "",
+                    Price: 0,
+                    Description: "",
+                    ProductCategory: [],
+                }
             }
         },
 
@@ -52,8 +67,8 @@
                 this.brands = data;
             },
 
-            InsertProduct(product){
-                const resp = ProductRepo.create(product)
+            InsertProduct(){
+                const resp = ProductRepo.create(this.product)
                 this.response = resp
                 
             }
