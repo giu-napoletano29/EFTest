@@ -39,20 +39,40 @@ export default {
         brands: Array,
         loaded: Boolean,
         error: Boolean,
-        product:{ 
-            BrandId: String,
-            Name: String,
-            ShortDescription: String,
-            Price: Number,
-            Description: String,
-            ProductCategory: Array,
-        }
+        // product:{ 
+        //     BrandId: String,
+        //     Name: String,
+        //     ShortDescription: String,
+        //     Price: Number,
+        //     Description: String,
+        //     ProductCategory: Array,
+        // }
 
     },
 
+    data(){
+        return{
+            product:{ 
+                BrandId: "Seleziona brand",
+                Name: "",
+                ShortDescription: "",
+                Price: 0,
+                Description: "",
+                ProductCategory: [],
+        }
+        }
+    },
+
     watch: {
-        product() {
-            this.$emit('input', this.product);
+        // product() {
+        //     this.$emit('input', this.product);
+        // }
+        product: {
+            deep:true,
+            handler(){
+                console.log("Emit")
+                this.$emit('input', this.product);
+            }
         }
     },
 

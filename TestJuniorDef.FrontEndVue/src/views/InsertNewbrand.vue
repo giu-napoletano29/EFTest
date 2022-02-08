@@ -21,8 +21,7 @@
                     :brands="brands"
                     :loaded="loaded"
                     :error="error"
-                    :product="product"
-                    @input="(newprod) => {product = newprod}"
+                    @input="(newprod) => {product[index] = newprod}"
                 />
                 <div class="mb-3">      
                     <button type="submit" class="btn btn-primary">Aggiungi brand</button>
@@ -41,7 +40,7 @@
     const BrandsRepo = Factory.get('brands')
     const ProductRepo = Factory.get('products')
     const Comp = InsertNewProduct
-
+//:product="product[prodIndex-1]" 
     export default {
         
         components: {
@@ -58,6 +57,7 @@
                 loaded: false,
                 error: false,
                 response: '',
+                prodIndex: 0,
 
                 brand:{ 
                     BrandName: "",
@@ -70,14 +70,15 @@
                     Products:[]
                 },
 
-                product:{ 
-                    BrandId: "Seleziona brand",
-                    Name: "",
-                    ShortDescription: "",
-                    Price: 0,
-                    Description: "",
-                    ProductCategory: [],
-                }
+                // product:{ 
+                //     BrandId: "Seleziona brand",
+                //     Name: "",
+                //     ShortDescription: "",
+                //     Price: 0,
+                //     Description: "",
+                //     ProductCategory: [],
+                // },
+                product: [],
             }
         },
 
@@ -100,8 +101,24 @@
                 
             },
 
-            addProd () {
+            addProd () {  
+                let prod = { 
+                    BrandId: "Seleziona brand",
+                    Name: "",
+                    ShortDescription: "",
+                    Price: 0,
+                    Description: "",
+                    ProductCategory: [],
+                } 
                 this.newcomponents.push(Comp)
+                this.prodIndex = this.product.push(prod);
+                      
+            }
+        },
+
+        computed: {
+            temp(){
+                return this.prod
             }
         },
 

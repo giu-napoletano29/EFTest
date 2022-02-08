@@ -8,7 +8,7 @@
                     :brands="brands"
                     :loaded="loaded"
                     :error="error"
-                    :product="product"
+                    
                     @input="(newprod) => {product = newprod}"
                 />
                 <div class="mb-3">      
@@ -26,7 +26,7 @@
     const CategoriesRepo = Factory.get('categories')
     const BrandsRepo = Factory.get('brands')
     const ProductRepo = Factory.get('products')
-
+//:product="product"
     export default {
         
         components: {
