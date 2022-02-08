@@ -20,6 +20,13 @@ export default {
     },
 
     create( data ){
+
+        // let config = {
+        //     headers: {
+        //         'Content-Type': 'application/json; charset=utf-8'
+        //     }
+        //   }
+
         return Repository.post(`${resource}/new`, data);
     },
 

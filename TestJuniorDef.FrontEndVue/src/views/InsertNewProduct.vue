@@ -7,6 +7,7 @@
                 :brands="brands"
                 :loaded="loaded"
                 :error="error"
+                @submitForm="InsertProduct"
             />
         </b-container>
     </div>
@@ -51,9 +52,10 @@
                 this.brands = data;
             },
 
-            InsertProduct(){
-                const resp = ProductRepo.create()
+            InsertProduct(product){
+                const resp = ProductRepo.create(product)
                 this.response = resp
+                console.log("Test: " + resp.response)
             }
         },
 
