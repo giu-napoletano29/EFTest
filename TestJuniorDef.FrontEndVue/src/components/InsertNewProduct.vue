@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-10">
                 <select class="form-select mb-3" aria-label="Default select example" v-model="product.BrandId">
-                    <option selected>Seleziona brand</option>
+                    <option value="">Seleziona brand</option>
                     <option v-for="(l,i) in brands" :key="i" :value="l.id">{{l.brandName}}</option>
                 </select>
             </div>
@@ -53,7 +53,7 @@ export default {
     data(){
         return{
             product:{ 
-                BrandId: "Seleziona brand",
+                BrandId: "",
                 Name: "",
                 ShortDescription: "",
                 Price: 0,

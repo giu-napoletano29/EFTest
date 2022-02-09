@@ -6,10 +6,40 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th scope="col"> Brand <i class="fa fa-fw fa-sort"></i></th>
-                                <th scope="col"> Prodotto <i class="fa fa-fw fa-sort"></i></th>
-                                <th scope="col"> Categorie </th>
-                                <th scope="col"> Prezzo <i class="fa fa-fw fa-sort"></i></th>
+                                <th scope="col" class="col-3" @click="OrderByBrand()"> Brand 
+                                    <button type="button" class="btn btn-sm" @click.stop="OrderByDesc()">
+                                        <div v-show="!this.orderbrand">
+                                            <i class="fa fa-fw fa-sort"></i>
+                                        </div>                              
+                                        <div v-show="this.orderbrand">
+                                            <i v-show="!this.desc" class="fa fa-fw fa-sort-asc"></i>
+                                            <i v-show="this.desc" class="fa fa-fw fa-sort-desc"></i>
+                                        </div>
+                                    </button>
+                                </th>
+                                <th scope="col" class="col-3" @click="OrderByName()"> Prodotto 
+                                    <button type="button" class="btn btn-sm" @click.stop="OrderByDesc()">
+                                        <div v-show="!this.ordername">
+                                            <i class="fa fa-fw fa-sort"></i>
+                                        </div>                              
+                                        <div v-show="this.ordername">
+                                            <i class="fa fa-fw fa-sort-asc"></i>
+                                            <i class="fa fa-fw fa-sort-desc"></i>
+                                        </div>
+                                    </button>
+                                </th>
+                                <th scope="col" class="col-4"> Categorie </th>
+                                <th scope="col" class="col-1" @click="OrderByPrice()"> Prezzo 
+                                    <button type="button" class="btn btn-sm" @click.stop="OrderByDesc()">
+                                        <div v-show="!this.orderprice">
+                                            <i class="fa fa-fw fa-sort"></i>
+                                        </div>                              
+                                        <div v-show="this.orderprice">
+                                            <i class="fa fa-fw fa-sort-asc"></i>
+                                            <i class="fa fa-fw fa-sort-desc"></i>
+                                        </div>
+                                    </button>
+                                </th>
                                 <th/>
                             </tr>
                             <tr class="table-light">
@@ -56,6 +86,10 @@
             listbrands: Array,
             loaded: Boolean,
             error: Boolean,
+            desc: Boolean,
+            orderbrand: Boolean,
+            ordername: Boolean,
+            orderprice: Boolean,
         },
         
         data() {
@@ -76,7 +110,19 @@
             },
             onChange(){
                 this.$emit('brandfilter', this.key)
-            }
+            },
+            OrderByBrand(){
+                this.$emit('orderbybrand')
+            },
+            OrderByName(){
+                this.$emit('orderbyname')
+            },
+            OrderByPrice(){
+                this.$emit('orderbyprice')
+            },
+            OrderByDesc(){
+                this.$emit('orderbydesc')
+            },
         },
     }
 </script>

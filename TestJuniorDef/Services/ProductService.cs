@@ -68,12 +68,27 @@ namespace TestJuniorDef.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public PagingModelAPI<ProductPagingModelAPI> GetProductPerPage(int size = 5, int page = 1, int brand = 0)
+        public PagingModelAPI<ProductPagingModelAPI> GetProductPerPage(int size = 5, int page = 1, int brand = 0, bool orderbyBrand = false, bool orderbyName = false, bool orderbyPrice = false, bool desc = false)
         {
             var repo = _productRepo.GetAll(true);
             if (brand > 0)
             {
                 repo = repo.Where(x => x.BrandId == brand);
+            }
+
+            repo = repo.OrderBy(x => x.Brand.BrandName).ThenBy(x => x.Name);
+
+            if (orderbyBrand)
+            {
+                repo = desc ? repo.OrderBy(x => x.Brand.BrandName):repo.OrderByDescending(x => x.Brand.BrandName);
+            }
+            if (orderbyName)
+            {
+                repo = desc ? repo.OrderBy(x => x.Name):repo.OrderByDescending(x => x.Name);
+            }
+            if (orderbyPrice)
+            {
+                repo = desc ? repo.OrderBy(x => x.Price):repo.OrderByDescending(x => x.Price);
             }
 
             var pagination = Service.PaginateEntity<Product>(repo, size, page);

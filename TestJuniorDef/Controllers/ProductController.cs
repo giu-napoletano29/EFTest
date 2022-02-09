@@ -67,7 +67,7 @@ namespace TestJuniorDef.Controllers
 
         [HttpGet("page/{page}")]
         [HttpGet("page/{size?}/{page?}")]
-        public IActionResult GetProductPerPage(int size = 5, int page = 1, int brand = 0)
+        public IActionResult GetProductPerPage(int size = 5, int page = 1, int brand = 0, bool orderbyBrand = false, bool orderbyName = false, bool orderbyPrice = false, bool desc = false )
         {
             if (size <= 0 || page < 1)
             {
@@ -75,7 +75,7 @@ namespace TestJuniorDef.Controllers
             }
             try
             {
-                var retvalue = _productService.GetProductPerPage(size, page, brand);
+                var retvalue = _productService.GetProductPerPage(size, page, brand, orderbyBrand, orderbyName, orderbyPrice, desc);
 
                 return Ok(retvalue);
             }

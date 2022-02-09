@@ -6,16 +6,17 @@
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th> ID </th>
-                            <th> Nome brand </th><th/>
+                            <th class="col-1"> ID </th>
+                            <th class="col-10"> Nome brand </th><th/>
                         </tr>
                         <tr class="table-light">
+                            <th/>
                             <th> 
-                                <div class="input-group">
+                                <div class="col-3">
                                     <input type="text" class="form-control" placeholder="Nome brand" aria-label="Nome brand" aria-describedby="basic-addon2" v-model="search" @change="SearchName()">
                                 </div>
                             </th>
-                            <th/><th/>
+                            <th/>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,7 +25,7 @@
                             <td>{{ l.brandName }}</td>
                             <td>
                                 <div class="btn-group me-2">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil-square"></i></button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" @click.stop="OpenEdit(l.id)"><i class="bi bi-pencil-square"></i></button>
                                     <button type="button" class="btn btn-sm btn-outline-secondary" @click.stop="OpenModal(l.id)"><i class="bi bi-trash" style="color: red;"></i></button>
                                 </div>
                             </td> 
@@ -59,6 +60,9 @@ export default {
     methods:{
         OpenModal(id){
             this.$emit('openmodal', id)
+        },
+        OpenEdit(id){
+            this.$emit('openedit', id)
         },
         CloseModal(){
             this.$emit('closemodal')

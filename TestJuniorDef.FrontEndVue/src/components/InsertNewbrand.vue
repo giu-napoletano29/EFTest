@@ -13,7 +13,7 @@
         <div class="mb-3">      
             <textarea class="form-control" rows="3" placeholder="Descrizione" v-model="brand.Description"></textarea>
         </div>
-        <div class="mb-3"> 
+        <div v-if="!EditMode" class="mb-3"> 
             <button type="button" class="btn btn-primary" @click="addProd">Aggiungi prodotto</button>
         </div>
     </div>
@@ -22,6 +22,12 @@
 <script>
 
 export default {
+
+    props: {
+        EditMode: Boolean,
+        brandbyid: Object,
+        loaded: Boolean,
+    },
 
     data(){
         return{
@@ -41,15 +47,27 @@ export default {
         brand: {
             deep:true,
             handler(){
-                console.log("Emit")
                 this.$emit('input', this.brand);
+            }
+        },
+        loaded:{
+            handler: function(newValue){
+                if(this.EditMode && newValue){
+                    this.AssingOldValue()
+                }
             }
         }
     },
 
     methods:{
         addProd(){
-            this.$emit('addprod');
+            this.$emit('addprodd');
+        },
+        AssingOldValue(){
+            this.brand.BrandName = this.brandbyid.brandName;
+            this.brand.Description = this.brandbyid.description;
+            this.brand.Account.Email = this.brandbyid.email;
+            this.brand.Account.Password =this.brandbyid.password;
         }
     },
 }

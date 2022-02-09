@@ -13,8 +13,16 @@
                 :listbrands="listbrands"
                 :loaded="loaded"
                 :error="error"
+                :desc="desc"
+                :orderbrand="orderbrand"
+                :ordername="ordername"
+                :orderprice="orderprice"
                 @openDetail="OpenDetail"
                 @brandfilter="BrandFilter"
+                @orderbybrand="OrderByBrand"
+                @orderbyname="OrderByName"
+                @orderbyprice="OrderByPrice"
+                @orderbydesc="OrderByDesc"
             />
             <Pagination
                 :totalPages="totalpages"
@@ -52,6 +60,10 @@
                 loaded: false,
                 error: false,
                 params: {},
+                orderbrand: false,
+                ordername: false,
+                orderprice: false,
+                desc: false,
             }
         },
 
@@ -96,7 +108,26 @@
                 }
                 this.loadElements();
             },
-
+            OrderByBrand(){
+                this.orderbrand = !this.orderbrand
+                this.params.orderbyBrand = this.orderbrand
+                this.loadElements();
+            },
+            OrderByName(){
+                this.ordername = !this.ordername
+                this.params.orderbyName = this.ordername
+                this.loadElements();
+            },
+            OrderByPrice(){
+                this.orderprice = !this.orderprice
+                this.params.orderbyPrice = this.orderprice
+                this.loadElements();
+            },
+            OrderByDesc(){
+                this.desc = !this.desc
+                this.params.desc = this.desc
+                this.loadElements();
+            },
         },
 
         created() {

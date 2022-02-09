@@ -19,6 +19,7 @@
                 @closemodal="CloseModal"
                 @openDetail="OpenDetail"
                 @search="Search"
+                @openedit="OpenEdit"
             />
             
             <Pagination
@@ -107,6 +108,9 @@
                     delete this.params.search
                 }
                 this.loadElements();
+            },
+            OpenEdit(id){
+                this.$router.push('/brands/edit/' + id)
             },
         },
 

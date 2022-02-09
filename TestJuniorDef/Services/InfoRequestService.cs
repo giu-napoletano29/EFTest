@@ -66,11 +66,11 @@ namespace TestJuniorDef.Services
             var repo = _inforeqrepo.GetAll(true);
             if (!orderdesc)
             {
-                repo = repo.OrderBy(x => x.InsertDate);
+                repo = repo.OrderByDescending(x => x.InsertDate);        
             }
             else
             {
-                repo = repo.OrderByDescending(x => x.InsertDate);
+                repo = repo.OrderBy(x => x.InsertDate);
             }       
             if (brand > 0)
             {

@@ -54,6 +54,9 @@ namespace TestJuniorDef.Services
                     {
                         Id = x.Id,
                         BrandName = x.BrandName,
+                        Email = x.Account.Email,
+                        Password = x.Account.Password,
+                        Description = x.Description,
                         TotalProducts = x.Products.Count,
                         TotalInfoRequest = x.Products.SelectMany(x => x.InfoRequests.Select(x => x.Id)).Count(),
                         Categories = cat,

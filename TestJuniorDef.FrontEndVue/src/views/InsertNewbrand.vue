@@ -8,7 +8,8 @@
                     :brands="brands"
                     :loaded="loaded"
                     :error="error"
-                    :brand="brand"
+                    :brandbyid="brandbyid"
+                    :EditMode="EditMode"
                     @input="(newbrand) => {brand = newbrand}"
                     @addprod="addProd"
                 />
@@ -24,7 +25,7 @@
                     @input="(newprod) => {product[index] = newprod}"
                 />
                 <div class="mb-3">      
-                    <button type="submit" class="btn btn-primary">Aggiungi brand</button>
+                    <button type="submit" class="btn btn-primary">{{ButtonText}} brand</button>
                 </div>       
             </form>
         </b-container>
@@ -53,9 +54,13 @@
                 newcomponents: [],
                 list: [],
                 brands: [],
+                brandbyid: {},
                 loaded: false,
                 error: false,
                 response: '',
+                brandid: this.$route.params.id,
+                EditMode: false,
+                ButtonText: "Aggiungi",
 
                 brand:{ 
                     BrandName: "",
@@ -85,11 +90,22 @@
                 this.brands = data;
             },
 
+            async loadBrandById(){
+                const {data} = await BrandsRepo.getById(this.$route.params.id)
+                this.loaded = true
+                this.brandbyid = data;
+            },
+
             InsertProduct(){
-                this.brand.Products = this.product
-                const resp = BrandsRepo.create(this.brand)
+                var resp = ""
+                if(!this.brandid){
+                    this.brand.Products = this.product
+                    resp = BrandsRepo.create(this.brand)
+                }else{
+                    delete this.brand.Products
+                    resp = BrandsRepo.update(this.brandid, this.brand)
+                }
                 this.response = resp
-                
             },
 
             addProd () {  
@@ -108,8 +124,16 @@
         },
 
         created() {
-            this.loadElements();
-            this.loadBrands();
+            if(!this.brandid){
+                this.loadElements();
+                this.loadBrands();              
+            }
+            else{
+                this.loadBrandById();
+                this.EditMode = true
+                this.ButtonText = "Modifica"
+                this.name= 'Modifica Brand'
+            }  
         }
 
     }

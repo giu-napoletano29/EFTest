@@ -42,6 +42,11 @@ const routes = [
     component: InsertNewbrand
   },
   {
+    path: '/brands/edit/:id(\\d+)',
+    name: 'Editbrand',
+    component: InsertNewbrand
+  },
+  {
     path: '/leeds/:id',
     name: 'LeedDetail',
     component: LeedDetail
