@@ -61,9 +61,17 @@ namespace TestJuniorDef.Services
             return infoRequest;
         }
 
-        public PagingModelAPI<InfoRequestPagingModelAPI> GetInfoRequestsPerPage(int size = 5, int page = 1, int brand = 0, string search = "")
+        public PagingModelAPI<InfoRequestPagingModelAPI> GetInfoRequestsPerPage(int size = 5, int page = 1, int brand = 0, string search = "", bool orderdesc = false)
         {
             var repo = _inforeqrepo.GetAll(true);
+            if (!orderdesc)
+            {
+                repo = repo.OrderBy(x => x.InsertDate);
+            }
+            else
+            {
+                repo = repo.OrderByDescending(x => x.InsertDate);
+            }       
             if (brand > 0)
             {
                 repo = repo.Where(x => x.Product.BrandId == brand);
@@ -83,6 +91,7 @@ namespace TestJuniorDef.Services
                 Name = x.Name,
                 Lastname = x.LastName,
                 Text = x.RequestText,
+                InsertDate = x.InsertDate,
                 productId = x.ProductId,
                 productName = x.Product.Name,
                 brandId = x.Product.BrandId,

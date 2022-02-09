@@ -8,7 +8,7 @@ namespace TestJuniorDef.Services.Interfaces
     public interface IInfoRequestService
     {
         IEnumerable<InfoRequest> GetInfoRequests();
-        PagingModelAPI<InfoRequestPagingModelAPI> GetInfoRequestsPerPage(int size = 5, int page = 1, int brand = 0, string search = "");
+        PagingModelAPI<InfoRequestPagingModelAPI> GetInfoRequestsPerPage(int size = 5, int page = 1, int brand = 0, string search = "", bool orderdesc = false);
         GetInfoRequestByIdModelAPI GetInfoRequestById(int id);
     }
 }

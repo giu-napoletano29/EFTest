@@ -6,10 +6,10 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th scope="col"> Brand </th>
-                                <th scope="col"> Prodotto </th>
+                                <th scope="col"> Brand <i class="fa fa-fw fa-sort"></i></th>
+                                <th scope="col"> Prodotto <i class="fa fa-fw fa-sort"></i></th>
                                 <th scope="col"> Categorie </th>
-                                <th scope="col"> Prezzo </th>
+                                <th scope="col"> Prezzo <i class="fa fa-fw fa-sort"></i></th>
                                 <th/>
                             </tr>
                             <tr class="table-light">

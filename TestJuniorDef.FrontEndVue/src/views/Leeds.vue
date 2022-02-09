@@ -10,6 +10,7 @@
                 @openDetail="OpenDetail"
                 @brandfilter="BrandFilter"
                 @search="Search"
+                @orderby="Orderby"
             />
             <Pagination
                 :totalPages="totalpages"
@@ -48,6 +49,7 @@
                 loaded: false,
                 error: false,
                 params: {},
+                orderDesc: false,
             }
         },
 
@@ -97,6 +99,11 @@
                 }
                 this.loadElements();
             },
+            Orderby(){
+                this.orderDesc = !this.orderDesc
+                this.params.orderdesc = this.orderDesc
+                this.loadElements();
+            }
         },
 
         created() {

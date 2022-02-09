@@ -7,6 +7,7 @@
                         <thead>
                             <tr>
                                 <th scope="col"> Id </th>
+                                <th scope="col"> Data <button type="button" class="btn btn-sm" @click="OrderBy()"><i class="fa fa-fw fa-sort"></i></button></th>
                                 <th scope="col"> Nome </th>
                                 <th scope="col"> Cognome </th>
                                 <th scope="col"> Prodotto </th>
@@ -25,12 +26,13 @@
                                         <input type="text" class="form-control" placeholder="Nome prodotto" aria-label="Nome prodotto" aria-describedby="basic-addon2" v-model="search" @change="SearchName()">
                                     </div>
                                 </th>
-                                <th/><th/><th/><th/>
+                                <th/><th/><th/><th/><th/>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(l,i) in list.elements" :key="i" v-on:click="openDetail(list.elements[i])"> 
                                 <td>{{ l.id }}</td> 
+                                <td>{{ l.insertDate }} </td>
                                 <td>{{ l.name }}</td>
                                 <td>{{ l.lastName }}</td>
                                 <td>{{ l.productName }}</td>
@@ -79,6 +81,9 @@
             },
             SearchName(){
                 this.$emit('search', this.search)
+            },
+            OrderBy(){
+                this.$emit('orderby')
             },
         }
 
