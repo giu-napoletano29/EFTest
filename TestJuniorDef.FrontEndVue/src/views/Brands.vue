@@ -18,6 +18,7 @@
                 @openmodal="OpenModal"
                 @closemodal="CloseModal"
                 @openDetail="OpenDetail"
+                @search="Search"
             />
             
             <Pagination
@@ -62,6 +63,7 @@
                 error: false,
                 open: false,
                 idEl: 0,
+                params: {},
             }
         },
 
@@ -77,7 +79,7 @@
                 this.loadElements();
             },
             async loadElements(){
-                const {data} = await BrandsRepo.getallpaged(this.page)
+                const {data} = await BrandsRepo.getallpaged(this.page, this.params)
                 this.loaded = true
                 this.list = data;
             },
@@ -97,7 +99,15 @@
             Delete(){
                 this.open = false
                 console.log("Id da eliminare: " + this.idEl)
-            }
+            },
+            Search(filter){
+                if(filter){
+                    this.params.search = filter
+                }else{
+                    delete this.params.search
+                }
+                this.loadElements();
+            },
         },
 
         created() {

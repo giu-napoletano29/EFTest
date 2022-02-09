@@ -73,9 +73,13 @@ namespace TestJuniorDef.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public PagingModelAPI<BrandPagingModelAPI> GetBrandPerPage(int size = 5, int page = 1)
+        public PagingModelAPI<BrandPagingModelAPI> GetBrandPerPage(int size = 5, int page = 1, string search = "")
         {
             var repo = _brandRepo.GetAll(true);
+            if (search.Length > 0)
+            {
+                repo = repo.Where(x => x.BrandName.Contains(search));
+            }
             var pagination = Service.PaginateEntity<Brand>(repo, size, page);
             PagingModelAPI<BrandPagingModelAPI> model = new PagingModelAPI<BrandPagingModelAPI>();
             model.PageSize = pagination.PageSize;

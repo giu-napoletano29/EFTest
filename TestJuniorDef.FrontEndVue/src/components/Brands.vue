@@ -5,8 +5,18 @@
             <div v-if="loaded">
                 <table class="table table-striped table-hover">
                     <thead>
-                        <th> ID </th>
-                        <th> Nome brand </th>
+                        <tr>
+                            <th> ID </th>
+                            <th> Nome brand </th><th/>
+                        </tr>
+                        <tr class="table-light">
+                            <th> 
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Nome brand" aria-label="Nome brand" aria-describedby="basic-addon2" v-model="search" @change="SearchName()">
+                                </div>
+                            </th>
+                            <th/><th/>
+                        </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(l,i) in list.elements" :key="i" v-on:click="openDetail(list.elements[i])">
@@ -40,6 +50,12 @@ export default {
         error: Boolean,
     },
 
+    data(){
+        return{
+            search: ""
+        }
+    },
+
     methods:{
         OpenModal(id){
             this.$emit('openmodal', id)
@@ -49,6 +65,9 @@ export default {
         },
         openDetail: function (element) {
             this.$emit('openDetail', element.id)
+        },
+        SearchName(){
+            this.$emit('search', this.search)
         },
     },
 }

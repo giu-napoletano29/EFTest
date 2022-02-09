@@ -13,7 +13,6 @@ export default {
 
     getallpaged(page, params){
         let config = {
-            //headers: {'Authorization': 'JWT ' + this.$store.state.token},
             params: {},
         }
         config.params = params

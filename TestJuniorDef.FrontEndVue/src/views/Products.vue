@@ -67,6 +67,7 @@
                 this.loadElements();
             },
             async loadElements(){
+                this.loaded = false
                 const {data} = await ProductsRepo.getallpaged(this.page, this.params)
                 this.loaded = true
                 this.list = data;

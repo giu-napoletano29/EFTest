@@ -11,8 +11,13 @@ export default {
         return Repository.get(`${resource}/page/${size}/${page}`);
     },
 
-    getallpaged(page){
-        return Repository.get(`${resource}/page/${page}`);
+    getallpaged(page, params){
+        let config = {
+            params: {},
+        }
+        config.params = params
+
+        return Repository.get(`${resource}/page/${page}`, config);
     },
 
     getById( id ){
