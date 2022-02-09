@@ -4,9 +4,12 @@
             <Header :name="name"/>
             <Leeds
                 :list="list"
+                :listbrands="listbrands"
                 :loaded="loaded"
                 :error="error"
                 @openDetail="OpenDetail"
+                @brandfilter="BrandFilter"
+                @search="Search"
             />
             <Pagination
                 :totalPages="totalpages"
@@ -24,6 +27,7 @@
     import Pagination from '@/components/Pagination.vue'
     import {Factory} from './../wrappers/Factory'
     const LeedsRepo = Factory.get('leeds')
+    const BrandsRepo = Factory.get('brands')
 
     export default {
         
@@ -37,11 +41,13 @@
             return{
                 name: 'Richieste info',
                 list: {},
+                listbrands: [],
                 maxVisibleButtons: 7,
                 page: 1,
                 pageSize: 10,
                 loaded: false,
                 error: false,
+                params: {},
             }
         },
 
@@ -58,9 +64,13 @@
             },
 
             async loadElements(){
-                const {data} = await LeedsRepo.getallpagedsized(this.pageSize, this.page)
+                const {data} = await LeedsRepo.getallpagedsized(this.pageSize, this.page, this.params)
                 this.loaded = true
                 this.list = data
+            },
+            async loadBrands(){
+                const {data} = await BrandsRepo.get()
+                this.listbrands = data;
             },
             OpenModal(){
                 this.open = true
@@ -70,11 +80,28 @@
             },
             OpenDetail(val){
                 this.$router.push('/leeds/'+val)
-            }
+            },
+            BrandFilter(filter){
+                if(/^\d+$/.test(filter)){
+                    this.params.brand = filter
+                }else{
+                    delete this.params.brand
+                }
+                this.loadElements();
+            },
+            Search(filter){
+                if(filter){
+                    this.params.search = filter
+                }else{
+                    delete this.params.search
+                }
+                this.loadElements();
+            },
         },
 
         created() {
             this.loadElements();
+            this.loadBrands();
         },
     }
 </script>

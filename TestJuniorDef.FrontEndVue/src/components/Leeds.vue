@@ -15,16 +15,14 @@
                             </tr>
                             <tr class="table-light">
                                 <th> 
-                                    <select class="form-select" aria-label="Default select example">
+                                    <select class="form-select" aria-label="Default select example" v-model="key" @change="onChange()">
                                         <option selected>Tutti i brand</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>   
+                                        <option v-for="(l,i) in listbrands" :key="i" :value="l.id">{{l.brandName}}</option>
+                                    </select>    
                                 </th>
                                 <th> 
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Nome prodotto" aria-label="Nome prodotto" aria-describedby="basic-addon2">
+                                        <input type="text" class="form-control" placeholder="Nome prodotto" aria-label="Nome prodotto" aria-describedby="basic-addon2" v-model="search" @change="SearchName()">
                                     </div>
                                 </th>
                                 <th/><th/><th/><th/>
@@ -60,14 +58,28 @@
 
         props: {
             list: Object,
+            listbrands: Array,
             loaded: Boolean,
             error: Boolean,
+        },
+
+        data() {
+            return{
+                key: "Tutti i brand",
+                search: ""
+            }  
         },
 
         methods:{
             openDetail: function (element) {
                 this.$emit('openDetail', element.id)
-            }
+            },
+            onChange(){
+                this.$emit('brandfilter', this.key)
+            },
+            SearchName(){
+                this.$emit('search', this.search)
+            },
         }
 
     }

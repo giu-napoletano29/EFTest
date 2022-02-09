@@ -7,12 +7,21 @@ export default {
         return Repository.get(`${resource}`);
     },
     
-    getallpagedsized(size, page){
-        return Repository.get(`${resource}/page/${size}/${page}`);
+    getallpagedsized(size, page, params){
+        let config = {
+            params: {},
+        }
+        config.params = params
+        return Repository.get(`${resource}/page/${size}/${page}`, config);
     },
 
-    getallpaged(page){
-        return Repository.get(`${resource}/page/${page}`);
+    getallpaged(page, params){
+        let config = {
+            params: {},
+        }
+        config.params = params
+        
+        return Repository.get(`${resource}/page/${page}`, config);
     },
 
     getById( id ){

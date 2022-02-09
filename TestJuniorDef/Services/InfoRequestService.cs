@@ -61,9 +61,17 @@ namespace TestJuniorDef.Services
             return infoRequest;
         }
 
-        public PagingModelAPI<InfoRequestPagingModelAPI> GetInfoRequestsPerPage(int size = 5, int page = 1)
+        public PagingModelAPI<InfoRequestPagingModelAPI> GetInfoRequestsPerPage(int size = 5, int page = 1, int brand = 0, string search = "")
         {
             var repo = _inforeqrepo.GetAll(true);
+            if (brand > 0)
+            {
+                repo = repo.Where(x => x.Product.BrandId == brand);
+            }
+            if (search.Length > 0)
+            {
+                repo = repo.Where(x => x.Product.Name.Contains(search));
+            }
             var pagination = Service.PaginateEntity<InfoRequest>(repo, size, page);
             PagingModelAPI<InfoRequestPagingModelAPI> model = new PagingModelAPI<InfoRequestPagingModelAPI>();
             model.PageSize = pagination.PageSize;
