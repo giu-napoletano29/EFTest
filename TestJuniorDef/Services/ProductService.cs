@@ -68,9 +68,15 @@ namespace TestJuniorDef.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public PagingModelAPI<ProductPagingModelAPI> GetProductPerPage(int size = 5, int page = 1)
+        public PagingModelAPI<ProductPagingModelAPI> GetProductPerPage(int size = 5, int page = 1, int brand = 0)
         {
-            var pagination = Service.PaginateEntity<Product>(_productRepo, size, page);
+            var repo = _productRepo.GetAll(true);
+            if (brand > 0)
+            {
+                repo = repo.Where(x => x.BrandId == brand);
+            }
+
+            var pagination = Service.PaginateEntity<Product>(repo, size, page);
             PagingModelAPI<ProductPagingModelAPI> model = new PagingModelAPI<ProductPagingModelAPI>();
             model.PageSize = pagination.PageSize;
             model.TotalElements = pagination.TotalElements;

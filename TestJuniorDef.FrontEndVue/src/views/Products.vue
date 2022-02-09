@@ -14,6 +14,7 @@
                 :loaded="loaded"
                 :error="error"
                 @openDetail="OpenDetail"
+                @brandfilter="BrandFilter"
             />
             <Pagination
                 :totalPages="totalpages"
@@ -50,6 +51,7 @@
                 page: 1,
                 loaded: false,
                 error: false,
+                params: {},
             }
         },
 
@@ -65,7 +67,7 @@
                 this.loadElements();
             },
             async loadElements(){
-                const {data} = await ProductsRepo.getallpaged(this.page)
+                const {data} = await ProductsRepo.getallpaged(this.page, this.params)
                 this.loaded = true
                 this.list = data;
             },
@@ -85,6 +87,15 @@
             OpenDetail(val){
                 this.$router.push('/products/'+val)
             },
+            BrandFilter(filter){
+                if(/^\d+$/.test(filter)){
+                    this.params.brand = filter
+                }else{
+                    delete this.params.brand
+                }
+                this.loadElements();
+            },
+
         },
 
         created() {

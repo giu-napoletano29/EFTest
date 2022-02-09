@@ -11,8 +11,14 @@ export default {
         return Repository.get(`${resource}/page/${size}/${page}`);
     },
 
-    getallpaged(page){
-        return Repository.get(`${resource}/page/${page}`);
+    getallpaged(page, params){
+        let config = {
+            //headers: {'Authorization': 'JWT ' + this.$store.state.token},
+            params: {},
+        }
+        config.params = params
+
+        return Repository.get(`${resource}/page/${page}`, config);
     },
 
     getById( id ){

@@ -63,7 +63,8 @@ namespace TestJuniorDef.Services
 
         public PagingModelAPI<InfoRequestPagingModelAPI> GetInfoRequestsPerPage(int size = 5, int page = 1)
         {
-            var pagination = Service.PaginateEntity<InfoRequest>(_inforeqrepo, size, page);
+            var repo = _inforeqrepo.GetAll(true);
+            var pagination = Service.PaginateEntity<InfoRequest>(repo, size, page);
             PagingModelAPI<InfoRequestPagingModelAPI> model = new PagingModelAPI<InfoRequestPagingModelAPI>();
             model.PageSize = pagination.PageSize;
             model.TotalElements = pagination.TotalElements;

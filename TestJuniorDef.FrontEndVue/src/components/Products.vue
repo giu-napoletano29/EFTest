@@ -76,6 +76,7 @@
             },
             onChange(){
                 console.log("Key: " + this.key)
+                this.$emit('brandfilter', this.key)
             }
         },
     }

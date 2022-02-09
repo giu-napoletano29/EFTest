@@ -75,7 +75,7 @@ namespace TestJuniorDef.Controllers
             }
             try
             {
-                var retvalue = _productService.GetProductPerPage(size, page);
+                var retvalue = _productService.GetProductPerPage(size, page, brand);
 
                 return Ok(retvalue);
             }
