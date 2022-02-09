@@ -2,7 +2,7 @@
     <div>
         <b-container>
             <Header :name="name"/>
-            <form v-on:submit.prevent="InsertProduct">
+            <form v-on:submit.prevent="InsertBrand">
                 <InsertNewbrand
                     :list="list"
                     :brands="brands"
@@ -96,7 +96,7 @@
                 this.brandbyid = data;
             },
 
-            InsertProduct(){
+            InsertBrand(){
                 var resp = ""
                 if(!this.brandid){
                     this.brand.Products = this.product

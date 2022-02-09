@@ -41,7 +41,11 @@ namespace TestJuniorDef.Services
                     {
                         Id = x.Id,
                         Name = x.Name,
+                        BrandId = x.BrandId,
                         BrandName = x.Brand.BrandName,
+                        ShortDescription = x.ShortDescription,
+                        Description = x.Description,
+                        Price = x.Price,
                         Categories = x.ProductCategory.Select(z => new CategoryBaseModelAPI
                         {
                             Id = z.Category.Id,

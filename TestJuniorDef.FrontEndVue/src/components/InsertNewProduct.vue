@@ -39,15 +39,8 @@ export default {
         brands: Array,
         loaded: Boolean,
         error: Boolean,
-        // product:{ 
-        //     BrandId: String,
-        //     Name: String,
-        //     ShortDescription: String,
-        //     Price: Number,
-        //     Description: String,
-        //     ProductCategory: Array,
-        // }
-
+        EditMode: Boolean,
+        productbyid: Object,
     },
 
     data(){
@@ -59,19 +52,23 @@ export default {
                 Price: 0,
                 Description: "",
                 ProductCategory: [],
-        }
+            }
         }
     },
 
     watch: {
-        // product() {
-        //     this.$emit('input', this.product);
-        // }
         product: {
             deep:true,
             handler(){
                 console.log("Emit")
                 this.$emit('input', this.product);
+            }
+        },
+        loaded:{
+            handler: function(newValue){
+                if(this.EditMode && newValue){
+                    this.AssingOldValue()
+                }
             }
         }
     },
@@ -79,6 +76,14 @@ export default {
     methods:{
         getCatObj(item){
             return { CategoryId: item,}
+        },
+        AssingOldValue(){
+            this.product.BrandId = this.productbyid.brandId
+            this.product.Name = this.productbyid.name
+            this.product.ShortDescription = this.productbyid.shortDescription
+            this.product.Price = this.productbyid.price
+            this.product.Description = this.productbyid.description
+            this.product.ProductCategory = this.productbyid.categories.map(a => this.getCatObj(a.id))
         }
     },
 }

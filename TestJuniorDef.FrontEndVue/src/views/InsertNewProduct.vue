@@ -8,6 +8,8 @@
                     :brands="brands"
                     :loaded="loaded"
                     :error="error"
+                    :productbyid="productbyid"
+                    :EditMode="EditMode"
                     
                     @input="(newprod) => {product = newprod}"
                 />
@@ -42,6 +44,8 @@
                 loaded: false,
                 error: false,
                 response: '',
+                productbyid: {},
+                prodid: this.$route.params.id,
 
                 product:{ 
                     BrandId: "Seleziona brand",
@@ -67,14 +71,32 @@
                 this.brands = data;
             },
 
+            async loadProductById(){
+                const {data} = await ProductRepo.getById(this.$route.params.id)
+                this.loaded = true
+                this.productbyid = data;
+            },
+
             InsertProduct(){
-                const resp = ProductRepo.create(this.product)
+                var resp = ""
+                if(!this.prodid){
+                    resp = ProductRepo.create(this.product)
+                }else{
+                    resp = ProductRepo.update(this.prodid, this.product)
+                }
+
                 this.response = resp
                 
             }
         },
 
         created() {
+            if(this.prodid){
+                this.loadProductById();
+                this.EditMode = true
+                this.ButtonText = "Modifica"
+                this.name= 'Modifica Prodotto'
+            } 
             this.loadElements();
             this.loadBrands();
         }

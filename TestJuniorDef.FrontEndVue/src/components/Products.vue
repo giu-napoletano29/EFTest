@@ -62,7 +62,7 @@
                                 <td><i class="bi bi-currency-euro"> </i> {{ l.price }}</td>
                                 <td>
                                     <div class="btn-group me-2">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil-square"></i></button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" @click.stop="EditProduct(l.id)"><i class="bi bi-pencil-square"></i></button>
                                         <button type="button" class="btn btn-sm btn-outline-secondary" @click.stop="OpenModal()"><i class="bi bi-trash" style="color: red;"></i></button>
                                     </div>
                                 </td> 
@@ -122,6 +122,9 @@
             },
             OrderByDesc(){
                 this.$emit('orderbydesc')
+            },
+            EditProduct(id){
+                this.$emit('openedit', id)
             },
         },
     }

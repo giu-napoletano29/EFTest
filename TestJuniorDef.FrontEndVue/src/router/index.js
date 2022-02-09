@@ -67,6 +67,11 @@ const routes = [
     component: InsertNewProduct
   },
   {
+    path: '/products/edit/:id(\\d+)',
+    name: 'EditProduct',
+    component: InsertNewProduct
+  },
+  {
     path: '/leeds',
     name: 'Leeds',
     component: Leeds

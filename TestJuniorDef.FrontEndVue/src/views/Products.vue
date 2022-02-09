@@ -23,6 +23,7 @@
                 @orderbyname="OrderByName"
                 @orderbyprice="OrderByPrice"
                 @orderbydesc="OrderByDesc"
+                @openedit="OpenEdit"
             />
             <Pagination
                 :totalPages="totalpages"
@@ -127,6 +128,9 @@
                 this.desc = !this.desc
                 this.params.desc = this.desc
                 this.loadElements();
+            },
+            OpenEdit(id){
+                this.$router.push('/products/edit/' + id)
             },
         },
 
