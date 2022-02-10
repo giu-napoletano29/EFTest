@@ -64,7 +64,6 @@
                 brandbyid: {},
                 loaded: false,
                 error: false,
-                check: false,
                 errors: [],
                 response: '',
                 brandid: this.$route.params.id,
@@ -107,7 +106,7 @@
 
             InsertBrand(){
                 var resp = ""
-                if(!this.brandid){
+                if(!this.brandid){  //change to EditMode check
                     this.brand.Products = this.product
                     resp = BrandsRepo.create(this.brand)
                 }else{
@@ -135,7 +134,6 @@
                 var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                 this.errors = [];
                 var temp = [];
-                this.check = true
 
                 if (!this.brand.BrandName) {
                     temp.push('Devi inserire un nome.');
@@ -163,7 +161,6 @@
                     this.InsertBrand()
                 }
 
-                this.check= false
             }
         },
 
