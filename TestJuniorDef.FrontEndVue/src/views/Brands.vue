@@ -20,8 +20,13 @@
                 @openDetail="OpenDetail"
                 @search="Search"
                 @openedit="OpenEdit"
-            />
-            
+            >
+                <Table
+                    :loaded="loaded"
+                    :error="error"
+                    :nrow="nrow"
+                />
+            </Brands>
             <Pagination
                 :totalPages="totalpages"
                 :maxVisibleButtons="maxVisibleButtons"
@@ -40,7 +45,7 @@
 <script>
     import Header from '@/components/Header.vue'
     import Brands from '@/components/Brands.vue'
-    //import Table from '@/components/Table.vue'
+    import Table from '@/components/Table.vue'
     import Pagination from '@/components/Pagination.vue'
     import DeleteModal from '@/components/DeleteModal.vue'
     import {Factory} from './../wrappers/Factory'
@@ -53,7 +58,7 @@
             Header,
             Pagination,
             DeleteModal,
-            //Table,
+            Table,
         },
 
         data(){
@@ -62,6 +67,7 @@
                 page: 1,
                 maxVisibleButtons: 7,
                 pageSize: 10,
+                nrow: 6,
                 list: {},
                 loaded: false,
                 error: false,
