@@ -52,4 +52,8 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+.v-align {
+    vertical-align: middle;
+}
 </style>

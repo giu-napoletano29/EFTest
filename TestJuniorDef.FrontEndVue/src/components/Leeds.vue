@@ -6,35 +6,36 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th scope="col"> Id </th>
-                                <th scope="col"> Data <button type="button" class="btn btn-sm" @click="OrderBy()"><i class="fa fa-fw fa-sort"></i></button></th>
-                                <th scope="col"> Nome </th>
-                                <th scope="col"> Cognome </th>
-                                <th scope="col"> Prodotto </th>
-                                <th scope="col"> Brand </th>
+                                <th scope="col" class="col-1 v-align"> Id </th>
+                                <th scope="col" class="col-1"> Data <button type="button" class="btn btn-sm" @click="OrderBy()"><i class="fa fa-fw fa-sort"></i></button></th>
+                                <th scope="col" class="col-2 v-align"> Nome </th>
+                                <th scope="col" class="col-2 v-align"> Cognome </th>
+                                <th scope="col" class="col-3 v-align"> Prodotto </th>
+                                <th scope="col" class="col-3 v-align"> Brand </th>
                                 <th/>
                             </tr>
                             <tr class="table-light">
+                                <th/><th/><th/><th/>
+                                <th> 
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Nome prodotto" aria-label="Nome prodotto" aria-describedby="basic-addon2" v-model="search" @change="SearchName()">
+                                    </div>
+                                </th>
                                 <th> 
                                     <select class="form-select" aria-label="Default select example" v-model="key" @change="onChange()">
                                         <option value="">Tutti i brand</option>
                                         <option v-for="(l,i) in listbrands" :key="i" :value="l.id">{{l.brandName}}</option>
                                     </select>    
                                 </th>
-                                <th> 
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Nome prodotto" aria-label="Nome prodotto" aria-describedby="basic-addon2" v-model="search" @change="SearchName()">
-                                    </div>
-                                </th>
-                                <th/><th/><th/><th/><th/>
+                                <th/>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(l,i) in list.elements" :key="i" v-on:click="openDetail(list.elements[i])"> 
                                 <td>{{ l.id }}</td> 
-                                <td>{{ l.insertDate }} </td>
+                                <td>{{ l.insertDate.substring(0, 10) }} </td>
                                 <td>{{ l.name }}</td>
-                                <td>{{ l.lastName }}</td>
+                                <td>{{ l.lastname }}</td>
                                 <td>{{ l.productName }}</td>
                                 <td>{{ l.brandName }}</td>
                                 <td>

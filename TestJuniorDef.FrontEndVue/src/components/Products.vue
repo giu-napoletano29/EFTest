@@ -6,7 +6,7 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th scope="col" class="col-3" @click="OrderByBrand()"> Brand 
+                                <th scope="col" class="col-3" @click="OrderByBrand()" > Brand 
                                     <div class="btn btn-sm">
                                         <div v-show="!this.orderbrand">
                                             <i class="fa fa-fw fa-sort"></i>
@@ -28,7 +28,7 @@
                                         </div>
                                     </div>
                                 </th>
-                                <th scope="col" class="col-4"> Categorie </th>
+                                <th scope="col" class="col-4 v-align"> Categorie </th>
                                 <th scope="col" class="col-1" @click="OrderByPrice()"> Prezzo 
                                     <div class="btn btn-sm">
                                         <div v-show="!this.orderprice">

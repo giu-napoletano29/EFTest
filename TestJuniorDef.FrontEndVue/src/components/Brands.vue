@@ -6,8 +6,8 @@
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th class="col-1"> ID </th>
-                            <th class="col-10"> Nome brand </th><th/>
+                            <th class="col-1 v-align"> ID </th>
+                            <th class="col-10 v-align"> Nome brand </th><th/>
                         </tr>
                         <tr class="table-light">
                             <th/>
