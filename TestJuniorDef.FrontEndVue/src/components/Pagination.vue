@@ -3,13 +3,19 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <li class="page-item" :class="{ disabled: IsFirstPage }">
-                    <a class="page-link" @click="changePage(prevPage)">Indietro</a>
+                    <a class="page-link" href="#" @click="changePage(prevPage)">Indietro</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#" @click="changePage(1)">Prima pagina</a>
                 </li>
                 <li v-for="i in pages" :key="i.num" class="page-item" :class="{ active: IsCurrentPage(i), disabled: i.isDisabled }"> 
                     <a class="page-link" href="#" @click="changePage(i.num)">{{i.num}}</a>
                 </li>
+                <li class="page-item">
+                    <a class="page-link" href="#" @click="changePage(totalPages)">Ultima pagina</a>
+                </li>
                 <li class="page-item" :class="{ disabled: IsLastPage }">
-                <a class="page-link" href="#" @click="changePage(nextPage)" >Avanti</a>
+                    <a class="page-link" href="#" @click="changePage(nextPage)" >Avanti</a>
                 </li>
             </ul>
         </nav>
@@ -34,6 +40,11 @@ export default {
         }
     },
 
+    data(){
+        return{
+            paginationPageMarginBefore: 3
+        }
+    },
 
     computed: {
         IsFirstPage(){
@@ -58,11 +69,22 @@ export default {
 
             // When on the last page
             if (this.page === this.totalPages) {
-                return this.totalPages - this.maxVisibleButtons;
+                const startpage = this.totalPages - this.maxVisibleButtons + 1
+                return startpage > 1 ? startpage:1;
+            }
+
+            const pageDifference = this.page - this.paginationPageMarginBefore + this.maxVisibleButtons
+            //8 - 3 + 7 = 12
+            //9 - 3 + 7 = 13
+
+            if(pageDifference > (this.totalPages+1)){
+                //return this.page - this.paginationPageMarginBefore + (pageDifference - this.totalPages - 1)
+                return this.page - (this.paginationPageMarginBefore + (pageDifference - this.totalPages - 1))
+                //9 - (3 + (13 - 11 - 1)) = 
             }
 
             // When inbetween
-            return this.page - 1;
+            return this.page - this.paginationPageMarginBefore > 1 ? this.page - this.paginationPageMarginBefore:1;
         },
 
         pages() {
