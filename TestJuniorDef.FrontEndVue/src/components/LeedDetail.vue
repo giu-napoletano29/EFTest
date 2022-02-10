@@ -1,22 +1,23 @@
 <template>
     <div>
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-left pt-3 pb-2 mb-3">
-            <h5 v-if="list.product" class="h5">Richiesta informazioni di {{ list.name }} {{ list.lastName }} per il prodotto {{ list.product.productName }} di {{ list.product.brandName }}</h5>
+            <h5 v-if="list.product" class="h5">Richiesta informazioni di {{ list.name }} {{ list.lastname }} per il prodotto {{ list.product.productName }} di {{ list.product.brandName }}</h5>
         </div>
-        <b>Dati del richiedente: </b>
-        <p>{{ list.name }} {{ list.lastName }},</p>
-        <p>{{ list.address }}</p>
-        <b>Richiesta inviata dall'utente: </b>
+        <p><b>Dati del richiedente: </b></p>
+        <p>{{ list.name }} {{ list.lastName }}, <br> {{ list.address }}</p>
+        <p><b>Richiesta inviata dall'utente: </b></p>
         <p>{{ list.text }}</p>
-        <b>Rispsote/Commenti alla richiesta</b>
+        <p><b>Rispsote/Commenti alla richiesta</b></p>
         <b-overlay :show="!loaded && !error" rounded="sm">
-            <div v-for="(l,i) in replies" :key="i" class="card" style="width: 18rem;">
-                <div class="card-header">
-                    {{l.date}} - {{list.product.brandName}}
+            <div style="height: 250px;">
+                <div v-for="(l,i) in replies" :key="i" class="card border-success mb-3" style="width: 100%;">
+                    <div class="card-header">
+                        {{l.date}} - {{list.product.brandName}}
+                    </div>
+                    <div class="card-body text-success">
+                        <p class="card-text">{{l.text}}</p>
+                    </div>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{l.text}}</li>
-                </ul>
             </div>
         </b-overlay>
         <div v-if="error">

@@ -12,7 +12,6 @@
                                 <th scope="col" class="col-2 v-align"> Cognome </th>
                                 <th scope="col" class="col-3 v-align"> Prodotto </th>
                                 <th scope="col" class="col-3 v-align"> Brand </th>
-                                <th/>
                             </tr>
                             <tr class="table-light">
                                 <th/><th/><th/><th/>
@@ -27,7 +26,6 @@
                                         <option v-for="(l,i) in listbrands" :key="i" :value="l.id">{{l.brandName}}</option>
                                     </select>    
                                 </th>
-                                <th/>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,12 +36,6 @@
                                 <td>{{ l.lastname }}</td>
                                 <td>{{ l.productName }}</td>
                                 <td>{{ l.brandName }}</td>
-                                <td>
-                                    <div class="btn-group me-2">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil-square"></i></button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-trash" style="color: red;"></i></button>
-                                    </div>
-                                </td> 
                             </tr>
                         </tbody>
                     </table>
