@@ -21,7 +21,11 @@ namespace TestJuniorDef.Repositories
         
         public IQueryable<Brand> GetByIdTracked(int id)
         {
-            return _context.Brands.Where(x => x.Id == id).Include(x => x.Account);  //TODO: was AsNoTracking()
+            return _context.Brands.Where(x => x.Id == id)
+                                    .Include(x => x.Account)
+                                    .Include(x => x.Products)
+                                        .ThenInclude(x => x.InfoRequests)
+                                            .ThenInclude(x => x.InfoRequestReply);
         }
 
 

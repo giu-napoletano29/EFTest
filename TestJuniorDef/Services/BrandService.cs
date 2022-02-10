@@ -155,12 +155,27 @@ namespace TestJuniorDef.Services
         /// <returns></returns>
         public int DeleteBrand(int id)
         {
-            var brand = _brandRepo.GetById(id).FirstOrDefault();
+            var brand = _brandRepo.GetByIdTracked(id).FirstOrDefault();
             if (brand != null)
             {
                 try
                 {
-                    _brandRepo.Delete(brand);
+                    brand.IsDeleted = true;
+                    brand.Account.IsDeleted = true;
+                    foreach (var p in brand.Products)
+                    {
+                        p.IsDeleted = true;
+                        foreach (var i in p.InfoRequests)
+                        {
+                            i.IsDeleted = true;
+                            foreach (var r in i.InfoRequestReply)
+                            {
+                                r.IsDeleted = true;
+                            }
+                        }
+                    }
+                    //_brandRepo.Delete(brand);
+                    _brandRepo.Update(brand);
                 }catch (System.Exception e)
                 {
                     return StatusCodes.Status500InternalServerError;

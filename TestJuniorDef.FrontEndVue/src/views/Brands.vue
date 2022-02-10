@@ -65,6 +65,7 @@
                 open: false,
                 idEl: 0,
                 params: {},
+                response: ""
             }
         },
 
@@ -98,8 +99,10 @@
                 this.$router.push('/brands/new')
             },
             Delete(){
+                const {data} = BrandsRepo.delete(this.idEl)
                 this.open = false
                 console.log("Id da eliminare: " + this.idEl)
+                this.response = data
             },
             Search(filter){
                 if(filter){

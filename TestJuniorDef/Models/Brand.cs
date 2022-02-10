@@ -8,6 +8,7 @@ namespace apitest.Models
         public int? AccountId { get; set; }
         public string BrandName { get; set; }
         public string Description { get; set; }
+        public bool IsDeleted { get; set; }
 
 
         public Account Account { get; set; }

@@ -19,6 +19,9 @@ namespace apitest.Models
             modelBuilder.Entity<Account>(builder =>
             {
                 builder.ToTable("Account");
+                //builder.Property<bool>("isDeleted");
+                //builder.Property(x => x.IsDeleted);
+                builder.HasQueryFilter(m => EF.Property<bool>(m, "IsDeleted") == false);
             });
 
             modelBuilder.Entity<User>(builder =>
@@ -54,6 +57,8 @@ namespace apitest.Models
                 builder.ToTable("Brand");
                 builder.Property(x => x.AccountId).HasColumnName("AccountId");
                 builder.Property(x => x.BrandName).IsRequired();
+                //builder.Property<bool>("isDeleted");
+                builder.HasQueryFilter(m => EF.Property<bool>(m, "IsDeleted") == false);
 
                 builder.HasOne(s => s.Account)
                     .WithOne(x => x.Brand)
@@ -67,6 +72,8 @@ namespace apitest.Models
                 builder.Property(x => x.BrandId).IsRequired();
                 builder.Property(x => x.Name).IsRequired();
                 builder.Property(x => x.Price).IsRequired();
+                //builder.Property<bool>("isDeleted");
+                builder.HasQueryFilter(m => EF.Property<bool>(m, "IsDeleted") == false);
 
                 builder.HasOne<Brand>(s => s.Brand)
                     .WithMany(g => g.Products)
@@ -87,6 +94,8 @@ namespace apitest.Models
                 builder.Property(x => x.NationId).IsRequired();
                 //builder.Property(x => x.Phone).IsRequired();
                 //builder.Property(x => x.PostalCode).IsRequired();
+                //builder.Property<bool>("isDeleted");
+                builder.HasQueryFilter(m => EF.Property<bool>(m, "IsDeleted") == false);
 
                 builder.HasOne<Product>(s => s.Product)
                     .WithMany(g => g.InfoRequests)
@@ -107,6 +116,8 @@ namespace apitest.Models
                 builder.Property(x => x.AccountId).IsRequired();
                 builder.Property(x => x.ReplyText).IsRequired();
                 builder.Property(x => x.InsertDate).IsRequired();
+                //builder.Property<bool>("isDeleted");
+                builder.HasQueryFilter(m => EF.Property<bool>(m, "IsDeleted") == false);
 
                 builder.HasOne<InfoRequest>(s => s.InfoRequest)
                     .WithMany(g => g.InfoRequestReply)

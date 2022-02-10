@@ -17,6 +17,7 @@ namespace apitest.Models
         public string PostalCode { get; set; }
         public string RequestText { get; set; }
         public DateTime InsertDate { get; set; }
+        public bool IsDeleted { get; set; }
 
 
         public User User { get; set; }
