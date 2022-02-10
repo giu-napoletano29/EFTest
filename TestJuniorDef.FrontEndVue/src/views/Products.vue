@@ -65,6 +65,7 @@
                 listbrands: [],
                 maxVisibleButtons: 7,
                 page: 1,
+                pageSize: 10,
                 loaded: false,
                 error: false,
                 params: {},
@@ -90,7 +91,7 @@
             },
             async loadElements(){
                 this.loaded = false
-                const {data} = await ProductsRepo.getallpaged(this.page, this.params)
+                const {data} = await ProductsRepo.getallpagedsized(this.pageSize, this.page, this.params)
                 this.loaded = true
                 this.list = data;
             },

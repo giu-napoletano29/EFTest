@@ -78,13 +78,10 @@ export default {
             }
 
             const pageDifference = this.page - this.paginationPageMarginBefore + this.maxVisibleButtons
-            //8 - 3 + 7 = 12
-            //9 - 3 + 7 = 13
 
             if(pageDifference > (this.computedTotalPages+1)){
-                //return this.page - this.paginationPageMarginBefore + (pageDifference - this.totalPages - 1)
-                return this.page - (this.paginationPageMarginBefore + (pageDifference - this.computedTotalPages - 1))
-                //9 - (3 + (13 - 11 - 1)) = 
+                const pageToReturn = this.page - (this.paginationPageMarginBefore + (pageDifference - this.computedTotalPages - 1))
+                return pageToReturn > 0 ? pageToReturn:1
             }
 
             // When inbetween

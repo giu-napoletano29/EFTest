@@ -2,7 +2,7 @@
     <div>
         <b-overlay :show="!loaded && !error" rounded="sm">
         <div class="brands">
-            <div v-if="loaded">
+            <div v-if="loaded" style="min-height: 600px;">
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>

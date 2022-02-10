@@ -59,6 +59,7 @@
                 name: 'Brand',
                 page: 1,
                 maxVisibleButtons: 7,
+                pageSize: 10,
                 list: {},
                 loaded: false,
                 error: false,
@@ -81,7 +82,7 @@
                 this.loadElements();
             },
             async loadElements(){
-                const {data} = await BrandsRepo.getallpaged(this.page, this.params)
+                const {data} = await BrandsRepo.getallpagedsized(this.pageSize, this.page, this.params)
                 this.loaded = true
                 this.list = data;
             },
