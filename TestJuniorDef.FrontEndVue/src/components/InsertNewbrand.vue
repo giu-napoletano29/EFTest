@@ -14,7 +14,7 @@
             <textarea class="form-control" rows="3" placeholder="Descrizione" v-model="brand.Description" required></textarea>
         </div>
         <div v-if="!EditMode" class="mb-3"> 
-            <button type="button" class="btn btn-primary" @click="addProd">Aggiungi prodotto</button>
+            <p><button type="button" class="btn btn-primary" @click="addProd">Aggiungi prodotto</button></p>
         </div>
     </div>
 </template>

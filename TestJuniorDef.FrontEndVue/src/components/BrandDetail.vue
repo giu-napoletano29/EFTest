@@ -2,9 +2,9 @@
     <div>
         <div class="row mb-5">
             <h5 class="mb-3">Categorie associate ai Prodotti di {{ list.brandName }}</h5>
-            <div class="row">
+            <div class="row border">
                 <div v-for="(l,i) in list.categories" :key="i"  class="col-sm-4">
-                    <div class="card">
+                    <div class="card border-0">
                         <div class="card-body">
                             {{ l.categoryName }} ({{ l.totalProducts }})
                         </div>
@@ -15,7 +15,7 @@
         <div class="row">
             <h5 class="mb-3">Richieste informazioni per prodotto</h5>
             <p class="mb-4"><b>{{ list.totalInfoRequest }}</b> richieste informazioni raccolte su totale di <b>{{ list.totalProducts }}</b> prodotti</p>
-            <table class="table table-success table-striped">
+            <table class="table table-success table-striped table-bordered" >
                 <thead>
                     <th> ID </th>
                     <th> Nome prodotto</th>

@@ -24,14 +24,13 @@
                     :key="index"
                     :is="component"
 
-                    :check="check"
                     :list="list"
                     :brands="brands"
                     :loaded="loaded"
                     :error="error"
                     @input="(newprod) => {product[index] = newprod}"
                 />
-                <div class="mb-3">      
+                <div class="mb-3 text-center">      
                     <button type="submit" class="btn btn-primary">{{ButtonText}} brand</button>
                 </div>       
             </form>

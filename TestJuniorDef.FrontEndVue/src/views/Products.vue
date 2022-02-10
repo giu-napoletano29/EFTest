@@ -109,6 +109,12 @@
                 this.listbrands = data;
             },
 
+            Delete(){
+                const {data} = ProductsRepo.delete(this.idEl)
+                this.open = false
+                this.response = data
+            },
+
             OpenModal(id){
                 this.idEl = id
                 this.open = true
@@ -124,6 +130,10 @@
 
             OpenDetail(val){
                 this.$router.push('/products/'+val)
+            },
+
+            OpenEdit(id){
+                this.$router.push('/products/edit/' + id)
             },
 
             BrandFilter(filter){
@@ -145,7 +155,6 @@
             },
 
             OrderByBrand(){
-                //let orderVal = !this.orderbrand
                 this.ResetOrder()
                 this.orderbrand = true
                 this.params.orderbyBrand = this.orderbrand
@@ -153,7 +162,6 @@
                 this.loadElements();
             },
             OrderByName(){
-                //let orderVal = !this.ordername
                 this.ResetOrder()
                 this.ordername = true
                 this.params.orderbyName = this.ordername
@@ -161,7 +169,6 @@
                 this.loadElements();
             },
             OrderByPrice(){
-                //let orderVal = !this.orderprice
                 this.ResetOrder()
                 this.orderprice = true
                 this.params.orderbyPrice = this.orderprice
@@ -172,14 +179,6 @@
                 this.desc = !this.desc
                 this.params.desc = this.desc
                 this.loadElements();
-            },
-            OpenEdit(id){
-                this.$router.push('/products/edit/' + id)
-            },
-            Delete(){
-                const {data} = ProductsRepo.delete(this.idEl)
-                this.open = false
-                this.response = data
             },
         },
 

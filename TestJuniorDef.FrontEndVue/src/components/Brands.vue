@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!-- <b-overlay :show="!loaded && !error" rounded="sm"> -->
         <div class="brands">
             <div style="min-height: 600px;">
                 <table class="table table-striped table-hover">
@@ -35,7 +34,6 @@
                 </table>
             </div>
         </div>
-        <!-- </b-overlay> -->
         <div v-if="error">
             <h2>An error has occourred!</h2>
         </div>
