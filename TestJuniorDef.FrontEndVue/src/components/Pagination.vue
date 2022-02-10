@@ -12,7 +12,7 @@
                     <a class="page-link" href="#" @click="changePage(i.num)">{{i.num}}</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="#" @click="changePage(totalPages)">Ultima pagina</a>
+                    <a class="page-link" href="#" @click="changePage(computedTotalPages)">Ultima pagina</a>
                 </li>
                 <li class="page-item" :class="{ disabled: IsLastPage }">
                     <a class="page-link" href="#" @click="changePage(nextPage)" >Avanti</a>
@@ -47,18 +47,22 @@ export default {
     },
 
     computed: {
+        computedTotalPages(){
+            return this.totalPages > 0 ? this.totalPages:1
+        },
+
         IsFirstPage(){
             return this.page === 1
         },
         IsLastPage(){
-            return this.page === this.totalPages
+            return this.page === this.computedTotalPages
         },
         prevPage(){
             return this.page-1 > 0 ? this.page-1 : this.page
         },
 
         nextPage(){
-            return this.page+1 <= this.totalPages ? this.page+1 : this.page
+            return this.page+1 <= this.computedTotalPages ? this.page+1 : this.page
         },
 
         startPage() {
@@ -68,8 +72,8 @@ export default {
             }
 
             // When on the last page
-            if (this.page === this.totalPages) {
-                const startpage = this.totalPages - this.maxVisibleButtons + 1
+            if (this.page === this.computedTotalPages) {
+                const startpage = this.computedTotalPages - this.maxVisibleButtons + 1
                 return startpage > 1 ? startpage:1;
             }
 
@@ -77,9 +81,9 @@ export default {
             //8 - 3 + 7 = 12
             //9 - 3 + 7 = 13
 
-            if(pageDifference > (this.totalPages+1)){
+            if(pageDifference > (this.computedTotalPages+1)){
                 //return this.page - this.paginationPageMarginBefore + (pageDifference - this.totalPages - 1)
-                return this.page - (this.paginationPageMarginBefore + (pageDifference - this.totalPages - 1))
+                return this.page - (this.paginationPageMarginBefore + (pageDifference - this.computedTotalPages - 1))
                 //9 - (3 + (13 - 11 - 1)) = 
             }
 
@@ -90,7 +94,7 @@ export default {
         pages() {
             const range = [];
 
-            for (let i = this.startPage; i <= Math.min(this.startPage + this.maxVisibleButtons - 1, this.totalPages); i++ ) 
+            for (let i = this.startPage; i <= Math.min(this.startPage + this.maxVisibleButtons - 1, this.computedTotalPages); i++ ) 
             {
                 range.push({
                 num: i,

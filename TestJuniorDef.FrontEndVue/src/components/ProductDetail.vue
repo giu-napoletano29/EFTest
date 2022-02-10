@@ -13,25 +13,28 @@
             </div>
         </div>
         <div class="row">
-            <h5 class="mb-3">Leeds per prodotto</h5>
-            <p class="mb-4"><b>{{ list.totalInfoRequest }}</b> richieste informazioni ricevute per questo prodotto fra cui <b>{{list.totalInfoRequestGuest}} </b> da utenti Guest e <b>{{list.totalInfoRequestLogged}} </b> da utenti registrati</p>
-            <table class="table table-success table-striped mb-3">
-                <thead>
-                    <th> ID </th>
-                    <th> Nome utente</th>
-                    <th> Num. Risposte</th>
-                    <th> Data ultima risposta</th>
-                </thead>
-                <tbody>
-                    <tr v-for="(p,i) in infoRequestPaged" :key="i"> 
-                        <td>{{ p.id }}</td>
-                        <td>{{ p.name }} {{ p.lastname }}</td> 
-                        <td>{{ p.totalReply }}</td>
-                        <td>{{ p.dateLastReply }}</td> 
-                    </tr>
-                </tbody>
-            </table> 
-            <button class="btn btn-primary mb-3" @click="GoToleeds()">Vedi tutte le richieste informazioni</button>      
+            <div style="height: 350px;">
+                <h5 class="mb-3">Leeds per prodotto</h5>
+                <p class="mb-4"><b>{{ list.totalInfoRequest }}</b> richieste informazioni ricevute per questo prodotto fra cui <b>{{list.totalInfoRequestGuest}} </b> da utenti Guest e <b>{{list.totalInfoRequestLogged}} </b> da utenti registrati</p>
+                <table class="table table-success table-striped mb-3">
+                    <thead>
+                        <th class="col-1 v-align"> ID </th>
+                        <th class="col-6 v-align"> Nome utente</th>
+                        <th class="col-2 v-align"> Num. Risposte</th>
+                        <th class="col-3 v-align"> Data ultima risposta</th>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(p,i) in infoRequestPaged" :key="i"> 
+                            <td>{{ p.id }}</td>
+                            <td>{{ p.name }} {{ p.lastname }}</td> 
+                            <td>{{ p.totalReply }}</td>
+                            <td>{{ p.dateLastReply }}</td> 
+                        </tr>
+                    </tbody>
+                </table>
+                <h4 v-show="emptyArray" class="text-center">Non ci sono richieste!</h4>
+            </div>    
+            <button v-show="!emptyArray" class="btn btn-primary mb-3" @click="GoToleeds()">Vedi tutte le richieste informazioni</button>      
         </div>
     </div>
 </template>
@@ -44,6 +47,12 @@ export default {
         infoRequestPaged: Array,
         loaded: Boolean,
         error: Boolean,
+    },
+
+    computed:{
+        emptyArray(){
+            return this.infoRequestPaged.length == 0
+        }
     },
 
     methods:{
