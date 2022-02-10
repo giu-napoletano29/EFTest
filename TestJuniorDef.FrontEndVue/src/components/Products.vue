@@ -63,7 +63,7 @@
                                 <td>
                                     <div class="btn-group me-2">
                                         <button type="button" class="btn btn-sm btn-outline-secondary" @click.stop="EditProduct(l.id)"><i class="bi bi-pencil-square"></i></button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary" @click.stop="OpenModal()"><i class="bi bi-trash" style="color: red;"></i></button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" @click.stop="OpenModal(l.id)"><i class="bi bi-trash" style="color: red;"></i></button>
                                     </div>
                                 </td> 
                             </tr>
@@ -99,8 +99,8 @@
         },
 
         methods:{
-            OpenModal(){
-                this.$emit('openmodal')
+            OpenModal(id){
+                this.$emit('openmodal', id)
             },
             CloseModal(){
                 this.$emit('closemodal')

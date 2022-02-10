@@ -101,7 +101,6 @@
             Delete(){
                 const {data} = BrandsRepo.delete(this.idEl)
                 this.open = false
-                console.log("Id da eliminare: " + this.idEl)
                 this.response = data
             },
             Search(filter){

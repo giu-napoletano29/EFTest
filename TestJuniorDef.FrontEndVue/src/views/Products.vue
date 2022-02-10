@@ -17,6 +17,7 @@
                 :orderbrand="orderbrand"
                 :ordername="ordername"
                 :orderprice="orderprice"
+                @openmodal="OpenModal"
                 @openDetail="OpenDetail"
                 @brandfilter="BrandFilter"
                 @orderbybrand="OrderByBrand"
@@ -31,6 +32,11 @@
                 :page="page"
                 @pageChanged="pageChange"
             />
+            <DeleteModal
+                :open="open"
+                @closemodal="CloseModal"
+                @delete="Delete"
+            />
         </b-container>
     </div>
 </template>
@@ -39,6 +45,7 @@
     import Header from '@/components/Header.vue'
     import Products from '@/components/Products.vue'
     import Pagination from '@/components/Pagination.vue'
+    import DeleteModal from '@/components/DeleteModal.vue'
     import {Factory} from './../wrappers/Factory'
     const ProductsRepo = Factory.get('products')
     const BrandsRepo = Factory.get('brands')
@@ -48,7 +55,8 @@
         components: {
             Products,
             Header,
-            Pagination
+            Pagination,
+            DeleteModal
         },
 
         data(){
@@ -65,6 +73,8 @@
                 ordername: false,
                 orderprice: false,
                 desc: false,
+                idEl: 0,
+                open: false,
             }
         },
 
@@ -89,7 +99,8 @@
                 const {data} = await BrandsRepo.get()
                 this.listbrands = data;
             },
-            OpenModal(){
+            OpenModal(id){
+                this.idEl = id
                 this.open = true
             },
             CloseModal(){
@@ -131,6 +142,11 @@
             },
             OpenEdit(id){
                 this.$router.push('/products/edit/' + id)
+            },
+            Delete(){
+                const {data} = ProductsRepo.delete(this.idEl)
+                this.open = false
+                this.response = data
             },
         },
 

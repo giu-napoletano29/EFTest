@@ -161,12 +161,22 @@ namespace TestJuniorDef.Services
 
         public int DeleteProduct(int id)
         {
-            var prod = _productRepo.GetById(id).FirstOrDefault();
+            var prod = _productRepo.GetByIdTracked(id).FirstOrDefault();
             if (prod != null)
             {
                 try
                 {
-                    _productRepo.Delete(prod);
+                    prod.IsDeleted = true;
+                    foreach (var i in prod.InfoRequests)
+                    {
+                        i.IsDeleted = true;
+                        foreach (var r in i.InfoRequestReply)
+                        {
+                            r.IsDeleted = true;
+                        }
+                    }
+                    //_productRepo.Delete(prod);
+                    _productRepo.Update(prod);
                 }
                 catch (System.Exception e)
                 {

@@ -58,7 +58,9 @@ namespace TestJuniorDef.Repositories
 
         public IQueryable<Product> GetByIdTracked(int id)
         {
-            return _context.Products.Where(x => x.Id == id);
+            return _context.Products.Where(x => x.Id == id)
+                                        .Include(x => x.InfoRequests)
+                                            .ThenInclude(x => x.InfoRequestReply);
         }
     }
 }
