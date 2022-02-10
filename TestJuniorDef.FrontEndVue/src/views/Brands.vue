@@ -40,6 +40,7 @@
 <script>
     import Header from '@/components/Header.vue'
     import Brands from '@/components/Brands.vue'
+    //import Table from '@/components/Table.vue'
     import Pagination from '@/components/Pagination.vue'
     import DeleteModal from '@/components/DeleteModal.vue'
     import {Factory} from './../wrappers/Factory'
@@ -52,6 +53,7 @@
             Header,
             Pagination,
             DeleteModal,
+            //Table,
         },
 
         data(){

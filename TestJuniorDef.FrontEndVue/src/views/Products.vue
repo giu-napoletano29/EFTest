@@ -24,7 +24,13 @@
                 @orderbyname="OrderByName"
                 @orderbyprice="OrderByPrice"
                 @openedit="OpenEdit"
-            />
+            >
+                <Table
+                    :loaded="loaded"
+                    :error="error"
+                    :nrow="nrow"
+                />
+            </Products>
             <Pagination
                 :totalPages="totalpages"
                 :maxVisibleButtons="maxVisibleButtons"
@@ -43,6 +49,7 @@
 <script>
     import Header from '@/components/Header.vue'
     import Products from '@/components/Products.vue'
+    import Table from '@/components/Table.vue'
     import Pagination from '@/components/Pagination.vue'
     import DeleteModal from '@/components/DeleteModal.vue'
     import {Factory} from './../wrappers/Factory'
@@ -55,7 +62,8 @@
             Products,
             Header,
             Pagination,
-            DeleteModal
+            DeleteModal,
+            Table,
         },
 
         data(){
@@ -66,6 +74,7 @@
                 maxVisibleButtons: 7,
                 page: 1,
                 pageSize: 10,
+                nrow: 7,
                 loaded: false,
                 error: false,
                 params: {},

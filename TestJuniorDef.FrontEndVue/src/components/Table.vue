@@ -1,44 +1,94 @@
 <template>
-  <div>
-    <b-table striped hover :items="items" :fields="fields" thead-class="prova">
-        <template slot="thead-top">
-            <b-tr role='row'>
-                <th role='columnheader' scope='col' colspan='3' tabindex='4' aria-colindex='4' aria-sort='none' class=''><div>Test</div><span class='sr-only'></span></th>
-            </b-tr>
-        </template>
-    </b-table>
-  </div>
+	<!-- <div v-show="!loaded && !error">  -->
+
+	<tbody v-show="!loaded && !error" cellpadding="0" cellspacing="0" width="100%" class="w3samples_table_loader">
+		<tr v-for="index in this.nrow" :key="index">
+			<td>
+				<span></span>
+			</td>
+			<td>
+				<span></span>
+				<span class="sub-temp"></span>
+				<span class="sub-temp sub-temp-three"></span>			
+			</td>
+			<td>
+				<span></span>
+			</td>
+			<td>
+				<span></span>
+			</td>
+			<td>
+				<span></span>
+			</td>
+		</tr>		
+	</tbody>
 </template>
 
+
 <script>
-  export default {
-    data() {
-      return {
-        // Note 'isActive' is left out and will not appear in the rendered table
-        fields: [
-          {
-            key: 'last_name',
-            sortable: true
-          },
-          {
-            key: 'first_name',
-            sortable: false
-          },
-          {
-            key: 'age',
-            label: 'Person age',
-            sortable: true,
-            // Variant applies to the whole column, including the header and footer
-            variant: 'danger'
-          }
-        ],
-        items: [
-          { isActive: true, age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
-          { isActive: false, age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-          { isActive: false, age: 89, first_name: 'Geneva', last_name: 'Wilson' },
-          { isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney' }
-        ]
-      }
-    },
-  }
+    export default {
+        props: {
+            loaded: Boolean,
+            error: Boolean,
+			nrow: Number,
+        },
+    }
 </script>
+
+
+
+<style>
+
+.w3samples_table_loader {
+    background-color: #FFF;
+    color: #666;
+    width: 100%;
+    padding: 0;
+}
+.w3samples_table_loader th{
+    background: #F7F9FA;
+    border-top: 1px solid #E5E5E5;
+    border-bottom: 1px solid #E5E5E5;
+    padding: 12px 10px;
+	text-align: left;
+}
+.w3samples_table_loader td{
+    border-top: 0px solid #E5E5E5;
+    border-bottom: 1px solid #E5E5E5;
+    padding: 12px 10px;
+    vertical-align: top;
+}
+.w3samples_table_loader span{
+width: calc(100% - 5px);
+    height: 15px;
+    border-radius: 3px;
+    background-image: linear-gradient(90deg, #ddd 0px, #e8e8e8 40px, #ddd 80px);
+    background-size: 600px;
+    animation: shine-lines-table 1.6s infinite linear;
+    display: inline-block;
+    min-width:15px;
+}
+.w3samples_table_loader span.sub-temp{
+	width: calc(100% - 50%);
+	margin-top: 5px;
+}
+.w3samples_table_loader span.sub-temp-three{
+	width:calc(100% - 70%);
+	display:block
+}
+
+
+
+@keyframes shine-lines-table {
+  0% {
+	opacity:0.4;
+  }
+  40%{
+	opacity:0.8;
+  }
+  100% {
+	opacity:0.4;
+  }
+}
+
+</style>

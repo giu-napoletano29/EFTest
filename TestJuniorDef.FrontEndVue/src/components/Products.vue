@@ -1,8 +1,8 @@
 <template>
     <div>
-        <b-overlay :show="!loaded && !error" rounded="sm">
+        <!-- <b-overlay :show="!loaded && !error" rounded="sm"> -->
             <div class="products">
-                <div v-if="loaded" style="min-height: 780px;">
+                <div style="min-height: 780px;">
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
@@ -52,7 +52,8 @@
                                 <th/><th/><th/><th/>
                             </tr>
                         </thead>
-                        <tbody>
+                        <slot></slot>
+                        <tbody v-if="loaded">
                             <tr v-for="(l,i) in list.elements" :key="i" v-on:click="openDetail(list.elements[i])"> 
                                 <td>{{ l.brandName }}</td> 
                                 <td>{{ l.productName }}</td>
@@ -71,7 +72,7 @@
                     </table>
                 </div>
             </div>
-        </b-overlay>
+        <!-- </b-overlay> -->
         <div v-if="error">
             <h2>An error has occourred!</h2>
         </div>
