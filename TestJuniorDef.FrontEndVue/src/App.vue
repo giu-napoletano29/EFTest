@@ -11,12 +11,6 @@
                     <div class="position-sticky pt-3">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <router-link to="/" class="nav-link" :class="{ active: this.$route.name==='Home'}">Home</router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link to="/about" class="nav-link" :class="{ active: this.$route.name==='About'}">About</router-link>
-                            </li>
-                            <li class="nav-item">
                                 <router-link to="/brands" class="nav-link" :class="{ active: this.$route.name==='Brands'}">Brand</router-link>
                             </li>
                             <li class="nav-item">
