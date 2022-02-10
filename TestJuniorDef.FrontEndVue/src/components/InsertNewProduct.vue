@@ -1,11 +1,11 @@
 <template>
     <div>
         <div class="mb-3">
-            <input type="text" class="form-control" id="productname" placeholder="Nome prodotto" v-model="product.Name">
+            <input type="text" class="form-control" id="productname" placeholder="Nome prodotto" v-model="product.Name" required>
         </div>
         <div class="row">
             <div class="col-10">
-                <select class="form-select mb-3" aria-label="Default select example" v-model="product.BrandId">
+                <select class="form-select mb-3" aria-label="Default select example" v-model="product.BrandId" required>
                     <option value="">Seleziona brand</option>
                     <option v-for="(l,i) in brands" :key="i" :value="l.id">{{l.brandName}}</option>
                 </select>
@@ -13,18 +13,18 @@
             <div class="col">
                 <div class="input-group"> 
                     <span class="input-group-text">€</span>
-                    <input type="number" class="form-control currency" placeholder="Prezzo" aria-label="price" min="0" step="0.10" data-number-to-fixed="2" data-number-stepfactor="100" v-model="product.Price" />
+                    <input type="number" class="form-control currency" placeholder="Prezzo" aria-label="price" min="0" step="0.10" data-number-to-fixed="2" data-number-stepfactor="100" v-model="product.Price" required/>
                 </div>
             </div>
         </div>
         <div class="mb-3">
-            <input type="text" class="form-control" id="shortdescriptio" placeholder="Piccola descrizione" v-model="product.ShortDescription">
+            <input type="text" class="form-control" id="shortdescriptio" placeholder="Piccola descrizione" v-model="product.ShortDescription" required>
         </div>
         <div class="mb-3">      
-            <textarea class="form-control" id="descriptio" rows="3" placeholder="Descrizione" v-model="product.Description"></textarea>
+            <textarea class="form-control" id="descriptio" rows="3" placeholder="Descrizione" v-model="product.Description" required></textarea>
         </div>
         <div class="mb-3 form-check form-check-inline" v-for="(l,i) in list" :key="i">
-            <input type="checkbox" class="form-check-input" :id="l.id" v-model="product.ProductCategory" :value="getCatObj(l.id)">
+            <input type="checkbox" class="form-check-input" :id="l.id" v-model="product.ProductCategory" :value="getCatObj(l.id)" required>
             <label class="form-check-label" for="exampleCheck1">{{l.name}}</label>
         </div>
     </div>

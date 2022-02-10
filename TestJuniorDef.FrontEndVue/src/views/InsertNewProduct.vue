@@ -2,7 +2,13 @@
     <div>
         <b-container>
             <Header :name="name"/>
-            <form v-on:submit.prevent="InsertProduct">
+            <form v-on:submit.prevent="checkForm">
+                <p v-if="errors.length">
+                    <b>Correggere i seguenti errori:</b>
+                    <ul>
+                        <li v-for="error in errors" :key="error">{{ error }}</li> 
+                    </ul>
+                </p>
                 <InsertNewProduct
                     :list="list"
                     :brands="brands"
@@ -28,7 +34,7 @@
     const CategoriesRepo = Factory.get('categories')
     const BrandsRepo = Factory.get('brands')
     const ProductRepo = Factory.get('products')
-//:product="product"
+
     export default {
         
         components: {
@@ -43,9 +49,11 @@
                 brands: [],
                 loaded: false,
                 error: false,
+                errors: [],
                 response: '',
                 productbyid: {},
                 prodid: this.$route.params.id,
+                EditMode: false,
 
                 product:{ 
                     BrandId: "Seleziona brand",
@@ -87,6 +95,37 @@
 
                 this.response = resp
                 
+            },
+
+            checkForm: function (e) {
+                // if (this.name && this.age) {
+                //     return true;
+                // }
+                console.log("Dentro")
+                this.errors = [];
+
+                if (!(this.product.BrandId>0)) {
+                    this.errors.push('Devi selezionare un brand.');
+                }
+                if (!this.product.Name) {
+                    this.errors.push('Devi inserire un nome.');
+                }
+                if (!this.product.ShortDescription) {
+                    this.errors.push('Devi inserire una piccola descrizione.');
+                }
+                if (!this.product.Description) {
+                    this.errors.push('Devi inserire una descrizione.');
+                }
+                if (this.product.ProductCategory.length < 1) {
+                    this.errors.push('Devi selezionare almeno una categoria.');
+                }
+                
+                e.preventDefault();
+                
+                if(this.errors.length == 0){
+                    //this.InsertProduct()
+                    console.log("Inviato")
+                }
             }
         },
 
