@@ -23,7 +23,6 @@
                 @orderbybrand="OrderByBrand"
                 @orderbyname="OrderByName"
                 @orderbyprice="OrderByPrice"
-                @orderbydesc="OrderByDesc"
                 @openedit="OpenEdit"
             />
             <Pagination
@@ -99,19 +98,24 @@
                 const {data} = await BrandsRepo.get()
                 this.listbrands = data;
             },
+
             OpenModal(id){
                 this.idEl = id
                 this.open = true
             },
+
             CloseModal(){
                 this.open = false
             },
+
             OpenNewProduct(){
                 this.$router.push('/products/new')
             },
+
             OpenDetail(val){
                 this.$router.push('/products/'+val)
             },
+
             BrandFilter(filter){
                 if(/^\d+$/.test(filter)){
                     this.params.brand = filter
@@ -120,19 +124,38 @@
                 }
                 this.loadElements();
             },
+
+            ResetOrder(){
+                this.orderbrand = false
+                this.ordername = false
+                this.orderprice = false
+                delete this.params.orderbyBrand
+                delete this.params.orderbyName
+                delete this.params.orderbyPrice
+            },
+
             OrderByBrand(){
-                this.orderbrand = !this.orderbrand
+                //let orderVal = !this.orderbrand
+                this.ResetOrder()
+                this.orderbrand = true
                 this.params.orderbyBrand = this.orderbrand
+                this.OrderByDesc()
                 this.loadElements();
             },
             OrderByName(){
-                this.ordername = !this.ordername
+                //let orderVal = !this.ordername
+                this.ResetOrder()
+                this.ordername = true
                 this.params.orderbyName = this.ordername
+                this.OrderByDesc()
                 this.loadElements();
             },
             OrderByPrice(){
-                this.orderprice = !this.orderprice
+                //let orderVal = !this.orderprice
+                this.ResetOrder()
+                this.orderprice = true
                 this.params.orderbyPrice = this.orderprice
+                this.OrderByDesc()
                 this.loadElements();
             },
             OrderByDesc(){
