@@ -98,10 +98,6 @@
             },
 
             checkForm: function (e) {
-                // if (this.name && this.age) {
-                //     return true;
-                // }
-                console.log("Dentro")
                 this.errors = [];
 
                 if (!(this.product.BrandId>0)) {
@@ -123,8 +119,7 @@
                 e.preventDefault();
                 
                 if(this.errors.length == 0){
-                    //this.InsertProduct()
-                    console.log("Inviato")
+                    this.InsertProduct()
                 }
             }
         },

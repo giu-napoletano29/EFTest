@@ -2,7 +2,13 @@
     <div>
         <b-container>
             <Header :name="name"/>
-            <form v-on:submit.prevent="InsertBrand">
+            <form v-on:submit.prevent="checkForm">
+                <p v-if="errors.length">
+                    <b>Correggere i seguenti errori:</b>
+                    <ul>
+                        <li v-for="error in errors" :key="error">{{ error }}</li> 
+                    </ul>
+                </p>
                 <InsertNewbrand
                     :list="list"
                     :brands="brands"
@@ -18,6 +24,7 @@
                     :key="index"
                     :is="component"
 
+                    :check="check"
                     :list="list"
                     :brands="brands"
                     :loaded="loaded"
@@ -57,6 +64,8 @@
                 brandbyid: {},
                 loaded: false,
                 error: false,
+                check: false,
+                errors: [],
                 response: '',
                 brandid: this.$route.params.id,
                 EditMode: false,
@@ -120,6 +129,41 @@
                 this.newcomponents.push(Comp)
                 this.product.push(prod);
                       
+            },
+
+            checkForm: function (e) {
+                var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                this.errors = [];
+                var temp = [];
+                this.check = true
+
+                if (!this.brand.BrandName) {
+                    temp.push('Devi inserire un nome.');
+                }
+                if (!re.test(this.brand.Account.Email)) {
+                    temp.push('Devi inserire una mail valida.');
+                }
+                if (!this.brand.Account.Password) {
+                    temp.push('Devi inserire una password.');
+                }
+                if (!this.brand.Description) {
+                    temp.push('Devi inserire una descrizione.');
+                }
+                if(this.product.length > 0){
+                    this.product.forEach(function (element, i) {
+                        if (element.ProductCategory.length < 1) {
+                            temp.push('Devi inserire una categoria al prodotto ' + (i+1) + ".");
+                        }
+                    });
+                }
+                
+                e.preventDefault();
+                this.errors = temp
+                if(this.errors.length == 0){
+                    this.InsertBrand()
+                }
+
+                this.check= false
             }
         },
 
