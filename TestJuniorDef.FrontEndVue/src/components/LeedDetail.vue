@@ -12,7 +12,7 @@
             <div style="height: 250px;">
                 <div v-for="(l,i) in replies" :key="i" class="card border-success mb-3" style="width: 100%;">
                     <div class="card-header">
-                        {{l.date}} - {{list.product.brandName}}
+                        {{l.date.substring(0, 10)}} - {{list.product.brandName}}
                     </div>
                     <div class="card-body text-success">
                         <p class="card-text">{{l.text}}</p>
