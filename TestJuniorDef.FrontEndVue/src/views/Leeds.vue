@@ -7,6 +7,7 @@
                 :listbrands="listbrands"
                 :loaded="loaded"
                 :error="error"
+                :params="params"
                 @openDetail="OpenDetail"
                 @brandfilter="BrandFilter"
                 @search="Search"
@@ -107,6 +108,10 @@
         },
 
         created() {
+            if(this.$route.params){
+                this.params.brand = this.$route.params.brand
+                this.params.search = this.$route.params.search
+            }
             this.loadElements();
             this.loadBrands();
         },

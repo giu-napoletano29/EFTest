@@ -31,7 +31,7 @@
                     </tr>
                 </tbody>
             </table> 
-            <button class="btn btn-primary mb-3">Vedi tutte le richieste informazioni</button>      
+            <button class="btn btn-primary mb-3" @click="GoToleeds()">Vedi tutte le richieste informazioni</button>      
         </div>
     </div>
 </template>
@@ -45,5 +45,11 @@ export default {
         loaded: Boolean,
         error: Boolean,
     },
+
+    methods:{
+        GoToleeds(){
+            this.$emit('gotoleeds')
+        }
+    }
 }
 </script>

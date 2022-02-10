@@ -7,6 +7,7 @@
                 :infoRequestPaged="listpaginated"
                 :error="error"
                 :loaded="loaded"
+                @gotoleeds="GoToleeds"
             />
             <Pagination
                 :totalPages="totalpages"
@@ -43,7 +44,7 @@
                 page: 1,
                 pageSize: 5,
             }
-        },
+        },    
 
         methods: {
             pageChange(page) {
@@ -58,6 +59,9 @@
                 this.loaded = true
                 this.list = data;
                 this.pageChange(1);
+            },
+            GoToleeds(){
+                this.$router.push({name: 'Leeds', params: {search: this.list.name, brand: this.list.brandId}})
             },
         },
 

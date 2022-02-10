@@ -17,7 +17,7 @@
                             <tr class="table-light">
                                 <th> 
                                     <select class="form-select" aria-label="Default select example" v-model="key" @change="onChange()">
-                                        <option selected>Tutti i brand</option>
+                                        <option value="">Tutti i brand</option>
                                         <option v-for="(l,i) in listbrands" :key="i" :value="l.id">{{l.brandName}}</option>
                                     </select>    
                                 </th>
@@ -63,12 +63,13 @@
             listbrands: Array,
             loaded: Boolean,
             error: Boolean,
+            params: Object,
         },
 
         data() {
             return{
-                key: "Tutti i brand",
-                search: ""
+                key: this.params.brand ? this.params.brand:"",
+                search: this.params.search
             }  
         },
 
