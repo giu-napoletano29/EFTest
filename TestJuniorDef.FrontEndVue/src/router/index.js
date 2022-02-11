@@ -54,6 +54,16 @@ const routes = [
     component: Products
   },
   {
+    path: '/products/success',
+    name: 'ProductsSuccess',
+    component: Products
+  },
+  {
+    path: '/products/error',
+    name: 'ProductsError',
+    component: Products
+  },
+  {
     path: '/products/:id(\\d+)',
     name: 'ProductDetail',
     component: ProductDetail

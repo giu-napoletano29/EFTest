@@ -60,7 +60,6 @@ export default {
         product: {
             deep:true,
             handler(){
-                console.log("Emit")
                 this.$emit('input', this.product);
             }
         },

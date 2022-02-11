@@ -85,15 +85,30 @@
                 this.productbyid = data;
             },
 
+            RedirectSuccess(){
+                this.$router.push('/products/success')
+            },
+
+            RedirectError(){
+                this.$router.push('/products/error')
+            },
+
             InsertProduct(){
-                var resp = ""
+                let self = this;
+                var resp = null
                 if(!this.prodid){
                     resp = ProductRepo.create(this.product)
                 }else{
                     resp = ProductRepo.update(this.prodid, this.product)
                 }
 
-                this.response = resp
+                resp.then(function (response) {
+                        if(response.status >= 200 && response.status <= 208){
+                            self.RedirectSuccess()
+                        }else{
+                            self.RedirectError()
+                        }
+                    });
                 
             },
 

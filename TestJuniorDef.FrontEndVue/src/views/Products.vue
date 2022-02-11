@@ -31,6 +31,7 @@
                     :nrow="nrow"
                 />
             </Products>
+
             <Pagination
                 :totalPages="totalpages"
                 :maxVisibleButtons="maxVisibleButtons"
@@ -41,7 +42,12 @@
                 :open="open"
                 @closemodal="CloseModal"
                 @delete="Delete"
-            />
+            />     
+            <RedirectModal
+                :success="successModalOpen"
+                :OpError="OpError"
+                @closemodal="CloseModal"
+            />        
         </b-container>
     </div>
 </template>
@@ -52,6 +58,7 @@
     import Table from '@/components/Table.vue'
     import Pagination from '@/components/Pagination.vue'
     import DeleteModal from '@/components/DeleteModal.vue'
+    import RedirectModal from '@/components/RedirectModal.vue'
     import {Factory} from './../wrappers/Factory'
     const ProductsRepo = Factory.get('products')
     const BrandsRepo = Factory.get('brands')
@@ -64,6 +71,7 @@
             Pagination,
             DeleteModal,
             Table,
+            RedirectModal
         },
 
         data(){
@@ -84,6 +92,8 @@
                 desc: false,
                 idEl: 0,
                 open: false,
+                successModalOpen: false,
+                OpError: false,
             }
         },
 
@@ -122,6 +132,7 @@
 
             CloseModal(){
                 this.open = false
+                this.success = false //To close success modal
             },
 
             OpenNewProduct(){
@@ -186,5 +197,14 @@
             this.loadElements();
             this.loadBrands();
         },
+
+        mounted(){
+            if(this.$route.name==='ProductsSuccess'){
+                this.successModalOpen = true
+            }else if(this.$route.name==='ProductsError'){
+                this.successModalOpen = true
+                this.OpError = true
+            }
+        }
     }
 </script>
