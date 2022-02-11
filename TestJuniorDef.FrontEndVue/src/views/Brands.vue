@@ -1,49 +1,47 @@
 <template>
     <div>
-        <b-container>
-            <Header :name="name">
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group me-2">
-                        <button type="button" class="btn btn-sm btn-outline-secondary" @click="OpenNewBrand()">Crea nuovo brand</button>
-                    </div>
+        <Header :name="name">
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group me-2">
+                    <button type="button" class="btn btn-sm btn-outline-primary" @click="OpenNewBrand()">Crea nuovo brand</button>
                 </div>
-            </Header>
-            <Brands
-                :list="list"
+            </div>
+        </Header>
+        <Brands
+            :list="list"
+            :loaded="loaded"
+            :error="error"
+            :page="page"
+            :maxVisibleButtons="maxVisibleButtons"
+            @page="pageChange"
+            @openmodal="OpenModal"
+            @closemodal="CloseModal"
+            @openDetail="OpenDetail"
+            @search="Search"
+            @openedit="OpenEdit"
+        >
+            <Table
                 :loaded="loaded"
                 :error="error"
-                :page="page"
-                :maxVisibleButtons="maxVisibleButtons"
-                @page="pageChange"
-                @openmodal="OpenModal"
-                @closemodal="CloseModal"
-                @openDetail="OpenDetail"
-                @search="Search"
-                @openedit="OpenEdit"
-            >
-                <Table
-                    :loaded="loaded"
-                    :error="error"
-                    :nrow="nrow"
-                />
-            </Brands>
-            <Pagination
-                :totalPages="totalpages"
-                :maxVisibleButtons="maxVisibleButtons"
-                :page="page"
-                @pageChanged="pageChange"
+                :nrow="nrow"
             />
-            <DeleteModal
-                :open="open"
-                @closemodal="CloseModal"
-                @delete="Delete"
-            />
-            <RedirectModal
-                :success="successModalOpen"
-                :OpError="OpError"
-                @closemodal="CloseModal"
-            />  
-        </b-container>
+        </Brands>
+        <Pagination
+            :totalPages="totalpages"
+            :maxVisibleButtons="maxVisibleButtons"
+            :page="page"
+            @pageChanged="pageChange"
+        />
+        <DeleteModal
+            :open="open"
+            @closemodal="CloseModal"
+            @delete="Delete"
+        />
+        <RedirectModal
+            :success="successModalOpen"
+            :OpError="OpError"
+            @closemodal="CloseModal"
+        />  
     </div>
 </template>
 

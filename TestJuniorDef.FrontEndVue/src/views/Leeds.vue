@@ -1,25 +1,23 @@
 <template>
     <div>
-        <b-container>
-            <Header :name="name"/>
-            <Leeds
-                :list="list"
-                :listbrands="listbrands"
-                :loaded="loaded"
-                :error="error"
-                :params="params"
-                @openDetail="OpenDetail"
-                @brandfilter="BrandFilter"
-                @search="Search"
-                @orderby="Orderby"
-            />
-            <Pagination
-                :totalPages="totalpages"
-                :maxVisibleButtons="maxVisibleButtons"
-                :page="page"
-                @pageChanged="pageChange"
-            />
-        </b-container>
+        <Header :name="name"/>
+        <Leeds
+            :list="list"
+            :listbrands="listbrands"
+            :loaded="loaded"
+            :error="error"
+            :params="params"
+            @openDetail="OpenDetail"
+            @brandfilter="BrandFilter"
+            @search="Search"
+            @orderby="Orderby"
+        />
+        <Pagination
+            :totalPages="totalpages"
+            :maxVisibleButtons="maxVisibleButtons"
+            :page="page"
+            @pageChanged="pageChange"
+        />
     </div>
 </template>
 

@@ -8,6 +8,7 @@ import Leeds from '../views/Leeds.vue'
 import LeedDetail from '../views/LeedDetail.vue'
 import InsertNewbrand from '../views/InsertNewbrand.vue'
 import InsertNewProduct from '../views/InsertNewProduct.vue'
+import NotFound from '../views/Service/NotFound.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ const routes = [
   {
     path: '/',
     redirect: '/brands'
+  },
+  {
+    path: '*',
+    name: 'NotFound',
+    component: NotFound
   },
   // {
   //   path: '/about',

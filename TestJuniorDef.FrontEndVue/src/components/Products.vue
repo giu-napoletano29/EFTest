@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="products">
-            <div style="min-height: 780px;">
+            <div>
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>

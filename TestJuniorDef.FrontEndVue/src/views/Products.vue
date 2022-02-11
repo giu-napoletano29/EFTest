@@ -1,54 +1,52 @@
 <template>
     <div>
-        <b-container>
-            <Header :name="name">
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group me-2">
-                        <button type="button" class="btn btn-sm btn-outline-secondary" @click="OpenNewProduct()">Aggiungi prodotto</button>
-                    </div>
+        <Header :name="name">
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group me-2">
+                    <button type="button" class="btn btn-sm btn-outline-primary" @click="OpenNewProduct()">Aggiungi prodotto</button>
                 </div>
-            </Header>
-            <Products
-                :list="list"
-                :listbrands="listbrands"
+            </div>
+        </Header>
+        <Products
+            :list="list"
+            :listbrands="listbrands"
+            :loaded="loaded"
+            :error="error"
+            :desc="desc"
+            :orderbrand="orderbrand"
+            :ordername="ordername"
+            :orderprice="orderprice"
+            @openmodal="OpenModal"
+            @openDetail="OpenDetail"
+            @brandfilter="BrandFilter"
+            @orderbybrand="OrderByBrand"
+            @orderbyname="OrderByName"
+            @orderbyprice="OrderByPrice"
+            @openedit="OpenEdit"
+        >
+            <Table
                 :loaded="loaded"
                 :error="error"
-                :desc="desc"
-                :orderbrand="orderbrand"
-                :ordername="ordername"
-                :orderprice="orderprice"
-                @openmodal="OpenModal"
-                @openDetail="OpenDetail"
-                @brandfilter="BrandFilter"
-                @orderbybrand="OrderByBrand"
-                @orderbyname="OrderByName"
-                @orderbyprice="OrderByPrice"
-                @openedit="OpenEdit"
-            >
-                <Table
-                    :loaded="loaded"
-                    :error="error"
-                    :nrow="nrow"
-                />
-            </Products>
-
-            <Pagination
-                :totalPages="totalpages"
-                :maxVisibleButtons="maxVisibleButtons"
-                :page="page"
-                @pageChanged="pageChange"
+                :nrow="nrow"
             />
-            <DeleteModal
-                :open="open"
-                @closemodal="CloseModal"
-                @delete="Delete"
-            />     
-            <RedirectModal
-                :success="successModalOpen"
-                :OpError="OpError"
-                @closemodal="CloseModal"
-            />        
-        </b-container>
+        </Products>
+
+        <Pagination
+            :totalPages="totalpages"
+            :maxVisibleButtons="maxVisibleButtons"
+            :page="page"
+            @pageChanged="pageChange"
+        />
+        <DeleteModal
+            :open="open"
+            @closemodal="CloseModal"
+            @delete="Delete"
+        />     
+        <RedirectModal
+            :success="successModalOpen"
+            :OpError="OpError"
+            @closemodal="CloseModal"
+        />        
     </div>
 </template>
 
