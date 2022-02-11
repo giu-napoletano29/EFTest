@@ -29,6 +29,16 @@ const routes = [
     component: Brands
   },
   {
+    path: '/brands/success',
+    name: 'BrandsSuccess',
+    component: Brands
+  },
+  {
+    path: '/brands/error',
+    name: 'BrandsError',
+    component: Brands
+  },
+  {
     path: '/brands/:id(\\d+)',
     name: 'BrandDetail',
     component: BrandDetail

@@ -38,6 +38,11 @@
                 @closemodal="CloseModal"
                 @delete="Delete"
             />
+            <RedirectModal
+                :success="successModalOpen"
+                :OpError="OpError"
+                @closemodal="CloseModal"
+            />  
         </b-container>
     </div>
 </template>
@@ -48,6 +53,7 @@
     import Table from '@/components/Table.vue'
     import Pagination from '@/components/Pagination.vue'
     import DeleteModal from '@/components/DeleteModal.vue'
+    import RedirectModal from '@/components/RedirectModal.vue'
     import {Factory} from './../wrappers/Factory'
     const BrandsRepo = Factory.get('brands')
 
@@ -59,6 +65,7 @@
             Pagination,
             DeleteModal,
             Table,
+            RedirectModal
         },
 
         data(){
@@ -74,7 +81,9 @@
                 open: false,
                 idEl: 0,
                 params: {},
-                response: ""
+                response: "",
+                successModalOpen: false,
+                OpError: false,
             }
         },
 
@@ -127,6 +136,15 @@
 
         created() {
             this.loadElements();
+        },
+
+        mounted(){
+            if(this.$route.name==='BrandsSuccess'){
+                this.successModalOpen = true
+            }else if(this.$route.name==='BrandsError'){
+                this.successModalOpen = true
+                this.OpError = true
+            }
         }
     }
 </script>

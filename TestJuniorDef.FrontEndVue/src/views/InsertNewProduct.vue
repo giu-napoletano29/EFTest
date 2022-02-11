@@ -50,7 +50,6 @@
                 loaded: false,
                 error: false,
                 errors: [],
-                response: '',
                 productbyid: {},
                 prodid: this.$route.params.id,
                 EditMode: false,

@@ -64,7 +64,6 @@
                 loaded: false,
                 error: false,
                 errors: [],
-                response: '',
                 brandid: this.$route.params.id,
                 EditMode: false,
                 ButtonText: "Aggiungi",
@@ -103,8 +102,17 @@
                 this.brandbyid = data;
             },
 
+            RedirectSuccess(){
+                this.$router.push('/brands/success')
+            },
+
+            RedirectError(){
+                this.$router.push('/brands/error')
+            },
+
             InsertBrand(){
-                var resp = ""
+                let self = this;
+                var resp = null
                 if(!this.brandid){  //change to EditMode check
                     this.brand.Products = this.product
                     resp = BrandsRepo.create(this.brand)
@@ -112,7 +120,13 @@
                     delete this.brand.Products
                     resp = BrandsRepo.update(this.brandid, this.brand)
                 }
-                this.response = resp
+                resp.then(function (response) {
+                        if(response.status >= 200 && response.status <= 208){
+                            self.RedirectSuccess()
+                        }else{
+                            self.RedirectError()
+                        }
+                    });
             },
 
             addProd () {  
