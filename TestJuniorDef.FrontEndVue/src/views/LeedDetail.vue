@@ -38,25 +38,11 @@
 
         data(){
             return{
-                //list: {},
-                // listpaginated: [],
-                // loaded: false,
-                // error: false,
-                // maxVisibleButtons: 7,
-                // page: 1,
                 pageSize: 2,
             }
         },
 
         methods: {
-            // pageChange(page) {
-            //     this.page = page
-            //     var skip = (this.page - 1 ) * this.pageSize
-            //     var take = skip + this.pageSize
-            //     this.pageChangeComponent(skip, take)
-            //     //this.listpaginated = this.list.replies.slice(skip, take)
-            // },
-
             pageChangeComponent(skip, take){
                 this.listpaginated = this.list.replies.slice(skip, take)
             },
@@ -64,26 +50,7 @@
             async loadElements(){
                 const {data} = await LeedsRepo.getById(this.$route.params.id)
                 this.loadElementsComponent(data)
-                // if(!data){
-                //     this.RedirectIfNotFound()
-                // }
-                // this.loaded = true
-                // this.list = data ? data:"";
-                // this.pageChange(1);
             },
-
-            // loadElementsComponent(data){
-            //     if(!data){
-            //         this.RedirectIfNotFound()
-            //     }
-            //     this.loaded = true
-            //     this.list = data ? data:"";
-            //     this.pageChange(1);
-            // },
-
-            // RedirectIfNotFound(){
-            //     this.$router.push({name: 'NotFound', params: { 0: "" } })     
-            // },
         },
 
         computed:{
@@ -95,9 +62,5 @@
                 return Math.ceil(this.list.replies?.length/this.pageSize)
             }
         },
-
-        // created() {
-        //     this.loadElements();
-        // }
     }
 </script>
