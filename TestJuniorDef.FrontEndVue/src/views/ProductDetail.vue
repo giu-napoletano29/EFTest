@@ -39,33 +39,49 @@
 
         data(){
             return{
-                list: {},
-                listpaginated: [],
-                loaded: false,
-                error: false,
-                maxVisibleButtons: 7,
-                page: 1,
+                // list: {},
+                // listpaginated: [],
+                // loaded: false,
+                // error: false,
+                // maxVisibleButtons: 7,
+                // page: 1,
                 pageSize: 5,
             }
         },    
 
         methods: {
-            pageChange(page) {
-                this.page = page
-                var skip = (this.page - 1 ) * this.pageSize
-                var take = skip + this.pageSize
+            // pageChange(page) {
+            //     this.page = page
+            //     var skip = (this.page - 1 ) * this.pageSize
+            //     var take = skip + this.pageSize
+            //     this.pageChangeComponent(skip, take)
+            //     //this.listpaginated = this.list.infoRequest ? this.list.infoRequest.slice(skip, take):[]
+            // },
+
+            pageChangeComponent(skip, take){
                 this.listpaginated = this.list.infoRequest ? this.list.infoRequest.slice(skip, take):[]
             },
             
             async loadElements(){
                 const {data} = await ProductsRepo.getById(this.$route.params.id)
-                if(!data){
-                    this.RedirectIfNotFound()
-                }
-                this.loaded = true
-                this.list = data ? data:"";
-                this.pageChange(1);
+                this.loadElementsComponent(data)
+                // if(!data){
+                //     this.RedirectIfNotFound()
+                // }
+                // this.loaded = true
+                // this.list = data ? data:"";
+                // this.pageChange(1);
             },
+
+            // loadElementsComponent(data){
+            //     if(!data){
+            //         this.RedirectIfNotFound()
+            //     }
+            //     this.loaded = true
+            //     this.list = data ? data:"";
+            //     this.pageChange(1);
+            // },
+
             GoToleeds(){
                 this.$router.push({name: 'Leeds', params: {search: this.list.name, brand: this.list.brandId}})
             },
@@ -84,8 +100,8 @@
             }
         },
 
-        created() {
-            this.loadElements();
-        }
+        // created() {
+        //     this.loadElements();
+        // }
     }
 </script>

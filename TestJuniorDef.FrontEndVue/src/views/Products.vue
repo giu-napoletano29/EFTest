@@ -75,7 +75,7 @@
         data(){
             return{
                 name: 'Prodotti',
-                list: {},
+                // list: {},
                 listbrands: [],
                 maxVisibleButtons: 7,
                 page: 1,
