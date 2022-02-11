@@ -53,6 +53,7 @@
 <script>
     import MainPagesUtils from '@/utilities/MainPagesUtils.js' 
     import BrandsProductsUtils from '@/utilities/BrandsProductsUtils.js'
+    import ProductsLeedsUtils from '@/utilities/ProductsLeedsUtils.js' 
     import Header from '@/components/Header.vue'
     import Products from '@/components/Products.vue'
     import Table from '@/components/Table.vue'
@@ -61,10 +62,9 @@
     import RedirectModal from '@/components/RedirectModal.vue'
     import {Factory} from './../wrappers/Factory'
     const ProductsRepo = Factory.get('products')
-    const BrandsRepo = Factory.get('brands')
 
     export default {
-        mixins: [MainPagesUtils, BrandsProductsUtils],
+        mixins: [MainPagesUtils, BrandsProductsUtils, ProductsLeedsUtils],
         
         components: {
             Products,
@@ -78,7 +78,6 @@
         data(){
             return{
                 name: 'Prodotti',
-                listbrands: [],
                 nrow: 7,
                 orderbrand: false,
                 ordername: false,
@@ -93,10 +92,6 @@
                 const {data} = await ProductsRepo.getallpagedsized(this.pageSize, this.page, this.params)
                 this.loaded = true
                 this.list = data;
-            },
-            async loadBrands(){
-                const {data} = await BrandsRepo.get()
-                this.listbrands = data;
             },
 
             Delete(){
@@ -115,15 +110,6 @@
 
             OpenEdit(id){
                 this.$router.push('/products/edit/' + id)
-            },
-
-            BrandFilter(filter){
-                if(/^\d+$/.test(filter)){
-                    this.params.brand = filter
-                }else{
-                    delete this.params.brand
-                }
-                this.loadElements();
             },
 
             ResetOrder(){

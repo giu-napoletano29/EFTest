@@ -11,6 +11,12 @@ export default{
         }
     },
 
+    computed:{
+        totalpages(){
+            return Math.ceil(this.list.totalElements/this.list.pageSize)
+        }
+    },
+
     methods:{
         pageChange(page) {
             this.page = page

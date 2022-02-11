@@ -23,15 +23,15 @@
 
 <script>
     import MainPagesUtils from '@/utilities/MainPagesUtils.js' 
+    import ProductsLeedsUtils from '@/utilities/ProductsLeedsUtils.js' 
     import Header from '@/components/Header.vue'
     import Leeds from '@/components/Leeds.vue'
     import Pagination from '@/components/Pagination.vue'
     import {Factory} from './../wrappers/Factory'
     const LeedsRepo = Factory.get('leeds')
-    const BrandsRepo = Factory.get('brands')
 
     export default {
-        mixins: [MainPagesUtils],
+        mixins: [MainPagesUtils, ProductsLeedsUtils],
         
         components: {
             Leeds,
@@ -42,51 +42,21 @@
         data(){
             return{
                 name: 'Richieste info',
-                // list: {},
-                listbrands: [],
-                // maxVisibleButtons: 7,
-                // page: 1,
-                // pageSize: 10,
-                // loaded: false,
-                // error: false,
-                // params: {},
                 orderDesc: false,
             }
         },
 
-        computed:{
-            totalpages(){
-                return Math.ceil(this.list.totalElements/this.list.pageSize)
-            }
-        },
-
         methods: {
-            // pageChange(page) {
-            //     this.page = page
-            //     this.loadElements();
-            // },
-
             async loadElements(){
                 const {data} = await LeedsRepo.getallpagedsized(this.pageSize, this.page, this.params)
                 this.loaded = true
                 this.list = data
             },
-            async loadBrands(){
-                const {data} = await BrandsRepo.get()
-                this.listbrands = data;
-            },
-            
+
             OpenDetail(val){
                 this.$router.push('/leeds/'+val)
             },
-            BrandFilter(filter){
-                if(/^\d+$/.test(filter)){
-                    this.params.brand = filter
-                }else{
-                    delete this.params.brand
-                }
-                this.loadElements();
-            },
+
             Search(filter){
                 if(filter){
                     this.params.search = filter
