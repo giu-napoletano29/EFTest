@@ -40,7 +40,7 @@ export default {
         loaded: Boolean,
         error: Boolean,
         EditMode: Boolean,
-        productbyid: Object,
+        elementbyid: Object,
     },
 
     data(){
@@ -77,12 +77,12 @@ export default {
             return { CategoryId: item,}
         },
         AssingOldValue(){
-            this.product.BrandId = this.productbyid.brandId
-            this.product.Name = this.productbyid.name
-            this.product.ShortDescription = this.productbyid.shortDescription
-            this.product.Price = this.productbyid.price
-            this.product.Description = this.productbyid.description
-            this.product.ProductCategory = this.productbyid.categories.map(a => this.getCatObj(a.id))
+            this.product.BrandId = this.elementbyid.brandId
+            this.product.Name = this.elementbyid.name
+            this.product.ShortDescription = this.elementbyid.shortDescription
+            this.product.Price = this.elementbyid.price
+            this.product.Description = this.elementbyid.description
+            this.product.ProductCategory = this.elementbyid.categories.map(a => this.getCatObj(a.id))
         }
     },
 }

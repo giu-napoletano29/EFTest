@@ -20,7 +20,7 @@
 </template>
 
 <script>
-    import utils from '@/utilities/utils.js' 
+    import DetailPagesUtils from '@/utilities/DetailPagesUtils.js' 
     import Header from '@/components/Header.vue'
     import ProductDetail from '@/components/ProductDetail.vue'
     import Pagination from '@/components/Pagination.vue'
@@ -29,7 +29,7 @@
 
     export default {
         
-        mixins: [utils],
+        mixins: [DetailPagesUtils],
 
         components: {
             Header,

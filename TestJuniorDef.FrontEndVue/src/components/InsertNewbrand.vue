@@ -25,7 +25,7 @@ export default {
 
     props: {
         EditMode: Boolean,
-        brandbyid: Object,
+        elementbyid: Object,
         loaded: Boolean,
     },
 
@@ -64,10 +64,10 @@ export default {
             this.$emit('addprod');
         },
         AssingOldValue(){
-            this.brand.BrandName = this.brandbyid.brandName;
-            this.brand.Description = this.brandbyid.description;
-            this.brand.Account.Email = this.brandbyid.email;
-            this.brand.Account.Password =this.brandbyid.password;
+            this.brand.BrandName = this.elementbyid.brandName;
+            this.brand.Description = this.elementbyid.description;
+            this.brand.Account.Email = this.elementbyid.email;
+            this.brand.Account.Password =this.elementbyid.password;
         }
     },
 }

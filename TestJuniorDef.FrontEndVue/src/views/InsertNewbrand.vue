@@ -14,7 +14,7 @@
                     :brands="brands"
                     :loaded="loaded"
                     :error="error"
-                    :brandbyid="brandbyid"
+                    :elementbyid="elementbyid"
                     :EditMode="EditMode"
                     @input="(newbrand) => {brand = newbrand}"
                     @addprod="addProd"
@@ -39,16 +39,17 @@
 </template>
 
 <script>
+    import InsertPageUtils from '@/utilities/InsertPageUtils.js' 
     import Header from '@/components/Header.vue'
     import InsertNewbrand from '@/components/InsertNewbrand.vue'
     import InsertNewProduct from '@/components/InsertNewProduct.vue'
     import {Factory} from './../wrappers/Factory'
-    const CategoriesRepo = Factory.get('categories')
     const BrandsRepo = Factory.get('brands')
     const Comp = InsertNewProduct
 
     export default {
-        
+        mixins: [InsertPageUtils],
+
         components: {
             InsertNewbrand,
             Header,
@@ -58,14 +59,6 @@
             return{
                 name: 'Nuovo Brand',
                 newcomponents: [],
-                list: [],
-                brands: [],
-                brandbyid: {},
-                loaded: false,
-                error: false,
-                errors: [],
-                brandid: this.$route.params.id,
-                EditMode: false,
                 ButtonText: "Aggiungi",
 
                 brand:{ 
@@ -84,22 +77,10 @@
         },
 
         methods: {
-            async loadElements(){
-                const {data} = await CategoriesRepo.get()
-                this.loaded = true
-                this.list = data;
-            },
-
-            async loadBrands(){
-                const {data} = await BrandsRepo.get()
-                this.loaded = true
-                this.brands = data;
-            },
-
             async loadBrandById(){
                 const {data} = await BrandsRepo.getById(this.$route.params.id)
                 this.loaded = true
-                this.brandbyid = data;
+                this.elementbyid = data;
             },
 
             RedirectSuccess(){
@@ -111,22 +92,15 @@
             },
 
             InsertBrand(){
-                let self = this;
                 var resp = null
-                if(!this.EditMode){  //change to EditMode check
+                if(!this.EditMode){ 
                     this.brand.Products = this.product
                     resp = BrandsRepo.create(this.brand)
                 }else{
                     delete this.brand.Products
-                    resp = BrandsRepo.update(this.brandid, this.brand)
+                    resp = BrandsRepo.update(this.elemid, this.brand)
                 }
-                resp.then(function (response) {
-                        if(response.status >= 200 && response.status <= 208){
-                            self.RedirectSuccess()
-                        }else{
-                            self.RedirectError()
-                        }
-                    });
+                this.ResponseHandler(resp)
             },
 
             addProd () {  
@@ -178,7 +152,7 @@
         },
 
         created() {
-            if(!this.brandid){
+            if(!this.elemid){
                 this.loadElements();
                 this.loadBrands();              
             }

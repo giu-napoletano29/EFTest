@@ -14,7 +14,7 @@
                     :brands="brands"
                     :loaded="loaded"
                     :error="error"
-                    :productbyid="productbyid"
+                    :elementbyid="elementbyid"
                     :EditMode="EditMode"
                     
                     @input="(newprod) => {product = newprod}"
@@ -28,15 +28,15 @@
 </template>
 
 <script>
+    import InsertPageUtils from '@/utilities/InsertPageUtils.js' 
     import Header from '@/components/Header.vue'
     import InsertNewProduct from '@/components/InsertNewProduct.vue'
     import {Factory} from './../wrappers/Factory'
-    const CategoriesRepo = Factory.get('categories')
-    const BrandsRepo = Factory.get('brands')
     const ProductRepo = Factory.get('products')
 
     export default {
-        
+        mixins: [InsertPageUtils],
+
         components: {
             InsertNewProduct,
             Header,
@@ -45,14 +45,6 @@
         data(){
             return{
                 name: 'Nuovo prodotto',
-                list: [],
-                brands: [],
-                loaded: false,
-                error: false,
-                errors: [],
-                productbyid: {},
-                prodid: this.$route.params.id,
-                EditMode: false,
 
                 product:{ 
                     BrandId: "Seleziona brand",
@@ -66,22 +58,10 @@
         },
 
         methods: {
-            async loadElements(){
-                const {data} = await CategoriesRepo.get()
-                this.loaded = true
-                this.list = data;
-            },
-
-            async loadBrands(){
-                const {data} = await BrandsRepo.get()
-                this.loaded = true
-                this.brands = data;
-            },
-
             async loadProductById(){
                 const {data} = await ProductRepo.getById(this.$route.params.id)
                 this.loaded = true
-                this.productbyid = data;
+                this.elementbyid = data;
             },
 
             RedirectSuccess(){
@@ -93,22 +73,13 @@
             },
 
             InsertProduct(){
-                let self = this;
                 var resp = null
-                if(!this.prodid){
+                if(!this.EditMode){
                     resp = ProductRepo.create(this.product)
                 }else{
-                    resp = ProductRepo.update(this.prodid, this.product)
+                    resp = ProductRepo.update(this.elemid, this.product)
                 }
-
-                resp.then(function (response) {
-                        if(response.status >= 200 && response.status <= 208){
-                            self.RedirectSuccess()
-                        }else{
-                            self.RedirectError()
-                        }
-                    });
-                
+                this.ResponseHandler(resp)
             },
 
             checkForm: function (e) {
@@ -139,12 +110,12 @@
         },
 
         created() {
-            if(this.prodid){
+            if(this.elemid){
                 this.loadProductById();
                 this.EditMode = true
                 this.ButtonText = "Modifica"
                 this.name= 'Modifica Prodotto'
-            } 
+            }
             this.loadElements();
             this.loadBrands();
         }
