@@ -113,7 +113,7 @@
             InsertBrand(){
                 let self = this;
                 var resp = null
-                if(!this.brandid){  //change to EditMode check
+                if(!this.EditMode){  //change to EditMode check
                     this.brand.Products = this.product
                     resp = BrandsRepo.create(this.brand)
                 }else{

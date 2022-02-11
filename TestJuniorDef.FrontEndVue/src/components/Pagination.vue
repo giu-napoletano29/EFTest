@@ -5,13 +5,13 @@
                 <li class="page-item" :class="{ disabled: IsFirstPage }">
                     <a class="page-link" href="#" @click="changePage(prevPage)">Indietro</a>
                 </li>
-                <li class="page-item">
+                <li class="page-item" :class="{ disabled: IsFirstPage }">
                     <a class="page-link" href="#" @click="changePage(1)">Prima pagina</a>
                 </li>
                 <li v-for="i in pages" :key="i.num" class="page-item" :class="{ active: IsCurrentPage(i), disabled: i.isDisabled }"> 
                     <a class="page-link" href="#" @click="changePage(i.num)">{{i.num}}</a>
                 </li>
-                <li class="page-item">
+                <li class="page-item" :class="{ disabled: IsLastPage }">
                     <a class="page-link" href="#" @click="changePage(computedTotalPages)">Ultima pagina</a>
                 </li>
                 <li class="page-item" :class="{ disabled: IsLastPage }">
