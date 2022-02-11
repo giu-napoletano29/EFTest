@@ -19,6 +19,7 @@
 </template>
 
 <script>
+    import utils from '@/utilities/utils.js' 
     import Header from '@/components/Header.vue'
     import LeedDetail from '@/components/LeedDetail.vue'
     import Pagination from '@/components/Pagination.vue'
@@ -26,6 +27,8 @@
     const LeedsRepo = Factory.get('leeds')
 
     export default {
+
+        mixins: [utils],
         
         components: {
             Header,
@@ -54,10 +57,17 @@
             },
             async loadElements(){
                 const {data} = await LeedsRepo.getById(this.$route.params.id)
+                if(!data){
+                    this.RedirectIfNotFound()
+                }
                 this.loaded = true
                 this.list = data;
                 this.pageChange(1);
             },
+
+            // RedirectIfNotFound(){
+            //     this.$router.push({name: 'NotFound', params: { 0: "" } })     
+            // },
         },
 
         computed:{

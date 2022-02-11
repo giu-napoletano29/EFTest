@@ -20,6 +20,7 @@
 </template>
 
 <script>
+    import utils from '@/utilities/utils.js' 
     import Header from '@/components/Header.vue'
     import ProductDetail from '@/components/ProductDetail.vue'
     import Pagination from '@/components/Pagination.vue'
@@ -28,6 +29,8 @@
 
     export default {
         
+        mixins: [utils],
+
         components: {
             Header,
             ProductDetail,
@@ -55,22 +58,10 @@
             },
             
             async loadElements(){
-                let self = this
                 const {data} = await ProductsRepo.getById(this.$route.params.id)
-                .then(function (response) {
-                        if(response.status == 204){
-                            self.RedirectIfNotFound()
-                            return response
-                        }else{
-                            return response
-                        }
-                    })
-                .catch(function (error) {
-                        if(error.response.status == 400){
-                            self.RedirectIfNotFound()
-                            return error.response
-                        }
-                    });
+                if(!data){
+                    this.RedirectIfNotFound()
+                }
                 this.loaded = true
                 this.list = data ? data:"";
                 this.pageChange(1);
@@ -79,9 +70,9 @@
                 this.$router.push({name: 'Leeds', params: {search: this.list.name, brand: this.list.brandId}})
             },
 
-            RedirectIfNotFound(){
-                this.$router.push({name: 'NotFound', params: { 0: "" } })     
-            }
+            // RedirectIfNotFound(){
+            //     this.$router.push({name: 'NotFound', params: { 0: "" } })     
+            // }
         },
 
         computed:{
