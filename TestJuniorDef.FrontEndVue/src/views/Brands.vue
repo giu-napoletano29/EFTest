@@ -46,6 +46,8 @@
 </template>
 
 <script>
+    import MainPagesUtils from '@/utilities/MainPagesUtils.js' 
+    import BrandsProductsUtils from '@/utilities/BrandsProductsUtils.js'
     import Header from '@/components/Header.vue'
     import Brands from '@/components/Brands.vue'
     import Table from '@/components/Table.vue'
@@ -56,6 +58,7 @@
     const BrandsRepo = Factory.get('brands')
 
     export default {
+        mixins: [MainPagesUtils, BrandsProductsUtils],
         
         components: {
             Brands,
@@ -69,46 +72,18 @@
         data(){
             return{
                 name: 'Brand',
-                page: 1,
-                maxVisibleButtons: 7,
-                pageSize: 10,
                 nrow: 6,
-                list: {},
-                loaded: false,
-                error: false,
-                open: false,
-                idEl: 0,
-                params: {},
                 response: "",
-                successModalOpen: false,
-                OpError: false,
-            }
-        },
-
-        computed:{
-            totalpages(){
-                return Math.ceil(this.list.totalElements/this.list.pageSize)
             }
         },
 
         methods: {
-            pageChange(page) {
-                this.page = page
-                this.loadElements();
-            },
             async loadElements(){
                 const {data} = await BrandsRepo.getallpagedsized(this.pageSize, this.page, this.params)
                 this.loaded = true
                 this.list = data;
             },
-            OpenModal(id){
-                this.idEl = id
-                this.open = true
-            },
-            CloseModal(){
-                this.open = false
-                this.successModalOpen = false
-            },
+
             OpenDetail(val){
                 this.$router.push('/brands/'+val)
             },
@@ -117,19 +92,9 @@
             },
             
             Delete(){
-                let self = this;
                 const data = BrandsRepo.delete(this.idEl)
                 this.open = false
-                data.then(function (response) {
-                    if(response.status >= 200 && response.status <= 208){
-                            self.OpError = false
-                            self.successModalOpen = true
-                    }else{
-                            self.OpError = true
-                            self.successModalOpen = true
-                    }
-                    self.loadElements();
-                });
+                this.DeleteSpecComponent(data)
             },
 
             Search(filter){

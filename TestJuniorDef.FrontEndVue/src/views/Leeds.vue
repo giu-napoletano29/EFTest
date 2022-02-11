@@ -22,6 +22,7 @@
 </template>
 
 <script>
+    import MainPagesUtils from '@/utilities/MainPagesUtils.js' 
     import Header from '@/components/Header.vue'
     import Leeds from '@/components/Leeds.vue'
     import Pagination from '@/components/Pagination.vue'
@@ -30,6 +31,7 @@
     const BrandsRepo = Factory.get('brands')
 
     export default {
+        mixins: [MainPagesUtils],
         
         components: {
             Leeds,
@@ -40,14 +42,14 @@
         data(){
             return{
                 name: 'Richieste info',
-                list: {},
+                // list: {},
                 listbrands: [],
-                maxVisibleButtons: 7,
-                page: 1,
-                pageSize: 10,
-                loaded: false,
-                error: false,
-                params: {},
+                // maxVisibleButtons: 7,
+                // page: 1,
+                // pageSize: 10,
+                // loaded: false,
+                // error: false,
+                // params: {},
                 orderDesc: false,
             }
         },
@@ -59,10 +61,10 @@
         },
 
         methods: {
-            pageChange(page) {
-                this.page = page
-                this.loadElements();
-            },
+            // pageChange(page) {
+            //     this.page = page
+            //     this.loadElements();
+            // },
 
             async loadElements(){
                 const {data} = await LeedsRepo.getallpagedsized(this.pageSize, this.page, this.params)
@@ -73,12 +75,7 @@
                 const {data} = await BrandsRepo.get()
                 this.listbrands = data;
             },
-            OpenModal(){
-                this.open = true
-            },
-            CloseModal(){
-                this.open = false
-            },
+            
             OpenDetail(val){
                 this.$router.push('/leeds/'+val)
             },

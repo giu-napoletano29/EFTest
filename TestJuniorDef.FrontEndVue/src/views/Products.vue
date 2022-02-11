@@ -51,6 +51,8 @@
 </template>
 
 <script>
+    import MainPagesUtils from '@/utilities/MainPagesUtils.js' 
+    import BrandsProductsUtils from '@/utilities/BrandsProductsUtils.js'
     import Header from '@/components/Header.vue'
     import Products from '@/components/Products.vue'
     import Table from '@/components/Table.vue'
@@ -62,6 +64,7 @@
     const BrandsRepo = Factory.get('brands')
 
     export default {
+        mixins: [MainPagesUtils, BrandsProductsUtils],
         
         components: {
             Products,
@@ -75,37 +78,16 @@
         data(){
             return{
                 name: 'Prodotti',
-                list: {},
                 listbrands: [],
-                maxVisibleButtons: 7,
-                page: 1,
-                pageSize: 10,
                 nrow: 7,
-                loaded: false,
-                error: false,
-                params: {},
                 orderbrand: false,
                 ordername: false,
                 orderprice: false,
                 desc: false,
-                idEl: 0,
-                open: false,
-                successModalOpen: false,
-                OpError: false,
-            }
-        },
-
-        computed:{
-            totalpages(){
-                return Math.ceil(this.list.totalElements/this.list.pageSize)
             }
         },
 
         methods: {
-            pageChange(page) {
-                this.page = page
-                this.loadElements();
-            },
             async loadElements(){
                 this.loaded = false
                 const {data} = await ProductsRepo.getallpagedsized(this.pageSize, this.page, this.params)
@@ -118,29 +100,9 @@
             },
 
             Delete(){
-                let self = this;
                 const data = ProductsRepo.delete(this.idEl)
                 this.open = false
-                data.then(function (response) {
-                        if(response.status >= 200 && response.status <= 208){
-                            self.OpError = false
-                            self.successModalOpen = true
-                        }else{
-                            self.OpError = true
-                            self.successModalOpen = true
-                        }
-                        self.loadElements();
-                    });
-            },
-
-            OpenModal(id){
-                this.idEl = id
-                this.open = true
-            },
-
-            CloseModal(){
-                this.open = false
-                this.successModalOpen = false //To close success modal
+                this.DeleteSpecComponent(data)
             },
 
             OpenNewProduct(){
@@ -178,21 +140,18 @@
                 this.orderbrand = true
                 this.params.orderbyBrand = this.orderbrand
                 this.OrderByDesc()
-                //this.loadElements();
             },
             OrderByName(){
                 this.ResetOrder()
                 this.ordername = true
                 this.params.orderbyName = this.ordername
                 this.OrderByDesc()
-                //this.loadElements();
             },
             OrderByPrice(){
                 this.ResetOrder()
                 this.orderprice = true
                 this.params.orderbyPrice = this.orderprice
                 this.OrderByDesc()
-                //this.loadElements();
             },
             OrderByDesc(){
                 this.desc = !this.desc
