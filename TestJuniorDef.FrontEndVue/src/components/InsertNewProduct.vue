@@ -13,7 +13,7 @@
             <div class="col">
                 <div class="input-group"> 
                     <span class="input-group-text">€</span>
-                    <input type="number" class="form-control currency" placeholder="Prezzo" aria-label="price" min="0" step="0.10" data-number-to-fixed="2" data-number-stepfactor="100" v-model="product.Price" required/>
+                    <input type="number" class="form-control currency" placeholder="Prezzo" aria-label="price" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" v-model="product.Price" required/>
                 </div>
             </div>
         </div>

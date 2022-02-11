@@ -159,21 +159,21 @@
                 this.orderbrand = true
                 this.params.orderbyBrand = this.orderbrand
                 this.OrderByDesc()
-                this.loadElements();
+                //this.loadElements();
             },
             OrderByName(){
                 this.ResetOrder()
                 this.ordername = true
                 this.params.orderbyName = this.ordername
                 this.OrderByDesc()
-                this.loadElements();
+                //this.loadElements();
             },
             OrderByPrice(){
                 this.ResetOrder()
                 this.orderprice = true
                 this.params.orderbyPrice = this.orderprice
                 this.OrderByDesc()
-                this.loadElements();
+                //this.loadElements();
             },
             OrderByDesc(){
                 this.desc = !this.desc
