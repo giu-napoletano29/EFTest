@@ -120,9 +120,19 @@
             },
 
             Delete(){
-                const {data} = ProductsRepo.delete(this.idEl)
+                let self = this;
+                const data = ProductsRepo.delete(this.idEl)
                 this.open = false
-                this.response = data
+                data.then(function (response) {
+                        if(response.status >= 200 && response.status <= 208){
+                            self.OpError = false
+                            self.successModalOpen = true
+                        }else{
+                            self.OpError = true
+                            self.successModalOpen = true
+                        }
+                        self.loadElements();
+                    });
             },
 
             OpenModal(id){
@@ -132,7 +142,7 @@
 
             CloseModal(){
                 this.open = false
-                this.success = false //To close success modal
+                this.successModalOpen = false //To close success modal
             },
 
             OpenNewProduct(){

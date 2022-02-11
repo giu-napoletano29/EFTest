@@ -109,6 +109,7 @@
             },
             CloseModal(){
                 this.open = false
+                this.successModalOpen = false
             },
             OpenDetail(val){
                 this.$router.push('/brands/'+val)
@@ -116,11 +117,23 @@
             OpenNewBrand(){
                 this.$router.push('/brands/new')
             },
+            
             Delete(){
-                const {data} = BrandsRepo.delete(this.idEl)
+                let self = this;
+                const data = BrandsRepo.delete(this.idEl)
                 this.open = false
-                this.response = data
+                data.then(function (response) {
+                    if(response.status >= 200 && response.status <= 208){
+                            self.OpError = false
+                            self.successModalOpen = true
+                    }else{
+                            self.OpError = true
+                            self.successModalOpen = true
+                    }
+                    self.loadElements();
+                });
             },
+
             Search(filter){
                 if(filter){
                     this.params.search = filter
@@ -142,8 +155,8 @@
             if(this.$route.name==='BrandsSuccess'){
                 this.successModalOpen = true
             }else if(this.$route.name==='BrandsError'){
-                this.successModalOpen = true
                 this.OpError = true
+                this.successModalOpen = true
             }
         }
     }
