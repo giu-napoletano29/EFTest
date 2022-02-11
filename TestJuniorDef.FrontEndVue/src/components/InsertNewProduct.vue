@@ -5,7 +5,7 @@
         </div>
         <div class="row">
             <div class="col-10">
-                <select class="form-select mb-3" aria-label="Default select example" v-model="product.BrandId" required>
+                <select class="form-select mb-3" aria-label="Default select example" v-model="product.BrandId" :disabled="disabledbrand" :required="!disabledbrand">
                     <option value="">Seleziona brand</option>
                     <option v-for="(l,i) in brands" :key="i" :value="l.id">{{l.brandName}}</option>
                 </select>
@@ -41,12 +41,13 @@ export default {
         error: Boolean,
         EditMode: Boolean,
         elementbyid: Object,
+        disabledbrand: Boolean,
     },
 
     data(){
         return{
             product:{ 
-                BrandId: "",
+                BrandId: this.disabledbrand ? 0:"",
                 Name: "",
                 ShortDescription: "",
                 Price: 0,

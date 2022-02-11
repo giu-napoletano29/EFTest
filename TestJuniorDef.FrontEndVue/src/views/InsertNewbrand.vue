@@ -25,6 +25,7 @@
                     :is="component"
 
                     :list="list"
+                    :disabledbrand="true"
                     :brands="brands"
                     :loaded="loaded"
                     :error="error"

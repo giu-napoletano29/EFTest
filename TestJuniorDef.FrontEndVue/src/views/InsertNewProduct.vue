@@ -11,6 +11,7 @@
                 </p>
                 <InsertNewProduct
                     :list="list"
+                    :disabledbrand="false"
                     :brands="brands"
                     :loaded="loaded"
                     :error="error"
