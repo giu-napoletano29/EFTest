@@ -1,7 +1,7 @@
 <template>
 	<!-- <div v-show="!loaded && !error">  -->
 
-	<tbody v-show="!loaded && !error" cellpadding="0" cellspacing="0" width="100%" class="w3samples_table_loader">
+	<tbody v-show="!loaded && !error" cellpadding="0" cellspacing="0" width="100%" class="table_loader">
 		<tr v-for="index in this.nrow" :key="index">
 			<td>
 				<span></span>
@@ -39,26 +39,26 @@
 
 <style>
 
-.w3samples_table_loader {
+.table_loader {
     background-color: #FFF;
     color: #666;
     width: 100%;
     padding: 0;
 }
-.w3samples_table_loader th{
+.table_loader th{
     background: #F7F9FA;
     border-top: 1px solid #E5E5E5;
     border-bottom: 1px solid #E5E5E5;
     padding: 12px 10px;
 	text-align: left;
 }
-.w3samples_table_loader td{
+.table_loader td{
     border-top: 0px solid #E5E5E5;
     border-bottom: 1px solid #E5E5E5;
     padding: 12px 10px;
     vertical-align: top;
 }
-.w3samples_table_loader span{
+.table_loader span{
 width: calc(100% - 5px);
     height: 15px;
     border-radius: 3px;
@@ -68,11 +68,11 @@ width: calc(100% - 5px);
     display: inline-block;
     min-width:15px;
 }
-.w3samples_table_loader span.sub-temp{
+.table_loader span.sub-temp{
 	width: calc(100% - 50%);
 	margin-top: 5px;
 }
-.w3samples_table_loader span.sub-temp-three{
+.table_loader span.sub-temp-three{
 	width:calc(100% - 70%);
 	display:block
 }

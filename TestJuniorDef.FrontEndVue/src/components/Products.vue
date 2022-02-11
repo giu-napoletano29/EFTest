@@ -5,7 +5,7 @@
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th scope="col" class="col-3" @click="OrderByBrand()" > Brand 
+                            <th scope="col" class="col-2 v-align" @click="OrderByBrand()" > Brand 
                                 <div class="btn btn-sm">
                                     <div v-show="!this.orderbrand">
                                         <i class="fa fa-fw fa-sort"></i>
@@ -16,7 +16,7 @@
                                     </div>
                                 </div>
                             </th>
-                            <th scope="col" class="col-3" @click="OrderByName()"> Prodotto 
+                            <th scope="col" class="col-4 v-align" @click="OrderByName()"> Prodotto 
                                 <div class="btn btn-sm">
                                     <div v-show="!this.ordername">
                                         <i class="fa fa-fw fa-sort"></i>
@@ -27,8 +27,8 @@
                                     </div>
                                 </div>
                             </th>
-                            <th scope="col" class="col-4 v-align"> Categorie </th>
-                            <th scope="col" class="col-1" @click="OrderByPrice()"> Prezzo 
+                            <th scope="col" class="col-3 v-align"> Categorie </th>
+                            <th scope="col" class="col-2 v-align" @click="OrderByPrice()">Prezzo
                                 <div class="btn btn-sm">
                                     <div v-show="!this.orderprice">
                                         <i class="fa fa-fw fa-sort"></i>
@@ -55,7 +55,7 @@
                     <tbody v-if="loaded">
                         <tr v-for="(l,i) in list.elements" :key="i" v-on:click="openDetail(list.elements[i])"> 
                             <td>{{ l.brandName }}</td> 
-                            <td>{{ l.productName }}</td>
+                            <td><b>{{ l.productName }}</b> {{l.description}}</td>
                             <td>
                                 <span v-for="(cat,y) in l.categories" :key="y" class="badge bg-primary">{{ cat.categoryName }}</span>
                             </td>

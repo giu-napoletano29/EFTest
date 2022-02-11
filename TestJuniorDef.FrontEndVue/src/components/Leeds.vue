@@ -7,7 +7,7 @@
                         <thead>
                             <tr>
                                 <th scope="col" class="col-1 v-align"> Id </th>
-                                <th scope="col" class="col-1"> Data <button type="button" class="btn btn-sm" @click="OrderBy()"><i class="fa fa-fw fa-sort"></i></button></th>
+                                <th scope="col" class="col-1 v-align"> Data <button type="button" class="btn btn-sm" @click="OrderBy()"><i class="fa fa-fw fa-sort"></i></button></th>
                                 <th scope="col" class="col-2 v-align"> Nome </th>
                                 <th scope="col" class="col-2 v-align"> Cognome </th>
                                 <th scope="col" class="col-3 v-align"> Prodotto </th>

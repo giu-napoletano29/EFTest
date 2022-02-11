@@ -2,9 +2,9 @@
     <div>
         <div class="row mb-5">
             <h5 class="mb-3">Categorie associate al Prodotto</h5>
-            <div class="row">
+            <div class="row border">
                 <div v-for="(l,i) in list.categories" :key="i"  class="col-sm-4">
-                    <div class="card">
+                    <div class="card border-0">
                         <div class="card-body">
                             {{ l.categoryName }}
                         </div>

@@ -67,7 +67,7 @@
 
         computed:{
             name(){
-                return this.list.brandName
+                return this.list.name + " by " + this.list.brandName
             },
             totalpages(){
                 return Math.ceil(this.list.infoRequest?.length/this.pageSize)
