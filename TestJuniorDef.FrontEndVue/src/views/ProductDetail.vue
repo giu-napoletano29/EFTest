@@ -51,18 +51,37 @@
                 this.page = page
                 var skip = (this.page - 1 ) * this.pageSize
                 var take = skip + this.pageSize
-                this.listpaginated = this.list.infoRequest.slice(skip, take)
+                this.listpaginated = this.list.infoRequest ? this.list.infoRequest.slice(skip, take):[]
             },
             
             async loadElements(){
+                let self = this
                 const {data} = await ProductsRepo.getById(this.$route.params.id)
+                .then(function (response) {
+                        if(response.status == 204){
+                            self.RedirectIfNotFound()
+                            return response
+                        }else{
+                            return response
+                        }
+                    })
+                .catch(function (error) {
+                        if(error.response.status == 400){
+                            self.RedirectIfNotFound()
+                            return error.response
+                        }
+                    });
                 this.loaded = true
-                this.list = data;
+                this.list = data ? data:"";
                 this.pageChange(1);
             },
             GoToleeds(){
                 this.$router.push({name: 'Leeds', params: {search: this.list.name, brand: this.list.brandId}})
             },
+
+            RedirectIfNotFound(){
+                this.$router.push({name: 'NotFound', params: { 0: "" } })     
+            }
         },
 
         computed:{
