@@ -84,15 +84,15 @@ namespace TestJuniorDef.Services
 
             if (orderbyBrand)
             {
-                repo = desc ? repo.OrderBy(x => x.Brand.BrandName):repo.OrderByDescending(x => x.Brand.BrandName);
+                repo = desc ? repo.OrderByDescending(x => x.Brand.BrandName):repo.OrderBy(x => x.Brand.BrandName);
             }
             if (orderbyName)
             {
-                repo = desc ? repo.OrderBy(x => x.Name):repo.OrderByDescending(x => x.Name);
+                repo = desc ? repo.OrderByDescending(x => x.Name):repo.OrderBy(x => x.Name);
             }
             if (orderbyPrice)
             {
-                repo = desc ? repo.OrderBy(x => x.Price):repo.OrderByDescending(x => x.Price);
+                repo = desc ? repo.OrderByDescending(x => x.Price):repo.OrderBy(x => x.Price);
             }
 
             var pagination = Service.PaginateEntity<Product>(repo, size, page);

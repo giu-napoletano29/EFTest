@@ -15,8 +15,14 @@
                                             <i class="fa fa-fw fa-sort"></i>
                                         </div>                              
                                         <div v-show="this.orderbrand">
-                                            <i v-show="!this.desc" class="fa fa-fw fa-sort-asc"></i>
-                                            <i v-show="this.desc" class="fa fa-fw fa-sort-desc"></i>
+                                            <div v-show="!this.desc">
+                                                <i class="fa fa-fw fa-sort-asc icon-stack"></i>
+                                                <i class="fa fa-fw fa-sort-desc"></i>
+                                            </div>
+                                            <div v-show="this.desc">
+                                                <i class="fa fa-fw fa-sort-desc icon-stack"></i>
+                                                <i class="fa fa-fw fa-sort-asc"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -31,8 +37,14 @@
                                             <i class="fa fa-fw fa-sort"></i>
                                         </div>                              
                                         <div v-show="this.ordername">
-                                            <i v-show="!this.desc" class="fa fa-fw fa-sort-asc"></i>
-                                            <i v-show="this.desc" class="fa fa-fw fa-sort-desc"></i>
+                                            <div v-show="!this.desc">
+                                                <i class="fa fa-fw fa-sort-asc icon-stack"></i>
+                                                <i class="fa fa-fw fa-sort-desc"></i>
+                                            </div>
+                                            <div v-show="this.desc">
+                                                <i class="fa fa-fw fa-sort-desc icon-stack"></i>
+                                                <i class="fa fa-fw fa-sort-asc"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -48,8 +60,14 @@
                                             <i class="fa fa-fw fa-sort"></i>
                                         </div>                              
                                         <div v-show="this.orderprice">
-                                            <i v-show="!this.desc" class="fa fa-fw fa-sort-asc"></i>
-                                            <i v-show="this.desc" class="fa fa-fw fa-sort-desc"></i>
+                                            <div v-show="!this.desc">
+                                                <i class="fa fa-fw fa-sort-asc icon-stack"></i>
+                                                <i class="fa fa-fw fa-sort-desc"></i>
+                                            </div>
+                                            <div v-show="this.desc">
+                                                <i class="fa fa-fw fa-sort-desc icon-stack"></i>
+                                                <i class="fa fa-fw fa-sort-asc"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
