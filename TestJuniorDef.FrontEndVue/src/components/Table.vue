@@ -1,6 +1,4 @@
 <template>
-	<!-- <div v-show="!loaded && !error">  -->
-
 	<tbody v-show="!loaded && !error" cellpadding="0" cellspacing="0" width="100%" class="table_loader">
 		<tr v-for="index in this.nrow" :key="index">
 			<td>
@@ -11,13 +9,7 @@
 				<span class="sub-temp"></span>
 				<span class="sub-temp sub-temp-three"></span>			
 			</td>
-			<td>
-				<span></span>
-			</td>
-			<td>
-				<span></span>
-			</td>
-			<td>
+			<td v-for="i in ntab" :key="i">
 				<span></span>
 			</td>
 		</tr>		
@@ -30,7 +22,8 @@
         props: {
             loaded: Boolean,
             error: Boolean,
-			nrow: Number,
+            nrow: Number,
+            ntab: Number,
         },
     }
 </script>

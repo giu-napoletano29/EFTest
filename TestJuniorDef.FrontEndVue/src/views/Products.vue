@@ -28,6 +28,7 @@
                 :loaded="loaded"
                 :error="error"
                 :nrow="nrow"
+                :ntab="ntab"
             />
         </Products>
 
@@ -79,6 +80,7 @@
             return{
                 name: 'Prodotti',
                 nrow: 7,
+                ntab: 3,
                 orderbrand: false,
                 ordername: false,
                 orderprice: false,

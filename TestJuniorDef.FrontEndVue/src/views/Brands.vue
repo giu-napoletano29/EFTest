@@ -24,6 +24,7 @@
                 :loaded="loaded"
                 :error="error"
                 :nrow="nrow"
+                :ntab="ntab"
             />
         </Brands>
         <Pagination
@@ -73,6 +74,7 @@
             return{
                 name: 'Brand',
                 nrow: 6,
+                ntab: 1,
                 response: "",
             }
         },

@@ -11,7 +11,14 @@
             @brandfilter="BrandFilter"
             @search="Search"
             @orderby="Orderby"
-        />
+        >
+            <Table
+                :loaded="loaded"
+                :error="error"
+                :nrow="nrow"
+                :ntab="ntab"
+            />
+        </Leeds>
         <Pagination
             :totalPages="totalpages"
             :maxVisibleButtons="maxVisibleButtons"
@@ -27,6 +34,7 @@
     import Header from '@/components/Header.vue'
     import Leeds from '@/components/Leeds.vue'
     import Pagination from '@/components/Pagination.vue'
+    import Table from '@/components/Table.vue'
     import {Factory} from './../wrappers/Factory'
     const LeedsRepo = Factory.get('leeds')
 
@@ -36,12 +44,15 @@
         components: {
             Leeds,
             Header,
-            Pagination
+            Pagination,
+            Table
         },
 
         data(){
             return{
                 name: 'Richieste info',
+                nrow: 6,
+                ntab: 4,
                 orderDesc: false,
             }
         },
