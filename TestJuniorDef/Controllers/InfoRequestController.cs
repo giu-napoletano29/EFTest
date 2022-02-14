@@ -59,7 +59,7 @@ namespace TestJuniorDef.Controllers
 
         [HttpGet("page/{page}")]
         [HttpGet("page/{size?}/{page?}")]
-        public IActionResult GetInfoRequestPerPage(int size = 5, int page = 1, int brand = 0, string search = "", bool orderdesc = false)
+        public IActionResult GetInfoRequestPerPage(int size = 5, int page = 1, int brand = 0, int productId = 0, string search = "", bool orderdesc = false)
         {
             if (size <= 0 || page < 1)
             {
@@ -67,7 +67,7 @@ namespace TestJuniorDef.Controllers
             }
             try
             {
-                var model = _infoRequestService.GetInfoRequestsPerPage(size, page, brand, search, orderdesc);
+                var model = _infoRequestService.GetInfoRequestsPerPage(size, page, brand, search, productId, orderdesc);
 
                 return Ok(model);
             }

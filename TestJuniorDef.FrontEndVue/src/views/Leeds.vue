@@ -60,6 +60,7 @@
         methods: {
             async loadElements(){
                 const {data} = await LeedsRepo.getallpagedsized(this.pageSize, this.page, this.params)
+                this.params = {}
                 this.loaded = true
                 this.list = data
             },
@@ -87,6 +88,7 @@
             if(this.$route.params){
                 this.params.brand = this.$route.params.brand
                 this.params.search = this.$route.params.search
+                this.params.productId = this.$route.params.productId
             }
             this.loadElements();
             this.loadBrands();

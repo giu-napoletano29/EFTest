@@ -7,7 +7,7 @@
         <p>{{ list.name }} {{ list.lastName }}, <br> {{ list.address }}</p>
         <p><b>Richiesta inviata dall'utente: </b></p>
         <p>{{ list.text }}</p>
-        <p><b>Rispsote/Commenti alla richiesta</b></p>
+        <p><b>Risposte/Commenti alla richiesta</b></p>
         <b-overlay :show="!loaded && !error" rounded="sm">
             <div style="min-height: 250px;">
                 <div v-for="(l,i) in replies" :key="i" class="card border-success mb-3" style="width: 100%;">

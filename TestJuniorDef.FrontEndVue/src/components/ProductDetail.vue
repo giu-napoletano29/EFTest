@@ -15,7 +15,7 @@
         <div class="row">
             <div style="height: 350px;">
                 <h5 class="mb-3">Leeds per prodotto</h5>
-                <p class="mb-4"><b>{{ list.totalInfoRequest }}</b> richieste informazioni ricevute per questo prodotto fra cui <b>{{list.totalInfoRequestGuest}} </b> da utenti Guest e <b>{{list.totalInfoRequestLogged}} </b> da utenti registrati</p>
+                <p class="mb-4"><b>{{ list.totalInfoRequestGuest + list.totalInfoRequestLogged }}</b> richieste informazioni ricevute per questo prodotto fra cui <b>{{list.totalInfoRequestGuest}} </b> da utenti Guest e <b>{{list.totalInfoRequestLogged}} </b> da utenti registrati</p>
                 <table class="table table-success table-striped mb-3">
                     <thead>
                         <th class="col-1 v-align"> ID </th>
@@ -28,7 +28,7 @@
                             <td>{{ p.id }}</td>
                             <td>{{ p.name }} {{ p.lastname }}</td> 
                             <td>{{ p.totalReply }}</td>
-                            <td>{{ p.dateLastReply }}</td> 
+                            <td>{{ p.dateLastReply.substring(0, 10) }}</td> 
                         </tr>
                     </tbody>
                 </table>

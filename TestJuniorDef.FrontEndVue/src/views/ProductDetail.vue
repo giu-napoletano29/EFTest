@@ -54,7 +54,8 @@
             },
 
             GoToleeds(){
-                this.$router.push({name: 'Leeds', params: {search: this.list.name, brand: this.list.brandId}})
+                // this.$router.push({name: 'Leeds', params: {search: this.list.name, brand: this.list.brandId}})
+                this.$router.push({name: 'Leeds', params: {productId: this.list.id}})
             },
         },
 
