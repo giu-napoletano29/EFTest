@@ -64,4 +64,14 @@
 .text-right {
     text-align: right !important;
 }
+
+.icon-stack {
+    position: absolute;
+    line-height: inherit;
+    opacity: 1 !important;
+}
+
+.fa{
+    opacity: 0.5;
+}
 </style>
