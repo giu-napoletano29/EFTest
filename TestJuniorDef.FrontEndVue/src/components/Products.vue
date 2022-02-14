@@ -59,7 +59,7 @@
                             <td>
                                 <span v-for="(cat,y) in l.categories" :key="y" class="badge bg-primary">{{ cat.categoryName }}</span>
                             </td>
-                            <td><i class="bi bi-currency-euro"> </i> {{ l.price.toFixed(2) }}</td>
+                            <td><i class="bi bi-currency-euro"> </i> {{ CurrencyFormat(l.price) }}</td>
                             <td>
                                 <div class="btn-group me-2">
                                     <button type="button" class="btn btn-sm btn-outline-secondary" @click.stop="EditProduct(l.id)"><i class="bi bi-pencil-square"></i></button>
@@ -98,6 +98,9 @@
         },
 
         methods:{
+            CurrencyFormat(num){
+                return num.toLocaleString("it-IT", { minimumFractionDigits: 2 });
+            },
             OpenModal(id){
                 this.$emit('openmodal', id)
             },
