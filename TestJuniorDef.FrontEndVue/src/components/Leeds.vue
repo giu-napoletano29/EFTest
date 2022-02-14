@@ -6,7 +6,7 @@
                     <thead>
                         <tr>
                             <th scope="col" class="col-1 v-align"> Id </th>
-                            <th scope="col" class="col-1 v-align"> Data <button type="button" class="btn btn-sm" @click="OrderBy()"><i class="fa fa-fw fa-sort"></i></button></th>
+                            <th scope="col" class="col-1 v-align s-pointer"> Data <button type="button" class="btn btn-sm" @click="OrderBy()"><i class="fa fa-fw fa-sort"></i></button></th>
                             <th scope="col" class="col-2 v-align"> Nome </th>
                             <th scope="col" class="col-2 v-align"> Cognome </th>
                             <th scope="col" class="col-3 v-align"> Prodotto </th>
@@ -29,7 +29,7 @@
                     </thead>
                     <slot></slot>
                     <tbody v-if="loaded">
-                        <tr v-for="(l,i) in list.elements" :key="i" v-on:click="openDetail(list.elements[i])"> 
+                        <tr class="s-pointer" v-for="(l,i) in list.elements" :key="i" v-on:click="openDetail(list.elements[i])"> 
                             <td>{{ l.id }}</td> 
                             <td>{{ l.insertDate.substring(0, 10) }} </td>
                             <td>{{ l.name }}</td>

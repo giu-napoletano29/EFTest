@@ -56,4 +56,8 @@
 .v-align {
     vertical-align: middle;
 }
+
+.s-pointer{
+    cursor: pointer;
+}
 </style>

@@ -5,7 +5,7 @@
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th scope="col" class="col-2 v-align" @click="OrderByBrand()" > Brand 
+                            <th scope="col" class="col-2 v-align s-pointer" @click="OrderByBrand()" > Brand 
                                 <div class="btn btn-sm">
                                     <div v-show="!this.orderbrand">
                                         <i class="fa fa-fw fa-sort"></i>
@@ -16,7 +16,7 @@
                                     </div>
                                 </div>
                             </th>
-                            <th scope="col" class="col-4 v-align" @click="OrderByName()"> Prodotto 
+                            <th scope="col" class="col-4 v-align s-pointer" @click="OrderByName()"> Prodotto 
                                 <div class="btn btn-sm">
                                     <div v-show="!this.ordername">
                                         <i class="fa fa-fw fa-sort"></i>
@@ -28,7 +28,7 @@
                                 </div>
                             </th>
                             <th scope="col" class="col-3 v-align"> Categorie </th>
-                            <th scope="col" class="col-2 v-align" @click="OrderByPrice()">Prezzo
+                            <th scope="col" class="col-2 v-align s-pointer" @click="OrderByPrice()">Prezzo
                                 <div class="btn btn-sm">
                                     <div v-show="!this.orderprice">
                                         <i class="fa fa-fw fa-sort"></i>
@@ -53,11 +53,11 @@
                     </thead>
                     <slot></slot>
                     <tbody v-if="loaded">
-                        <tr v-for="(l,i) in list.elements" :key="i" v-on:click="openDetail(list.elements[i])"> 
+                        <tr class="s-pointer" v-for="(l,i) in list.elements" :key="i" v-on:click="openDetail(list.elements[i])"> 
                             <td>{{ l.brandName }}</td> 
-                            <td><b>{{ l.productName }}</b> {{l.description}}</td>
+                            <td><b>{{ l.productName }}</b> <div class="text-secondary" style="display:inline;">{{l.description}}</div></td>
                             <td>
-                                <span v-for="(cat,y) in l.categories" :key="y" class="badge bg-primary">{{ cat.categoryName }}</span>
+                                <span v-for="(cat,y) in l.categories" :key="y" class="badge bg-primary" style="margin-right:2px;">{{ cat.categoryName }}</span>
                             </td>
                             <td><i class="bi bi-currency-euro"> </i> {{ CurrencyFormat(l.price) }}</td>
                             <td>

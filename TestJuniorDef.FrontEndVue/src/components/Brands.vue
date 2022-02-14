@@ -20,7 +20,7 @@
                     </thead>
                     <slot></slot>
                     <tbody v-if="loaded">
-                        <tr v-for="(l,i) in list.elements" :key="i" v-on:click="openDetail(list.elements[i])">
+                        <tr class="s-pointer" v-for="(l,i) in list.elements" :key="i" v-on:click="openDetail(list.elements[i])">
                             <td>{{ l.id }}</td> 
                             <td>{{ l.brandName }}</td>
                             <td>

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-left pt-3 pb-2 mb-3">
-            <h5 v-if="list.product" class="h5">Richiesta informazioni di {{ list.name }} {{ list.lastname }} per il prodotto {{ list.product.productName }} di {{ list.product.brandName }}</h5>
+            <h5 v-if="list.product" class="h5">Richiesta informazioni di <i>{{ list.name }} {{ list.lastname }}</i> per il prodotto <i>{{ list.product.productName }}</i> di <i>{{ list.product.brandName }}</i></h5>
         </div>
         <p><b>Dati del richiedente: </b></p>
         <p>{{ list.name }} {{ list.lastName }}, <br> {{ list.address }}</p>

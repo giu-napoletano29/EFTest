@@ -60,7 +60,7 @@ const routes = [
     component: InsertNewbrand
   },
   {
-    path: '/leeds/:id',
+    path: '/leeds/:id(\\d+)',
     name: 'LeedDetail',
     component: LeedDetail
   },
