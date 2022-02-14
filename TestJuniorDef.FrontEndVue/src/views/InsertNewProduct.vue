@@ -23,7 +23,7 @@
                     @input="(newprod) => {product = newprod}"
                 />
                 <div class="mb-3">      
-                    <button type="submit" class="btn btn-primary" :disabled="!loadedEl || !loadedBrand">Invia</button>
+                    <button type="submit" class="btn btn-primary" :disabled="ShowButton">Invia</button>
                 </div>       
             </form>
         </b-container>
@@ -43,6 +43,12 @@
         components: {
             InsertNewProduct,
             Header,
+        },
+
+        computed:{
+            ShowButton(){
+                return this.EditMode ? false:!this.loadedEl || !this.loadedBrand
+            }
         },
 
         data(){

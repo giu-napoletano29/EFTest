@@ -43,7 +43,7 @@ export default {
         brands: Array,
         loadedEl: Boolean,
         loadedBrand: Boolean,
-        loadedProduct: Boolean,
+        loadedEditElement: Boolean,
         error: Boolean,
         EditMode: Boolean,
         elementbyid: Object,

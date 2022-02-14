@@ -34,7 +34,7 @@
                     @input="(newprod) => {product[index] = newprod}"
                 />
                 <div class="mb-3 text-center">      
-                    <button type="submit" class="btn btn-primary" :disabled="!loadedEl || !loadedBrand">{{ButtonText}} brand</button>
+                    <button type="submit" class="btn btn-primary" :disabled="ShowButton">{{ButtonText}} brand</button>
                 </div>       
             </form>
         </b-container>
@@ -56,6 +56,12 @@
         components: {
             InsertNewbrand,
             Header,
+        },
+
+        computed:{
+            ShowButton(){
+                return this.EditMode ? false:!this.loadedEl || !this.loadedBrand
+            }
         },
 
         data(){
