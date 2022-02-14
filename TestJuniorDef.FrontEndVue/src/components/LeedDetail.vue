@@ -12,7 +12,7 @@
             <div style="min-height: 250px;">
                 <div v-for="(l,i) in replies" :key="i" class="card border-success mb-3" style="width: 100%;">
                     <div class="card-header">
-                        {{l.date.substring(0, 10)}} - {{l.user}}
+                        {{ FormatDate(l.date) }} - {{l.user}}
                     </div>
                     <div class="card-body text-success">
                         <p class="card-text">{{l.text}}</p>
@@ -35,5 +35,13 @@ export default {
         loaded: Boolean,
         error: Boolean,
     },
+
+    methods: {
+        FormatDate(date){
+            let formDate = date.substring(0, 10)
+            formDate = date.substring(8, 10) + "/" + date.substring(5, 7) + "/" + date.substring(0, 4)
+            return formDate
+        }
+    }
 }
 </script>
