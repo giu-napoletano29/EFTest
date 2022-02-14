@@ -63,7 +63,7 @@ namespace TestJuniorDef.Controllers
         {
             if (size <= 0 || page < 1)
             {
-                return ValidationProblem();
+                return ValidationProblem("Invalid page requested");
             }
             try
             {

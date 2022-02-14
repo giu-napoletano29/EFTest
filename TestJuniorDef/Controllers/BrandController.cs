@@ -72,7 +72,7 @@ namespace TestJuniorDef.Controllers
         {
             if (size <= 0 || page < 1)
             {
-                return ValidationProblem();
+                return ValidationProblem("Invalid page requested");
             }
             try
             {
@@ -103,7 +103,7 @@ namespace TestJuniorDef.Controllers
             }
             else
             {
-                return ValidationProblem();
+                return ValidationProblem("Sent an invalid object");
             }
         }
 
@@ -126,7 +126,7 @@ namespace TestJuniorDef.Controllers
             }
             else
             {
-                return ValidationProblem();
+                return ValidationProblem("Sent an invalid object");
             }
         }
 

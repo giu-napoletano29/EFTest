@@ -90,9 +90,9 @@
                             <td>{{ l.brandName }}</td> 
                             <td><b>{{ l.productName }}</b> <div class="text-secondary" style="display:inline;">{{l.description}}</div></td>
                             <td>
-                                <span v-for="(cat,y) in l.categories" :key="y" class="badge bg-primary" style="margin-right:2px;">{{ cat.categoryName }}</span>
+                                <span v-for="(cat,y) in l.categories" :key="y" class="badge rounded-pill bg-primary" style="margin-right:3px;">{{ cat.categoryName }}</span>
                             </td>
-                            <td><i class="bi bi-currency-euro"> </i> {{ CurrencyFormat(l.price) }}</td>
+                            <td class="text-center"><i class="bi bi-currency-euro"> </i> {{ CurrencyFormat(l.price) }}</td>
                             <td>
                                 <div class="btn-group me-2">
                                     <button type="button" class="btn btn-sm btn-outline-secondary" @click.stop="EditProduct(l.id)"><i class="bi bi-pencil-square"></i></button>
