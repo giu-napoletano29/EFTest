@@ -48,7 +48,7 @@
                     <tbody v-if="loaded">
                         <tr class="s-pointer" v-for="(l,i) in list.elements" :key="i" v-on:click="openDetail(list.elements[i])"> 
                             <td>{{ l.id }}</td> 
-                            <td>{{ l.insertDate.substring(0, 10) }} </td>
+                            <td>{{ FormatDate(l.insertDate)}} </td>
                             <td>{{ l.name }}</td>
                             <td>{{ l.lastname }}</td>
                             <td>{{ l.productName }}</td>
@@ -96,6 +96,9 @@
             OrderBy(){
                 this.$emit('orderby')
             },
+            FormatDate(date){
+                return this.$parent.FormatDate(date)
+            }
         }
 
     }

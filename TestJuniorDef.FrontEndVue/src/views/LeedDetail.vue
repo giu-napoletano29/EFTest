@@ -20,6 +20,7 @@
 
 <script>
     import DetailPagesUtils from '@/utilities/DetailPagesUtils.js' 
+    import Commonutils from '@/utilities/Commonutils.js'
     import Header from '@/components/Header.vue'
     import LeedDetail from '@/components/LeedDetail.vue'
     import Pagination from '@/components/Pagination.vue'
@@ -28,7 +29,7 @@
 
     export default {
 
-        mixins: [DetailPagesUtils],
+        mixins: [DetailPagesUtils, Commonutils],
         
         components: {
             Header,

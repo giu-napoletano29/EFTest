@@ -28,7 +28,7 @@
                             <td>{{ p.id }}</td>
                             <td>{{ p.name }} {{ p.lastname }}</td> 
                             <td>{{ p.totalReply }}</td>
-                            <td>{{ p.dateLastReply.substring(0, 10) }}</td> 
+                            <td>{{ FormatDate(p.dateLastReply)}}</td> 
                         </tr>
                     </tbody>
                 </table>
@@ -58,6 +58,9 @@ export default {
     methods:{
         GoToleeds(){
             this.$emit('gotoleeds')
+        },
+        FormatDate(date){
+            return this.$parent.FormatDate(date)
         }
     }
 }
