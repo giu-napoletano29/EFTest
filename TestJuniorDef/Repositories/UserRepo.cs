@@ -2,51 +2,55 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using TestJuniorDef.Repositories.Interfaces;
 
 namespace TestJuniorDef.Repositories
 {
-    public class AccountRepo : IAccountRepo
+    public class UserRepo : IUserRepo
     {
         private readonly Context _context;
 
-        public AccountRepo(Context context)
+        public UserRepo(Context context)
         {
             _context = context;
         }
-
-        public IQueryable<Account> GetById(int id)
+        public IQueryable<User> GetById(int id)
         {
-            var account = _context.Accounts.Where(x => x.Id == id).AsNoTracking();
-
-            return account;
+            return _context.Users.Where(x => x.Id == id).AsNoTracking();
         }
 
-        public IQueryable<Account> GetAll()
+        public IQueryable<User> GetByIdTracked(int id)
         {
-            return _context.Accounts.AsNoTracking();
+            return _context.Users.Where(x => x.Id == id)
+                                    .Include(x => x.Account)
+                                    .Include(x => x.InfoRequests)
+                                        .ThenInclude(x => x.InfoRequestReply);
         }
 
-        public IQueryable<Account> GetAll(bool includeAll)
+
+        public IQueryable<User> GetAll()
+        {
+            return _context.Users.AsNoTracking();
+        }
+
+        public IQueryable<User> GetAll(bool includeAll)
         {
             if (!includeAll)
             {
                 return GetAll();
             }
-
-            return _context.Accounts.Include(x => x.Brand)
-                                        .ThenInclude(x => x.Products)
-                                    .Include(x => x.User);
+            return _context.Users.Include(x => x.Account)
+                                    .Include(x => x.InfoRequests)
+                                        .ThenInclude(x => x.InfoRequestReply);
         }
 
-        public void Insert(Account obj)
+        public void Insert(User obj)
         {
             IDbContextTransaction transaction = _context.Database.BeginTransaction();
             try
             {
-                _context.Accounts.Add(obj);
+                _context.Users.Add(obj);
                 _context.SaveChanges();
                 transaction.Commit();
             }
@@ -54,14 +58,16 @@ namespace TestJuniorDef.Repositories
             {
                 transaction.Rollback();
             }
+
+
         }
 
-        public void Update(Account obj)
+        public void Update(User obj)
         {
             IDbContextTransaction transaction = _context.Database.BeginTransaction();
             try
             {
-                _context.Accounts.Update(obj);
+                _context.Users.Update(obj);
                 _context.SaveChanges();
                 transaction.Commit();
             }
@@ -69,9 +75,10 @@ namespace TestJuniorDef.Repositories
             {
                 transaction.Rollback();
             }
+
         }
 
-        public void Delete(Account obj)
+        public void Delete(User obj)
         {
             IDbContextTransaction transaction = _context.Database.BeginTransaction();
             try
@@ -84,15 +91,7 @@ namespace TestJuniorDef.Repositories
             {
                 transaction.Rollback();
             }
-        }
 
-        public IQueryable<Account> GetByIdTracked(int id)
-        {
-            var account = _context.Accounts.Where(x => x.Id == id)
-                                        .Include(x => x.Brand)
-                                        .Include(x => x.User);
-
-            return account;
         }
     }
 }

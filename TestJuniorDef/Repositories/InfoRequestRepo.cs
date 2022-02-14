@@ -1,5 +1,7 @@
 ﻿using apitest.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TestJuniorDef.Repositories.Interfaces;
@@ -43,22 +45,55 @@ namespace TestJuniorDef.Repositories
 
         public void Insert(InfoRequest obj)
         {
-            throw new System.NotImplementedException();
+            IDbContextTransaction transaction = _context.Database.BeginTransaction();
+            try
+            {
+                _context.InfoRequests.Add(obj);
+                _context.SaveChanges();
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+            }
         }
 
         public void Update(InfoRequest obj)
         {
-            throw new System.NotImplementedException();
+            IDbContextTransaction transaction = _context.Database.BeginTransaction();
+            try
+            {
+                _context.InfoRequests.Update(obj);
+                _context.SaveChanges();
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+            }
         }
 
         public void Delete(InfoRequest obj)
         {
-            throw new System.NotImplementedException();
+            IDbContextTransaction transaction = _context.Database.BeginTransaction();
+            try
+            {
+                _context.Remove(obj);
+                _context.SaveChanges();
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+            }
         }
 
         public IQueryable<InfoRequest> GetByIdTracked(int id)
         {
-            throw new System.NotImplementedException();
+            return _context.InfoRequests.Where(x => x.Id == id)
+                                        .Include(x => x.Product)
+                                        .Include(x => x.User)
+                                        .Include(x => x.InfoRequestReply);
         }
     }
 }
