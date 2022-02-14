@@ -26,7 +26,9 @@ export default {
     props: {
         EditMode: Boolean,
         elementbyid: Object,
-        loaded: Boolean,
+        loadedEl: Boolean,
+        loadedBrand: Boolean,
+        loadedEditElement: Boolean,
     },
 
     data(){
@@ -50,7 +52,7 @@ export default {
                 this.$emit('input', this.brand);
             }
         },
-        loaded:{
+        loadedEditElement:{
             handler: function(newValue){
                 if(this.EditMode && newValue){
                     this.AssingOldValue()

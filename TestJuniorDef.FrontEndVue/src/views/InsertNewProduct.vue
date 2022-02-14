@@ -13,7 +13,9 @@
                     :list="list"
                     :disabledbrand="false"
                     :brands="brands"
-                    :loaded="loaded"
+                    :loadedEl="loadedEl"
+                    :loadedBrand="loadedBrand"
+                    :loadedEditElement="loadedEditElement"
                     :error="error"
                     :elementbyid="elementbyid"
                     :EditMode="EditMode"
@@ -21,7 +23,7 @@
                     @input="(newprod) => {product = newprod}"
                 />
                 <div class="mb-3">      
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary" :disabled="!loadedEl || !loadedBrand">Invia</button>
                 </div>       
             </form>
         </b-container>
@@ -60,8 +62,9 @@
 
         methods: {
             async loadProductById(){
+                this.loadedEditElement = false
                 const {data} = await ProductRepo.getById(this.$route.params.id)
-                this.loaded = true
+                this.loadedEditElement = true
                 this.elementbyid = data;
             },
 

@@ -1,31 +1,35 @@
 <template>
     <div>
-        <div class="mb-3">
-            <input type="text" class="form-control" id="productname" placeholder="Nome prodotto" v-model="product.Name" required>
-        </div>
-        <div class="row">
-            <div class="col-10">
-                <select class="form-select mb-3" aria-label="Default select example" v-model="product.BrandId" :disabled="disabledbrand" :required="!disabledbrand">
-                    <option value="">Seleziona brand</option>
-                    <option v-for="(l,i) in brands" :key="i" :value="l.id">{{l.brandName}}</option>
-                </select>
+        <div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="productname" placeholder="Nome prodotto" v-model="product.Name" required>
             </div>
-            <div class="col">
-                <div class="input-group"> 
-                    <span class="input-group-text">€</span>
-                    <input type="number" class="form-control currency" placeholder="Prezzo" aria-label="price" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" v-model="product.Price" required/>
+            <div class="row">
+                <div class="col-10">
+                    <select v-show="loadedBrand" class="form-select mb-3" aria-label="Default select example" v-model="product.BrandId" :disabled="disabledbrand" :required="!disabledbrand">
+                        <option value="">Seleziona brand</option>
+                        <option v-for="(l,i) in brands" :key="i" :value="l.id">{{l.brandName}}</option>
+                    </select>
+                    <p v-show="!loadedBrand">Caricamento brand...</p>
+                </div>
+                <div class="col">
+                    <div class="input-group"> 
+                        <span class="input-group-text">€</span>
+                        <input type="number" class="form-control currency" placeholder="Prezzo" aria-label="price" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" v-model="product.Price" required/>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" id="shortdescriptio" placeholder="Piccola descrizione" v-model="product.ShortDescription" required>
-        </div>
-        <div class="mb-3">      
-            <textarea class="form-control" id="descriptio" rows="3" placeholder="Descrizione" v-model="product.Description" required></textarea>
-        </div>
-        <div class="mb-3 form-check form-check-inline" v-for="(l,i) in list" :key="i">
-            <input type="checkbox" class="form-check-input" :id="l.id" v-model="product.ProductCategory" :value="getCatObj(l.id)">
-            <label class="form-check-label" for="exampleCheck1">{{l.name}}</label>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="shortdescriptio" placeholder="Piccola descrizione" v-model="product.ShortDescription" required>
+            </div>
+            <div class="mb-3">      
+                <textarea class="form-control" id="descriptio" rows="3" placeholder="Descrizione" v-model="product.Description" required></textarea>
+            </div>
+            <div v-show="loadedEl" class="mb-3 form-check form-check-inline" v-for="(l,i) in list" :key="i">
+                <input type="checkbox" class="form-check-input" :id="l.id" v-model="product.ProductCategory" :value="getCatObj(l.id)">
+                <label class="form-check-label" for="exampleCheck1">{{l.name}}</label>
+            </div>
+            <p v-show="!loadedEl">Caricamento categorie...</p>
         </div>
     </div>
 </template>
@@ -37,7 +41,9 @@ export default {
     props: {
         list: Array,
         brands: Array,
-        loaded: Boolean,
+        loadedEl: Boolean,
+        loadedBrand: Boolean,
+        loadedProduct: Boolean,
         error: Boolean,
         EditMode: Boolean,
         elementbyid: Object,
@@ -64,7 +70,7 @@ export default {
                 this.$emit('input', this.product);
             }
         },
-        loaded:{
+        loadedEditElement:{
             handler: function(newValue){
                 if(this.EditMode && newValue){
                     this.AssingOldValue()

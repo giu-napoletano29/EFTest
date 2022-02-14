@@ -13,6 +13,7 @@
                     :list="list"
                     :brands="brands"
                     :loaded="loaded"
+                    :loadedEditElement="loadedEditElement"
                     :error="error"
                     :elementbyid="elementbyid"
                     :EditMode="EditMode"
@@ -27,12 +28,13 @@
                     :list="list"
                     :disabledbrand="true"
                     :brands="brands"
-                    :loaded="loaded"
+                    :loadedEl="loadedEl"
+                    :loadedBrand="loadedBrand"
                     :error="error"
                     @input="(newprod) => {product[index] = newprod}"
                 />
                 <div class="mb-3 text-center">      
-                    <button type="submit" class="btn btn-primary">{{ButtonText}} brand</button>
+                    <button type="submit" class="btn btn-primary" :disabled="!loadedEl || !loadedBrand">{{ButtonText}} brand</button>
                 </div>       
             </form>
         </b-container>
@@ -79,8 +81,9 @@
 
         methods: {
             async loadBrandById(){
+                this.loadedEditElement = false
                 const {data} = await BrandsRepo.getById(this.$route.params.id)
-                this.loaded = true
+                this.loadedEditElement = true
                 this.elementbyid = data;
             },
 

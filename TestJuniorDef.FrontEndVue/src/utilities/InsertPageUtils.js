@@ -7,7 +7,9 @@ export default{
         return{
             list: [],
             brands: [],
-            loaded: false,
+            loadedEl: false,
+            loadedBrand: false,
+            loadedEditElement: false,
             error: false,
             errors: [],
             EditMode: false,
@@ -18,14 +20,16 @@ export default{
 
     methods:{
         async loadElements(){
+            this.loadedEl = false
             const {data} = await CategoriesRepo.get()
-            this.loaded = true
+            this.loadedEl = true
             this.list = data;
         },
 
         async loadBrands(){
+            this.loadedBrand = false
             const {data} = await BrandsRepo.get()
-            this.loaded = true
+            this.loadedBrand = true
             this.brands = data;
         },
 

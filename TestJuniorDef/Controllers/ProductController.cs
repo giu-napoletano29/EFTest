@@ -89,7 +89,14 @@ namespace TestJuniorDef.Controllers
         [HttpPost("new")]      
         public IActionResult InsertProduct([FromBody] Product product)
         {
-            _productService.InsertProduct(product);
+            if (ModelState.IsValid)
+            {
+                _productService.InsertProduct(product);
+            }
+            else
+            {
+                return ValidationProblem();
+            }
 
             return StatusCode(200);
         }
@@ -97,9 +104,16 @@ namespace TestJuniorDef.Controllers
         [HttpPut("{id}/edit")]       
         public IActionResult UpdateProduct(int id, [FromBody] Product product)
         {
-            product.Id = id;
+            if (ModelState.IsValid)
+            {
+                product.Id = id;
+                return StatusCode(_productService.UpdateProduct(product));
+            }
+            else
+            {
+                return ValidationProblem();
+            }
 
-            return StatusCode(_productService.UpdateProduct(product));
         }
 
         /// <summary>
