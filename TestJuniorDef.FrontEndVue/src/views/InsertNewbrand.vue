@@ -12,7 +12,6 @@
                 <InsertNewbrand
                     :list="list"
                     :brands="brands"
-                    :loaded="loaded"
                     :loadedEditElement="loadedEditElement"
                     :error="error"
                     :elementbyid="elementbyid"
@@ -32,9 +31,11 @@
                     :loadedBrand="loadedBrand"
                     :error="error"
                     @input="(newprod) => {product[index] = newprod}"
-                />
+                >
+                    <h4 class="mt-5 mb-3">Prodotto #{{index+1}}</h4>
+                </component>
                 <div class="mb-3 text-center">      
-                    <button type="submit" class="btn btn-primary" :disabled="ShowButton">{{ButtonText}} brand</button>
+                    <button type="submit" class="btn btn-primary mt-3" :disabled="ShowButton">{{ButtonText}} brand</button>
                 </div>       
             </form>
         </b-container>

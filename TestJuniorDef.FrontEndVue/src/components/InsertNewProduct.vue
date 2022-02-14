@@ -1,5 +1,6 @@
 <template>
     <div>
+        <slot></slot>
         <div>
             <div class="mb-3">
                 <input type="text" class="form-control" id="productname" placeholder="Nome prodotto" v-model="product.Name" required>
