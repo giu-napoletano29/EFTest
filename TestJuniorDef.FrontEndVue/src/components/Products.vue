@@ -5,37 +5,52 @@
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th scope="col" class="col-2 v-align s-pointer" @click="OrderByBrand()" > Brand 
-                                <div class="btn btn-sm">
-                                    <div v-show="!this.orderbrand">
-                                        <i class="fa fa-fw fa-sort"></i>
-                                    </div>                              
-                                    <div v-show="this.orderbrand">
-                                        <i v-show="!this.desc" class="fa fa-fw fa-sort-asc"></i>
-                                        <i v-show="this.desc" class="fa fa-fw fa-sort-desc"></i>
+                            <th scope="col" class="col-2 v-align s-pointer" @click="OrderByBrand()" > 
+                                <div class="row">
+                                    <div class="col-2">
+                                        Brand
+                                    </div> 
+                                    <div class="text-right col">
+                                        <div v-show="!this.orderbrand">
+                                            <i class="fa fa-fw fa-sort"></i>
+                                        </div>                              
+                                        <div v-show="this.orderbrand">
+                                            <i v-show="!this.desc" class="fa fa-fw fa-sort-asc"></i>
+                                            <i v-show="this.desc" class="fa fa-fw fa-sort-desc"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </th>
-                            <th scope="col" class="col-4 v-align s-pointer" @click="OrderByName()"> Prodotto 
-                                <div class="btn btn-sm">
-                                    <div v-show="!this.ordername">
-                                        <i class="fa fa-fw fa-sort"></i>
-                                    </div>                              
-                                    <div v-show="this.ordername">
-                                        <i v-show="!this.desc" class="fa fa-fw fa-sort-asc"></i>
-                                        <i v-show="this.desc" class="fa fa-fw fa-sort-desc"></i>
+                            <th scope="col" class="col-4 v-align s-pointer" @click="OrderByName()"> 
+                                <div class="row">
+                                    <div class="col-2">
+                                        Prodotto
+                                    </div> 
+                                    <div class="text-right col">
+                                        <div v-show="!this.ordername">
+                                            <i class="fa fa-fw fa-sort"></i>
+                                        </div>                              
+                                        <div v-show="this.ordername">
+                                            <i v-show="!this.desc" class="fa fa-fw fa-sort-asc"></i>
+                                            <i v-show="this.desc" class="fa fa-fw fa-sort-desc"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </th>
                             <th scope="col" class="col-3 v-align"> Categorie </th>
-                            <th scope="col" class="col-2 v-align s-pointer" @click="OrderByPrice()">Prezzo
-                                <div class="btn btn-sm">
-                                    <div v-show="!this.orderprice">
-                                        <i class="fa fa-fw fa-sort"></i>
-                                    </div>                              
-                                    <div v-show="this.orderprice">
-                                        <i v-show="!this.desc" class="fa fa-fw fa-sort-asc"></i>
-                                        <i v-show="this.desc" class="fa fa-fw fa-sort-desc"></i>
+                            <th scope="col" class="col-2 v-align s-pointer" @click="OrderByPrice()">
+                                <div class="row">
+                                    <div class="col-2">
+                                        Prezzo
+                                    </div> 
+                                    <div class="text-right col">
+                                        <div v-show="!this.orderprice">
+                                            <i class="fa fa-fw fa-sort"></i>
+                                        </div>                              
+                                        <div v-show="this.orderprice">
+                                            <i v-show="!this.desc" class="fa fa-fw fa-sort-asc"></i>
+                                            <i v-show="this.desc" class="fa fa-fw fa-sort-desc"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </th>

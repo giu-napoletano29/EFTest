@@ -6,7 +6,21 @@
                     <thead>
                         <tr>
                             <th scope="col" class="col-1 v-align"> Id </th>
-                            <th scope="col" class="col-1 v-align s-pointer"> Data <button type="button" class="btn btn-sm" @click="OrderBy()"><i class="fa fa-fw fa-sort"></i></button></th>
+                            <th scope="col" class="col-1 v-align s-pointer" @click="OrderBy()"> 
+                                <div class="row">
+                                    <div class="col-2">
+                                        Data
+                                    </div> 
+                                    <div class="text-right col">
+                                        <div v-show="!this.orderDesc">
+                                            <i class="fa fa-fw fa-sort-desc"></i>
+                                        </div>                              
+                                        <div v-show="this.orderDesc">
+                                            <i v-show="!this.desc" class="fa fa-fw fa-sort-asc"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th>
                             <th scope="col" class="col-2 v-align"> Nome </th>
                             <th scope="col" class="col-2 v-align"> Cognome </th>
                             <th scope="col" class="col-3 v-align"> Prodotto </th>
@@ -56,6 +70,7 @@
             loaded: Boolean,
             error: Boolean,
             params: Object,
+            orderDesc: Boolean,
         },
 
         data() {

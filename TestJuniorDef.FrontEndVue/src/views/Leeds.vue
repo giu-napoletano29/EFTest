@@ -7,6 +7,7 @@
             :loaded="loaded"
             :error="error"
             :params="params"
+            :orderDesc="orderDesc"
             @openDetail="OpenDetail"
             @brandfilter="BrandFilter"
             @search="Search"

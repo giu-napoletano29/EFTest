@@ -60,4 +60,8 @@
 .s-pointer{
     cursor: pointer;
 }
+
+.text-right {
+    text-align: right !important;
+}
 </style>
