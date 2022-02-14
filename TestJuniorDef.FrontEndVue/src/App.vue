@@ -11,19 +11,13 @@
                     <div class="position-sticky pt-3">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <router-link to="/" class="nav-link active">Home</router-link>
+                                <router-link to="/brands" class="nav-link" :class="{ active: this.$route.name==='Brands'}">Brand</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link to="/about" class="nav-link">About</router-link>
+                                <router-link to="/products" class="nav-link" :class="{ active: this.$route.name==='Products'}">Prodotti</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link to="/brands" class="nav-link">Brand</router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link to="/products" class="nav-link">Prodotti</router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link to="/leeds" class="nav-link">Richieste info</router-link>
+                                <router-link to="/leeds" class="nav-link" :class="{ active: this.$route.name==='Leeds'}">Richieste info</router-link>
                             </li>
                         </ul>
                     </div>
@@ -36,12 +30,13 @@
     </div>
 </template>
 
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /* text-align: center; */
   color: #2c3e50;
 }
 
@@ -56,5 +51,27 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.v-align {
+    vertical-align: middle;
+}
+
+.s-pointer{
+    cursor: pointer;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.icon-stack {
+    position: absolute;
+    line-height: inherit;
+    opacity: 1 !important;
+}
+
+.fa{
+    opacity: 0.5;
 }
 </style>

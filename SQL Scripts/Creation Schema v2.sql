@@ -22,7 +22,8 @@ CREATE TABLE Account(
 	Id int primary key identity,
 	Email varchar(319), -- According to the standard 64 username 1 @ 254 domain name
 	Password BINARY(64), -- To be hashed
-	AccountType tinyint
+	AccountType tinyint,
+	IsDeleted Bit NOT NULL DEFAULT 0
 )
 
 CREATE TABLE tUser(
@@ -40,7 +41,8 @@ CREATE TABLE Brand(
 	Id int primary key identity,
 	AccountId int,
 	BrandName varchar(100),
-	Description nvarchar(MAX)
+	Description nvarchar(MAX),
+	IsDeleted Bit NOT NULL DEFAULT 0
 )
 
 ALTER TABLE Brand
@@ -53,7 +55,8 @@ CREATE TABLE Product(
 	Name varchar(80),
 	ShortDescription nvarchar(MAX),
 	Price decimal(18,2),
-	Description nvarchar(MAX)
+	Description nvarchar(MAX),
+	IsDeleted Bit NOT NULL DEFAULT 0
 )
 
 ALTER TABLE Product
@@ -92,7 +95,8 @@ CREATE TABLE InfoRequest(
 	Phone char(15),
 	PostalCode varchar(10),
 	RequestText nvarchar(MAX),
-	InsertDate Date
+	InsertDate Date,
+	IsDeleted Bit NOT NULL DEFAULT 0
 )
 
 ALTER TABLE InfoRequest
@@ -106,7 +110,8 @@ CREATE TABLE InfoRequestReply(
 	InfoRequestId int,
 	AccountId int,
 	ReplyText nvarchar(MAX),
-	InsertDate Date
+	InsertDate Date,
+	IsDeleted Bit NOT NULL DEFAULT 0
 )
 
 ALTER TABLE InfoRequestReply

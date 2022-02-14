@@ -54,6 +54,9 @@ namespace TestJuniorDef.Services
                     {
                         Id = x.Id,
                         BrandName = x.BrandName,
+                        Email = x.Account.Email,
+                        Password = x.Account.Password,
+                        Description = x.Description,
                         TotalProducts = x.Products.Count,
                         TotalInfoRequest = x.Products.SelectMany(x => x.InfoRequests.Select(x => x.Id)).Count(),
                         Categories = cat,
@@ -73,15 +76,21 @@ namespace TestJuniorDef.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public PagingModelAPI<BrandPagingModelAPI> GetBrandPerPage(int size = 5, int page = 1)
+        public PagingModelAPI<BrandPagingModelAPI> GetBrandPerPage(int size = 5, int page = 1, string search = "")
         {
-            var pagination = Service.PaginateEntity<Brand>(_brandRepo, size, page);
+            var repo = _brandRepo.GetAll(true);
+            if (search.Length > 0)
+            {
+                repo = repo.Where(x => x.BrandName.Contains(search));
+            }
+            var pagination = Service.PaginateEntity<Brand>(repo, size, page);
             PagingModelAPI<BrandPagingModelAPI> model = new PagingModelAPI<BrandPagingModelAPI>();
             model.PageSize = pagination.PageSize;
             model.TotalElements = pagination.TotalElements;
             model.NumPage = pagination.NumPage;
             model.Elements = pagination.Elements.Select(x => new BrandPagingModelAPI
             {
+                Id=x.Id,
                 BrandName = x.BrandName,
                 Description = x.Description,
                 ProductsId = x.Products.Select(y => y.Id).ToList()
@@ -146,12 +155,27 @@ namespace TestJuniorDef.Services
         /// <returns></returns>
         public int DeleteBrand(int id)
         {
-            var brand = _brandRepo.GetById(id).FirstOrDefault();
+            var brand = _brandRepo.GetByIdTracked(id).FirstOrDefault();
             if (brand != null)
             {
                 try
                 {
-                    _brandRepo.Delete(brand);
+                    brand.IsDeleted = true;
+                    brand.Account.IsDeleted = true;
+                    foreach (var p in brand.Products)
+                    {
+                        p.IsDeleted = true;
+                        foreach (var i in p.InfoRequests)
+                        {
+                            i.IsDeleted = true;
+                            foreach (var r in i.InfoRequestReply)
+                            {
+                                r.IsDeleted = true;
+                            }
+                        }
+                    }
+                    //_brandRepo.Delete(brand);
+                    _brandRepo.Update(brand);
                 }catch (System.Exception e)
                 {
                     return StatusCodes.Status500InternalServerError;

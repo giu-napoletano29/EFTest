@@ -41,7 +41,11 @@ namespace TestJuniorDef.Services
                     {
                         Id = x.Id,
                         Name = x.Name,
+                        BrandId = x.BrandId,
                         BrandName = x.Brand.BrandName,
+                        ShortDescription = x.ShortDescription,
+                        Description = x.Description,
+                        Price = x.Price,
                         Categories = x.ProductCategory.Select(z => new CategoryBaseModelAPI
                         {
                             Id = z.Category.Id,
@@ -68,9 +72,30 @@ namespace TestJuniorDef.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public PagingModelAPI<ProductPagingModelAPI> GetProductPerPage(int size = 5, int page = 1)
+        public PagingModelAPI<ProductPagingModelAPI> GetProductPerPage(int size = 5, int page = 1, int brand = 0, bool orderbyBrand = false, bool orderbyName = false, bool orderbyPrice = false, bool desc = false)
         {
-            var pagination = Service.PaginateEntity<Product>(_productRepo, size, page);
+            var repo = _productRepo.GetAll(true);
+            if (brand > 0)
+            {
+                repo = repo.Where(x => x.BrandId == brand);
+            }
+
+            repo = repo.OrderBy(x => x.Brand.BrandName).ThenBy(x => x.Name);
+
+            if (orderbyBrand)
+            {
+                repo = desc ? repo.OrderByDescending(x => x.Brand.BrandName):repo.OrderBy(x => x.Brand.BrandName);
+            }
+            if (orderbyName)
+            {
+                repo = desc ? repo.OrderByDescending(x => x.Name):repo.OrderBy(x => x.Name);
+            }
+            if (orderbyPrice)
+            {
+                repo = desc ? repo.OrderByDescending(x => x.Price):repo.OrderBy(x => x.Price);
+            }
+
+            var pagination = Service.PaginateEntity<Product>(repo, size, page);
             PagingModelAPI<ProductPagingModelAPI> model = new PagingModelAPI<ProductPagingModelAPI>();
             model.PageSize = pagination.PageSize;
             model.TotalElements = pagination.TotalElements;
@@ -78,8 +103,15 @@ namespace TestJuniorDef.Services
             model.Elements = pagination.Elements.Select(x => new ProductPagingModelAPI
             {
                 Id = x.Id,
+                BrandName = x.Brand.BrandName,
                 ProductName = x.Name,
-                Description = x.ShortDescription
+                Description = x.ShortDescription,
+                Price = x.Price,
+                Categories = x.ProductCategory.Select(z => new CategoryBaseModelAPI
+                {
+                    Id = z.Category.Id,
+                    CategoryName = z.Category.Name
+                }),
             }).ToList();
 
             return model;
@@ -129,12 +161,22 @@ namespace TestJuniorDef.Services
 
         public int DeleteProduct(int id)
         {
-            var prod = _productRepo.GetById(id).FirstOrDefault();
+            var prod = _productRepo.GetByIdTracked(id).FirstOrDefault();
             if (prod != null)
             {
                 try
                 {
-                    _productRepo.Delete(prod);
+                    prod.IsDeleted = true;
+                    foreach (var i in prod.InfoRequests)
+                    {
+                        i.IsDeleted = true;
+                        foreach (var r in i.InfoRequestReply)
+                        {
+                            r.IsDeleted = true;
+                        }
+                    }
+                    //_productRepo.Delete(prod);
+                    _productRepo.Update(prod);
                 }
                 catch (System.Exception e)
                 {

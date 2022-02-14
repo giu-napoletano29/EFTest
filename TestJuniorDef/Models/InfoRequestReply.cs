@@ -9,6 +9,7 @@ namespace apitest.Models
         public int AccountId { get; set; }
         public string ReplyText { get; set; }
         public DateTime InsertDate { get; set; }
+        public bool IsDeleted { get; set; }
 
         public InfoRequest InfoRequest { get; set; }
         public Account Account { get; set; }

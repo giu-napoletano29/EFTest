@@ -68,7 +68,7 @@ namespace TestJuniorDef.Controllers
 
         [HttpGet("page/{page}")]
         [HttpGet("page/{size?}/{page?}")]
-        public IActionResult GetbrandPerPage(int size = 5, int page = 1)
+        public IActionResult GetBrandPerPage(int size = 5, int page = 1, string search = "")
         {
             if (size <= 0 || page < 1)
             {
@@ -76,7 +76,7 @@ namespace TestJuniorDef.Controllers
             }
             try
             {
-                var model = _brandService.GetBrandPerPage(size, page);
+                var model = _brandService.GetBrandPerPage(size, page, search);
 
                 return Ok(model);
             }
@@ -97,7 +97,14 @@ namespace TestJuniorDef.Controllers
         [HttpPost("new")]      
         public IActionResult InsertBrand([FromBody] Brand brand)
         {
-            return StatusCode(_brandService.InsertBrand(brand));
+            if (ModelState.IsValid)
+            {
+                return StatusCode(_brandService.InsertBrand(brand));
+            }
+            else
+            {
+                return ValidationProblem();
+            }
         }
 
         /// <summary>
@@ -112,9 +119,15 @@ namespace TestJuniorDef.Controllers
         [HttpPut("{id}/edit")]
         public IActionResult UpdateBrand(int id, [FromBody] Brand brand)
         {
-            brand.Id = id;
-
-            return StatusCode(_brandService.UpdateBrand(brand));
+            if (ModelState.IsValid)
+            {
+                brand.Id = id;
+                return StatusCode(_brandService.UpdateBrand(brand));
+            }
+            else
+            {
+                return ValidationProblem();
+            }
         }
 
         /// <summary>

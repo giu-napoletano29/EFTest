@@ -67,7 +67,7 @@ namespace TestJuniorDef.Controllers
 
         [HttpGet("page/{page}")]
         [HttpGet("page/{size?}/{page?}")]
-        public IActionResult GetProductPerPage(int size = 5, int page = 1)
+        public IActionResult GetProductPerPage(int size = 5, int page = 1, int brand = 0, bool orderbyBrand = false, bool orderbyName = false, bool orderbyPrice = false, bool desc = false )
         {
             if (size <= 0 || page < 1)
             {
@@ -75,7 +75,7 @@ namespace TestJuniorDef.Controllers
             }
             try
             {
-                var retvalue = _productService.GetProductPerPage(size, page);
+                var retvalue = _productService.GetProductPerPage(size, page, brand, orderbyBrand, orderbyName, orderbyPrice, desc);
 
                 return Ok(retvalue);
             }
@@ -89,7 +89,14 @@ namespace TestJuniorDef.Controllers
         [HttpPost("new")]      
         public IActionResult InsertProduct([FromBody] Product product)
         {
-            _productService.InsertProduct(product);
+            if (ModelState.IsValid)
+            {
+                _productService.InsertProduct(product);
+            }
+            else
+            {
+                return ValidationProblem();
+            }
 
             return StatusCode(200);
         }
@@ -97,9 +104,16 @@ namespace TestJuniorDef.Controllers
         [HttpPut("{id}/edit")]       
         public IActionResult UpdateProduct(int id, [FromBody] Product product)
         {
-            product.Id = id;
+            if (ModelState.IsValid)
+            {
+                product.Id = id;
+                return StatusCode(_productService.UpdateProduct(product));
+            }
+            else
+            {
+                return ValidationProblem();
+            }
 
-            return StatusCode(_productService.UpdateProduct(product));
         }
 
         /// <summary>

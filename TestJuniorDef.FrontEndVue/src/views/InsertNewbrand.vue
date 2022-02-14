@@ -1,0 +1,178 @@
+<template>
+    <div>
+        <b-container>
+            <Header :name="name"/>
+            <form v-on:submit.prevent="checkForm">
+                <p v-if="errors.length">
+                    <b>Correggere i seguenti errori:</b>
+                    <ul>
+                        <li v-for="error in errors" :key="error">{{ error }}</li> 
+                    </ul>
+                </p>
+                <InsertNewbrand
+                    :list="list"
+                    :brands="brands"
+                    :loaded="loaded"
+                    :loadedEditElement="loadedEditElement"
+                    :error="error"
+                    :elementbyid="elementbyid"
+                    :EditMode="EditMode"
+                    @input="(newbrand) => {brand = newbrand}"
+                    @addprod="addProd"
+                />
+                <component
+                    v-for="(component, index) in newcomponents"
+                    :key="index"
+                    :is="component"
+
+                    :list="list"
+                    :disabledbrand="true"
+                    :brands="brands"
+                    :loadedEl="loadedEl"
+                    :loadedBrand="loadedBrand"
+                    :error="error"
+                    @input="(newprod) => {product[index] = newprod}"
+                />
+                <div class="mb-3 text-center">      
+                    <button type="submit" class="btn btn-primary" :disabled="ShowButton">{{ButtonText}} brand</button>
+                </div>       
+            </form>
+        </b-container>
+    </div>
+</template>
+
+<script>
+    import InsertPageUtils from '@/utilities/InsertPageUtils.js' 
+    import Header from '@/components/Header.vue'
+    import InsertNewbrand from '@/components/InsertNewbrand.vue'
+    import InsertNewProduct from '@/components/InsertNewProduct.vue'
+    import {Factory} from './../wrappers/Factory'
+    const BrandsRepo = Factory.get('brands')
+    const Comp = InsertNewProduct
+
+    export default {
+        mixins: [InsertPageUtils],
+
+        components: {
+            InsertNewbrand,
+            Header,
+        },
+
+        computed:{
+            ShowButton(){
+                return this.EditMode ? false:!this.loadedEl || !this.loadedBrand
+            }
+        },
+
+        data(){
+            return{
+                name: 'Nuovo Brand',
+                newcomponents: [],
+                ButtonText: "Aggiungi",
+
+                brand:{ 
+                    BrandName: "",
+                    Description: "",
+                    Account:{
+                        Email: "",
+                        Password: "",
+                        AccountType: 1,
+                    },
+                    Products:[]
+                },
+
+                product: [],
+            }
+        },
+
+        methods: {
+            async loadBrandById(){
+                this.loadedEditElement = false
+                const {data} = await BrandsRepo.getById(this.$route.params.id)
+                this.loadedEditElement = true
+                this.elementbyid = data;
+            },
+
+            RedirectSuccess(){
+                this.$router.push('/brands/success')
+            },
+
+            RedirectError(){
+                this.$router.push('/brands/error')
+            },
+
+            InsertBrand(){
+                var resp = null
+                if(!this.EditMode){ 
+                    this.brand.Products = this.product
+                    resp = BrandsRepo.create(this.brand)
+                }else{
+                    delete this.brand.Products
+                    resp = BrandsRepo.update(this.elemid, this.brand)
+                }
+                this.ResponseHandler(resp)
+            },
+
+            addProd () {  
+                let prod = { 
+                    BrandId: "Seleziona brand",
+                    Name: "",
+                    ShortDescription: "",
+                    Price: 0,
+                    Description: "",
+                    ProductCategory: [],
+                } 
+                this.newcomponents.push(Comp)
+                this.product.push(prod);
+                      
+            },
+
+            checkForm: function (e) {
+                var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                this.errors = [];
+                var temp = [];
+
+                if (!this.brand.BrandName) {
+                    temp.push('Devi inserire un nome.');
+                }
+                if (!re.test(this.brand.Account.Email)) {
+                    temp.push('Devi inserire una mail valida.');
+                }
+                if (!this.brand.Account.Password) {
+                    temp.push('Devi inserire una password.');
+                }
+                if (!this.brand.Description) {
+                    temp.push('Devi inserire una descrizione.');
+                }
+                if(this.product.length > 0){
+                    this.product.forEach(function (element, i) {
+                        if (element.ProductCategory.length < 1) {
+                            temp.push('Devi inserire una categoria al prodotto ' + (i+1) + ".");
+                        }
+                    });
+                }
+                
+                e.preventDefault();
+                this.errors = temp
+                if(this.errors.length == 0){
+                    this.InsertBrand()
+                }
+
+            }
+        },
+
+        created() {
+            if(!this.elemid){
+                this.loadElements();
+                this.loadBrands();              
+            }
+            else{
+                this.loadBrandById();
+                this.EditMode = true
+                this.ButtonText = "Modifica"
+                this.name= 'Modifica Brand'
+            }  
+        }
+
+    }
+</script>

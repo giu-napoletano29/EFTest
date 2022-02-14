@@ -9,7 +9,7 @@ namespace TestJuniorDef.Services.Interfaces
     {
         IEnumerable<Brand> GetBrands();
         BrandModelAPI GetBrandById(int id);
-        PagingModelAPI<BrandPagingModelAPI> GetBrandPerPage(int size = 5, int page = 1);
+        PagingModelAPI<BrandPagingModelAPI> GetBrandPerPage(int size = 5, int page = 1, string search = "");
         int InsertBrand(Brand brand);
         int UpdateBrand(Brand brand);
         int DeleteBrand(int id);

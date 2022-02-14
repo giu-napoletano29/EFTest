@@ -1,5 +1,7 @@
 ﻿using apitest.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TestJuniorDef.Repositories.Interfaces;
@@ -21,7 +23,11 @@ namespace TestJuniorDef.Repositories
         
         public IQueryable<Brand> GetByIdTracked(int id)
         {
-            return _context.Brands.Where(x => x.Id == id).Include(x => x.Account);  //TODO: was AsNoTracking()
+            return _context.Brands.Where(x => x.Id == id)
+                                    .Include(x => x.Account)
+                                    .Include(x => x.Products)
+                                        .ThenInclude(x => x.InfoRequests)
+                                            .ThenInclude(x => x.InfoRequestReply);
         }
 
 
@@ -45,20 +51,51 @@ namespace TestJuniorDef.Repositories
 
         public void Insert(Brand obj)
         {
-            _context.Brands.Add(obj);
-            _context.SaveChanges();
+            IDbContextTransaction transaction = _context.Database.BeginTransaction();
+            try
+            {
+                _context.Brands.Add(obj);
+                _context.SaveChanges();
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+            }
+
+
         }
 
         public void Update(Brand obj)
         {
-            _context.Brands.Update(obj);
-            _context.SaveChanges();
+            IDbContextTransaction transaction = _context.Database.BeginTransaction();
+            try
+            {
+                _context.Brands.Update(obj);
+                _context.SaveChanges();
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+            }
+
         }
 
         public void Delete(Brand obj)
         {
-            var result = _context.Remove(obj);
-            _context.SaveChanges();
+            IDbContextTransaction transaction = _context.Database.BeginTransaction();
+            try
+            {
+                _context.Remove(obj);
+                _context.SaveChanges();
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+            }
+
         }
     }
 }

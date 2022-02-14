@@ -13,6 +13,7 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(NavbarPlugin)
 Vue.use(FormTagsPlugin)
+// window.axios = require('axios');
 
 Vue.config.productionTip = false
 

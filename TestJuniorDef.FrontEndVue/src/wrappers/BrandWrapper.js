@@ -1,22 +1,42 @@
-//Qui chiamata ad API e poi passare contenuto ai componenti (template)
+import Repository from "./Repository";
+
+const resource = "/brands";
 
 export default {
-    getall(){
-
+    get(){
+        return Repository.get(`${resource}`);
     },
 
-    update( id, data ){
-        //return an Axios request (promise)
-        //return axios.get()
-        // data._method = 'PUT';
-        // return axios.post( 'https://music.com/api/v1/songs/'+id, data );
+    getallpagedsized(size, page, params){
+        let config = {
+            params: {},
+        }
+        config.params = params
+        return Repository.get(`${resource}/page/${size}/${page}`, config);
+    },
+
+    getallpaged(page, params){
+        let config = {
+            params: {},
+        }
+        config.params = params
+
+        return Repository.get(`${resource}/page/${page}`, config);
+    },
+
+    getById( id ){
+        return Repository.get(`${resource}/${id}`);
     },
 
     create( data ){
+        return Repository.post(`${resource}/new`, data);
+    },
 
+    update( id, data ){
+        return Repository.put(`${resource}/${id}/edit`, data);
     },
 
     delete( id ){
-
+        return Repository.delete(`${resource}/${id}`);
     }
-}
+};
