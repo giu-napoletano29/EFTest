@@ -79,8 +79,9 @@ namespace TestJuniorDef.Services
         public PagingModelAPI<BrandPagingModelAPI> GetBrandPerPage(int size = 5, int page = 1, string search = "")
         {
             var repo = _brandRepo.GetAll(true);
-            if (string.IsNullOrWhiteSpace(search) && search.Length > 0)
+            if (!string.IsNullOrWhiteSpace(search))
             {
+                search = search.TrimStart();
                 repo = repo.Where(x => x.BrandName.Contains(search));
             }
             var pagination = Service.PaginateEntity<Brand>(repo, size, page);

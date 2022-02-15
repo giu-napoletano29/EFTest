@@ -90,8 +90,9 @@ namespace TestJuniorDef.Services
             {
                 repo = repo.Where(x => x.Product.BrandId == brand);
             }
-            if (search.Length > 0)
+            if (!string.IsNullOrWhiteSpace(search) && search.Length > 0)
             {
+                search = search.TrimStart();
                 repo = repo.Where(x => x.Product.Name.Contains(search));
             }
             var pagination = Service.PaginateEntity<InfoRequest>(repo, size, page);
