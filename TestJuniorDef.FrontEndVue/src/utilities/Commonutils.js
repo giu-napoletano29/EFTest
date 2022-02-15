@@ -1,3 +1,5 @@
+//utility with the common methods and data between all views
+
 export default{
     methods:{
         FormatDate(date){

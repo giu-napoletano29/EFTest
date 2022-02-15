@@ -77,7 +77,6 @@
                 nrow: 6,
                 ntab: 1,
                 response: "",
-                ErrMsg: "",
             }
         },
 
@@ -96,13 +95,13 @@
             },
 
             SpecRedirect(){
-                this.$router.push('/brands')
+                this.$router.push({name: 'Brands'})
             },
             
             Delete(){
                 const data = BrandsRepo.delete(this.idEl)
                 this.open = false
-                this.DeleteSpecComponent(data)
+                this.DeleteSpecComponent(data)  //delete handling generic for the components (BrandsProductsUtils.js)
             },
 
             Search(filter){

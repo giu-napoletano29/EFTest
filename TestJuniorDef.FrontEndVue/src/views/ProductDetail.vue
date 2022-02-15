@@ -51,11 +51,10 @@
             
             async loadElements(){
                 const {data} = await ProductsRepo.getById(this.$route.params.id)
-                this.loadElementsComponent(data)
+                this.loadElementsComponent(data)    //Common request response handler (DetailPagesUtils.js)
             },
 
             GoToleeds(){
-                // this.$router.push({name: 'Leeds', params: {search: this.list.name, brand: this.list.brandId}})
                 this.$router.push({name: 'Leeds', params: {productId: this.list.id}})
             },
         },

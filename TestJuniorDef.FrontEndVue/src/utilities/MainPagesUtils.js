@@ -1,3 +1,5 @@
+//utility with the common methods and data between Brands, Leeds and Products views
+
 export default{
     data(){
         return{

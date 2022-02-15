@@ -45,12 +45,6 @@
             Header,
         },
 
-        computed:{
-            ShowButton(){
-                return this.EditMode ? false:!this.loadedEl || !this.loadedBrand
-            }
-        },
-
         data(){
             return{
                 name: 'Nuovo prodotto',
@@ -80,7 +74,6 @@
 
             RedirectError(err){
                 this.$router.push({name: 'ProductsError', params: {Error: err}})
-                //this.$router.push('/products/error')
             },
 
             InsertProduct(){

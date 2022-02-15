@@ -86,7 +86,6 @@
                 ordername: false,
                 orderprice: false,
                 desc: false,
-                ErrMsg: "",
             }
         },
 
@@ -101,7 +100,7 @@
             Delete(){
                 const data = ProductsRepo.delete(this.idEl)
                 this.open = false
-                this.DeleteSpecComponent(data)
+                this.DeleteSpecComponent(data) //delete handling generic for the components (BrandsProductsUtils.js)
             },
 
             OpenNewProduct(){
@@ -117,7 +116,7 @@
             },
 
             SpecRedirect(){
-                this.$router.push('/products')
+                this.$router.push({name: 'Products'})
             },
 
             ResetOrder(){
@@ -156,7 +155,7 @@
 
         created() {
             this.loadElements();
-            this.loadBrands();
+            this.loadBrands();  //common method in ProductsLeedsUtils.js
         },
 
         mounted(){

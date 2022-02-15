@@ -42,7 +42,7 @@
         },
 
         methods: {
-            pageChangeComponent(skip, take){
+            pageChangeComponent(skip, take){    //Client side pagination handler
                 this.listpaginated = this.list.products ? this.list.products.slice(skip, take):[]
             },
             

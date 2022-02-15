@@ -1,3 +1,5 @@
+//utility with the common methods and data between Brands and Products views
+
 export default{
     data(){
         return{
@@ -5,21 +7,23 @@ export default{
             idEl: 0,
             successModalOpen: false,
             OpError: false,
+            ErrMsg: "",
         }
     },
 
     methods:{
         OpenModal(id){
-            this.idEl = id
+            this.idEl = id  //Element id
             this.open = true
         },
 
         CloseModal(){
             this.open = false
             this.successModalOpen = false //To close success modal
-            this.SpecRedirect();
+            this.SpecRedirect(); //Calling redirect specific for the component
         },
 
+        //Handling of Delete request result
         DeleteSpecComponent(data){
             let self = this;
             data.then(function (response) {

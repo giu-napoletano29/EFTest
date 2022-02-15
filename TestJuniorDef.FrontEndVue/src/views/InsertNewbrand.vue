@@ -59,12 +59,6 @@
             Header,
         },
 
-        computed:{
-            ShowButton(){
-                return this.EditMode ? false:!this.loadedEl || !this.loadedBrand
-            }
-        },
-
         data(){
             return{
                 name: 'Nuovo Brand',
@@ -99,9 +93,7 @@
             },
 
             RedirectError(err){
-                console.log(err)
                 this.$router.push({name: 'BrandsError', params: {Error: err}})
-                //this.$router.push('/brands/error')
             },
 
             InsertBrand(){
