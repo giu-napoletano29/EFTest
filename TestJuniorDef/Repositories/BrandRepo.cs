@@ -19,8 +19,13 @@ namespace TestJuniorDef.Repositories
         public IQueryable<Brand> GetById(int id)
         {
             return _context.Brands.Where(x => x.Id == id).AsNoTracking();
-        }        
-        
+        }
+
+        /// <summary>
+        /// Return a Brand specified by its id with entities tracking
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IQueryable<Brand> GetByIdTracked(int id)
         {
             return _context.Brands.Where(x => x.Id == id)
@@ -34,8 +39,13 @@ namespace TestJuniorDef.Repositories
         public IQueryable<Brand> GetAll()
         {
             return _context.Brands.AsNoTracking();
-        }        
-        
+        }
+
+        /// <summary>
+        /// Get all Brands with tracking on the returned entities
+        /// </summary>
+        /// <param name="includeAll"></param>
+        /// <returns></returns>
         public IQueryable<Brand> GetAll(bool includeAll)
         {
             if (!includeAll)

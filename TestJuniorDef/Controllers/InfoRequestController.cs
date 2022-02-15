@@ -17,7 +17,7 @@ namespace TestJuniorDef.Controllers
 {
     [ApiController]
     [Route("leeds")]
-    public class InfoRequestController : ControllerBase
+    public class InfoRequestController : GenericController
     {
         private readonly ILogger<InfoRequestController> _logger;
         private readonly IInfoRequestService _infoRequestService;

@@ -18,7 +18,7 @@ namespace TestJuniorDef.Repositories
         }
         public IQueryable<Product> GetById(int id)
         {
-            return _context.Products.Where(x => x.Id == id).AsNoTracking(); //TODO: handle tracking
+            return _context.Products.Where(x => x.Id == id).AsNoTracking();
         }
 
         public IQueryable<Product> GetAll()
@@ -26,6 +26,11 @@ namespace TestJuniorDef.Repositories
             return _context.Products.AsNoTracking();
         }
 
+        /// <summary>
+        /// Get all Products with tracking on the returned entities
+        /// </summary>
+        /// <param name="includeAll"></param>
+        /// <returns></returns>
         public IQueryable<Product> GetAll(bool includeAll)
         {
             if (!includeAll)
@@ -88,6 +93,11 @@ namespace TestJuniorDef.Repositories
 
         }
 
+        /// <summary>
+        /// Return a Product specified by its id with entities tracking
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IQueryable<Product> GetByIdTracked(int id)
         {
             return _context.Products.Where(x => x.Id == id)

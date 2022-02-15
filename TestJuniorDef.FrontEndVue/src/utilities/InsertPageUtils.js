@@ -41,6 +41,8 @@ export default{
                     }else{
                         self.RedirectError()
                     }
+                }).catch(function (){
+                    self.RedirectError()
                 });
         },
     },

@@ -159,6 +159,11 @@ namespace TestJuniorDef.Services
             return StatusCodes.Status200OK;
         }
 
+        /// <summary>
+        /// Perform a logic deletion on a product
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public int DeleteProduct(int id)
         {
             var prod = _productRepo.GetByIdTracked(id).FirstOrDefault();

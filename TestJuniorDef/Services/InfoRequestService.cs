@@ -61,6 +61,16 @@ namespace TestJuniorDef.Services
             return infoRequest;
         }
 
+        /// <summary>
+        /// Return a page of Inforequests with a specified lenght and search filters.
+        /// </summary>
+        /// <param name="size"></param>
+        /// <param name="page"></param>
+        /// <param name="brand"></param>
+        /// <param name="search"></param>
+        /// <param name="productId"></param>
+        /// <param name="orderdesc"></param>
+        /// <returns></returns>
         public PagingModelAPI<InfoRequestPagingModelAPI> GetInfoRequestsPerPage(int size = 5, int page = 1, int brand = 0, string search = "", int productId = 0, bool orderdesc = false)
         {
             var repo = _inforeqrepo.GetAll(true);

@@ -17,7 +17,7 @@ namespace TestJuniorDef.Controllers
 {
     [ApiController]
     [Route("categories")]
-    public class CategoryController : ControllerBase
+    public class CategoryController : GenericController
     {
         private readonly ILogger<InfoRequestController> _logger;
         private readonly ICategoryService _categoryService;

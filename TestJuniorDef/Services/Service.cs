@@ -2,8 +2,12 @@
 using System.Linq;
 using System.Runtime.CompilerServices;
 using TestJuniorDef.ModelAPI;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using TestJuniorDef.Repositories.Interfaces;
 using TestJuniorDef.Services.Interfaces;
+using apitest.Models;
+
 [assembly: InternalsVisibleTo("TestJuniorDef.Services")]
 
 

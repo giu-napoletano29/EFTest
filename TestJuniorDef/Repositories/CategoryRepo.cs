@@ -27,6 +27,11 @@ namespace TestJuniorDef.Repositories
             return _context.Categories.AsNoTracking();
         }
 
+        /// <summary>
+        /// Get all Categories with tracking on the returned entities
+        /// </summary>
+        /// <param name="includeAll"></param>
+        /// <returns></returns>
         public IQueryable<Category> GetAll(bool includeAll)
         {
             if (!includeAll)
@@ -83,6 +88,11 @@ namespace TestJuniorDef.Repositories
             }
         }
 
+        /// <summary>
+        /// Return a Category specified by its id with entities tracking
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IQueryable<Category> GetByIdTracked(int id)
         {
             return _context.Categories

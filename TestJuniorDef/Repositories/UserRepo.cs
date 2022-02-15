@@ -20,6 +20,11 @@ namespace TestJuniorDef.Repositories
             return _context.Users.Where(x => x.Id == id).AsNoTracking();
         }
 
+        /// <summary>
+        /// Return an User specified by its id with entities tracking
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IQueryable<User> GetByIdTracked(int id)
         {
             return _context.Users.Where(x => x.Id == id)
@@ -34,6 +39,11 @@ namespace TestJuniorDef.Repositories
             return _context.Users.AsNoTracking();
         }
 
+        /// <summary>
+        /// Get all Users with tracking on the returned entities
+        /// </summary>
+        /// <param name="includeAll"></param>
+        /// <returns></returns>
         public IQueryable<User> GetAll(bool includeAll)
         {
             if (!includeAll)

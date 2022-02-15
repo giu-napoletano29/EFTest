@@ -18,7 +18,7 @@ namespace TestJuniorDef.Controllers
 {
     [ApiController]
     [Route("brands")]
-    public class BrandController : ControllerBase
+    public class BrandController : GenericController
     {
         private readonly ILogger<BrandController> _logger;
         private readonly IBrandService _brandService;
@@ -97,6 +97,7 @@ namespace TestJuniorDef.Controllers
         [HttpPost("new")]      
         public IActionResult InsertBrand([FromBody] Brand brand)
         {
+            BrandValidation(brand);
             if (ModelState.IsValid)
             {
                 return StatusCode(_brandService.InsertBrand(brand));
@@ -119,6 +120,7 @@ namespace TestJuniorDef.Controllers
         [HttpPut("{id}/edit")]
         public IActionResult UpdateBrand(int id, [FromBody] Brand brand)
         {
+            BrandValidation(brand);
             if (ModelState.IsValid)
             {
                 brand.Id = id;
@@ -142,11 +144,51 @@ namespace TestJuniorDef.Controllers
             return StatusCode(_brandService.DeleteBrand(id));
         }
 
+        /// <summary>
+        /// Return a list of brands that match the given name string
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+
         [HttpGet("name/{name}")]
         public IActionResult GetBrandByName(string name)
         {
             return Ok(_brandService.GetBrands().Where(x => x.BrandName == name).ToList());
         }
+
+        //private bool BrandValidation(Brand brand)
+        //{
+        //    bool state = true;
+
+        //    if (brand.BrandName.Length < 1 || brand.BrandName.Length > 100)
+        //    {
+        //        state = false;
+        //        ModelState.AddModelError("brand.Name", $"The brand name is invalid.");
+        //    }
+        //    if (brand.AccountId < 1)
+        //    {
+        //        state = false;
+        //        ModelState.AddModelError("brand.AccountId", $"The AccountId is invalid.");
+        //    }
+        //    if (brand.Description.Length < 1)
+        //    {
+        //        state = false;
+        //        ModelState.AddModelError("brand.Description", $"Description is required.");
+        //    }
+
+        //    if (brand.Account.Email.Length < 1 || brand.Account.Email.Length > 319)
+        //    {
+        //        state = false;
+        //        ModelState.AddModelError("brand.account.Email", $"The account email is invalid.");
+        //    }
+        //    if (brand.Account.AccountType < 1 || brand.Account.AccountType > 2)
+        //    {
+        //        state = false;
+        //        ModelState.AddModelError("brand.account.AccountId", $"The account type is invalid.");
+        //    }
+
+        //    return state;
+        //}
 
     }
 }

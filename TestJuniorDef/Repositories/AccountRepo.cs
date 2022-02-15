@@ -29,6 +29,11 @@ namespace TestJuniorDef.Repositories
             return _context.Accounts.AsNoTracking();
         }
 
+        /// <summary>
+        /// Get all Accounts with tracking on the returned entities
+        /// </summary>
+        /// <param name="includeAll"></param>
+        /// <returns></returns>
         public IQueryable<Account> GetAll(bool includeAll)
         {
             if (!includeAll)
@@ -86,6 +91,11 @@ namespace TestJuniorDef.Repositories
             }
         }
 
+        /// <summary>
+        /// Return an Account specified by its id with entities tracking
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IQueryable<Account> GetByIdTracked(int id)
         {
             var account = _context.Accounts.Where(x => x.Id == id)

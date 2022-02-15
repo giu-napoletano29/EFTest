@@ -13,7 +13,7 @@ namespace TestJuniorDef.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AccountController : ControllerBase
+    public class AccountController : GenericController
     {
         private readonly ILogger<AccountController> _logger;
         private readonly IAccountService _accountService;
