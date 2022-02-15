@@ -50,7 +50,13 @@ export default{
                         self.RedirectError()
                     }
                 }).catch(function (response){
-                    self.RedirectError(response.message + ". " + response.response.data.title)
+                    let msg = response.message + ". " + response.response.data.title
+                    if(response.response.status == 409){
+                        msg = response.message + ". Email già esistente."
+                    }else if(response.response.status == 500){
+                        msg = "Status code 500. Errore interno del server."
+                    }
+                    self.RedirectError(msg)
                 });
         },
     },
