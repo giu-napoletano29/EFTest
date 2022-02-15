@@ -94,7 +94,7 @@ namespace TestJuniorDef.Controllers
         [HttpPost("new")]      
         public IActionResult InsertProduct([FromBody] Product product)
         {
-            ProductValidation(product);
+            InsertProductValidation(product);
 
             if (ModelState.IsValid)
             {
@@ -117,7 +117,7 @@ namespace TestJuniorDef.Controllers
         [HttpPut("{id}/edit")]       
         public IActionResult UpdateProduct(int id, [FromBody] Product product)
         {
-            ProductValidation(product);
+            InsertProductValidation(product);
             if (ModelState.IsValid)
             {
                 product.Id = id;

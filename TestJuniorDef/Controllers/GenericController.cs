@@ -7,7 +7,12 @@ namespace TestJuniorDef.Controllers
     {
         internal bool BrandValidation(Brand brand)
         {
-            bool state = true;
+            bool state = AccountValidation(brand.Account);
+
+            foreach (var prod in brand.Products)
+            {
+                state = EditProductValidation(prod);
+            }
 
             if (brand.BrandName.Length < 1 || brand.BrandName.Length > 100)
             {
@@ -23,13 +28,6 @@ namespace TestJuniorDef.Controllers
             {
                 state = false;
                 ModelState.AddModelError("brand.Description", $"Description is required.");
-            }
-
-            state = AccountValidation(brand.Account);
-
-            foreach (var prod in brand.Products)
-            {
-                state = ProductValidation(prod);
             }
 
             return state;
@@ -53,7 +51,22 @@ namespace TestJuniorDef.Controllers
             return state;
         }
 
-        internal bool ProductValidation(Product product)
+        internal bool InsertProductValidation(Product product)
+        {
+            bool state;
+
+            state = EditProductValidation(product);
+
+            if (product.BrandId < 1)
+            {
+                state = false;
+                ModelState.AddModelError("Product.BrandId", $"The product BrandId is invalid.");
+            }
+
+            return state;
+        }
+
+        internal bool EditProductValidation(Product product)
         {
             bool state = true;
 
@@ -61,11 +74,6 @@ namespace TestJuniorDef.Controllers
             {
                 state = false;
                 ModelState.AddModelError("Product.Name", $"The product name is invalid.");
-            }
-            if (product.BrandId < 9999)
-            {
-                state = false;
-                ModelState.AddModelError("Product.BrandId", $"The product BrandId is invalid.");
             }
             if (product.ShortDescription.Length < 1)
             {

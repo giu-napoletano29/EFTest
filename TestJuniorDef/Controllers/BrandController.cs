@@ -156,39 +156,5 @@ namespace TestJuniorDef.Controllers
             return Ok(_brandService.GetBrands().Where(x => x.BrandName == name).ToList());
         }
 
-        //private bool BrandValidation(Brand brand)
-        //{
-        //    bool state = true;
-
-        //    if (brand.BrandName.Length < 1 || brand.BrandName.Length > 100)
-        //    {
-        //        state = false;
-        //        ModelState.AddModelError("brand.Name", $"The brand name is invalid.");
-        //    }
-        //    if (brand.AccountId < 1)
-        //    {
-        //        state = false;
-        //        ModelState.AddModelError("brand.AccountId", $"The AccountId is invalid.");
-        //    }
-        //    if (brand.Description.Length < 1)
-        //    {
-        //        state = false;
-        //        ModelState.AddModelError("brand.Description", $"Description is required.");
-        //    }
-
-        //    if (brand.Account.Email.Length < 1 || brand.Account.Email.Length > 319)
-        //    {
-        //        state = false;
-        //        ModelState.AddModelError("brand.account.Email", $"The account email is invalid.");
-        //    }
-        //    if (brand.Account.AccountType < 1 || brand.Account.AccountType > 2)
-        //    {
-        //        state = false;
-        //        ModelState.AddModelError("brand.account.AccountId", $"The account type is invalid.");
-        //    }
-
-        //    return state;
-        //}
-
     }
 }

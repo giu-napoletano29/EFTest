@@ -50,7 +50,7 @@ export default{
                         self.RedirectError()
                     }
                 }).catch(function (response){
-                    self.RedirectError(response.message)
+                    self.RedirectError(response.message + ". " + response.response.data.title)
                 });
         },
     },
