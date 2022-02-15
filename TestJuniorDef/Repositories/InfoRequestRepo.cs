@@ -1,4 +1,5 @@
 ﻿using apitest.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
@@ -48,7 +49,7 @@ namespace TestJuniorDef.Repositories
                                         .Include(x => x.Nation);
         }
 
-        public void Insert(InfoRequest obj)
+        public int Insert(InfoRequest obj)
         {
             IDbContextTransaction transaction = _context.Database.BeginTransaction();
             try
@@ -56,10 +57,12 @@ namespace TestJuniorDef.Repositories
                 _context.InfoRequests.Add(obj);
                 _context.SaveChanges();
                 transaction.Commit();
+                return StatusCodes.Status201Created;
             }
             catch (Exception ex)
             {
                 transaction.Rollback();
+                return StatusCodes.Status500InternalServerError;
             }
         }
 

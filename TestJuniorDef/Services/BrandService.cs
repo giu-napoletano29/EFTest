@@ -105,16 +105,11 @@ namespace TestJuniorDef.Services
         /// <param name="brand"></param>
         public int InsertBrand(Brand brand)
         {
-            try
+            if(_brandRepo.GetAll().Any(x => x.Account.Email == brand.Account.Email))
             {
-                _brandRepo.Insert(brand);
+                return StatusCodes.Status409Conflict;
             }
-            catch (System.Exception e)
-            {
-                return StatusCodes.Status500InternalServerError;
-            }
-
-            return StatusCodes.Status201Created;
+            return _brandRepo.Insert(brand);
             
         }
 
@@ -125,6 +120,10 @@ namespace TestJuniorDef.Services
         /// <returns></returns>
         public int UpdateBrand(Brand brand)
         {
+            if (_brandRepo.GetAll().Any(x => x.Account.Email == brand.Account.Email && x.Id != brand.Id))
+            {
+                return StatusCodes.Status409Conflict;
+            }
             var b = _brandRepo.GetByIdTracked(brand.Id).FirstOrDefault();
             if (b != null)
             {

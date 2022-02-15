@@ -119,16 +119,7 @@ namespace TestJuniorDef.Services
 
         public int InsertProduct(Product product)
         {
-            try
-            {
-                _productRepo.Insert(product);
-            }
-            catch (System.Exception e)
-            {
-                return StatusCodes.Status500InternalServerError;
-            }
-
-            return StatusCodes.Status201Created;
+            return _productRepo.Insert(product);
         }
 
         public int UpdateProduct(Product product)

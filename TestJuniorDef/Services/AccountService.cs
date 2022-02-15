@@ -51,15 +51,7 @@ namespace TestJuniorDef.Services
 
         public int InsertAccount(Account account)
         {
-            try
-            {
-                _accountRepo.Insert(account);
-            }
-            catch (System.Exception e)
-            {
-                return StatusCodes.Status500InternalServerError;
-            }
-            return StatusCodes.Status200OK;
+            return _accountRepo.Insert(account);
         }
 
         public int UpdateAccount(Account account)

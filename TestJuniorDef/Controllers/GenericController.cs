@@ -5,15 +5,23 @@ namespace TestJuniorDef.Controllers
 {
     public abstract class GenericController : Controller
     {
+        internal void AppendModelError(string key, string msg)
+        {
+            ModelState.AddModelError(key, msg);
+        }
+
         internal bool BrandValidation(Brand brand)
         {
             bool state = false;
             
             AccountValidation(brand.Account);
 
-            foreach (var prod in brand.Products)
+            if (brand.Products != null)
             {
-                state = ProductValidation(prod);
+                foreach (var prod in brand.Products)
+                {
+                    state = ProductValidation(prod);
+                }
             }
 
             if (string.IsNullOrWhiteSpace(brand.BrandName) || brand.BrandName.Length > 100)
