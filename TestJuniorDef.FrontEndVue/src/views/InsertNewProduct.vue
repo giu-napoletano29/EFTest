@@ -78,8 +78,9 @@
                 this.$router.push('/products/success')
             },
 
-            RedirectError(){
-                this.$router.push('/products/error')
+            RedirectError(err){
+                this.$router.push({name: 'ProductsError', params: {Error: err}})
+                //this.$router.push('/products/error')
             },
 
             InsertProduct(){

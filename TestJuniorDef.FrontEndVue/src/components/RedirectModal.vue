@@ -9,7 +9,7 @@
                 </div>
                 <div class="modal-body">
                     <p v-if="!OpError" >L'azione è stata compiuta correttamente!</p>
-                    <p v-else >Si è verificato un errore nel completare l'operazione!</p>
+                    <div v-else >Si è verificato un errore nel completare l'operazione! <p>{{ErrMsg}}</p></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn" v-bind:class="getClass()" @click="CloseModal()">Chiudi</button>
@@ -26,6 +26,7 @@ export default {
     props: {
         success: Boolean,
         OpError: Boolean,
+        ErrMsg: String,
     },
 
     data(){

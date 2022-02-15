@@ -8,12 +8,6 @@ export default{
         }
     },
 
-    // computed:{
-    //     totalpages(){
-    //         return Math.ceil(this.list.totalElements/this.list.pageSize)
-    //     }
-    // },
-
     methods:{
         OpenModal(id){
             this.idEl = id
@@ -23,6 +17,7 @@ export default{
         CloseModal(){
             this.open = false
             this.successModalOpen = false //To close success modal
+            this.SpecRedirect();
         },
 
         DeleteSpecComponent(data){

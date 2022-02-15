@@ -98,8 +98,10 @@
                 this.$router.push('/brands/success')
             },
 
-            RedirectError(){
-                this.$router.push('/brands/error')
+            RedirectError(err){
+                console.log(err)
+                this.$router.push({name: 'BrandsError', params: {Error: err}})
+                //this.$router.push('/brands/error')
             },
 
             InsertBrand(){

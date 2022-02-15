@@ -41,6 +41,7 @@
         <RedirectModal
             :success="successModalOpen"
             :OpError="OpError"
+            :ErrMsg="ErrMsg"
             @closemodal="CloseModal"
         />  
     </div>
@@ -76,6 +77,7 @@
                 nrow: 6,
                 ntab: 1,
                 response: "",
+                ErrMsg: "",
             }
         },
 
@@ -91,6 +93,10 @@
             },
             OpenNewBrand(){
                 this.$router.push('/brands/new')
+            },
+
+            SpecRedirect(){
+                this.$router.push('/brands')
             },
             
             Delete(){
@@ -122,6 +128,7 @@
             }else if(this.$route.name==='BrandsError'){
                 this.OpError = true
                 this.successModalOpen = true
+                this.ErrMsg = this.$route.params.Error
             }
         }
     }

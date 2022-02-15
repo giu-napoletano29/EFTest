@@ -62,7 +62,7 @@ namespace TestJuniorDef.Controllers
                 state = false;
                 ModelState.AddModelError("Product.Name", $"The product name is invalid.");
             }
-            if (product.BrandId < 0)
+            if (product.BrandId < 9999)
             {
                 state = false;
                 ModelState.AddModelError("Product.BrandId", $"The product BrandId is invalid.");

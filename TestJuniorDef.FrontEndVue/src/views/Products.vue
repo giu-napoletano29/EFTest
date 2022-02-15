@@ -46,6 +46,7 @@
         <RedirectModal
             :success="successModalOpen"
             :OpError="OpError"
+            :ErrMsg="ErrMsg"
             @closemodal="CloseModal"
         />        
     </div>
@@ -85,6 +86,7 @@
                 ordername: false,
                 orderprice: false,
                 desc: false,
+                ErrMsg: "",
             }
         },
 
@@ -112,6 +114,10 @@
 
             OpenEdit(id){
                 this.$router.push('/products/edit/' + id)
+            },
+
+            SpecRedirect(){
+                this.$router.push('/products')
             },
 
             ResetOrder(){
@@ -159,6 +165,7 @@
             }else if(this.$route.name==='ProductsError'){
                 this.successModalOpen = true
                 this.OpError = true
+                this.ErrMsg = this.$route.params.Error
             }
         }
     }
