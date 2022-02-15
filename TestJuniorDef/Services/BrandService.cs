@@ -79,7 +79,7 @@ namespace TestJuniorDef.Services
         public PagingModelAPI<BrandPagingModelAPI> GetBrandPerPage(int size = 5, int page = 1, string search = "")
         {
             var repo = _brandRepo.GetAll(true);
-            if (search.Length > 0)
+            if (string.IsNullOrWhiteSpace(search) && search.Length > 0)
             {
                 repo = repo.Where(x => x.BrandName.Contains(search));
             }
