@@ -13,5 +13,6 @@ namespace TestJuniorDef.Services.Interfaces
         int InsertBrand(Brand brand);
         int UpdateBrand(Brand brand);
         int DeleteBrand(int id);
+        public bool CheckEmailDuplicate(Brand brand);
     }
 }

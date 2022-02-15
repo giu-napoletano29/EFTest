@@ -97,6 +97,11 @@ namespace TestJuniorDef.Controllers
         [HttpPost("new")]      
         public IActionResult InsertBrand([FromBody] Brand brand)
         {
+            if (_brandService.CheckEmailDuplicate(brand))
+            {
+                AppendModelError("brand.account.email", "Email already exist.");
+            }
+
             BrandValidation(brand);
             if (ModelState.IsValid)
             {
@@ -120,6 +125,10 @@ namespace TestJuniorDef.Controllers
         [HttpPut("{id}/edit")]
         public IActionResult UpdateBrand(int id, [FromBody] Brand brand)
         {
+            if (_brandService.CheckEmailDuplicate(brand))
+            {
+                AppendModelError("brand.account.email", "Email already exist.");
+            }
             BrandValidation(brand);
             if (ModelState.IsValid)
             {

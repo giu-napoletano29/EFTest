@@ -105,12 +105,21 @@ namespace TestJuniorDef.Services
         /// <param name="brand"></param>
         public int InsertBrand(Brand brand)
         {
-            if(_brandRepo.GetAll().Any(x => x.Account.Email == brand.Account.Email))
-            {
-                return StatusCodes.Status409Conflict;
-            }
+            //if(_brandRepo.GetAll().Any(x => x.Account.Email == brand.Account.Email))
+            //{
+            //    return StatusCodes.Status409Conflict;
+            //}
             return _brandRepo.Insert(brand);
             
+        }
+
+        public bool CheckEmailDuplicate(Brand brand)
+        {
+            if (_brandRepo.GetAll().Any(x => x.Account.Email == brand.Account.Email && x.Id > 0 ? x.Id!= brand.Id:true))
+            {
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -120,10 +129,10 @@ namespace TestJuniorDef.Services
         /// <returns></returns>
         public int UpdateBrand(Brand brand)
         {
-            if (_brandRepo.GetAll().Any(x => x.Account.Email == brand.Account.Email && x.Id != brand.Id))
-            {
-                return StatusCodes.Status409Conflict;
-            }
+            //if (_brandRepo.GetAll().Any(x => x.Account.Email == brand.Account.Email && x.Id != brand.Id))
+            //{
+            //    return StatusCodes.Status409Conflict;
+            //}
             var b = _brandRepo.GetByIdTracked(brand.Id).FirstOrDefault();
             if (b != null)
             {

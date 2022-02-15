@@ -17,6 +17,7 @@ export default{
             EditMode: false,
             elemid: this.$route.params.id,
             elementbyid: {},
+            errmsg: [],
         }
     },
     
@@ -51,13 +52,23 @@ export default{
                     }
                 }).catch(function (response){
                     let msg = response.message + ". " + response.response.data.title
-                    if(response.response.status == 409){
-                        msg = response.message + ". Email già esistente."
-                    }else if(response.response.status == 500){
+                    if(response.response.status == 500){
                         msg = "Status code 500. Errore interno del server."
                     }
+                    //self.printValues(response.response.data.errors)
                     self.RedirectError(msg)
                 });
         },
+
+        printValues(obj) {
+            for (var key in obj) {
+                if (typeof obj[key] === "object") {
+                    this.printValues(obj[key]);   
+                } else {
+                    console.log(obj[key]);
+                    this.errmsg.push(obj[key])
+                }
+            }
+        }
     },
 }
