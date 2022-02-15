@@ -113,15 +113,6 @@ namespace TestJuniorDef.Services
             
         }
 
-        public bool CheckEmailDuplicate(Brand brand)
-        {
-            if (_brandRepo.GetAll().Any(x => x.Account.Email == brand.Account.Email && x.Id > 0 ? x.Id!= brand.Id:true))
-            {
-                return true;
-            }
-            return false;
-        }
-
         /// <summary>
         /// Update a brand with the given infos
         /// </summary>
@@ -195,6 +186,20 @@ namespace TestJuniorDef.Services
                 return StatusCodes.Status404NotFound;
             }
             return StatusCodes.Status200OK;
+        }
+
+        /// <summary>
+        /// Check if provided email is duplicate
+        /// </summary>
+        /// <param name="brand"></param>
+        /// <returns></returns>
+        public bool CheckEmailDuplicate(Brand brand)
+        {
+            if (_brandRepo.GetAll().Any(x => x.Account.Email == brand.Account.Email && x.Id > 0 ? x.Id != brand.Id : true))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -57,12 +57,12 @@ namespace TestJuniorDef.Repositories
                                         .ThenInclude(x => x.InfoRequests)
                                     .Include(x => x.Products)
                                         .ThenInclude(x => x.ProductCategory)
-                                            .ThenInclude(x => x.Category); //TODO: try to generalize include
+                                            .ThenInclude(x => x.Category);
         }
 
         public int Insert(Brand obj)
         {
-            IDbContextTransaction transaction = _context.Database.BeginTransaction();
+            using IDbContextTransaction transaction = _context.Database.BeginTransaction();   //TODO: dispose transactions
             try
             {
                 _context.Brands.Add(obj);

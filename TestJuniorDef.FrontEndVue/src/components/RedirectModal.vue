@@ -67,6 +67,7 @@ export default {
     watch: { 
         success: function(val) {
             if(val){
+                this.ErrMsg = []
                 this.printValues(this.ErrMsg)
                 this.modal.show()
             }         
