@@ -51,24 +51,8 @@ export default{
                         self.RedirectError()
                     }
                 }).catch(function (response){
-                    let msg = response.message + ". " + response.response.data.title
-                    if(response.response.status == 500){
-                        msg = "Status code 500. Errore interno del server."
-                    }
-                    //self.printValues(response.response.data.errors)
-                    self.RedirectError(msg)
+                    self.RedirectError(response.response.data.errors)
                 });
         },
-
-        printValues(obj) {
-            for (var key in obj) {
-                if (typeof obj[key] === "object") {
-                    this.printValues(obj[key]);   
-                } else {
-                    console.log(obj[key]);
-                    this.errmsg.push(obj[key])
-                }
-            }
-        }
     },
 }

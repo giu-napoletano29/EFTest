@@ -7,7 +7,7 @@ export default{
             idEl: 0,
             successModalOpen: false,
             OpError: false,
-            ErrMsg: "",
+            ErrMsg: {},
         }
     },
 

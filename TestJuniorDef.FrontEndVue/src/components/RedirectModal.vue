@@ -9,7 +9,10 @@
                 </div>
                 <div class="modal-body">
                     <p v-if="!OpError" >L'azione è stata compiuta correttamente!</p>
-                    <div v-else >Si è verificato un errore nel completare l'operazione! <p>{{ErrMsg}}</p></div>
+                    <div v-else>
+                        Si è verificato un errore nel completare l'operazione! 
+                        <div v-for="(l,i) in err" :key="i">{{l}}</div>
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn" v-bind:class="getClass()" @click="CloseModal()">Chiudi</button>
@@ -26,12 +29,13 @@ export default {
     props: {
         success: Boolean,
         OpError: Boolean,
-        ErrMsg: String,
+        ErrMsg: Object,
     },
 
     data(){
         return{
-            modal: null
+            modal: null,
+            err: []
         }
     },
     mounted() {
@@ -48,12 +52,22 @@ export default {
                 'btn-success': !this.OpError,  
                 'btn-danger': this.OpError
                 }
+        },
+        printValues(obj) {
+            for (var key in obj) {
+                if (typeof obj[key] === "object") {
+                    this.printValues(obj[key]);   
+                } else {
+                    this.err.push(obj[key])
+                }
+            }
         }
     },
 
     watch: { 
         success: function(val) {
             if(val){
+                this.printValues(this.ErrMsg)
                 this.modal.show()
             }         
         }
