@@ -7,14 +7,16 @@ namespace TestJuniorDef.Controllers
     {
         internal bool BrandValidation(Brand brand)
         {
-            bool state = AccountValidation(brand.Account);
+            bool state = false;
+            
+            AccountValidation(brand.Account);
 
             foreach (var prod in brand.Products)
             {
-                state = EditProductValidation(prod);
+                state = ProductValidation(prod);
             }
 
-            if (brand.BrandName.Length < 1 || brand.BrandName.Length > 100)
+            if (string.IsNullOrWhiteSpace(brand.BrandName) || brand.BrandName.Length > 100)
             {
                 state = false;
                 ModelState.AddModelError("brand.Name", $"The brand name is invalid.");
@@ -24,7 +26,7 @@ namespace TestJuniorDef.Controllers
                 state = false;
                 ModelState.AddModelError("brand.AccountId", $"The AccountId is invalid.");
             }
-            if (brand.Description.Length < 1)
+            if (string.IsNullOrWhiteSpace(brand.Description))
             {
                 state = false;
                 ModelState.AddModelError("brand.Description", $"Description is required.");
@@ -37,7 +39,7 @@ namespace TestJuniorDef.Controllers
         {
             bool state = true;
 
-            if (account.Email.Length < 1 || account.Email.Length > 319)
+            if (string.IsNullOrWhiteSpace(account.Email) || account.Email.Length > 319)
             {
                 state = false;
                 ModelState.AddModelError("account.Email", $"The account email is invalid.");
@@ -55,7 +57,7 @@ namespace TestJuniorDef.Controllers
         {
             bool state;
 
-            state = EditProductValidation(product);
+            state = ProductValidation(product);
 
             if (product.BrandId < 1)
             {
@@ -66,21 +68,21 @@ namespace TestJuniorDef.Controllers
             return state;
         }
 
-        internal bool EditProductValidation(Product product)
+        internal bool ProductValidation(Product product)
         {
             bool state = true;
 
-            if (product.Name.Length < 1 || product.Name.Length > 80)
+            if (string.IsNullOrWhiteSpace(product.Name) || product.Name.Length > 80)
             {
                 state = false;
                 ModelState.AddModelError("Product.Name", $"The product name is invalid.");
             }
-            if (product.ShortDescription.Length < 1)
+            if (string.IsNullOrWhiteSpace(product.ShortDescription))
             {
                 state = false;
                 ModelState.AddModelError("Product.ShortDescription", $"Short description is required.");
             }
-            if (product.Description.Length < 1)
+            if (string.IsNullOrWhiteSpace(product.Description))
             {
                 state = false;
                 ModelState.AddModelError("Product.Description", $"Description is required.");

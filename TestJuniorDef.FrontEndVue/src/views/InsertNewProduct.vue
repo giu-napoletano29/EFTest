@@ -92,13 +92,13 @@
                 if (!(this.product.BrandId>0)) {
                     this.errors.push('Devi selezionare un brand.');
                 }
-                if (!this.product.Name) {
+                if (!this.product.Name || !/\S/.test(this.product.Name)) {
                     this.errors.push('Devi inserire un nome.');
                 }
-                if (!this.product.ShortDescription) {
+                if (!this.product.ShortDescription || !/\S/.test(this.product.ShortDescription)) {
                     this.errors.push('Devi inserire una piccola descrizione.');
                 }
-                if (!this.product.Description) {
+                if (!this.product.Description || !/\S/.test(this.product.Description)) {
                     this.errors.push('Devi inserire una descrizione.');
                 }
                 if (this.product.ProductCategory.length < 1) {

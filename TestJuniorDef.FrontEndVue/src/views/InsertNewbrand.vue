@@ -127,16 +127,16 @@
                 this.errors = [];
                 var temp = [];
 
-                if (!this.brand.BrandName) {
+                if (!this.brand.BrandName || !/\S/.test(this.brand.BrandName)) {
                     temp.push('Devi inserire un nome.');
                 }
                 if (!re.test(this.brand.Account.Email)) {
                     temp.push('Devi inserire una mail valida.');
                 }
-                if (!this.brand.Account.Password) {
+                if (!this.brand.Account.Password || !/\S/.test(this.brand.Account.Password)) {
                     temp.push('Devi inserire una password.');
                 }
-                if (!this.brand.Description) {
+                if (!this.brand.Description || !/\S/.test(this.brand.Description)) {
                     temp.push('Devi inserire una descrizione.');
                 }
                 if(this.product.length > 0){
