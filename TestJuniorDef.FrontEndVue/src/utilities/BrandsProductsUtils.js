@@ -6,6 +6,7 @@ export default{
             open: false,
             idEl: 0,
             successModalOpen: false,
+            showToast: false,
             OpError: false,
             ErrMsg: {},
         }
@@ -21,6 +22,15 @@ export default{
             this.open = false
             this.successModalOpen = false //To close success modal
             this.SpecRedirect(); //Calling redirect specific for the component
+        },
+
+        OpenToast(){
+            this.SpecRedirect();
+            this.showToast = true;
+        },
+
+        CloseToast(){
+            this.showToast = false;
         },
 
         //Handling of Delete request result

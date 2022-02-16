@@ -83,7 +83,7 @@
                 }else{
                     resp = ProductRepo.update(this.elemid, this.product)
                 }
-                this.ResponseHandler(resp)
+                this.ResponseHandler(resp)  //Common in InsertPageUtils.js
             },
 
             checkForm: function (e) {

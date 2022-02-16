@@ -48,7 +48,11 @@
             :OpError="OpError"
             :ErrMsg="ErrMsg"
             @closemodal="CloseModal"
-        />        
+        />  
+        <ToastMessage
+            :open="showToast"
+            @closetoast="CloseToast"
+        />      
     </div>
 </template>
 
@@ -62,6 +66,7 @@
     import Pagination from '@/components/Pagination.vue'
     import DeleteModal from '@/components/DeleteModal.vue'
     import RedirectModal from '@/components/RedirectModal.vue'
+    import ToastMessage from '@/components/ToastMessage.vue'
     import {Factory} from './../wrappers/Factory'
     const ProductsRepo = Factory.get('products')
 
@@ -74,7 +79,8 @@
             Pagination,
             DeleteModal,
             Table,
-            RedirectModal
+            RedirectModal,
+            ToastMessage
         },
 
         data(){
@@ -116,7 +122,9 @@
             },
 
             SpecRedirect(){
-                this.$router.push({name: 'Products'})
+                if(this.$route.name!='Products'){
+                    this.$router.push({name: 'Products'})
+                }
             },
 
             ResetOrder(){
@@ -160,7 +168,8 @@
 
         mounted(){
             if(this.$route.name==='ProductsSuccess'){
-                this.successModalOpen = true
+                //this.successModalOpen = true
+                this.OpenToast()
             }else if(this.$route.name==='ProductsError'){
                 this.successModalOpen = true
                 this.OpError = true

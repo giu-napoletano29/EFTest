@@ -105,7 +105,7 @@
                     delete this.brand.Products
                     resp = BrandsRepo.update(this.elemid, this.brand)
                 }
-                this.ResponseHandler(resp)
+                this.ResponseHandler(resp) //Common in InsertPageUtils.js
             },
 
             addProd () {  

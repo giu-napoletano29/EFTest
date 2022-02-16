@@ -44,6 +44,10 @@
             :ErrMsg="ErrMsg"
             @closemodal="CloseModal"
         />  
+        <ToastMessage
+            :open="showToast"
+            @closetoast="CloseToast"
+        />
     </div>
 </template>
 
@@ -51,6 +55,7 @@
     import MainPagesUtils from '@/utilities/MainPagesUtils.js' 
     import BrandsProductsUtils from '@/utilities/BrandsProductsUtils.js'
     import Header from '@/components/Header.vue'
+    import ToastMessage from '@/components/ToastMessage.vue'
     import Brands from '@/components/Brands.vue'
     import Table from '@/components/Table.vue'
     import Pagination from '@/components/Pagination.vue'
@@ -68,7 +73,8 @@
             Pagination,
             DeleteModal,
             Table,
-            RedirectModal
+            RedirectModal,
+            ToastMessage
         },
 
         data(){
@@ -95,7 +101,9 @@
             },
 
             SpecRedirect(){
-                this.$router.push({name: 'Brands'})
+                if(this.$route.name!='Brands'){
+                    this.$router.push({name: 'Brands'})
+                }
             },
             
             Delete(){
@@ -123,7 +131,8 @@
 
         mounted(){
             if(this.$route.name==='BrandsSuccess'){
-                this.successModalOpen = true
+                // this.successModalOpen = true
+                this.OpenToast()
             }else if(this.$route.name==='BrandsError'){
                 this.OpError = true
                 this.successModalOpen = true
