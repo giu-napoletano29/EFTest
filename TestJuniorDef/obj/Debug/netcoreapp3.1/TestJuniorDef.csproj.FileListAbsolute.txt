@@ -418,3 +418,7 @@ C:\Users\Giuseppe\Documents\GitHub\repo\EFTest\TestJuniorDef\obj\Debug\netcoreap
 C:\Users\Giuseppe\Documents\GitHub\repo\EFTest\TestJuniorDef\obj\Debug\netcoreapp3.1\TestJuniorDef.dll
 C:\Users\Giuseppe\Documents\GitHub\repo\EFTest\TestJuniorDef\obj\Debug\netcoreapp3.1\TestJuniorDef.pdb
 C:\Users\Giuseppe\Documents\GitHub\repo\EFTest\TestJuniorDef\obj\Debug\netcoreapp3.1\TestJuniorDef.genruntimeconfig.cache
+C:\Users\napoletano\source\repos\TestJuniorDef\TestJuniorDef\bin\Debug\netcoreapp3.1\BusinessAccess.dll
+C:\Users\napoletano\source\repos\TestJuniorDef\TestJuniorDef\bin\Debug\netcoreapp3.1\DataAccess.dll
+C:\Users\napoletano\source\repos\TestJuniorDef\TestJuniorDef\bin\Debug\netcoreapp3.1\BusinessAccess.pdb
+C:\Users\napoletano\source\repos\TestJuniorDef\TestJuniorDef\bin\Debug\netcoreapp3.1\DataAccess.pdb

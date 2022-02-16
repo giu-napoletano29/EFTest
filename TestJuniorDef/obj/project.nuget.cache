@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ynfWWZql5snJnxzwWM51T7AtNcFkauhCyKEXeoT9hyc6qdMUsBQxaOIhK20/P6HhRE8XpBWsTVHSo7e4KxNq9w==",
+  "dgSpecHash": "F9ZX3avW9jdqy5e/WANGgm2mQ8R0fZi/tuYFUbtZEFQhXkhffhEFm/g4++dkTO7Q+S5Ufx+c+B7DbRVh596MEw==",
   "success": true,
   "projectFilePath": "C:\\Users\\napoletano\\source\\repos\\TestJuniorDef\\TestJuniorDef\\TestJuniorDef.csproj",
   "expectedPackageFiles": [
@@ -29,8 +29,8 @@
     "C:\\Users\\napoletano\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\3.1.22\\microsoft.entityframeworkcore.analyzers.3.1.22.nupkg.sha512",
     "C:\\Users\\napoletano\\.nuget\\packages\\microsoft.entityframeworkcore.design\\3.1.21\\microsoft.entityframeworkcore.design.3.1.21.nupkg.sha512",
     "C:\\Users\\napoletano\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\3.1.22\\microsoft.entityframeworkcore.inmemory.3.1.22.nupkg.sha512",
-    "C:\\Users\\napoletano\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\3.1.21\\microsoft.entityframeworkcore.relational.3.1.21.nupkg.sha512",
-    "C:\\Users\\napoletano\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\3.1.21\\microsoft.entityframeworkcore.sqlserver.3.1.21.nupkg.sha512",
+    "C:\\Users\\napoletano\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\3.1.22\\microsoft.entityframeworkcore.relational.3.1.22.nupkg.sha512",
+    "C:\\Users\\napoletano\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\3.1.22\\microsoft.entityframeworkcore.sqlserver.3.1.22.nupkg.sha512",
     "C:\\Users\\napoletano\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\3.1.21\\microsoft.entityframeworkcore.tools.3.1.21.nupkg.sha512",
     "C:\\Users\\napoletano\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\3.1.22\\microsoft.extensions.caching.abstractions.3.1.22.nupkg.sha512",
     "C:\\Users\\napoletano\\.nuget\\packages\\microsoft.extensions.caching.memory\\3.1.22\\microsoft.extensions.caching.memory.3.1.22.nupkg.sha512",
