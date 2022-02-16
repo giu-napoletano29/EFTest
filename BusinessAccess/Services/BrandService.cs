@@ -1,16 +1,17 @@
 ﻿using apitest.Models;
+using BusinessAccess.ModelAPI.BrandModels;
+using BusinessAccess.ModelAPI.CategoryModels;
+using BusinessAccess.ModelAPI.ProductModels;
+using BusinessAccess.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using TestJuniorDef.ModelAPI;
-using TestJuniorDef.ModelAPI.CategoryModels;
-using TestJuniorDef.ModelAPI.ProductModels;
 using TestJuniorDef.Repositories.Interfaces;
-using TestJuniorDef.Services.Interfaces;
 
-namespace TestJuniorDef.Services
+namespace BusinessAccess.Services
 {
     public class BrandService : IBrandService
     {
@@ -68,7 +69,7 @@ namespace TestJuniorDef.Services
                             TotalInfoRequest = x.InfoRequests.Count
                         })
                     }).FirstOrDefault();
-            
+
             return brands;
         }
 
@@ -85,14 +86,14 @@ namespace TestJuniorDef.Services
                 search = search.TrimStart();
                 repo = repo.Where(x => x.BrandName.Contains(search));
             }
-            var pagination = Service.PaginateEntity<Brand>(repo, size, page);
+            var pagination = Service.PaginateEntity(repo, size, page);
             PagingModelAPI<BrandPagingModelAPI> model = new PagingModelAPI<BrandPagingModelAPI>();
             model.PageSize = pagination.PageSize;
             model.TotalElements = pagination.TotalElements;
             model.NumPage = pagination.NumPage;
             model.Elements = pagination.Elements.Select(x => new BrandPagingModelAPI
             {
-                Id=x.Id,
+                Id = x.Id,
                 BrandName = x.BrandName,
                 Description = x.Description,
                 ProductsId = x.Products.Select(y => y.Id).ToList()
@@ -115,7 +116,7 @@ namespace TestJuniorDef.Services
             {
                 return StatusCodes.Status500InternalServerError;
             }
-            
+
         }
 
         /// <summary>
@@ -141,7 +142,7 @@ namespace TestJuniorDef.Services
 
                     _brandRepo.Update(b);
                 }
-                catch (System.Exception e)
+                catch (Exception e)
                 {
                     return StatusCodes.Status500InternalServerError;
                 }
@@ -181,7 +182,8 @@ namespace TestJuniorDef.Services
                     }
                     //_brandRepo.Delete(brand);
                     _brandRepo.Update(brand);
-                }catch (System.Exception e)
+                }
+                catch (Exception e)
                 {
                     return StatusCodes.Status500InternalServerError;
                 }

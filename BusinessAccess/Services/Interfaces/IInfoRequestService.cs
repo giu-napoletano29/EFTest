@@ -1,9 +1,9 @@
 ﻿using apitest.Models;
+using BusinessAccess.ModelAPI.InfoRequestModels;
 using System.Collections.Generic;
 using TestJuniorDef.ModelAPI;
-using TestJuniorDef.ModelAPI.InfoRequestModels;
 
-namespace TestJuniorDef.Services.Interfaces
+namespace BusinessAccess.Services.Interfaces
 {
     public interface IInfoRequestService
     {

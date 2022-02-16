@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using TestJuniorDef.ModelAPI.CategoryModels;
+﻿using BusinessAccess.ModelAPI.CategoryModels;
+using System.Collections.Generic;
 
-namespace TestJuniorDef.ModelAPI.ProductModels
+namespace BusinessAccess.ModelAPI.ProductModels
 {
     public class ProductPagingModelAPI : ProductBaseModelAPI
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TestJuniorDef.ModelAPI.InfoRequestModels
+namespace BusinessAccess.ModelAPI.InfoRequestModels
 {
     public class InfoRequestModelAPI
     {

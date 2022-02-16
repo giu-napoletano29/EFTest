@@ -1,9 +1,9 @@
 ﻿using apitest.Models;
+using BusinessAccess.ModelAPI.ProductModels;
 using System.Collections.Generic;
 using TestJuniorDef.ModelAPI;
-using TestJuniorDef.ModelAPI.ProductModels;
 
-namespace TestJuniorDef.Services.Interfaces
+namespace BusinessAccess.Services.Interfaces
 {
     public interface IProductService
     {

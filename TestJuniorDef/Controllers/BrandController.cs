@@ -4,15 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
-using TestJuniorDef.Repositories.Interfaces;
-using TestJuniorDef.Repositories;
-using Microsoft.Data.SqlClient;
-using TestJuniorDef.ModelAPI;
-using TestJuniorDef.ModelAPI.CategoryModels;
-using TestJuniorDef.ModelAPI.ProductModels;
-using TestJuniorDef.Services.Interfaces;
 using System.Text;
+using BusinessAccess.Services.Interfaces;
 
 namespace TestJuniorDef.Controllers
 {

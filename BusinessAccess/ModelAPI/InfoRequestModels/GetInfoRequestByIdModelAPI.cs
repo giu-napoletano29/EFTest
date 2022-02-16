@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using BusinessAccess.ModelAPI.ProductModels;
+using System.Collections;
 using System.Collections.Generic;
-using TestJuniorDef.ModelAPI.ProductModels;
+using TestJuniorDef.ModelAPI;
 
-namespace TestJuniorDef.ModelAPI.InfoRequestModels
+namespace BusinessAccess.ModelAPI.InfoRequestModels
 {
     public class GetInfoRequestByIdModelAPI
     {

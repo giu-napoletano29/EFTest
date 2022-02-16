@@ -1,12 +1,12 @@
 ﻿using apitest.Models;
+using BusinessAccess.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using TestJuniorDef.Repositories.Interfaces;
-using TestJuniorDef.Services.Interfaces;
 
-namespace TestJuniorDef.Services
+namespace BusinessAccess.Services
 {
     public class AccountService : IAccountService
     {
@@ -18,7 +18,7 @@ namespace TestJuniorDef.Services
 
         public int DeleteAccount(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace TestJuniorDef.Services
 
         public int UpdateAccount(Account account)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

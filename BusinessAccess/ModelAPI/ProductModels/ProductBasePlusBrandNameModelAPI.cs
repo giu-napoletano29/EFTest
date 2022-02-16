@@ -1,4 +1,4 @@
-﻿namespace TestJuniorDef.ModelAPI.ProductModels
+﻿namespace BusinessAccess.ModelAPI.ProductModels
 {
     public class ProductBasePlusBrandNameModelAPI : ProductBaseModelAPI
     {

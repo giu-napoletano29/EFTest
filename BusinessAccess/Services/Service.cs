@@ -5,13 +5,12 @@ using TestJuniorDef.ModelAPI;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using TestJuniorDef.Repositories.Interfaces;
-using TestJuniorDef.Services.Interfaces;
 using apitest.Models;
 
 [assembly: InternalsVisibleTo("TestJuniorDef.Services")]
 
 
-namespace TestJuniorDef.Services
+namespace BusinessAccess.Services
 {
     internal static class Service
     {
@@ -26,7 +25,7 @@ namespace TestJuniorDef.Services
         internal static PagingModelAPI<T> PaginateEntity<T>(IQueryable<T> entityRepo, int size = 5, int page = 1)
         {
             //var entityList = entityRepo.GetAll(true).Skip((size * page) - size).Take(size);
-            var entityList = entityRepo.Skip((size * page) - size).Take(size);
+            var entityList = entityRepo.Skip(size * page - size).Take(size);
 
             PagingModelAPI<T> model = new PagingModelAPI<T>();
             model.PageSize = size;

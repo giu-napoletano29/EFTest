@@ -3,14 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using TestJuniorDef.Repositories.Interfaces;
-using TestJuniorDef.Repositories;
-using Microsoft.Data.SqlClient;
-using TestJuniorDef.ModelAPI;
-using TestJuniorDef.Services.Interfaces;
-using TestJuniorDef.ModelAPI.ProductModels;
+using BusinessAccess.Services.Interfaces;
 
 namespace TestJuniorDef.Controllers
 {

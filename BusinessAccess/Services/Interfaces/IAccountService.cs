@@ -1,7 +1,7 @@
 ﻿using apitest.Models;
 using System.Collections.Generic;
 
-namespace TestJuniorDef.Services.Interfaces
+namespace BusinessAccess.Services.Interfaces
 {
     public interface IAccountService
     {

@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using TestJuniorDef.ModelAPI.CategoryModels;
-using TestJuniorDef.ModelAPI.InfoRequestModels;
+﻿using BusinessAccess.ModelAPI.CategoryModels;
+using BusinessAccess.ModelAPI.InfoRequestModels;
+using System.Collections.Generic;
 
-namespace TestJuniorDef.ModelAPI
+namespace BusinessAccess.ModelAPI.ProductModels
 {
     public class ProductByIdModelAPI
     {

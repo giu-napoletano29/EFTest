@@ -1,13 +1,10 @@
 ﻿using apitest.Models;
+using BusinessAccess.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-using TestJuniorDef.ModelAPI;
-using TestJuniorDef.ModelAPI.InfoRequestModels;
-using TestJuniorDef.ModelAPI.ProductModels;
 using TestJuniorDef.Repositories.Interfaces;
-using TestJuniorDef.Services.Interfaces;
 
-namespace TestJuniorDef.Services
+namespace BusinessAccess.Services
 {
     public class CategoryService : ICategoryService
     {

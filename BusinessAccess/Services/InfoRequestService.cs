@@ -1,13 +1,13 @@
 ﻿using apitest.Models;
+using BusinessAccess.ModelAPI.InfoRequestModels;
+using BusinessAccess.ModelAPI.ProductModels;
+using BusinessAccess.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using TestJuniorDef.ModelAPI;
-using TestJuniorDef.ModelAPI.InfoRequestModels;
-using TestJuniorDef.ModelAPI.ProductModels;
 using TestJuniorDef.Repositories.Interfaces;
-using TestJuniorDef.Services.Interfaces;
 
-namespace TestJuniorDef.Services
+namespace BusinessAccess.Services
 {
     public class InfoRequestService : IInfoRequestService
     {
@@ -76,7 +76,7 @@ namespace TestJuniorDef.Services
             var repo = _inforeqrepo.GetAll(true);
             if (!orderdesc)
             {
-                repo = repo.OrderByDescending(x => x.InsertDate);        
+                repo = repo.OrderByDescending(x => x.InsertDate);
             }
             else
             {
@@ -95,14 +95,14 @@ namespace TestJuniorDef.Services
                 search = search.TrimStart();
                 repo = repo.Where(x => x.Product.Name.Contains(search));
             }
-            var pagination = Service.PaginateEntity<InfoRequest>(repo, size, page);
+            var pagination = Service.PaginateEntity(repo, size, page);
             PagingModelAPI<InfoRequestPagingModelAPI> model = new PagingModelAPI<InfoRequestPagingModelAPI>();
             model.PageSize = pagination.PageSize;
             model.TotalElements = pagination.TotalElements;
             model.NumPage = pagination.NumPage;
             model.Elements = pagination.Elements.Select(x => new InfoRequestPagingModelAPI
             {
-                Id=x.Id,
+                Id = x.Id,
                 Name = x.Name,
                 Lastname = x.LastName,
                 Text = x.RequestText,

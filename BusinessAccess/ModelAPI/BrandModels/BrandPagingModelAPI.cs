@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TestJuniorDef.ModelAPI
+namespace BusinessAccess.ModelAPI.BrandModels
 {
     public class BrandPagingModelAPI
     {

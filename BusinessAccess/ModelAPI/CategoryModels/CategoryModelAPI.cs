@@ -1,4 +1,4 @@
-﻿namespace TestJuniorDef.ModelAPI.CategoryModels
+﻿namespace BusinessAccess.ModelAPI.CategoryModels
 {
     public class CategoryModelAPI : CategoryBaseModelAPI
     {

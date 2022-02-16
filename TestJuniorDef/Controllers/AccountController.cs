@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text.Json;
 using TestJuniorDef.Repositories.Interfaces;
 using TestJuniorDef.Repositories;
-using TestJuniorDef.Services.Interfaces;
+using BusinessAccess.Services.Interfaces;
 
 namespace TestJuniorDef.Controllers
 {

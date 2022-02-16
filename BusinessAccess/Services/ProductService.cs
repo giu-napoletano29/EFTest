@@ -1,16 +1,16 @@
 ﻿using apitest.Models;
+using BusinessAccess.ModelAPI.CategoryModels;
+using BusinessAccess.ModelAPI.InfoRequestModels;
+using BusinessAccess.ModelAPI.ProductModels;
+using BusinessAccess.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using TestJuniorDef.ModelAPI;
-using TestJuniorDef.ModelAPI.CategoryModels;
-using TestJuniorDef.ModelAPI.InfoRequestModels;
-using TestJuniorDef.ModelAPI.ProductModels;
 using TestJuniorDef.Repositories.Interfaces;
-using TestJuniorDef.Services.Interfaces;
 
-namespace TestJuniorDef.Services
+namespace BusinessAccess.Services
 {
     public class ProductService : IProductService
     {
@@ -85,18 +85,18 @@ namespace TestJuniorDef.Services
 
             if (orderbyBrand)
             {
-                repo = desc ? repo.OrderByDescending(x => x.Brand.BrandName):repo.OrderBy(x => x.Brand.BrandName);
+                repo = desc ? repo.OrderByDescending(x => x.Brand.BrandName) : repo.OrderBy(x => x.Brand.BrandName);
             }
             if (orderbyName)
             {
-                repo = desc ? repo.OrderByDescending(x => x.Name):repo.OrderBy(x => x.Name);
+                repo = desc ? repo.OrderByDescending(x => x.Name) : repo.OrderBy(x => x.Name);
             }
             if (orderbyPrice)
             {
-                repo = desc ? repo.OrderByDescending(x => x.Price):repo.OrderBy(x => x.Price);
+                repo = desc ? repo.OrderByDescending(x => x.Price) : repo.OrderBy(x => x.Price);
             }
 
-            var pagination = Service.PaginateEntity<Product>(repo, size, page);
+            var pagination = Service.PaginateEntity(repo, size, page);
             PagingModelAPI<ProductPagingModelAPI> model = new PagingModelAPI<ProductPagingModelAPI>();
             model.PageSize = pagination.PageSize;
             model.TotalElements = pagination.TotalElements;
@@ -147,7 +147,7 @@ namespace TestJuniorDef.Services
 
                     _productRepo.Update(prod);
                 }
-                catch (System.Exception e)
+                catch (Exception e)
                 {
                     return StatusCodes.Status500InternalServerError;
                 }
@@ -183,7 +183,7 @@ namespace TestJuniorDef.Services
                     //_productRepo.Delete(prod);
                     _productRepo.Update(prod);
                 }
-                catch (System.Exception e)
+                catch (Exception e)
                 {
                     return StatusCodes.Status500InternalServerError;
                 }

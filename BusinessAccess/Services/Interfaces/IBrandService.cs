@@ -1,9 +1,10 @@
 ﻿using apitest.Models;
+using BusinessAccess.ModelAPI.BrandModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using TestJuniorDef.ModelAPI;
 
-namespace TestJuniorDef.Services.Interfaces
+namespace BusinessAccess.Services.Interfaces
 {
     public interface IBrandService
     {
