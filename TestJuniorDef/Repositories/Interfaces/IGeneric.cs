@@ -9,7 +9,7 @@ namespace TestJuniorDef.Repositories.Interfaces
         IQueryable<T> GetByIdTracked(int id);
         IQueryable<T> GetAll();
         IQueryable<T> GetAll(bool includeAll);
-        int Insert(T obj);
+        void Insert(T obj);
         void Update(T obj);
         void Delete(T obj);
     }

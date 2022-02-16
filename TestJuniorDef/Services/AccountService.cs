@@ -1,5 +1,6 @@
 ﻿using apitest.Models;
 using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TestJuniorDef.Repositories.Interfaces;
@@ -51,7 +52,15 @@ namespace TestJuniorDef.Services
 
         public int InsertAccount(Account account)
         {
-            return _accountRepo.Insert(account);
+            try
+            {
+                _accountRepo.Insert(account);
+                return StatusCodes.Status201Created;
+            }
+            catch (Exception ex)
+            {
+                return StatusCodes.Status500InternalServerError;
+            }
         }
 
         public int UpdateAccount(Account account)

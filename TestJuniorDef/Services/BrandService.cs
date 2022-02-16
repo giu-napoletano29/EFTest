@@ -1,6 +1,7 @@
 ﻿using apitest.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TestJuniorDef.ModelAPI;
@@ -105,11 +106,15 @@ namespace TestJuniorDef.Services
         /// <param name="brand"></param>
         public int InsertBrand(Brand brand)
         {
-            //if(_brandRepo.GetAll().Any(x => x.Account.Email == brand.Account.Email))
-            //{
-            //    return StatusCodes.Status409Conflict;
-            //}
-            return _brandRepo.Insert(brand);
+            try
+            {
+                _brandRepo.Insert(brand);
+                return StatusCodes.Status201Created;
+            }
+            catch (Exception ex)
+            {
+                return StatusCodes.Status500InternalServerError;
+            }
             
         }
 

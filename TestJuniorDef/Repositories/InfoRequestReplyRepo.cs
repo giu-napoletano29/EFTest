@@ -19,17 +19,8 @@ namespace TestJuniorDef.Repositories
 
         public void Delete(InfoRequestReply obj)
         {
-            IDbContextTransaction transaction = _context.Database.BeginTransaction();
-            try
-            {
-                _context.Remove(obj);
-                _context.SaveChanges();
-                transaction.Commit();
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-            }
+            _context.Remove(obj);
+            _context.SaveChanges();
         }
 
         public IQueryable<InfoRequestReply> GetAll()
@@ -70,36 +61,16 @@ namespace TestJuniorDef.Repositories
                                                .Include(x => x.Account);
         }
 
-        public int Insert(InfoRequestReply obj)
+        public void Insert(InfoRequestReply obj)
         {
-            IDbContextTransaction transaction = _context.Database.BeginTransaction();
-            try
-            {
-                _context.InfoRequestReplies.Add(obj);
-                _context.SaveChanges();
-                transaction.Commit();
-                return StatusCodes.Status201Created;
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-                return StatusCodes.Status500InternalServerError;
-            }
+            _context.InfoRequestReplies.Add(obj);
+            _context.SaveChanges();
         }
 
         public void Update(InfoRequestReply obj)
         {
-            IDbContextTransaction transaction = _context.Database.BeginTransaction();
-            try
-            {
-                _context.InfoRequestReplies.Update(obj);
-                _context.SaveChanges();
-                transaction.Commit();
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-            }
+            _context.InfoRequestReplies.Update(obj);
+            _context.SaveChanges();
         }
     }
 }

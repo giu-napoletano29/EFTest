@@ -60,54 +60,24 @@ namespace TestJuniorDef.Repositories
                                             .ThenInclude(x => x.Category);
         }
 
-        public int Insert(Brand obj)
+        public void Insert(Brand obj)
         {
-            using IDbContextTransaction transaction = _context.Database.BeginTransaction();   //TODO: dispose transactions
-            try
-            {
-                _context.Brands.Add(obj);
-                _context.SaveChanges();
-                transaction.Commit();
-                return StatusCodes.Status201Created;
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-                return StatusCodes.Status500InternalServerError;
-            }
-
-
+            //using IDbContextTransaction transaction = _context.Database.BeginTransaction();   //TODO: dispose transactions
+            _context.Brands.Add(obj);
+            _context.SaveChanges();
         }
 
         public void Update(Brand obj)
         {
-            IDbContextTransaction transaction = _context.Database.BeginTransaction();
-            try
-            {
-                _context.Brands.Update(obj);
-                _context.SaveChanges();
-                transaction.Commit();
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-            }
+            _context.Brands.Update(obj);
+            _context.SaveChanges();
 
         }
 
         public void Delete(Brand obj)
         {
-            IDbContextTransaction transaction = _context.Database.BeginTransaction();
-            try
-            {
-                _context.Remove(obj);
-                _context.SaveChanges();
-                transaction.Commit();
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-            }
+            _context.Remove(obj);
+            _context.SaveChanges();
 
         }
     }

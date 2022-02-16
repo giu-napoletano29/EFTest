@@ -1,5 +1,6 @@
 ﻿using apitest.Models;
 using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TestJuniorDef.ModelAPI;
@@ -119,7 +120,15 @@ namespace TestJuniorDef.Services
 
         public int InsertProduct(Product product)
         {
-            return _productRepo.Insert(product);
+            try
+            {
+                _productRepo.Insert(product);
+                return StatusCodes.Status201Created;
+            }
+            catch (Exception ex)
+            {
+                return StatusCodes.Status500InternalServerError;
+            }
         }
 
         public int UpdateProduct(Product product)

@@ -49,51 +49,22 @@ namespace TestJuniorDef.Repositories
                                         .Include(x => x.Nation);
         }
 
-        public int Insert(InfoRequest obj)
+        public void Insert(InfoRequest obj)
         {
-            IDbContextTransaction transaction = _context.Database.BeginTransaction();
-            try
-            {
-                _context.InfoRequests.Add(obj);
-                _context.SaveChanges();
-                transaction.Commit();
-                return StatusCodes.Status201Created;
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-                return StatusCodes.Status500InternalServerError;
-            }
+            _context.InfoRequests.Add(obj);
+            _context.SaveChanges();
         }
 
         public void Update(InfoRequest obj)
         {
-            IDbContextTransaction transaction = _context.Database.BeginTransaction();
-            try
-            {
-                _context.InfoRequests.Update(obj);
-                _context.SaveChanges();
-                transaction.Commit();
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-            }
+            _context.InfoRequests.Update(obj);
+            _context.SaveChanges();
         }
 
         public void Delete(InfoRequest obj)
         {
-            IDbContextTransaction transaction = _context.Database.BeginTransaction();
-            try
-            {
-                _context.Remove(obj);
-                _context.SaveChanges();
-                transaction.Commit();
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-            }
+            _context.Remove(obj);
+            _context.SaveChanges();
         }
 
         /// <summary>

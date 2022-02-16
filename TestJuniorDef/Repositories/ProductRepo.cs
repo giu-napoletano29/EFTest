@@ -44,56 +44,25 @@ namespace TestJuniorDef.Repositories
                                     .Include(x => x.Brand);
         }
 
-        public int Insert(Product obj)
+        public void Insert(Product obj)
         {
-            IDbContextTransaction transaction = _context.Database.BeginTransaction();
-            try
-            {
-                _context.Products.Add(obj);
-                _context.SaveChanges();
-                transaction.Commit();
-                return StatusCodes.Status201Created;
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-                return StatusCodes.Status500InternalServerError;
-            }
+            _context.Products.Add(obj);
+            _context.SaveChanges();
 
         }
 
         public void Update(Product obj)
         {
-            IDbContextTransaction transaction = _context.Database.BeginTransaction();
-            try
-            {
-                _context.ProductCategories.RemoveRange(_context.ProductCategories.Where(x => x.ProductId == obj.Id));
-                _context.Products.Update(obj);
-                _context.SaveChanges();
-                transaction.Commit();
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-            }
+            _context.ProductCategories.RemoveRange(_context.ProductCategories.Where(x => x.ProductId == obj.Id));
+            _context.Products.Update(obj);
+            _context.SaveChanges();
         }
 
         public void Delete(Product obj)
         {
-            IDbContextTransaction transaction = _context.Database.BeginTransaction();
-            try
-            {
-                _context.ProductCategories.RemoveRange(_context.ProductCategories.Where(x => x.ProductId == obj.Id));
-                _context.Products.Remove(obj);
-                _context.SaveChanges();
-                transaction.Commit();
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-            }
-
-
+            _context.ProductCategories.RemoveRange(_context.ProductCategories.Where(x => x.ProductId == obj.Id));
+            _context.Products.Remove(obj);
+            _context.SaveChanges();
         }
 
         /// <summary>

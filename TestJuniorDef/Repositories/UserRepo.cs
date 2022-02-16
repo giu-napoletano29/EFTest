@@ -56,39 +56,16 @@ namespace TestJuniorDef.Repositories
                                         .ThenInclude(x => x.InfoRequestReply);
         }
 
-        public int Insert(User obj)
+        public void Insert(User obj)
         {
-            IDbContextTransaction transaction = _context.Database.BeginTransaction();
-            try
-            {
-                _context.Users.Add(obj);
-                _context.SaveChanges();
-                transaction.Commit();
-                return StatusCodes.Status201Created;
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-                return StatusCodes.Status500InternalServerError;
-            }
-
-
+            _context.Users.Add(obj);
+            _context.SaveChanges();
         }
 
         public void Update(User obj)
         {
-            IDbContextTransaction transaction = _context.Database.BeginTransaction();
-            try
-            {
-                _context.Users.Update(obj);
-                _context.SaveChanges();
-                transaction.Commit();
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-            }
-
+            _context.Users.Update(obj);
+            _context.SaveChanges();
         }
 
         public void Delete(User obj)
