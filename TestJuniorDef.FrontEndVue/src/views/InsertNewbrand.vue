@@ -50,6 +50,7 @@
 
 <script>
     import InsertPageUtils from '@/utilities/InsertPageUtils.js' 
+    import Commonutils from '@/utilities/Commonutils.js'
     import Header from '@/components/Header.vue'
     import InsertNewbrand from '@/components/InsertNewbrand.vue'
     import InsertNewProduct from '@/components/InsertNewProduct.vue'
@@ -58,7 +59,7 @@
     const Comp = InsertNewProduct
 
     export default {
-        mixins: [InsertPageUtils],
+        mixins: [InsertPageUtils, Commonutils],
 
         components: {
             InsertNewbrand,
@@ -89,9 +90,10 @@
         methods: {
             async loadBrandById(){
                 this.loadedEditElement = false
-                const {data} = await BrandsRepo.getById(this.$route.params.id)
-                this.loadedEditElement = true
-                this.elementbyid = data;
+                const {data} = await BrandsRepo.getById(this.$route.params.id).catch(function (response){
+                    return response.response.data.status
+                });
+                this.CheckEditData(data)
             },
 
             RedirectSuccess(){

@@ -54,5 +54,14 @@ export default{
                     self.RedirectError(response.response.data.errors)
                 });
         },
+
+        CheckEditData(data){
+            if(data){
+                this.loadedEditElement = true
+                this.elementbyid = data;
+            }else{
+                this.RedirectIfNotFound()
+            }
+        }
     },
 }

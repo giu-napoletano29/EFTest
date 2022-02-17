@@ -28,10 +28,6 @@ export default{
             this.list = data ? data:"";
             this.pageChange(1);
         },
-
-        RedirectIfNotFound(){
-            this.$router.push({name: 'NotFound', params: { 0: "" } })     
-        },
     },
 
     created() {
