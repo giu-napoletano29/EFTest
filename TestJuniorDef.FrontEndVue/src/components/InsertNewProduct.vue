@@ -26,9 +26,11 @@
             <div class="mb-3">      
                 <textarea class="form-control" id="descriptio" rows="3" placeholder="Descrizione" v-model="product.Description" required></textarea>
             </div>
-            <div v-show="loadedEl" class="mb-3 form-check form-check-inline" v-for="(l,i) in list" :key="i">
-                <input type="checkbox" class="form-check-input" :id="l.id" v-model="product.ProductCategory" :value="getCatObj(l.id)">
-                <label class="form-check-label" for="exampleCheck1">{{l.name}}</label>
+            <div class="row">
+                <div v-show="loadedEl" class="mb-3 form-check form-check-inline col" v-for="(l,i) in list" :key="i">
+                    <input type="checkbox" class="form-check-input" :id="l.id" v-model="product.ProductCategory" :value="getCatObj(l.id)">
+                    <label class="form-check-label" for="exampleCheck1">{{l.name}}</label>
+                </div>
             </div>
             <p v-show="!loadedEl">Caricamento categorie...</p>
         </div>
