@@ -121,7 +121,7 @@
 
             addProd () {  
                 let prod = { 
-                    BrandId: "Seleziona brand",
+                    BrandId: 0,
                     Name: "",
                     ShortDescription: "",
                     Price: 0,

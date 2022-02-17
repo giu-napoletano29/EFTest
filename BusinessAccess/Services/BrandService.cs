@@ -202,10 +202,17 @@ namespace BusinessAccess.Services
         /// <returns></returns>
         public bool CheckEmailDuplicate(Brand brand)
         {
-            if (_brandRepo.GetAll().Any(x => x.Account.Email == brand.Account.Email && x.Id > 0 ? x.Id != brand.Id : true))
+            //if (_brandRepo.GetAll().Any(x => x.Account.Email == brand.Account.Email && brand.Id > 0 ? x.Id != brand.Id : true))
+            //{
+            //    return true;
+            //}
+
+            if (_brandRepo.GetAll().Where(x => x.Account.Email == brand.Account.Email).Any(x => x.Id != brand.Id))
             {
                 return true;
             }
+
+
             return false;
         }
     }
