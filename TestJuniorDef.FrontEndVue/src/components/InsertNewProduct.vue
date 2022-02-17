@@ -3,7 +3,7 @@
         <slot></slot>
         <div>
             <div class="mb-3">
-                <input type="text" class="form-control" id="productname" placeholder="Nome prodotto" v-model="product.Name" required>
+                <input type="text" class="form-control" placeholder="Nome prodotto" v-model="product.Name" required>
             </div>
             <div class="row">
                 <div class="col-10">
@@ -21,10 +21,10 @@
                 </div>
             </div>
             <div class="mb-3">
-                <input type="text" class="form-control" id="shortdescriptio" placeholder="Piccola descrizione" v-model="product.ShortDescription" required>
+                <input type="text" class="form-control" placeholder="Piccola descrizione" v-model="product.ShortDescription" required>
             </div>
             <div class="mb-3">      
-                <textarea class="form-control" id="descriptio" rows="3" placeholder="Descrizione" v-model="product.Description" required></textarea>
+                <textarea class="form-control" rows="3" placeholder="Descrizione" v-model="product.Description" required></textarea>
             </div>
             <div class="row">
                 <div v-show="loadedEl" class="mb-3 form-check form-check-inline col" v-for="(l,i) in list" :key="i">
@@ -99,9 +99,10 @@ export default {
         
         collapseVal: function(val) {
             if(val){
-                // this.CollapsShow()
                 this.collapsEl.show()
-            }    
+            }else{
+                this.collapsEl.hide()
+            }
         }
     },
 
