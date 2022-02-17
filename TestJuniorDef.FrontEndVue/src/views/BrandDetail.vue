@@ -47,7 +47,9 @@
             },
             
             async loadElements(){
-                const {data} = await BrandsRepo.getById(this.$route.params.id)
+                const {data} = await BrandsRepo.getById(this.$route.params.id).catch(function (response){
+                    return response.response.data.status
+                });
                 this.loadElementsComponent(data)
             },
         },

@@ -50,7 +50,9 @@
             },
             
             async loadElements(){
-                const {data} = await ProductsRepo.getById(this.$route.params.id)
+                var {data} = await ProductsRepo.getById(this.$route.params.id).catch(function (response){
+                    return response.response.data.status
+                });
                 this.loadElementsComponent(data)    //Common request response handler (DetailPagesUtils.js)
             },
 
