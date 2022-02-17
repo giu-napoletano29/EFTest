@@ -49,6 +49,7 @@ export default {
         EditMode: Boolean,
         elementbyid: Object,
         disabledbrand: Boolean,
+        arrayprod: Object,
     },
 
     data(){
@@ -77,7 +78,13 @@ export default {
                     this.AssingOldValue()
                 }
             }
-        }
+        },
+        arrayprod:{
+            deep:true,
+            handler(){
+                this.product = {...this.arrayprod}
+            }
+        },
     },
 
     methods:{

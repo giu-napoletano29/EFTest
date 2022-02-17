@@ -22,8 +22,9 @@
                 <component
                     v-for="(component, index) in newcomponents"
                     :key="index"
-                    :is="component"
+                    :is="component.c"
 
+                    :arrayprod="product[index]"
                     :list="list"
                     :disabledbrand="true"
                     :brands="brands"
@@ -32,7 +33,10 @@
                     :error="error"
                     @input="(newprod) => {product[index] = newprod}"
                 >
-                    <h4 class="mt-5 mb-3">Prodotto #{{index+1}}</h4>
+                    <div class="mb-3" role="group" aria-label="Basic example" style="display: inline-flex;  margin-top: 2rem !important;">
+                        <h4 style="margin-top: 0.5rem !important;">Prodotto #{{index+1}}</h4>
+                        <button type="button" class="btn" @click="RemoveComponent(index)"><i class="bi bi-x-circle-fill" style="color:#dc3545"></i></button>
+                    </div>
                 </component>
                 <div class="mb-3 text-center">      
                     <button type="submit" class="btn btn-primary mt-3" :disabled="ShowButton">{{ButtonText}} brand</button>
@@ -96,6 +100,13 @@
                 this.$router.push({name: 'BrandsError', params: {Error: err}})
             },
 
+            RemoveComponent(val){
+                this.product.splice(val, 1)
+                this.newcomponents.splice(val, 1)
+                //Il problema è che i prodotti nel component non vengono aggiornati di conseguenza
+                //prova a passare l'array[index] col prodotto per ognuno di essi e fai modificare quello
+            },
+
             InsertBrand(){
                 var resp = null
                 if(!this.EditMode){ 
@@ -117,7 +128,7 @@
                     Description: "",
                     ProductCategory: [],
                 } 
-                this.newcomponents.push(Comp)
+                this.newcomponents.push({c: Comp, index: this.newcomponents.length})
                 this.product.push(prod);
                       
             },
