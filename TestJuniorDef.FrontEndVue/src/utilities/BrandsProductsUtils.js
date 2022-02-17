@@ -38,8 +38,9 @@ export default{
             let self = this;
             data.then(function (response) {
                     if(response.status >= 200 && response.status <= 208){
-                        self.OpError = false
-                        self.successModalOpen = true
+                        // self.OpError = false
+                        // self.successModalOpen = true
+                        self.OpenToast()
                     }else{
                         self.OpError = true
                         self.successModalOpen = true
