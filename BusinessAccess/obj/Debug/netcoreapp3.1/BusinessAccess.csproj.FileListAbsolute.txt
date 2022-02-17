@@ -1,0 +1,13 @@
+C:\Users\napoletano\source\repos\TestJuniorDef\BusinessAccess\bin\Debug\netcoreapp3.1\BusinessAccess.deps.json
+C:\Users\napoletano\source\repos\TestJuniorDef\BusinessAccess\bin\Debug\netcoreapp3.1\BusinessAccess.dll
+C:\Users\napoletano\source\repos\TestJuniorDef\BusinessAccess\bin\Debug\netcoreapp3.1\BusinessAccess.pdb
+C:\Users\napoletano\source\repos\TestJuniorDef\BusinessAccess\bin\Debug\netcoreapp3.1\DataAccess.dll
+C:\Users\napoletano\source\repos\TestJuniorDef\BusinessAccess\bin\Debug\netcoreapp3.1\DataAccess.pdb
+C:\Users\napoletano\source\repos\TestJuniorDef\BusinessAccess\obj\Debug\netcoreapp3.1\BusinessAccess.csproj.AssemblyReference.cache
+C:\Users\napoletano\source\repos\TestJuniorDef\BusinessAccess\obj\Debug\netcoreapp3.1\BusinessAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\napoletano\source\repos\TestJuniorDef\BusinessAccess\obj\Debug\netcoreapp3.1\BusinessAccess.AssemblyInfoInputs.cache
+C:\Users\napoletano\source\repos\TestJuniorDef\BusinessAccess\obj\Debug\netcoreapp3.1\BusinessAccess.AssemblyInfo.cs
+C:\Users\napoletano\source\repos\TestJuniorDef\BusinessAccess\obj\Debug\netcoreapp3.1\BusinessAccess.csproj.CoreCompileInputs.cache
+C:\Users\napoletano\source\repos\TestJuniorDef\BusinessAccess\obj\Debug\netcoreapp3.1\BusinessAccess.csproj.CopyComplete
+C:\Users\napoletano\source\repos\TestJuniorDef\BusinessAccess\obj\Debug\netcoreapp3.1\BusinessAccess.dll
+C:\Users\napoletano\source\repos\TestJuniorDef\BusinessAccess\obj\Debug\netcoreapp3.1\BusinessAccess.pdb

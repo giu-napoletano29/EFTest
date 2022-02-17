@@ -3,20 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using TestJuniorDef.Repositories.Interfaces;
-using TestJuniorDef.Repositories;
-using Microsoft.Data.SqlClient;
-using TestJuniorDef.ModelAPI;
-using TestJuniorDef.Services.Interfaces;
-using TestJuniorDef.ModelAPI.ProductModels;
+using BusinessAccess.Services.Interfaces;
 
 namespace TestJuniorDef.Controllers
 {
     [ApiController]
     [Route("products")]
-    public class ProductController : ControllerBase
+    public class ProductController : GenericController
     {
         private readonly ILogger<ProductController> _logger;
         private readonly IProductService _productService;
@@ -71,7 +64,7 @@ namespace TestJuniorDef.Controllers
         {
             if (size <= 0 || page < 1)
             {
-                return ValidationProblem();
+                return ValidationProblem("Invalid page requested");
             }
             try
             {
@@ -86,24 +79,38 @@ namespace TestJuniorDef.Controllers
             return UnprocessableEntity();
         }
 
+        /// <summary>
+        /// Insert a new Product into the database.
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         [HttpPost("new")]      
         public IActionResult InsertProduct([FromBody] Product product)
         {
+            InsertProductValidation(product);
+
             if (ModelState.IsValid)
             {
                 _productService.InsertProduct(product);
             }
             else
             {
-                return ValidationProblem();
+                return ValidationProblem("Sent an invalid object");
             }
 
             return StatusCode(200);
         }
 
+        /// <summary>
+        /// Update an existing Product with the newest data
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="product"></param>
+        /// <returns></returns>
         [HttpPut("{id}/edit")]       
         public IActionResult UpdateProduct(int id, [FromBody] Product product)
         {
+            InsertProductValidation(product);
             if (ModelState.IsValid)
             {
                 product.Id = id;
@@ -111,7 +118,7 @@ namespace TestJuniorDef.Controllers
             }
             else
             {
-                return ValidationProblem();
+                return ValidationProblem("Sent an invalid object");
             }
 
         }
@@ -127,5 +134,6 @@ namespace TestJuniorDef.Controllers
 
             return StatusCode(_productService.DeleteProduct(id));
         }
+
     }
 }

@@ -1,3 +1,5 @@
+//utility with the common methods and data between insert views
+
 import {Factory} from './../wrappers/Factory'
 const CategoriesRepo = Factory.get('categories')
 const BrandsRepo = Factory.get('brands')
@@ -15,6 +17,13 @@ export default{
             EditMode: false,
             elemid: this.$route.params.id,
             elementbyid: {},
+            errmsg: [],
+        }
+    },
+    
+    computed:{
+        ShowButton(){
+            return this.EditMode ? false:!this.loadedEl || !this.loadedBrand
         }
     },
 
@@ -41,6 +50,8 @@ export default{
                     }else{
                         self.RedirectError()
                     }
+                }).catch(function (response){
+                    self.RedirectError(response.response.data.errors)
                 });
         },
     },

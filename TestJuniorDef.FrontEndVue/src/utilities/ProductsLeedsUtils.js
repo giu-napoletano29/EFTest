@@ -1,3 +1,5 @@
+//utility with the common methods and data between Leeds and Products views
+
 import {Factory} from './../wrappers/Factory'
 const BrandsRepo = Factory.get('brands')
 

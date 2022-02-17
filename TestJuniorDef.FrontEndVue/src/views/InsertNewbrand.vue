@@ -12,7 +12,6 @@
                 <InsertNewbrand
                     :list="list"
                     :brands="brands"
-                    :loaded="loaded"
                     :loadedEditElement="loadedEditElement"
                     :error="error"
                     :elementbyid="elementbyid"
@@ -23,18 +22,26 @@
                 <component
                     v-for="(component, index) in newcomponents"
                     :key="index"
-                    :is="component"
+                    :is="component.c"
 
+                    :index="index"
+                    :arrayprod="product[index]"
                     :list="list"
                     :disabledbrand="true"
+                    :collapseVal="true"
                     :brands="brands"
                     :loadedEl="loadedEl"
                     :loadedBrand="loadedBrand"
                     :error="error"
                     @input="(newprod) => {product[index] = newprod}"
-                />
+                >
+                    <div class="mb-3" role="group" aria-label="Basic example" style="display: inline-flex;  margin-top: 2rem !important;">
+                        <h4 style="margin-top: 0.5rem !important;">Prodotto #{{index+1}}</h4>
+                        <button type="button" class="btn" @click="RemoveComponent(index)"><i class="bi bi-x-circle-fill" style="color:#dc3545"></i></button>
+                    </div>
+                </component>
                 <div class="mb-3 text-center">      
-                    <button type="submit" class="btn btn-primary" :disabled="ShowButton">{{ButtonText}} brand</button>
+                    <button type="submit" class="btn btn-primary mt-3" :disabled="ShowButton">{{ButtonText}} brand</button>
                 </div>       
             </form>
         </b-container>
@@ -56,12 +63,6 @@
         components: {
             InsertNewbrand,
             Header,
-        },
-
-        computed:{
-            ShowButton(){
-                return this.EditMode ? false:!this.loadedEl || !this.loadedBrand
-            }
         },
 
         data(){
@@ -97,8 +98,13 @@
                 this.$router.push('/brands/success')
             },
 
-            RedirectError(){
-                this.$router.push('/brands/error')
+            RedirectError(err){
+                this.$router.push({name: 'BrandsError', params: {Error: err}})
+            },
+
+            RemoveComponent(val){
+                this.product.splice(val, 1)
+                this.newcomponents.splice(val, 1)
             },
 
             InsertBrand(){
@@ -110,19 +116,19 @@
                     delete this.brand.Products
                     resp = BrandsRepo.update(this.elemid, this.brand)
                 }
-                this.ResponseHandler(resp)
+                this.ResponseHandler(resp) //Common in InsertPageUtils.js
             },
 
             addProd () {  
                 let prod = { 
-                    BrandId: "Seleziona brand",
+                    BrandId: 0,
                     Name: "",
                     ShortDescription: "",
                     Price: 0,
                     Description: "",
                     ProductCategory: [],
                 } 
-                this.newcomponents.push(Comp)
+                this.newcomponents.push({c: Comp, index: this.newcomponents.length})
                 this.product.push(prod);
                       
             },
@@ -132,16 +138,16 @@
                 this.errors = [];
                 var temp = [];
 
-                if (!this.brand.BrandName) {
+                if (!this.brand.BrandName || !/\S/.test(this.brand.BrandName)) {
                     temp.push('Devi inserire un nome.');
                 }
                 if (!re.test(this.brand.Account.Email)) {
                     temp.push('Devi inserire una mail valida.');
                 }
-                if (!this.brand.Account.Password) {
+                if (!this.brand.Account.Password || !/\S/.test(this.brand.Account.Password)) {
                     temp.push('Devi inserire una password.');
                 }
-                if (!this.brand.Description) {
+                if (!this.brand.Description || !/\S/.test(this.brand.Description)) {
                     temp.push('Devi inserire una descrizione.');
                 }
                 if(this.product.length > 0){

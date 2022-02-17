@@ -3,21 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using TestJuniorDef.Repositories.Interfaces;
-using TestJuniorDef.Repositories;
-using Microsoft.Data.SqlClient;
-using TestJuniorDef.ModelAPI;
-using TestJuniorDef.Services.Interfaces;
-using TestJuniorDef.ModelAPI.ProductModels;
-using TestJuniorDef.ModelAPI.InfoRequestModels;
+using BusinessAccess.Services.Interfaces;
 
 namespace TestJuniorDef.Controllers
 {
     [ApiController]
     [Route("leeds")]
-    public class InfoRequestController : ControllerBase
+    public class InfoRequestController : GenericController
     {
         private readonly ILogger<InfoRequestController> _logger;
         private readonly IInfoRequestService _infoRequestService;
@@ -63,7 +55,7 @@ namespace TestJuniorDef.Controllers
         {
             if (size <= 0 || page < 1)
             {
-                return ValidationProblem();
+                return ValidationProblem("Invalid page requested");
             }
             try
             {

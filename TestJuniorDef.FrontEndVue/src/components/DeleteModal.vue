@@ -52,6 +52,6 @@ export default {
                 this.modal.show()
             }         
         }
-}
+    }
 }
 </script>

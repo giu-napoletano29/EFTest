@@ -1,3 +1,5 @@
+//utility with the common methods and data between the detail views
+
 export default{
     data(){
         return{

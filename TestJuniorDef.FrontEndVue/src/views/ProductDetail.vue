@@ -20,7 +20,8 @@
 </template>
 
 <script>
-    import DetailPagesUtils from '@/utilities/DetailPagesUtils.js' 
+    import DetailPagesUtils from '@/utilities/DetailPagesUtils.js'
+    import Commonutils from '@/utilities/Commonutils.js'
     import Header from '@/components/Header.vue'
     import ProductDetail from '@/components/ProductDetail.vue'
     import Pagination from '@/components/Pagination.vue'
@@ -29,7 +30,7 @@
 
     export default {
         
-        mixins: [DetailPagesUtils],
+        mixins: [DetailPagesUtils, Commonutils],
 
         components: {
             Header,
@@ -50,11 +51,10 @@
             
             async loadElements(){
                 const {data} = await ProductsRepo.getById(this.$route.params.id)
-                this.loadElementsComponent(data)
+                this.loadElementsComponent(data)    //Common request response handler (DetailPagesUtils.js)
             },
 
             GoToleeds(){
-                // this.$router.push({name: 'Leeds', params: {search: this.list.name, brand: this.list.brandId}})
                 this.$router.push({name: 'Leeds', params: {productId: this.list.id}})
             },
         },

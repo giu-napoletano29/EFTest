@@ -15,7 +15,17 @@
       "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
       "DisplayName": "Miscellaneous Files",
       "ColorIndex": -1
+    },
+    "854f30b8-1d7a-44b3-b88a-1a3334626998": {
+      "ProjectGuid": "854f30b8-1d7a-44b3-b88a-1a3334626998",
+      "DisplayName": "DataAccess",
+      "ColorIndex": 2
+    },
+    "4494f128-8373-4bb1-834c-666636d388b8": {
+      "ProjectGuid": "4494f128-8373-4bb1-834c-666636d388b8",
+      "DisplayName": "BusinessAccess",
+      "ColorIndex": 3
     }
   },
-  "NextColorIndex": 2
+  "NextColorIndex": 4
 }

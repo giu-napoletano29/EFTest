@@ -7,7 +7,7 @@
         </div>
         <div class="container-fluid">
             <div class="row flex-xl-nowrap2">
-                <nav id="bd-docs-nav" aria-label="Main navigation" class="base-layout col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <nav id="bd-docs-nav" aria-label="Main navigation" class="base-layout col-md-3 col-lg-2 d-md-block bg-light sidebar">
                     <div class="position-sticky pt-3">
                         <ul class="nav flex-column">
                             <li class="nav-item">

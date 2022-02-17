@@ -32,6 +32,7 @@
 <script>
     import MainPagesUtils from '@/utilities/MainPagesUtils.js' 
     import ProductsLeedsUtils from '@/utilities/ProductsLeedsUtils.js' 
+    import Commonutils from '@/utilities/Commonutils.js'
     import Header from '@/components/Header.vue'
     import Leeds from '@/components/Leeds.vue'
     import Pagination from '@/components/Pagination.vue'
@@ -40,7 +41,7 @@
     const LeedsRepo = Factory.get('leeds')
 
     export default {
-        mixins: [MainPagesUtils, ProductsLeedsUtils],
+        mixins: [MainPagesUtils, ProductsLeedsUtils, Commonutils],
         
         components: {
             Leeds,

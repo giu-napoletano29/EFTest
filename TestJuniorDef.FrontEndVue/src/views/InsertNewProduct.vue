@@ -45,12 +45,6 @@
             Header,
         },
 
-        computed:{
-            ShowButton(){
-                return this.EditMode ? false:!this.loadedEl || !this.loadedBrand
-            }
-        },
-
         data(){
             return{
                 name: 'Nuovo prodotto',
@@ -78,8 +72,8 @@
                 this.$router.push('/products/success')
             },
 
-            RedirectError(){
-                this.$router.push('/products/error')
+            RedirectError(err){
+                this.$router.push({name: 'ProductsError', params: {Error: err}})
             },
 
             InsertProduct(){
@@ -89,7 +83,7 @@
                 }else{
                     resp = ProductRepo.update(this.elemid, this.product)
                 }
-                this.ResponseHandler(resp)
+                this.ResponseHandler(resp)  //Common in InsertPageUtils.js
             },
 
             checkForm: function (e) {
@@ -98,13 +92,13 @@
                 if (!(this.product.BrandId>0)) {
                     this.errors.push('Devi selezionare un brand.');
                 }
-                if (!this.product.Name) {
+                if (!this.product.Name || !/\S/.test(this.product.Name)) {
                     this.errors.push('Devi inserire un nome.');
                 }
-                if (!this.product.ShortDescription) {
+                if (!this.product.ShortDescription || !/\S/.test(this.product.ShortDescription)) {
                     this.errors.push('Devi inserire una piccola descrizione.');
                 }
-                if (!this.product.Description) {
+                if (!this.product.Description || !/\S/.test(this.product.Description)) {
                     this.errors.push('Devi inserire una descrizione.');
                 }
                 if (this.product.ProductCategory.length < 1) {

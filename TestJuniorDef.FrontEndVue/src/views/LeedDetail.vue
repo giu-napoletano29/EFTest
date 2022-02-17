@@ -20,6 +20,7 @@
 
 <script>
     import DetailPagesUtils from '@/utilities/DetailPagesUtils.js' 
+    import Commonutils from '@/utilities/Commonutils.js'
     import Header from '@/components/Header.vue'
     import LeedDetail from '@/components/LeedDetail.vue'
     import Pagination from '@/components/Pagination.vue'
@@ -28,7 +29,7 @@
 
     export default {
 
-        mixins: [DetailPagesUtils],
+        mixins: [DetailPagesUtils, Commonutils],
         
         components: {
             Header,
@@ -44,12 +45,12 @@
 
         methods: {
             pageChangeComponent(skip, take){
-                this.listpaginated = this.list.replies.slice(skip, take)
+                this.listpaginated = this.list.replies.slice(skip, take)    //Client side pagination handler
             },
 
             async loadElements(){
                 const {data} = await LeedsRepo.getById(this.$route.params.id)
-                this.loadElementsComponent(data)
+                this.loadElementsComponent(data)    //Common request response handler (DetailPagesUtils.js)
             },
         },
 

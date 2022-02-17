@@ -34,6 +34,7 @@ export default {
     data(){
         return{
             brand:{ 
+                id: 0,
                 BrandName: "",
                 Description: "",
                 Account:{
@@ -66,6 +67,7 @@ export default {
             this.$emit('addprod');
         },
         AssingOldValue(){
+            this.brand.id = this.elementbyid.id;
             this.brand.BrandName = this.elementbyid.brandName;
             this.brand.Description = this.elementbyid.description;
             this.brand.Account.Email = this.elementbyid.email;

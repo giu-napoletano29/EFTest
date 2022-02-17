@@ -20,7 +20,7 @@ USE sqltest
 
 CREATE TABLE Account(
 	Id int primary key identity,
-	Email varchar(319), -- According to the standard 64 username 1 @ 254 domain name
+	Email varchar(319) UNIQUE, -- According to the standard 64 username 1 @ 254 domain name
 	Password BINARY(64), -- To be hashed
 	AccountType tinyint,
 	IsDeleted Bit NOT NULL DEFAULT 0

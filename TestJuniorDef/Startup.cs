@@ -17,8 +17,8 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using TestJuniorDef.Repositories;
 using TestJuniorDef.Repositories.Interfaces;
-using TestJuniorDef.Services.Interfaces;
-using TestJuniorDef.Services;
+using BusinessAccess.Services;
+using BusinessAccess.Services.Interfaces;
 
 namespace TestJuniorDef
 {

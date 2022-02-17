@@ -4,21 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
-using TestJuniorDef.Repositories.Interfaces;
-using TestJuniorDef.Repositories;
-using Microsoft.Data.SqlClient;
-using TestJuniorDef.ModelAPI;
-using TestJuniorDef.ModelAPI.CategoryModels;
-using TestJuniorDef.ModelAPI.ProductModels;
-using TestJuniorDef.Services.Interfaces;
 using System.Text;
+using BusinessAccess.Services.Interfaces;
 
 namespace TestJuniorDef.Controllers
 {
     [ApiController]
     [Route("brands")]
-    public class BrandController : ControllerBase
+    public class BrandController : GenericController
     {
         private readonly ILogger<BrandController> _logger;
         private readonly IBrandService _brandService;
@@ -72,7 +65,7 @@ namespace TestJuniorDef.Controllers
         {
             if (size <= 0 || page < 1)
             {
-                return ValidationProblem();
+                return ValidationProblem("Invalid page requested");
             }
             try
             {
@@ -97,13 +90,19 @@ namespace TestJuniorDef.Controllers
         [HttpPost("new")]      
         public IActionResult InsertBrand([FromBody] Brand brand)
         {
+            if (_brandService.CheckEmailDuplicate(brand))
+            {
+                AppendModelError("brand.account.email", "Email already exist.");
+            }
+
+            BrandValidation(brand);
             if (ModelState.IsValid)
             {
                 return StatusCode(_brandService.InsertBrand(brand));
             }
             else
             {
-                return ValidationProblem();
+                return ValidationProblem("Sent an invalid object");
             }
         }
 
@@ -119,6 +118,11 @@ namespace TestJuniorDef.Controllers
         [HttpPut("{id}/edit")]
         public IActionResult UpdateBrand(int id, [FromBody] Brand brand)
         {
+            if (_brandService.CheckEmailDuplicate(brand))
+            {
+                AppendModelError("brand.account.email", "Email already exist.");
+            }
+            BrandValidation(brand);
             if (ModelState.IsValid)
             {
                 brand.Id = id;
@@ -126,7 +130,7 @@ namespace TestJuniorDef.Controllers
             }
             else
             {
-                return ValidationProblem();
+                return ValidationProblem("Sent an invalid object");
             }
         }
 
@@ -141,6 +145,12 @@ namespace TestJuniorDef.Controllers
 
             return StatusCode(_brandService.DeleteBrand(id));
         }
+
+        /// <summary>
+        /// Return a list of brands that match the given name string
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
 
         [HttpGet("name/{name}")]
         public IActionResult GetBrandByName(string name)
