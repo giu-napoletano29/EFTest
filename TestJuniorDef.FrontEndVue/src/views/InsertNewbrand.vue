@@ -91,7 +91,7 @@
             async loadBrandById(){
                 this.loadedEditElement = false
                 const {data} = await BrandsRepo.getById(this.$route.params.id).catch(function (response){
-                    return response.response.data.status
+                    return response
                 });
                 this.CheckEditData(data)
             },

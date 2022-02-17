@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BusinessAccess.Services.Interfaces;
+using TestJuniorDef.ViewModels;
 
 namespace TestJuniorDef.Controllers
 {
@@ -88,17 +89,37 @@ namespace TestJuniorDef.Controllers
         /// <param name="Description"></param>
         /// <returns></returns>
         [HttpPost("new")]      
-        public IActionResult InsertBrand([FromBody] Brand brand)
+        //public IActionResult InsertBrand([FromBody] Brand brand)
+        public IActionResult InsertBrand([FromBody] BrandViewModel brand)
         {
-            if (_brandService.CheckEmailDuplicate(brand))
+            Brand b = new Brand()
+            {
+                Id = brand.Id,
+                BrandName = brand.BrandName,
+                AccountId = brand.AccountId,
+                Description = brand.Description,
+                IsDeleted = brand.IsDeleted,
+                Products = brand.Products,
+                Account = new Account()
+                {
+                    Id = brand.Account.Id,
+                    Email = brand.Account.Email,
+                    Password = Encoding.ASCII.GetBytes(brand.Account.Password),
+                    AccountType = brand.Account.AccountType,
+                    IsDeleted = brand.Account.IsDeleted,
+                }
+            };
+
+            if (_brandService.CheckEmailDuplicate(b))
             {
                 AppendModelError("brand.account.email", "Email already exist.");
             }
 
             BrandValidation(brand);
+
             if (ModelState.IsValid)
             {
-                return StatusCode(_brandService.InsertBrand(brand));
+                return StatusCode(_brandService.InsertBrand(b));
             }
             else
             {
@@ -116,17 +137,55 @@ namespace TestJuniorDef.Controllers
         /// <param name="description"></param>
         /// <returns></returns>
         [HttpPut("{id}/edit")]
-        public IActionResult UpdateBrand(int id, [FromBody] Brand brand)
+        public IActionResult UpdateBrand(int id, [FromBody] BrandViewModelUpdate brand)
         {
-            if (_brandService.CheckEmailDuplicate(brand))
+            //brand.Account.Password = System.Text.Encoding.Default.GetString(brand.Account.Password);
+            BrandViewModel bUpdate = new BrandViewModel()
+            {
+                Id = brand.Id,
+                BrandName = brand.BrandName,
+                AccountId = brand.AccountId,
+                Description = brand.Description,
+                IsDeleted = brand.IsDeleted,
+                Products = brand.Products,
+                Account = new AccountViewModel()
+                {
+                    Id = brand.Account.Id,
+                    Email = brand.Account.Email,
+                    Password = System.Text.Encoding.Default.GetString(brand.Account.Password),
+                    AccountType = brand.Account.AccountType,
+                    IsDeleted = brand.Account.IsDeleted,
+                }
+            };
+
+
+            Brand b = new Brand()
+            {
+                Id = brand.Id,
+                BrandName = brand.BrandName,
+                AccountId = brand.AccountId,
+                Description = brand.Description,
+                IsDeleted = brand.IsDeleted,
+                Products = brand.Products,
+                Account = new Account()
+                {
+                    Id = brand.Account.Id,
+                    Email = brand.Account.Email,
+                    Password = brand.Account.Password,
+                    AccountType = brand.Account.AccountType,
+                    IsDeleted = brand.Account.IsDeleted,
+                }
+            };
+
+            if (_brandService.CheckEmailDuplicate(b))
             {
                 AppendModelError("brand.account.email", "Email already exist.");
             }
-            BrandValidation(brand);
+            BrandValidation(bUpdate);
             if (ModelState.IsValid)
             {
                 brand.Id = id;
-                return StatusCode(_brandService.UpdateBrand(brand));
+                return StatusCode(_brandService.UpdateBrand(b));
             }
             else
             {

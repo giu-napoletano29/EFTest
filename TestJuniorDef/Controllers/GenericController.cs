@@ -1,5 +1,7 @@
 ﻿using apitest.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
+using TestJuniorDef.ViewModels;
 
 namespace TestJuniorDef.Controllers
 {
@@ -10,7 +12,7 @@ namespace TestJuniorDef.Controllers
             ModelState.AddModelError(key, msg);
         }
 
-        internal bool BrandValidation(Brand brand)
+        internal bool BrandValidation(BrandViewModel brand)
         {
             bool state = false;
             
@@ -43,14 +45,22 @@ namespace TestJuniorDef.Controllers
             return state;
         }
 
-        internal bool AccountValidation(Account account)
+        internal bool AccountValidation(AccountViewModel account)
         {
             bool state = true;
+            Regex commaregex = new Regex(@"^[^,]+$");
+            Regex pregex = new Regex(@"^[^.]+$");
+            //string pass = System.Text.Encoding.Default.GetString(account.Password);
 
             if (string.IsNullOrWhiteSpace(account.Email) || account.Email.Length > 319)
             {
                 state = false;
                 ModelState.AddModelError("account.Email", $"The account email is invalid.");
+            }
+            if (!commaregex.IsMatch(account.Password) || !pregex.IsMatch(account.Password))
+            {
+                state = false;
+                ModelState.AddModelError("account.Password", $"The account password is invalid.");
             }
             if (account.AccountType < 1 || account.AccountType > 2)
             {
