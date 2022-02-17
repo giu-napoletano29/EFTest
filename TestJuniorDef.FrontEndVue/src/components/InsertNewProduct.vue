@@ -7,14 +7,14 @@
             </div>
             <div class="row">
                 <div class="col-10">
-                    <select v-show="loadedBrand" class="form-select mb-3" aria-label="Default select example" v-model="product.BrandId" :disabled="disabledbrand" :required="!disabledbrand">
+                    <select v-show="loadedBrand && !disabledbrand" class="form-select mb-3" aria-label="Default select example" v-model="product.BrandId" :disabled="disabledbrand" :required="!disabledbrand">
                         <option value="">Seleziona brand</option>
                         <option v-for="(l,i) in brands" :key="i" :value="l.id">{{l.brandName}}</option>
                     </select>
                     <p v-show="!loadedBrand">Caricamento brand...</p>
                 </div>
-                <div class="col">
-                    <div class="input-group"> 
+                <div class="col-2">
+                    <div class="input-group mb-3"> 
                         <span class="input-group-text">€</span>
                         <input type="number" class="form-control currency" placeholder="Prezzo" aria-label="price" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" v-model="product.Price" required/>
                     </div>
