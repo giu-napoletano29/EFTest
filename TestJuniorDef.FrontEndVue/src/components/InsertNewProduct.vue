@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :id="indexId">
         <slot></slot>
         <div>
             <div class="mb-3">
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-
+import { Collapse } from 'bootstrap'
 export default {
 
     props: {
@@ -52,10 +52,19 @@ export default {
         elementbyid: Object,
         disabledbrand: Boolean,
         arrayprod: Object,
+        collapseVal: {
+            default: false,
+            type: Boolean
+        },
+        index: {
+            default: 0,
+            type: Number
+        },
     },
 
     data(){
         return{
+            collapsEl: {},
             product:{ 
                 BrandId: this.disabledbrand ? 0:"",
                 Name: "",
@@ -87,6 +96,19 @@ export default {
                 this.product = {...this.arrayprod}
             }
         },
+        
+        collapseVal: function(val) {
+            if(val){
+                // this.CollapsShow()
+                this.collapsEl.show()
+            }    
+        }
+    },
+
+    computed:{
+        indexId(){
+            return this.collapseVal ? "collapse" + this.index : "insert"
+        }
     },
 
     methods:{
@@ -100,7 +122,18 @@ export default {
             this.product.Price = this.elementbyid.price
             this.product.Description = this.elementbyid.description
             this.product.ProductCategory = this.elementbyid.categories.map(a => this.getCatObj(a.id))
+        },
+
+        CollapsShow(){
+            var collapseElementList = document.getElementById('collapse' + this.index)
+            if(collapseElementList){
+                this.collapsEl = new Collapse(collapseElementList)
+            }
         }
+    },
+
+    mounted(){
+        this.CollapsShow()
     },
 }
 </script>

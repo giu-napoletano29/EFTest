@@ -24,9 +24,11 @@
                     :key="index"
                     :is="component.c"
 
+                    :index="index"
                     :arrayprod="product[index]"
                     :list="list"
                     :disabledbrand="true"
+                    :collapseVal="true"
                     :brands="brands"
                     :loadedEl="loadedEl"
                     :loadedBrand="loadedBrand"
@@ -103,8 +105,6 @@
             RemoveComponent(val){
                 this.product.splice(val, 1)
                 this.newcomponents.splice(val, 1)
-                //Il problema è che i prodotti nel component non vengono aggiornati di conseguenza
-                //prova a passare l'array[index] col prodotto per ognuno di essi e fai modificare quello
             },
 
             InsertBrand(){
